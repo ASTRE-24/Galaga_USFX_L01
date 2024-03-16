@@ -20,7 +20,7 @@ public:
 
 public:
 	//ANaveEnemiga* NaveEnemiga01;
-	ANaveEnemigaTransporte* NaveEnemigaTransporte01;
+	//ANaveEnemigaTransporte* NaveEnemigaTransporte01;
 	ANaveEnemigaCaza* NaveEnemigaCaza01;
 protected:
 	// Called when the game starts or when spawned
