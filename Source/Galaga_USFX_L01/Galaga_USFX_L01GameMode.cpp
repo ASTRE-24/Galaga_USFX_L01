@@ -22,8 +22,6 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 	FVector ubicacionInicioNavesEnemigasCaza = FVector(-500.0f, 500.0f, 250.0f);
 	FVector ubicacionInicioNavesEnemigasTransporte = FVector(500.0f, 500.0f, 250.0f);
 
-	//FVector ubicacionNave01 = FVector(-1000.0f, 500.0f, 250.0f);
-	//FVector ubicacionNave02 = FVector(-500.0f, -500.0f, 250.0f);
 
 	FRotator rotacionNave = FRotator(0.0f, 0.0f, 0.0f);
 
@@ -31,25 +29,36 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 	if (World != nullptr)
 	{
 		for (int i = 0; i < 5; i++) {
-			FVector PosicionNaveActual = FVector(ubicacionInicioNavesEnemigasCaza.X, ubicacionInicioNavesEnemigasCaza.Y + i * 300, ubicacionInicioNavesEnemigasTransporte.Z);
-			ANaveEnemigaCaza* NaveEnemigaCazaTemporal = World->SpawnActor<ANaveEnemigaCaza>(PosicionNaveActual, rotacionNave);
+			//ESto es para crear las naves enemigas en una ubicacion especifica para comenzar
+			FVector PosicionNaveActual = FVector(ubicacionInicioNavesEnemigasCaza.X, ubicacionInicioNavesEnemigasCaza.Y + i * 300, ubicacionInicioNavesEnemigasCaza.Z);
+			
+			if (i % 2 == 0) {
+				ANaveEnemigaCaza* NaveEnemigaCazaTemporal = World->SpawnActor<ANaveEnemigaCaza>(PosicionNaveActual, rotacionNave);// Se crea el objeto de la nave enemiga
+				TANavesEnemigas.Push(NaveEnemigaCazaTemporal); //Agrega la nave al array de todas sus clases hijas de NaveEnemiga
+			}
+			else {
+				ANaveEnemigaTransporte* NaveEnemigaTransporteTemporal = World->SpawnActor<ANaveEnemigaTransporte>(PosicionNaveActual, rotacionNave);
+				TANavesEnemigas.Push(NaveEnemigaTransporteTemporal);
+			}
+			//ANaveEnemigaCaza* NaveEnemigaCazaTemporal = World->SpawnActor<ANaveEnemigaCaza>(PosicionNaveActual, rotacionNave);// Se crea el objeto de la nave enemiga
 
-			//TANavesEnemigasCaza.Push(NaveEnemigaCazaTemporal);
-			TANavesEnemigas.Push(NaveEnemigaCazaTemporal);
+			
+			//TANavesEnemigas.Push(NaveEnemigaCazaTemporal); //Agrega la nave al array de todas sus clases hijas de NaveEnemiga
 		}
 
-		float nuevaposicionX = ubicacionInicioNavesEnemigasTransporte.X - 300.0f;
+		/*float nuevaposicionX = ubicacionInicioNavesEnemigasTransporte.X - 300.0f;
 
 		for (int j = 0; j < 5; j++) {
 			FVector PosicionNaveActual = FVector(nuevaposicionX, ubicacionInicioNavesEnemigasTransporte.Y + j * 300, ubicacionInicioNavesEnemigasTransporte.Z);
 			ANaveEnemigaTransporte* NaveEnemigaTransporteTemporal = World->SpawnActor<ANaveEnemigaTransporte>(PosicionNaveActual, rotacionNave);
 
-			//TANavesEnemigasTransporte.Push(NaveEnemigaTransporteTemporal);
+			
 			TANavesEnemigas.Push(NaveEnemigaTransporteTemporal);
-		}
+		}*/
 
+		//Esto era para probar que se crearan las naves enemigas en un ubicaion especifica
 		//NaveEnemigaTransporte01 = World->SpawnActor<ANaveEnemigaTransporte>(ubicacionNave01, rotacionNave);
-		//NaveEnemigaCaza01 = World->SpawnActor<ANaveEnemigaCaza>(ubicacionNave02, rotacionNave);
+		//NaveEnemigaCaza01 = World->SpawnActor<ANaveEnemigaCaza>(ubicacionNave02, rotacionNave); 
 
 		TiempoTranscurrido = 0;
 	}
@@ -59,23 +68,24 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 
 }
 
-void AGalaga_USFX_L01GameMode::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-	TiempoTranscurrido++;
-
-	if (TiempoTranscurrido >= 100)
-	{
-		int numeroEnemigo = FMath::RandRange(0, 9);
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("Hola estoy aqui")));
-
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Entero: %d"), numeroEnemigo));
-
-		}
-		//TANavesEnemigas[numeroEnemigo]->PrimaryActorTick.bCanEverTick = false;
-		TANavesEnemigas[numeroEnemigo]->SetVelocidad(0);
-	}
-}
+//void AGalaga_USFX_L01GameMode::Tick(float DeltaTime)
+//{
+//	Super::Tick(DeltaTime);
+//	TiempoTranscurrido++;
+//
+//	if (TiempoTranscurrido >= 100)
+//	{
+//		int numeroEnemigo = FMath::RandRange(0, 9);
+//		if (GEngine)
+//		{
+//			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("Hola estoy aqui")));
+//
+//
+//			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Entero: %d"), numeroEnemigo));//Imprime el numero aleatorio
+//			
+//
+//		}
+//		//TANavesEnemigas[numeroEnemigo]->PrimaryActorTick.bCanEverTick = false;
+//		TANavesEnemigas[numeroEnemigo]->SetVelocidad(0);
+//	}
+//}

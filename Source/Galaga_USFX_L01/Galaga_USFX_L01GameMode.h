@@ -27,6 +27,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	//Definicion de las naves enemigas en un array
 	TArray<ANaveEnemiga*> TANavesEnemigas;
 	TArray<ANaveEnemigaCaza*> TANavesEnemigasCaza;
 	TArray<ANaveEnemigaTransporte*> TANavesEnemigasTransporte;
@@ -34,9 +35,9 @@ public:
 private:
 	int TiempoTranscurrido;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+//public:
+//	// Called every frame
+//	virtual void Tick(float DeltaTime) override;
 
 };
 
