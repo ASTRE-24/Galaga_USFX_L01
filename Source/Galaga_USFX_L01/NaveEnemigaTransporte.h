@@ -16,6 +16,7 @@ class GALAGA_USFX_L01_API ANaveEnemigaTransporte : public ANaveEnemiga
 private:
 	float capacidadCargaPeso;
 	float capacidadCargaVolumen;
+	float Timer; //Timer para el movimiento de la nave
 
 
 public:

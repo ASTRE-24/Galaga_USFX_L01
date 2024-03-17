@@ -19,7 +19,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	//Set the game state to playing
-	FVector ubicacionInicioNavesEnemigasCaza = FVector(-500.0f, 500.0f, 250.0f);
+	FVector ubicacionInicioNavesEnemigasCaza = FVector(-900.0f, 0.0f, 250.0f);
 	FVector ubicacionInicioNavesEnemigasTransporte = FVector(500.0f, 500.0f, 250.0f);
 
 
@@ -29,7 +29,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 	if (World != nullptr)
 	{
 		for (int i = 0; i < 5; i++) {
-			//ESto es para crear las naves enemigas en una ubicacion especifica para comenzar
+			//Esto es para crear las naves enemigas en una ubicacion especifica para comenzar
 			FVector PosicionNaveActual = FVector(ubicacionInicioNavesEnemigasCaza.X, ubicacionInicioNavesEnemigasCaza.Y + i * 300, ubicacionInicioNavesEnemigasCaza.Z);
 			
 			if (i % 2 == 0) {

@@ -16,6 +16,11 @@ class GALAGA_USFX_L01_API ANaveEnemigaCaza : public ANaveEnemiga
 private:
 	int cantidadBombas;
 	float Timer; //Timer para el movimiento de la nave
+    float bShouldMove;// Variable para controlar el movimiento de la nave
+	float TiempoParaDetenerse; //Tiempo para detenerse
+	float TiempoParaReanudar; //Tiempo para reanudar
+	// Nuevo temporizador para reanudar el movimiento
+	FTimerHandle TimerHandle_ReanudarMovimiento;
 
 public:
 	ANaveEnemigaCaza(); //Constructor
@@ -24,7 +29,7 @@ public:
 protected:
 	virtual void Mover(float DeltaTime);
 	virtual void Disparar();
-	
+	void ReanudarMovimiento();
 	virtual void Destruirse();
 	virtual void Escapar();
 	virtual void Atacar();

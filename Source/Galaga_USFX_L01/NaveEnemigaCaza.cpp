@@ -11,29 +11,47 @@ ANaveEnemigaCaza::ANaveEnemigaCaza()
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
 
 	Timer = 0.0f; //Inicializa el timer en 0
+	bShouldMove = true; //Inicializa el booleano en true
+	TiempoParaDetenerse = 5.0f; //Inicializa el tiempo para detenerse en 5 segundos
+	TiempoParaReanudar = 2.0f; //Tiempo para reanudar el movimiento
 
 }
 
 void ANaveEnemigaCaza::Mover(float DeltaTime)
 {
-	// Obtiene la posición actual del actor
-	FVector PosicionActual = GetActorLocation();
+	if (bShouldMove) {
 
-	Timer += DeltaTime; //Aumenta el timer con el tiempo transcurrido
+		// Obtiene la posición actual del actor
+		FVector PosicionActual = GetActorLocation();
 
-	//Movimiento sinusoidal
-	float Amplitud = 10.0f;
-	float Frecuencia = 4.0f;
+		Timer += DeltaTime; //Aumenta el timer con el tiempo transcurrido
 
-	float NewX = PosicionActual.X + Amplitud * FMath::Sin(Frecuencia * Timer);
-	float NewY = PosicionActual.Y;
-	float NewZ = PosicionActual.Z;
+		//Movimiento sinusoidal
+		float Amplitud = 10.0f;
+		float Frecuencia = 4.0f;
 
-	// Crea un nuevo vector de posición con las coordenadas aleatorias y la misma Z que la posición actual
-	//FVector NuevaPosicion = FVector(PosicionActual.X + NewX, PosicionActual.Y + NewY, PosicionActual.Z);
+		float NewX = PosicionActual.X + Amplitud * FMath::Sin(Frecuencia * Timer);
+		float NewY = PosicionActual.Y;
+		float NewZ = PosicionActual.Z;
 
-	// Establece la nueva posición del actor
-	SetActorLocation(FVector(NewX,NewY,NewZ));
+		// Crea un nuevo vector de posición con las coordenadas aleatorias y la misma Z que la posición actual
+		//FVector NuevaPosicion = FVector(PosicionActual.X + NewX, PosicionActual.Y + NewY, PosicionActual.Z);
+
+		// Establece la nueva posición del actor
+		SetActorLocation(FVector(NewX, NewY, NewZ));
+		if (Timer >= TiempoParaDetenerse) 
+		{
+			bShouldMove = false;
+			Timer = 0.0f;
+			//Llama a la función ReanudarMovimiento después de TiempoParaReanudar segundos
+			GetWorldTimerManager().SetTimer(TimerHandle_ReanudarMovimiento, this, &ANaveEnemigaCaza::ReanudarMovimiento, TiempoParaReanudar, false);
+		}
+	}
+}
+
+void ANaveEnemigaCaza::ReanudarMovimiento()
+{
+	bShouldMove = true;
 }
 
 void ANaveEnemigaCaza::Disparar()
