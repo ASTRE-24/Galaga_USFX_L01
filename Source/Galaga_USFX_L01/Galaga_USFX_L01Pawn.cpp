@@ -12,6 +12,7 @@
 #include "Engine/StaticMesh.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
+#include "Kismet/GameplayStatics.h" // Necesario para usar usar la musica de fondo
 
 const FName AGalaga_USFX_L01Pawn::MoveForwardBinding("MoveForward");
 const FName AGalaga_USFX_L01Pawn::MoveRightBinding("MoveRight");
@@ -135,5 +136,14 @@ void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 void AGalaga_USFX_L01Pawn::ShotTimerExpired()
 {
 	bCanFire = true;
+}
+
+//Para que suene la musica de fondo
+void AGalaga_USFX_L01Pawn::BeginPlay()
+{
+	Super::BeginPlay();
+	UGameplayStatics::PlaySound2D(GetWorld(), Music, 0.3f); // Reproduce el sonido de la música de fondo con un volumen de 0.3
+
+
 }
 

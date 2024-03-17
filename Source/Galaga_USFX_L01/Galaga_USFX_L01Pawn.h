@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Galaga_USFX_L01Pawn.generated.h"
 
+
 UCLASS(Blueprintable)
 class AGalaga_USFX_L01Pawn : public APawn
 {
@@ -74,5 +75,15 @@ public:
 	FORCEINLINE class UCameraComponent* GetCameraComponent() const { return CameraComponent; }
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+
+protected:
+	
+	//Referencia al sonido de la música de fondo
+	UPROPERTY(EditAnywhere, Category ="Sound") // EditAnywhere permite modificar el valor de la variable en el editor
+	class USoundBase* Music; 
+
+public:
+	virtual void BeginPlay() override;
+
 };
 
