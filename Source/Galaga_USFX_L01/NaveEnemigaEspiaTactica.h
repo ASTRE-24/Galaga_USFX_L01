@@ -14,4 +14,10 @@ class GALAGA_USFX_L01_API ANaveEnemigaEspiaTactica : public ANaveEnemigaEspia
 {
 	GENERATED_BODY()
 	
+public:
+	ANaveEnemigaEspiaTactica();
+	virtual void Mover(float DeltaTime) override; //Sobrescribir los metodos
+	virtual void Atacar() override;
+	void RecopilarInformacion(); //Metodo propio
+
 };

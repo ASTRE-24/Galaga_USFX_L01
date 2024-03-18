@@ -34,6 +34,8 @@ protected:
 	float peso;
 	float volumen;
 
+
+
 public:
 	FORCEINLINE float GetVelocidad() const { return velocidad; }
 	FORCEINLINE float GetResistencia() const { return resistencia; }
@@ -68,6 +70,7 @@ public:
 public:
 	// Sets default values for this actor's properties
 	ANaveEnemiga();
+	
 
 protected:
 	// Called when the game starts or when spawned

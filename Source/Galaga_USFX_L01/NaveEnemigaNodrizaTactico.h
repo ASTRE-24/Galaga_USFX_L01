@@ -14,4 +14,8 @@ class GALAGA_USFX_L01_API ANaveEnemigaNodrizaTactico : public ANaveEnemigaNodriz
 {
 	GENERATED_BODY()
 	
+public:
+	ANaveEnemigaNodrizaTactico();
+	virtual void Mover(float DeltaTime) override; //Sobrescribir los metodos
+	void DesplegarTropas(); //Metodo propio
 };

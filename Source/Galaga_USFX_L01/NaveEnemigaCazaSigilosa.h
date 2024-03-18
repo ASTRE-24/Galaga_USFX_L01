@@ -14,4 +14,9 @@ class GALAGA_USFX_L01_API ANaveEnemigaCazaSigilosa : public ANaveEnemigaCaza
 {
 	GENERATED_BODY()
 	
+public:
+	ANaveEnemigaCazaSigilosa();
+	virtual void Mover(float Deltatime) override; //Sobrescribir los metodos
+	virtual void Atacar() override;
+	void Detectar(); //Metodo propio
 };

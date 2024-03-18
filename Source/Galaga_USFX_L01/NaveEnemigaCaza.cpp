@@ -30,7 +30,7 @@ void ANaveEnemigaCaza::Mover(float DeltaTime)
 		float Amplitud = 10.0f;
 		float Frecuencia = 4.0f;
 
-		float NewX = PosicionActual.X + Amplitud * FMath::Sin(Frecuencia * Timer);
+		float NewX = PosicionActual.X - Amplitud * FMath::Sin(Frecuencia * Timer);//Es negativa para que se mueva hacia abajo
 		float NewY = PosicionActual.Y;
 		float NewZ = PosicionActual.Z;
 

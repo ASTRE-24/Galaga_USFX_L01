@@ -14,4 +14,9 @@ class GALAGA_USFX_L01_API ANaveEnemigaTransporteFurtivo : public ANaveEnemigaTra
 {
 	GENERATED_BODY()
 	
+public:
+	ANaveEnemigaTransporteFurtivo();
+	virtual void Destruirse() override; //Otra forma de destruirse
+	void evitarRadares();
+	virtual void Mover(float DeltaTime) override; //Otra forma de Moverse
 };

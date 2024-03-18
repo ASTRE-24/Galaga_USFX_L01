@@ -3,3 +3,27 @@
 
 #include "NaveEnemigaCazaVeloz.h"
 
+ANaveEnemigaCazaVeloz::ANaveEnemigaCazaVeloz()
+{
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_TriPyramid.Shape_TriPyramid'"));
+	//// Create the mesh component
+	//mallaNaveEnemiga = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
+	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
+
+}
+
+void ANaveEnemigaCazaVeloz::Mover(float DeltaTime) {
+	//movimiento mas rapido
+}
+
+void ANaveEnemigaCazaVeloz::Escapar() {
+
+}
+
+void ANaveEnemigaCazaVeloz::Atacar() {
+	//ataques mas rapidos
+}
+
+void ANaveEnemigaCazaVeloz::Destruirse() {
+
+}

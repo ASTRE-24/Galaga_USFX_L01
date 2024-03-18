@@ -142,7 +142,7 @@ void AGalaga_USFX_L01Pawn::ShotTimerExpired()
 void AGalaga_USFX_L01Pawn::BeginPlay()
 {
 	Super::BeginPlay();
-	UGameplayStatics::PlaySound2D(GetWorld(), Music, 0.3f); // Reproduce el sonido de la música de fondo con un volumen de 0.3
+	UGameplayStatics::PlaySound2D(GetWorld(), Music, 0.1f); // Reproduce el sonido de la música de fondo con un volumen de 0.3
 
 
 }

@@ -19,27 +19,34 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	//Set the game state to playing
-	FVector ubicacionInicioNavesEnemigasCaza = FVector(-900.0f, 0.0f, 250.0f);
+	FVector ubicacionInicioNavesEnemigas = FVector(1850.0f, -1585.7f, 250.0f);
 	FVector ubicacionInicioNavesEnemigasTransporte = FVector(500.0f, 500.0f, 250.0f);
 
 
 	FRotator rotacionNave = FRotator(0.0f, 0.0f, 0.0f);
+	
 
 	UWorld* const World = GetWorld();
 	if (World != nullptr)
 	{
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 6; i++) {
 			//Esto es para crear las naves enemigas en una ubicacion especifica para comenzar
-			FVector PosicionNaveActual = FVector(ubicacionInicioNavesEnemigasCaza.X, ubicacionInicioNavesEnemigasCaza.Y + i * 300, ubicacionInicioNavesEnemigasCaza.Z);
 			
+			FVector PosicionNaveActualX = FVector(ubicacionInicioNavesEnemigas.X, ubicacionInicioNavesEnemigas.Y + i * 528.5f, ubicacionInicioNavesEnemigas.Z);
+			
+			for (int j = 0 ; j < 5; j++) {
+				FVector PosicionNaveActualY = FVector(PosicionNaveActualX.X - j * 528.5f, PosicionNaveActualX.Y , PosicionNaveActualX.Z);
+
 			if (i % 2 == 0) {
-				ANaveEnemigaCaza* NaveEnemigaCazaTemporal = World->SpawnActor<ANaveEnemigaCaza>(PosicionNaveActual, rotacionNave);// Se crea el objeto de la nave enemiga
+
+				ANaveEnemigaCaza* NaveEnemigaCazaTemporal = World->SpawnActor<ANaveEnemigaCaza>(PosicionNaveActualY, rotacionNave);// Se crea el objeto de la nave enemiga
 				TANavesEnemigas.Push(NaveEnemigaCazaTemporal); //Agrega la nave al array de todas sus clases hijas de NaveEnemiga
 			}
 			else {
-				ANaveEnemigaTransporte* NaveEnemigaTransporteTemporal = World->SpawnActor<ANaveEnemigaTransporte>(PosicionNaveActual, rotacionNave);
+				ANaveEnemigaTransporte* NaveEnemigaTransporteTemporal = World->SpawnActor<ANaveEnemigaTransporte>(PosicionNaveActualY, rotacionNave);
 				TANavesEnemigas.Push(NaveEnemigaTransporteTemporal);
 			}
+		    }
 			//ANaveEnemigaCaza* NaveEnemigaCazaTemporal = World->SpawnActor<ANaveEnemigaCaza>(PosicionNaveActual, rotacionNave);// Se crea el objeto de la nave enemiga
 
 			

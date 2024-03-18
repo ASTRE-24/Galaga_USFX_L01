@@ -16,8 +16,9 @@ ANaveEnemiga::ANaveEnemiga()
 	//mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
 	mallaNaveEnemiga->SetupAttachment(RootComponent);
 	RootComponent = mallaNaveEnemiga;
-	
 }
+
+
 
 // Called when the game starts or when spawned
 void ANaveEnemiga::BeginPlay()

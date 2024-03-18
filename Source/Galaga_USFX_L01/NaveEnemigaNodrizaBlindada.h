@@ -13,5 +13,8 @@ UCLASS()
 class GALAGA_USFX_L01_API ANaveEnemigaNodrizaBlindada : public ANaveEnemigaNodriza
 {
 	GENERATED_BODY()
-	
+public:
+	ANaveEnemigaNodrizaBlindada();
+	virtual void Mover(float DeltaTime) override; //Sobrescribir los metodos
+	void ActivarEscudo(); //Metodo propio
 };
