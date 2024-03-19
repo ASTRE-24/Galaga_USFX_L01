@@ -2,13 +2,16 @@
 
 
 #include "NaveEnemigaTransporte.h"
+#include "Galaga_USFX_L01GameMode.h"
 
 ANaveEnemigaTransporte::ANaveEnemigaTransporte()
 {
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_NarrowCapsule.Shape_NarrowCapsule'"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
-	Timer = 0.0f; //Inicializa el timer en 0
 	
+	//Asiganar el indice de fila en el Constructor
+	
+	//PosicionInicial = GetActorLocation();
 }
 
 
@@ -16,6 +19,9 @@ void ANaveEnemigaTransporte::Mover(float DeltaTime)
 {
 	// Obtiene la posición actual del actor
 	FVector PosicionActual = GetActorLocation();
+	Timer = 0.0f; //Inicializa el timer en 0
+	
+	
 
 	Timer += DeltaTime; //Aumenta el timer con el tiempo transcurrido
 	float Velocidad = 5.0f;
@@ -34,12 +40,15 @@ void ANaveEnemigaTransporte::Mover(float DeltaTime)
 	SetActorLocation(FVector(NewX, NewY, NewZ));
 
 	//hacer que la nave llegue a una ubicacion especifica e inicie donde su posicioninicial
-	if (-1880.0f == GetActorLocation().X)
+	
+
+	if (GetActorLocation().X<=-1800.0f)
 	{
-		SetActorLocation(FVector (1880.0f, NewY, NewZ));
+		
+		SetActorLocation(FVector(1800.0f, NewY, NewZ));
+		
 		Timer = 0.0f;
 	}
-
 
 	////Si la nave llega a destino, reaparecer en la posicion inicial
 	//if (FVector::Distance(PosicionActual, Destino) < 5.0f)
@@ -57,6 +66,7 @@ void ANaveEnemigaTransporte::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	Mover(DeltaTime);
+	
 }
 
 void ANaveEnemigaTransporte::Destruirse()

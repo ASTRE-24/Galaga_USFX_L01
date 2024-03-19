@@ -17,7 +17,11 @@ private:
 	float capacidadCargaPeso;
 	float capacidadCargaVolumen;
 	float Timer; //Timer para el movimiento de la nave
-
+	FVector PosicionInicial; //Posicion inicial de la nave
+	//FVector PosicionActual; //Posicion a la que se dirige la nave
+	FVector PosicionDestino; //Posicion a la que se dirige la nave
+	FVector EstadoMovimiento; //Direccion en la que se mueve la nave
+	int32 FilaIndex;
 
 
 public:

@@ -14,12 +14,12 @@ ANaveEnemigaCaza::ANaveEnemigaCaza()
 	bShouldMove = true; //Inicializa el booleano en true
 	TiempoParaDetenerse = 5.0f; //Inicializa el tiempo para detenerse en 5 segundos
 	TiempoParaReanudar = 2.0f; //Tiempo para reanudar el movimiento
-
+	
 }
 
 void ANaveEnemigaCaza::Mover(float DeltaTime)
 {
-	if (bShouldMove) {
+	//if (bShouldMove) {
 
 		// Obtiene la posición actual del actor
 		FVector PosicionActual = GetActorLocation();
@@ -27,11 +27,12 @@ void ANaveEnemigaCaza::Mover(float DeltaTime)
 		Timer += DeltaTime; //Aumenta el timer con el tiempo transcurrido
 
 		//Movimiento sinusoidal
-		float Amplitud = 10.0f;
+		float Amplitud = 5.0f;
 		float Frecuencia = 4.0f;
+		float Velocidad = 100.0f;
 
-		float NewX = PosicionActual.X - Amplitud * FMath::Sin(Frecuencia * Timer);//Es negativa para que se mueva hacia abajo
-		float NewY = PosicionActual.Y;
+		float NewX = PosicionActual.X - Velocidad*DeltaTime;
+		float NewY = PosicionActual.Y- Amplitud * FMath::Sin(Frecuencia * Timer);//Es negativa para que se mueva hacia abajo;
 		float NewZ = PosicionActual.Z;
 
 		// Crea un nuevo vector de posición con las coordenadas aleatorias y la misma Z que la posición actual
@@ -39,14 +40,23 @@ void ANaveEnemigaCaza::Mover(float DeltaTime)
 
 		// Establece la nueva posición del actor
 		SetActorLocation(FVector(NewX, NewY, NewZ));
-		if (Timer >= TiempoParaDetenerse) 
+
+		if (GetActorLocation().X <= -1800.0f)
+		{
+
+			SetActorLocation(FVector(1850.0f, NewY, NewZ));
+
+			Timer = 0.0f;
+		}
+
+		/*if (Timer >= TiempoParaDetenerse)
 		{
 			bShouldMove = false;
 			Timer = 0.0f;
 			//Llama a la función ReanudarMovimiento después de TiempoParaReanudar segundos
 			GetWorldTimerManager().SetTimer(TimerHandle_ReanudarMovimiento, this, &ANaveEnemigaCaza::ReanudarMovimiento, TiempoParaReanudar, false);
-		}
-	}
+		}*/
+	//}
 }
 
 void ANaveEnemigaCaza::ReanudarMovimiento()

@@ -22,19 +22,24 @@ public:
 	//ANaveEnemiga* NaveEnemiga01;
 	//ANaveEnemigaTransporte* NaveEnemigaTransporte01;
 	ANaveEnemigaCaza* NaveEnemigaCaza01;
+	FString GetUniqueNameForNave(); // Declaración de la función aquí
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:
 	//Definicion de las naves enemigas en un array
-	TArray<ANaveEnemiga*> TANavesEnemigas;
+	//TArray<ANaveEnemiga*> TANavesEnemigas;
 	TArray<ANaveEnemigaCaza*> TANavesEnemigasCaza;
 	TArray<ANaveEnemigaTransporte*> TANavesEnemigasTransporte;
+	TMap<FString, ANaveEnemiga*> NaveEnemigas; // Aquí se declara el TMap para almacenar las naves enemigas
+	//TMap<int32, FVector> PosicionesNavesEnemigas; // Aquí se declara el TMap para almacenar las posiciones de las naves enemigas
 
 private:
+	
 	int TiempoTranscurrido;
-
+	
 //public:
 //	// Called every frame
 //	virtual void Tick(float DeltaTime) override;

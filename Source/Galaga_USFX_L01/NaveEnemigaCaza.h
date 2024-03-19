@@ -21,6 +21,7 @@ private:
 	float TiempoParaReanudar; //Tiempo para reanudar
 	// Nuevo temporizador para reanudar el movimiento
 	FTimerHandle TimerHandle_ReanudarMovimiento;
+	
 
 public:
 	ANaveEnemigaCaza(); //Constructor
