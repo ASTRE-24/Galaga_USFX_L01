@@ -9,6 +9,7 @@ ANaveEnemigaCaza::ANaveEnemigaCaza()
 	//// Create the mesh component
 	//mallaNaveEnemiga = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
+	//mallaNaveEnemiga->SetWorldScale3D(FVector(0.5f, 0.5f, 0.5f));
 
 	Timer = 0.0f; //Inicializa el timer en 0
 	bShouldMove = true; //Inicializa el booleano en true
@@ -47,6 +48,15 @@ void ANaveEnemigaCaza::Mover(float DeltaTime)
 			SetActorLocation(FVector(1850.0f, NewY, NewZ));
 
 			
+		}
+		if (GetActorLocation().Y >= 1850)
+		{
+			SetActorLocation(FVector(NewX, -1850.0f, PosicionActual.Z));
+		}
+
+		if (GetActorLocation().Y <= -1850)
+		{
+			SetActorLocation(FVector(NewX, 1850.0f, PosicionActual.Z));
 		}
 
 		/*if (Timer >= TiempoParaDetenerse)

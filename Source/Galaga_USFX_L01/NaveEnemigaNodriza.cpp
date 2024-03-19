@@ -49,6 +49,15 @@ void ANaveEnemigaNodriza::Mover(float DeltaTime)
 
 
     }
+    if (GetActorLocation().Y >= 1850)
+    {
+        SetActorLocation(FVector(NewX, -1850.0f, PosicionActual.Z));
+    }
+
+    if (GetActorLocation().Y <= -1850)
+    {
+        SetActorLocation(FVector(NewX, 1850.0f, PosicionActual.Z));
+    }
 }
 
 void ANaveEnemigaNodriza::Tick(float DeltaTime)

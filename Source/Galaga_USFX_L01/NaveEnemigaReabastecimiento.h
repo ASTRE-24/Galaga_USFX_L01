@@ -18,6 +18,9 @@ private:
 	float velocidadReabasto; //Velocidad de Reabastecimiento
 	float tiempoReabasto; //Tiempo de Reabastecimiento
 	float radioReabasto; //Radio de reabastecimiento
+	float Timer; //Timer para el movimiento de la nave
+	float TiempoTranscurrido; //Tiempo transcurrido
+	float PosicionCentro; //Posicion del centro del arco
 
 public:
 	ANaveEnemigaReabastecimiento();
@@ -36,4 +39,7 @@ protected:
 	virtual void Destruirse();
 	virtual void Escapar();
 	virtual void Atacar();
+public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 };
