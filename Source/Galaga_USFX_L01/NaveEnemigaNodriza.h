@@ -17,6 +17,8 @@ class GALAGA_USFX_L01_API ANaveEnemigaNodriza : public ANaveEnemiga
 private:
 	int numNavesGeneradas; //Numero de naves generadas;
 	float tiempoGeneracionNaves; //Tiempo de generacion de naves
+	float Timer; //Timer para el movimiento de la nave
+	float TiempoTranscurrido; //Tiempo transcurrido
 
 public:
 	ANaveEnemigaNodriza();
@@ -33,4 +35,7 @@ protected:
 	virtual void Destruirse();
 	virtual void Escapar();
 	virtual void Atacar();
+public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 };

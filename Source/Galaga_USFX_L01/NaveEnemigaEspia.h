@@ -17,6 +17,8 @@ class GALAGA_USFX_L01_API ANaveEnemigaEspia : public ANaveEnemiga
 private:
 	float duracionInvisibilidad;
 	FString tipoCamuflaje;
+	float Timer; //Timer para el movimiento de la nave
+	float TiempoTrascurrido; //Tiempo transcurrido para el movimiento de la nave
 
 public:
 	ANaveEnemigaEspia();
@@ -33,5 +35,9 @@ protected:
 	virtual void Destruirse();
 	virtual void Escapar();
 	virtual void Atacar();
+
+public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 };
 

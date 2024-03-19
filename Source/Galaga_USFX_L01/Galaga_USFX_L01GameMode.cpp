@@ -5,6 +5,8 @@
 #include "NaveEnemiga.h"
 #include "NaveEnemigaTransporte.h"
 #include "NaveEnemigaCaza.h"
+#include "NaveEnemigaEspia.h"
+#include "NaveEnemigaNodriza.h"
 
 AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 {
@@ -40,10 +42,10 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 
                 // Probabilidad de generar una nave caza o transporte (50% cada una)
                 if (RandomNumber <= 0.5f) {
-                    NaveEnemigaTemporal = World->SpawnActor<ANaveEnemigaCaza>(PosicionNaveActualY, rotacionNave); // Spawn nave caza
+                    NaveEnemigaTemporal = World->SpawnActor<ANaveEnemigaEspia>(PosicionNaveActualY, rotacionNave); // Spawn nave caza
                 }
                 else {
-                    NaveEnemigaTemporal = World->SpawnActor<ANaveEnemigaTransporte>(PosicionNaveActualY, rotacionNave); // Spawn nave transporte
+                    NaveEnemigaTemporal = World->SpawnActor<ANaveEnemigaNodriza>(PosicionNaveActualY, rotacionNave); // Spawn nave transporte
                 }
 
                 if (NaveEnemigaTemporal != nullptr) {
