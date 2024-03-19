@@ -17,4 +17,7 @@ public:
 	ANaveEnemigaNodrizaBlindada();
 	virtual void Mover(float DeltaTime) override; //Sobrescribir los metodos
 	void ActivarEscudo(); //Metodo propio
+public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 };

@@ -13,6 +13,10 @@ UCLASS()
 class GALAGA_USFX_L01_API ANaveEnemigaEspiaInfiltrada : public ANaveEnemigaEspia
 {
 	GENERATED_BODY()
+private:
+
+	float Timer; //Timer para el movimiento de la nave
+	float TiempoTrascurrido; //Tiempo transcurrido para el movimiento de la nave
 
 public:
 	ANaveEnemigaEspiaInfiltrada();
@@ -20,5 +24,7 @@ public:
 	virtual void Atacar() override;
 	virtual void Escapar() override;
 	void CambiarDisfraz(); //Metodo propio
-
+public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 };

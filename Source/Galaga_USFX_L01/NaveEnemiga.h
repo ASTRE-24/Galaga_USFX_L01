@@ -33,6 +33,7 @@ protected:
 
 	float peso;
 	float volumen;
+	
 
 
 

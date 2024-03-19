@@ -18,4 +18,6 @@ public:
 	ANaveReabastecimientoMunicion();
 	virtual void Mover(float DeltaTime) override; //Sobrescribir los metodos
 	void RecargarMunicion(); //Metodo propio
+
+	virtual void Tick(float DeltaTime) override; //Sobrescribir el metodo tick
 };

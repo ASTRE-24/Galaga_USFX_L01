@@ -33,3 +33,15 @@ D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemigaTransporteFurtivo.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaTransporteFurtivo.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemigaTransporteLogistico.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaTransporteLogistico.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemigaEspiaInfiltrada.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaEspiaInfiltrada.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemigaEspiaTactica.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaEspiaTactica.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemigaNodrizaBlindada.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaNodrizaBlindada.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemigaNodrizaTactico.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaNodrizaTactico.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveReabastecimientoEnergia.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveReabastecimientoEnergia.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveReabastecimientoMunicion.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveReabastecimientoMunicion.generated.h

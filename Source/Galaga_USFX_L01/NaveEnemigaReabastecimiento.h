@@ -18,9 +18,10 @@ private:
 	float velocidadReabasto; //Velocidad de Reabastecimiento
 	float tiempoReabasto; //Tiempo de Reabastecimiento
 	float radioReabasto; //Radio de reabastecimiento
+public:
 	float Timer; //Timer para el movimiento de la nave
 	float TiempoTranscurrido; //Tiempo transcurrido
-	float PosicionCentro; //Posicion del centro del arco
+	
 
 public:
 	ANaveEnemigaReabastecimiento();

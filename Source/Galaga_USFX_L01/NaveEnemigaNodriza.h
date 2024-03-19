@@ -17,6 +17,7 @@ class GALAGA_USFX_L01_API ANaveEnemigaNodriza : public ANaveEnemiga
 private:
 	int numNavesGeneradas; //Numero de naves generadas;
 	float tiempoGeneracionNaves; //Tiempo de generacion de naves
+public:
 	float Timer; //Timer para el movimiento de la nave
 	float TiempoTranscurrido; //Tiempo transcurrido
 

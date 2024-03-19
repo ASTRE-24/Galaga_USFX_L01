@@ -19,4 +19,8 @@ public:
 	virtual void Mover(float DeltaTime) override; //Sobrescribir los metodos
 	virtual void Escapar() override;
 	void RecargarEnergia(); //Metodo propio
+
+public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 };
