@@ -2,6 +2,7 @@
 
 
 #include "NaveEnemigaCaza.h"
+#include "ActorComponentDisparo.h"
 
 ANaveEnemigaCaza::ANaveEnemigaCaza()
 {
@@ -15,7 +16,9 @@ ANaveEnemigaCaza::ANaveEnemigaCaza()
 	bShouldMove = true; //Inicializa el booleano en true
 	TiempoParaDetenerse = 5.0f; //Inicializa el tiempo para detenerse en 5 segundos
 	TiempoParaReanudar = 2.0f; //Tiempo para reanudar el movimiento
-	
+	// Inicializar el componente de disparo
+	DisparoComponent = CreateDefaultSubobject<UActorComponentDisparo>(TEXT("DisparoComponent"));
+	// Asignar valores necesarios (como FireRate, GunOffset, etc.) al componente de disparo si es necesario
 }
 
 void ANaveEnemigaCaza::Mover(float DeltaTime)
@@ -76,12 +79,15 @@ void ANaveEnemigaCaza::ReanudarMovimiento()
 
 void ANaveEnemigaCaza::Disparar()
 {
+	
+
 }
 
 void ANaveEnemigaCaza::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	Mover(DeltaTime);
+	
 }
 
 void ANaveEnemigaCaza::Destruirse()
@@ -97,4 +103,15 @@ void ANaveEnemigaCaza::Escapar()
 void ANaveEnemigaCaza::Atacar()
 {
 
+}
+
+void ANaveEnemigaCaza::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// Inicia el temporizador de disparo cuando la nave enemiga comienza a jugar
+	if (DisparoComponent)
+	{
+		DisparoComponent->StartFireTimer();
+	}
 }

@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\Galaga_USFX_L01.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{09AEFA34-CAD6-4CBC-8F58-5EFA16DE1A09}</UniqueIdentifier>
+      <UniqueIdentifier>{97B941CF-04E0-41A5-8EDB-C76E30915EAD}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\Galaga_USFX_L01.Target.cs">
       <Filter>Source</Filter>
@@ -14,7 +14,7 @@
     <None Include="..\..\.gitattributes" />
     <None Include="..\..\.gitignore" />
     <Filter Include="Config">
-      <UniqueIdentifier>{EF6846D9-6EB4-4F98-A81B-AC6C45601609}</UniqueIdentifier>
+      <UniqueIdentifier>{EA839A64-DD08-4CD4-83EE-163D67FB639D}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -32,8 +32,14 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\Galaga_USFX_L01">
-      <UniqueIdentifier>{C187A756-CAB4-41D2-8A0F-0C3C6BF33541}</UniqueIdentifier>
+      <UniqueIdentifier>{B6061B0E-5CE5-4E87-9032-1DF8CF92A033}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\ActorComponentDisparo.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\ActorComponentDisparo.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
     <None Include="..\..\Source\Galaga_USFX_L01\Galaga_USFX_L01.Build.cs">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </None>

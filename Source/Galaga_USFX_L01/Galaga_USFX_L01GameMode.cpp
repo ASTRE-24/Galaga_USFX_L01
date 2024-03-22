@@ -72,7 +72,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
         // Tipos de naves disponibles
         TArray<TSubclassOf<ANaveEnemiga>> TiposDeNaves;//Crea un TArray de subclases de ANaveEnemiga
         TiposDeNaves.Add(ANaveEnemigaCaza::StaticClass()); //Agrega la subclase ANaveEnemigaCaza al TArray
-        TiposDeNaves.Add(ANaveEnemigaCazaVeloz::StaticClass());
+        /*TiposDeNaves.Add(ANaveEnemigaCazaVeloz::StaticClass());
         TiposDeNaves.Add(ANaveEnemigaCazaSigilosa::StaticClass());
         TiposDeNaves.Add(ANaveEnemigaTransporte::StaticClass());
         TiposDeNaves.Add(ANaveEnemigaTransporteFurtivo::StaticClass());
@@ -85,14 +85,14 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
         TiposDeNaves.Add(ANaveEnemigaNodrizaTactico::StaticClass());
         TiposDeNaves.Add(ANaveEnemigaReabastecimiento::StaticClass());
         TiposDeNaves.Add(ANaveReabastecimientoEnergia::StaticClass());
-        TiposDeNaves.Add(ANaveReabastecimientoMunicion::StaticClass());
+        TiposDeNaves.Add(ANaveReabastecimientoMunicion::StaticClass());*/
 
         
 
         for (int i = 0; i < 6; i++) {
             FVector PosicionNaveActualX = FVector(ubicacionInicioNavesEnemigas.X, ubicacionInicioNavesEnemigas.Y + i * 600.0f, ubicacionInicioNavesEnemigas.Z);
 
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 1; j++) {
                 FVector PosicionNaveActualY = FVector(PosicionNaveActualX.X - j * 528.5f, PosicionNaveActualX.Y, PosicionNaveActualX.Z);
 
                 // Selecciona un tipo de nave aleatorio

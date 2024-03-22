@@ -116,7 +116,29 @@ void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 			if (World != nullptr)
 			{
 				// spawn the projectile
-				World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocation, FireRotation);
+				// Spawn the three projectiles
+				//float BulletSpacing = 100.0f; // Ajusta el valor según sea necesario
+
+				for (int i = 0; i <3 ; ++i)
+				{
+					//World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocation, FireRotation);
+					 FRotator ModifiedRotation = FireRotation;
+					// Modify rotation for each projectile
+					ModifiedRotation.Yaw += (i - 1) * 20.0f; // Offset rotation by 10 degrees
+
+					// Calcular la ubicación de spawn de la bala actual
+                    //FVector BulletSpawnLocation = SpawnLocation + FireRotation.RotateVector(FVector(0.f, i * BulletSpacing, 0.f));
+
+                    // Spawn the projectile
+                    //World->SpawnActor<AGalaga_USFX_L01Projectile>(BulletSpawnLocation, FireRotation);
+                
+            
+					const FVector ModifiedSpawnLocation = GetActorLocation() + ModifiedRotation.RotateVector(GunOffset);
+
+					//// Spawn the projectile
+					World->SpawnActor<AGalaga_USFX_L01Projectile>(ModifiedSpawnLocation, ModifiedRotation);
+				}
+				
 			}
 
 			bCanFire = false;
@@ -143,7 +165,7 @@ void AGalaga_USFX_L01Pawn::BeginPlay()
 {
 	Super::BeginPlay();
 	UGameplayStatics::PlaySound2D(GetWorld(), Music, 0.1f); // Reproduce el sonido de la música de fondo con un volumen de 0.3
-
+	
 
 }
 

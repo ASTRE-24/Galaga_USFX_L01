@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "NaveEnemiga.h"
+#include "ActorComponentDisparo.h"
 #include "NaveEnemigaCaza.generated.h"
+
 
 /**
  *
@@ -38,4 +40,13 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	virtual void BeginPlay() override;
+
+private:
+	// Other member variables and functions
+
+	// Declare the DisparoComponent
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Disparo", meta = (AllowPrivateAccess = "true"))
+	UActorComponentDisparo* DisparoComponent; // Declara el componente DisparoComponent
+
 };

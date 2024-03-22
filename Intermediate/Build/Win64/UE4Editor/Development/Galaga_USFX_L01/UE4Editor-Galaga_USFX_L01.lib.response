@@ -7,6 +7,7 @@
 /IGNORE:4221
 /NODEFAULTLIB
 "D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\Galaga_USFX_L01Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\ActorComponentDisparo.cpp.obj"
 "D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\Galaga_USFX_L01.cpp.obj"
 "D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\Galaga_USFX_L01GameMode.cpp.obj"
 "D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\Galaga_USFX_L01Pawn.cpp.obj"
@@ -27,6 +28,7 @@
 "D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\NaveEnemigaTransporteLogistico.cpp.obj"
 "D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\NaveReabastecimientoEnergia.cpp.obj"
 "D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\NaveReabastecimientoMunicion.cpp.obj"
+"D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\ActorComponentDisparo.gen.cpp.obj"
 "D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\Galaga_USFX_L01.init.gen.cpp.obj"
 "D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\Galaga_USFX_L01GameMode.gen.cpp.obj"
 "D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\Galaga_USFX_L01Pawn.gen.cpp.obj"
