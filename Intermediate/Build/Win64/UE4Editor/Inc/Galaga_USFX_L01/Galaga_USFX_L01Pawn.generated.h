@@ -21,6 +21,7 @@ class AInventoryActor;
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_Galaga_USFX_L01Pawn_h_15_SPARSE_DATA
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_Galaga_USFX_L01Pawn_h_15_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execReloadAmmo); \
 	DECLARE_FUNCTION(execNotifyHit); \
 	DECLARE_FUNCTION(execTakeItem); \
 	DECLARE_FUNCTION(execDropItem);
@@ -28,6 +29,7 @@ class AInventoryActor;
 
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_Galaga_USFX_L01Pawn_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execReloadAmmo); \
 	DECLARE_FUNCTION(execNotifyHit); \
 	DECLARE_FUNCTION(execTakeItem); \
 	DECLARE_FUNCTION(execDropItem);

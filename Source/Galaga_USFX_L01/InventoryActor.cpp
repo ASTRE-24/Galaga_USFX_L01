@@ -33,4 +33,17 @@ AInventoryActor::AInventoryActor():Super()
 			}
 	GetStaticMeshComponent()->SetMobility(EComponentMobility::Movable);
 	SetActorEnableCollision(true);
+
+}
+
+void AInventoryActor::BeginPlay()
+{
+	Super::BeginPlay();
+	CustomizeAppearance(); // Llama a la función de personalización al comienzo del juego
+	//SetLifeSpan(10.0f); // Destruye el objeto después de 10 segundos
+}
+
+void AInventoryActor::CustomizeAppearance()
+{
+	// No hace nada en la clase base, las clases hijas pueden sobrescribir esta función
 }

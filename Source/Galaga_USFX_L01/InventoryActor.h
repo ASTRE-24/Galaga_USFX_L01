@@ -21,5 +21,7 @@ public:
 
 	virtual void PickUp(); 
 	virtual void PutDown(FTransform TargetLocation);
+	virtual void CustomizeAppearance();
+	virtual void BeginPlay() override;
 	
 };

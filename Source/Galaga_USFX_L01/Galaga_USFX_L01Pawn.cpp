@@ -12,6 +12,8 @@
 #include "Engine/StaticMesh.h"
 #include "InventoryComponent.h"
 #include "InventoryActor.h"
+#include "InventoryActorMunicion.h"
+#include "InventoryActorEnergia.h"
 #include "Sound/SoundBase.h"
 #include "Kismet/GameplayStatics.h" // Necesario para usar usar la musica de fondo
 
@@ -73,8 +75,8 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 		EInputEvent::IE_Pressed,this,
 		&AGalaga_USFX_L01Pawn::DropItem);
 
-	PlayerInputComponent->BindAction("ReloadAmmo",
-		IE_Pressed, this, &AGalaga_USFX_L01Pawn::ReloadAmmo);
+	PlayerInputComponent->BindAction("ReloadAmmo", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ReloadAmmo);
+	PlayerInputComponent->BindAction("ReloadEnergy", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ReloadEnergy);
 
 }
 
@@ -190,8 +192,8 @@ void AGalaga_USFX_L01Pawn::ShotTimerExpired()
 		//NumProyectilesDisparados = 0;
 		if (GEngine)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "No tienes municiones");
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Presiona R para recargar");
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "No tienes municiones");
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Presiona Q para recargar");
 			
 
 		}
@@ -217,13 +219,21 @@ void AGalaga_USFX_L01Pawn::DropItem()
 	AInventoryActor* Item =
 		MyInventory->CurrentInventory.Last();
 	MyInventory->RemoveFromInventory(Item);
+	// Obtén la ubicación actual de la nave
+	FVector ShipLocation = GetActorLocation();
 	FVector ItemOrigin;
 	FVector ItemBounds;
 	Item->GetActorBounds(false, ItemOrigin, ItemBounds);
-	FTransform PutDownLocation = GetTransform() +
-		FTransform(RootComponent->GetForwardVector() *
-			ItemBounds.GetMax());
+	// Ajusta la posición para centrar el objeto con respecto a la nave
+	float DropDistance = 200.0f; // Distancia adicional para dejar caer el objeto
+	FVector DropOffset = FVector(0.0f, 0.0f, ItemBounds.Z * 0.5f); // Ajusta la posición verticalmente para centrar el objeto
+	FTransform PutDownLocation = FTransform(GetActorRotation(), ShipLocation + DropOffset +
+		(RootComponent->GetForwardVector() * DropDistance)); // Combina la ubicación de la nave con el desplazamiento vertical y horizontal
+
 	Item->PutDown(PutDownLocation);
+
+	//Verifica el inventario después de soltar un objeto
+	CheckInventory();
 }
 
 void AGalaga_USFX_L01Pawn::NotifyHit(class UPrimitiveComponent*
@@ -243,17 +253,120 @@ void AGalaga_USFX_L01Pawn::TakeItem(AInventoryActor*
 {
 	InventoryItem->PickUp();
 	MyInventory->AddToInventory(InventoryItem);
+
+	
+	//Verifica el inventario después de recoger un objeto
+	CheckInventory();
 }
 
 void AGalaga_USFX_L01Pawn::ReloadAmmo()
 {
-	if (GEngine)
+	// Bandera para verificar si se encontró un objeto de munición
+	bool bFoundAmmo = false;
+
+	// Itera sobre los objetos en el inventario para encontrar uno de munición
+	for (AInventoryActor* InventoryItem : MyInventory->CurrentInventory)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Municiones Recargadas +5");
-		
+		// Intenta hacer un cast a AInventoryActorMunicion
+		AInventoryActorMunicion* AmmoItem = Cast<AInventoryActorMunicion>(InventoryItem);
+		if (AmmoItem)
+		{
+			// Se encontró un objeto de munición en el inventario
+			bFoundAmmo = true;
 
+			// Se encontró un objeto de munición en el inventario
+			// Elimina el objeto de munición del inventario			
+			MyInventory->RemoveFromInventory(AmmoItem);
+			NumProyectilesDisparados = 0; // Restablece el contador de proyectiles disparados.
+			MaxProyectilesDisparados = 20; // Establece el número máximo de proyectiles disparados
+			bCanFire = true; // Permite al jugador disparar nuevamente.
 
+			if (GEngine)
+			{
+				FString Message = FString::Printf(TEXT("Se recargaron +%d de municion"), MaxProyectilesDisparados);
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, Message);
+			}
+			CheckInventory();
+
+			// Sal del bucle ya que encontraste y manejaste un objeto de munición
+			break;
+		}
 	}
-	NumProyectilesDisparados = 0; // Restablece el contador de proyectiles disparados.
-	bCanFire = true; // Permite al jugador disparar nuevamente.
+
+	// Verifica si no se encontró ningún objeto de munición
+	if (!bFoundAmmo)
+	{
+		// Muestra un mensaje indicando que no se encontró ningún objeto de munición
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "No tienes municion para recargar");
+		}
+	}
 }
+
+void AGalaga_USFX_L01Pawn::CheckInventory()
+{
+	
+	// Verifica si el componente de inventario existe
+	if (MyInventory)
+	{
+		// Obtiene el número de objetos de inventario en el inventario del jugador
+		int32 NumItems = MyInventory->CurrentInventory.Num();
+
+		// Puedes hacer lo que quieras con NumItems, como mostrarlo en pantalla, usarlo en lógica de juego, etc.
+		if (GEngine)
+		{
+			FString Message = FString::Printf(TEXT("Tienes %d objetos en tu inventario"), NumItems);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, Message);
+		}
+	}
+	else
+	{
+		
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "No tienes un Items de municion en el inventario");
+		}
+	}
+}
+
+void AGalaga_USFX_L01Pawn::ReloadEnergy()
+{
+	// Bandera para verificar si se encontró un objeto de munición
+	bool bFoundEnergy = false;
+	// Itera sobre los objetos en el inventario para encontrar uno de Energia
+	for (AInventoryActor* InventoryItem : MyInventory->CurrentInventory)
+	{
+		// Intenta hacer un cast a AInventoryActorEnergy
+		AInventoryActorEnergia* EnergyItem = Cast<AInventoryActorEnergia>(InventoryItem);
+		if (EnergyItem)
+		{
+			// Se encontró un objeto de munición en el inventario
+			bFoundEnergy= true;
+			// Se encontró un objeto de Energia en el inventario
+			// Elimina el objeto de munición del inventario
+			MyInventory->RemoveFromInventory(EnergyItem);
+			
+			// Muestra un mensaje de depuración
+			if (GEngine)
+			{
+				//FString Message = FString::Printf(TEXT("Se recargaron %d de municion"), MaxProyectilesDisparados);
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Se restablecio 100 pts de vida");
+			}
+			CheckInventory();
+			// Sal del bucle ya que encontraste y manejaste un objeto de munición
+			break;
+		}
+		
+	}
+	// Verifica si no se encontró ningún objeto de munición
+	if (!bFoundEnergy)
+	{
+		// Muestra un mensaje indicando que no se encontró ningún objeto de munición
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "No tienes Energia para recargar");
+		}
+	}
+}	
+
