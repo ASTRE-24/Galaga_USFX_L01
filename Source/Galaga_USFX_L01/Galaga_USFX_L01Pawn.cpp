@@ -10,7 +10,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Engine/CollisionProfile.h"
 #include "Engine/StaticMesh.h"
-#include "Kismet/GameplayStatics.h"
+#include "InventoryComponent.h"
+#include "InventoryActor.h"
 #include "Sound/SoundBase.h"
 #include "Kismet/GameplayStatics.h" // Necesario para usar usar la musica de fondo
 
@@ -51,6 +52,11 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	GunOffset = FVector(90.f, 0.f, 0.f);
 	FireRate = 0.1f;
 	bCanFire = true;
+
+	NumProyectilesDisparados = 0;
+	MaxProyectilesDisparados = 5; //Establece el número máximo de proyectiles disparados
+	MyInventory =
+		CreateDefaultSubobject<UInventoryComponent>("MyInventory");
 }
 
 void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -62,7 +68,16 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 	PlayerInputComponent->BindAxis(MoveRightBinding);
 	PlayerInputComponent->BindAxis(FireForwardBinding);
 	PlayerInputComponent->BindAxis(FireRightBinding);
+
+	PlayerInputComponent->BindAction("DropItem",
+		EInputEvent::IE_Pressed,this,
+		&AGalaga_USFX_L01Pawn::DropItem);
+
+	PlayerInputComponent->BindAction("ReloadAmmo",
+		IE_Pressed, this, &AGalaga_USFX_L01Pawn::ReloadAmmo);
+
 }
+
 
 void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 {
@@ -103,8 +118,12 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 {
 	// If it's ok to fire again
-	if (bCanFire == true)
+	if (bCanFire==true && NumProyectilesDisparados<MaxProyectilesDisparados)
 	{
+		// Incrementa el contador de proyectiles disparados
+		
+
+		
 		// If we are pressing fire stick in a direction
 		if (FireDirection.SizeSquared() > 0.0f)
 		{
@@ -140,6 +159,12 @@ void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 				}
 				
 			}
+			// Restablece el contador cuando se alcance el límite máximo
+			if (NumProyectilesDisparados >= MaxProyectilesDisparados)
+			{
+				bCanFire = false;
+				GetWorld()->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &AGalaga_USFX_L01Pawn::ShotTimerExpired, FireRate);
+			}
 
 			bCanFire = false;
 			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &AGalaga_USFX_L01Pawn::ShotTimerExpired, FireRate);
@@ -157,6 +182,20 @@ void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 
 void AGalaga_USFX_L01Pawn::ShotTimerExpired()
 {
+	// Restablece el contador y permite disparar de nuevo
+	++NumProyectilesDisparados; // Incrementa el contador de proyectiles disparados en 1
+	
+	if (NumProyectilesDisparados >= MaxProyectilesDisparados)
+	{
+		//NumProyectilesDisparados = 0;
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "No tienes municiones");
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Presiona R para recargar");
+			
+
+		}
+	}
 	bCanFire = true;
 }
 
@@ -169,3 +208,52 @@ void AGalaga_USFX_L01Pawn::BeginPlay()
 
 }
 
+void AGalaga_USFX_L01Pawn::DropItem()
+{
+	if (MyInventory->CurrentInventory.Num() == 0)
+	{
+		return;
+	}
+	AInventoryActor* Item =
+		MyInventory->CurrentInventory.Last();
+	MyInventory->RemoveFromInventory(Item);
+	FVector ItemOrigin;
+	FVector ItemBounds;
+	Item->GetActorBounds(false, ItemOrigin, ItemBounds);
+	FTransform PutDownLocation = GetTransform() +
+		FTransform(RootComponent->GetForwardVector() *
+			ItemBounds.GetMax());
+	Item->PutDown(PutDownLocation);
+}
+
+void AGalaga_USFX_L01Pawn::NotifyHit(class UPrimitiveComponent*
+	MyComp, AActor* Other, class UPrimitiveComponent* OtherComp,
+	bool bSelfMoved, FVector HitLocation, FVector HitNormal,
+	FVector NormalImpulse, const FHitResult& Hit)
+{
+	AInventoryActor* InventoryItem =
+		Cast<AInventoryActor>(Other);
+	if (InventoryItem != nullptr)
+	{
+		TakeItem(InventoryItem);
+	}
+}
+void AGalaga_USFX_L01Pawn::TakeItem(AInventoryActor*
+	InventoryItem)
+{
+	InventoryItem->PickUp();
+	MyInventory->AddToInventory(InventoryItem);
+}
+
+void AGalaga_USFX_L01Pawn::ReloadAmmo()
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Municiones Recargadas +5");
+		
+
+
+	}
+	NumProyectilesDisparados = 0; // Restablece el contador de proyectiles disparados.
+	bCanFire = true; // Permite al jugador disparar nuevamente.
+}
