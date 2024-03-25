@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "InventoryActor.h"
+#include "Containers/Queue.h"
 #include "InventoryComponent.generated.h"
 
 
@@ -17,14 +18,22 @@ public:
 	// Sets default values for this component's properties
 	UInventoryComponent();
 
-	UPROPERTY()
-	TArray<AInventoryActor*> CurrentInventory;
+	//UPROPERTY()
+	TQueue<AInventoryActor*> CurrentInventory; // Cola de objetos en el inventario
+	//TArray<AInventoryActor*> CurrentInventory;
 
 	UFUNCTION()
 	int32 AddToInventory(AInventoryActor* ActorToAdd);	
 
 	UFUNCTION()
 	void RemoveFromInventory(AInventoryActor* ActorToRemove); 
+
+	// Funcion para el movimiento de los objetos en el inventario
+	UFUNCTION()
+	void MoveInventoryItem();
+
+	UPROPERTY()
+	float MovementRadius; // Radio de movimiento de los objetos en el inventario
 
 protected:
 	// Called when the game starts

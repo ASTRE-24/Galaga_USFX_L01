@@ -17,6 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeInventoryActor() {}
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_AInventoryActor();
 	ENGINE_API UClass* Z_Construct_UClass_AStaticMeshActor();
 	UPackage* Z_Construct_UPackage__Script_Galaga_USFX_L01();
+	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UMovimientoVertical_NoRegister();
 // End Cross Module References
 	void AInventoryActor::StaticRegisterNativesAInventoryActor()
 	{
@@ -31,6 +32,11 @@ void EmptyLinkFunctionForGeneratedCodeInventoryActor() {}
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_MovementComponent_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_MovementComponent;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
 	};
@@ -47,6 +53,19 @@ void EmptyLinkFunctionForGeneratedCodeInventoryActor() {}
 		{ "ShowCategories", "Input|MouseInput Input|TouchInput" },
 	};
 #endif
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AInventoryActor_Statics::NewProp_MovementComponent_MetaData[] = {
+		{ "Category", "Movimiento" },
+		{ "Comment", "// Componente de movimiento vertical\n" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "InventoryActor.h" },
+		{ "ToolTip", "Componente de movimiento vertical" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AInventoryActor_Statics::NewProp_MovementComponent = { "MovementComponent", nullptr, (EPropertyFlags)0x00200800000a001d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AInventoryActor, MovementComponent), Z_Construct_UClass_UMovimientoVertical_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AInventoryActor_Statics::NewProp_MovementComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AInventoryActor_Statics::NewProp_MovementComponent_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AInventoryActor_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AInventoryActor_Statics::NewProp_MovementComponent,
+	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AInventoryActor_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AInventoryActor>::IsAbstract,
 	};
@@ -56,11 +75,11 @@ void EmptyLinkFunctionForGeneratedCodeInventoryActor() {}
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		nullptr,
-		nullptr,
+		Z_Construct_UClass_AInventoryActor_Statics::PropPointers,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
 		0,
-		0,
+		UE_ARRAY_COUNT(Z_Construct_UClass_AInventoryActor_Statics::PropPointers),
 		0,
 		0x009000A4u,
 		METADATA_PARAMS(Z_Construct_UClass_AInventoryActor_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_AInventoryActor_Statics::Class_MetaDataParams))
@@ -74,7 +93,7 @@ void EmptyLinkFunctionForGeneratedCodeInventoryActor() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AInventoryActor, 524300419);
+	IMPLEMENT_CLASS(AInventoryActor, 3949385037);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<AInventoryActor>()
 	{
 		return AInventoryActor::StaticClass();

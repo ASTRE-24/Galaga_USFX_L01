@@ -74,7 +74,7 @@ void EmptyLinkFunctionForGeneratedCodeInventoryActorEnergia() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AInventoryActorEnergia, 2230059851);
+	IMPLEMENT_CLASS(AInventoryActorEnergia, 2452777320);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<AInventoryActorEnergia>()
 	{
 		return AInventoryActorEnergia::StaticClass();

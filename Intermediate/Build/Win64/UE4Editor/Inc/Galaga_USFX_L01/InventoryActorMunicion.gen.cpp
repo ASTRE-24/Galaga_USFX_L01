@@ -74,7 +74,7 @@ void EmptyLinkFunctionForGeneratedCodeInventoryActorMunicion() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AInventoryActorMunicion, 1681205322);
+	IMPLEMENT_CLASS(AInventoryActorMunicion, 3236668698);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<AInventoryActorMunicion>()
 	{
 		return AInventoryActorMunicion::StaticClass();

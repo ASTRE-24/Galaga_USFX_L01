@@ -18,6 +18,9 @@
 #include "NaveEnemigaNodrizaTactico.h"
 #include "NaveReabastecimientoEnergia.h"
 #include "NaveReabastecimientoMunicion.h"
+#include "InventoryActor.h"
+#include "InventoryActorEnergia.h"
+#include "InventoryActorMunicion.h"
 
 
 
@@ -36,6 +39,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     //Set the game state to playing
     FVector ubicacionInicioNavesEnemigas = FVector(1850.0f, -1540.7f, 250.0f);
     FVector ubicacionInicioNavesEnemigasTransporte = FVector(500.0f, 500.0f, 250.0f);
+    FVector ubicacionDeObjetosInventario = FVector(-700.0f, 300.0f, 700.0f);
     FRotator rotacionNave = FRotator(0.0f, 0.0f, 0.0f);
     FRotator rotacionNave90 = FRotator(0.0f, 90.0f, 0.0f);
 
@@ -108,6 +112,25 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
             }
         }
         TiempoTranscurrido = 0;
+
+        //Para el spauwn de las objetos de inventario
+        for (int i = 0; i < 6; i++) {
+			FVector PosicionInventario = FVector(ubicacionDeObjetosInventario.X, ubicacionDeObjetosInventario.Y + i * 100.0f, ubicacionDeObjetosInventario.Z);
+             //Generar un número aleatorio entre 0 y 1
+                float RandomNumber = FMath::FRandRange(0.0f, 1.0f);
+
+                // Probabilidad de generar una nave caza o transporte (50% cada una)
+                if (RandomNumber <= 0.5f) {
+                    AInventoryActor* ObjetoInventario = World->SpawnActor<AInventoryActor>(AInventoryActorMunicion::StaticClass(), PosicionInventario, rotacionNave);
+                    //Spawnea el objeto de inventario en una posicion y rotacion especifica  
+                }
+                else {
+                    AInventoryActor* ObjetoInventario = World->SpawnActor<AInventoryActor>(AInventoryActorEnergia::StaticClass(), PosicionInventario, rotacionNave);
+                    //Spawnea el objeto de inventario en una posicion y rotacion especifica  
+                }
+            
+		}
+
     }
 }
 

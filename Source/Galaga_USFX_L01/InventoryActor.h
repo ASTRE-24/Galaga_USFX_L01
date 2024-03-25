@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/StaticMeshActor.h"
+#include "MovimientoVertical.h"
 #include "InventoryActor.generated.h"
 
 /**
@@ -19,9 +20,14 @@ class GALAGA_USFX_L01_API AInventoryActor : public AStaticMeshActor
 public:
 	AInventoryActor();
 
-	virtual void PickUp(); 
-	virtual void PutDown(FTransform TargetLocation);
+	virtual void PickUp(); //Función para recoger el objeto
+	virtual void PutDown(FTransform TargetLocation); //Función para dejar el objeto
 	virtual void CustomizeAppearance();
 	virtual void BeginPlay() override;
+
+protected:
+	// Componente de movimiento vertical
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movimiento")
+	UMovimientoVertical* MovementComponent;
 	
 };

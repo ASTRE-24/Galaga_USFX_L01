@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\Galaga_USFX_L01.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{ABA8DC9C-14D1-4B29-816A-10E9635C6CE4}</UniqueIdentifier>
+      <UniqueIdentifier>{EF0CBA9B-4ED8-4B5C-9D8A-743C67E0C73C}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\Galaga_USFX_L01.Target.cs">
       <Filter>Source</Filter>
@@ -14,7 +14,7 @@
     <None Include="..\..\.gitattributes" />
     <None Include="..\..\.gitignore" />
     <Filter Include="Config">
-      <UniqueIdentifier>{BB03E7CA-1F08-49C6-BE1F-BFBCDA8D25AB}</UniqueIdentifier>
+      <UniqueIdentifier>{B3510B5E-2CEE-4B49-A025-0952D083C01B}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -32,7 +32,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\Galaga_USFX_L01">
-      <UniqueIdentifier>{30B0FE1B-528E-4EAE-9983-D54CEB4466A1}</UniqueIdentifier>
+      <UniqueIdentifier>{6AE470E2-327F-46FA-829B-FBFEAD5B00FF}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\ActorComponentDisparo.cpp">
       <Filter>Source\Galaga_USFX_L01</Filter>
@@ -85,16 +85,16 @@
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\InventoryActorMunicion.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\Source\Galaga_USFX_L01\InventoryCharacter.cpp">
-      <Filter>Source\Galaga_USFX_L01</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\Galaga_USFX_L01\InventoryCharacter.h">
-      <Filter>Source\Galaga_USFX_L01</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\InventoryComponent.cpp">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\InventoryComponent.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\MovimientoVertical.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\MovimientoVertical.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\NaveEnemiga.cpp">

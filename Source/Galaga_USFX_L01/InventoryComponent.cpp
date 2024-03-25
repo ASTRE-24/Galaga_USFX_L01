@@ -2,6 +2,7 @@
 
 
 #include "InventoryComponent.h"
+#include "Containers/Queue.h"
 
 // Sets default values for this component's properties
 UInventoryComponent::UInventoryComponent()
@@ -9,7 +10,7 @@ UInventoryComponent::UInventoryComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
+	
 	// ...
 }
 
@@ -28,16 +29,24 @@ void UInventoryComponent::BeginPlay()
 void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	
 
 	// ...
 }
 int32 UInventoryComponent::AddToInventory(AInventoryActor* ActorToAdd)
 {
-	return CurrentInventory.Add(ActorToAdd);
+	//return CurrentInventory.Add(ActorToAdd);
+	return CurrentInventory.Enqueue(ActorToAdd);
 }
 void UInventoryComponent::RemoveFromInventory(AInventoryActor* ActorToRemove)
 {
-	CurrentInventory.Remove(ActorToRemove);
+	//CurrentInventory.Remove(ActorToRemove);
+	CurrentInventory.Dequeue(ActorToRemove);
+}
+
+void UInventoryComponent::MoveInventoryItem()
+{
+	//float PosicionActual = GetActorLocation();
 }
 
 

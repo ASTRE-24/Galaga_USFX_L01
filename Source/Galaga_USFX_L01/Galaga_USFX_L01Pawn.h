@@ -98,6 +98,7 @@ private:
 
 	int32 NumProyectilesDisparados;
 	int32 MaxProyectilesDisparados;
+	int32 NumItems;
 
 public:
 	/** Returns ShipMeshComponent subobject **/

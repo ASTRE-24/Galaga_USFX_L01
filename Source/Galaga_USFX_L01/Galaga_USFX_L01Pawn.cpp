@@ -14,6 +14,8 @@
 #include "InventoryActor.h"
 #include "InventoryActorMunicion.h"
 #include "InventoryActorEnergia.h"
+
+#include "Containers/Queue.h"
 #include "Sound/SoundBase.h"
 #include "Kismet/GameplayStatics.h" // Necesario para usar usar la musica de fondo
 
@@ -59,6 +61,7 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	MaxProyectilesDisparados = 5; //Establece el número máximo de proyectiles disparados
 	MyInventory =
 		CreateDefaultSubobject<UInventoryComponent>("MyInventory");
+	NumItems = 0;
 }
 
 void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -212,18 +215,26 @@ void AGalaga_USFX_L01Pawn::BeginPlay()
 
 void AGalaga_USFX_L01Pawn::DropItem()
 {
-	if (MyInventory->CurrentInventory.Num() == 0)
+	if (MyInventory->CurrentInventory.IsEmpty())//MyInventory->CurrentInventory.Num() == 0
 	{
+		if (GEngine)
+		{
+			FString Message = FString::Printf(TEXT("Tienes %d objetos en tu inventario"), NumItems);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, Message);
+		}
 		return;
 	}
-	AInventoryActor* Item =
-		MyInventory->CurrentInventory.Last();
-	MyInventory->RemoveFromInventory(Item);
+	AInventoryActor* Item = nullptr;
+	MyInventory->CurrentInventory.Dequeue(Item);//MyInventory->CurrentInventory.Last();
+		//MyInventory->CurrentInventory.Last();
+	//MyInventory->RemoveFromInventory(Item);
+	NumItems-=1;
 	// Obtén la ubicación actual de la nave
 	FVector ShipLocation = GetActorLocation();
 	FVector ItemOrigin;
 	FVector ItemBounds;
 	Item->GetActorBounds(false, ItemOrigin, ItemBounds);
+
 	// Ajusta la posición para centrar el objeto con respecto a la nave
 	float DropDistance = 200.0f; // Distancia adicional para dejar caer el objeto
 	FVector DropOffset = FVector(0.0f, 0.0f, ItemBounds.Z * 0.5f); // Ajusta la posición verticalmente para centrar el objeto
@@ -253,7 +264,28 @@ void AGalaga_USFX_L01Pawn::TakeItem(AInventoryActor*
 {
 	InventoryItem->PickUp();
 	MyInventory->AddToInventory(InventoryItem);
+	// Declarar un TimerHandle
+	
+	NumItems+=1;	
 
+	// Configurar el temporizador con SetTimer
+	float DelayInSeconds = 10.0f; // Tiempo de retraso en segundos
+	bool bLooping = false; // Si el temporizador debe repetirse automáticamente o no
+	AInventoryActorMunicion* AmmoItem = Cast<AInventoryActorMunicion>(InventoryItem);
+	if (AmmoItem)
+	{
+      FTimerHandle MyTimerHandle1;
+	  GetWorldTimerManager().SetTimer(MyTimerHandle1, this, &AGalaga_USFX_L01Pawn::ReloadAmmo, DelayInSeconds, bLooping);
+	}
+
+	AInventoryActorEnergia* EnergyItem = Cast<AInventoryActorEnergia>(InventoryItem);
+	if (EnergyItem)
+	{
+		FTimerHandle MyTimerHandle2;
+		GetWorldTimerManager().SetTimer(MyTimerHandle2, this, &AGalaga_USFX_L01Pawn::ReloadEnergy, DelayInSeconds, bLooping);
+	}
+
+	//GetWorldTimerManager().SetTimer(MyTimerHandle1, this, &AGalaga_USFX_L01Pawn::ReloadAmmo, DelayInSeconds, bLooping);
 	
 	//Verifica el inventario después de recoger un objeto
 	CheckInventory();
@@ -265,7 +297,10 @@ void AGalaga_USFX_L01Pawn::ReloadAmmo()
 	bool bFoundAmmo = false;
 
 	// Itera sobre los objetos en el inventario para encontrar uno de munición
-	for (AInventoryActor* InventoryItem : MyInventory->CurrentInventory)
+	AInventoryActor* InventoryItem = nullptr;
+	
+	//for (AInventoryActor* InventoryItem : MyInventory->CurrentInventory)
+	while (MyInventory->CurrentInventory.Dequeue(InventoryItem))
 	{
 		// Intenta hacer un cast a AInventoryActorMunicion
 		AInventoryActorMunicion* AmmoItem = Cast<AInventoryActorMunicion>(InventoryItem);
@@ -276,7 +311,7 @@ void AGalaga_USFX_L01Pawn::ReloadAmmo()
 
 			// Se encontró un objeto de munición en el inventario
 			// Elimina el objeto de munición del inventario			
-			MyInventory->RemoveFromInventory(AmmoItem);
+			//MyInventory->RemoveFromInventory(AmmoItem);
 			NumProyectilesDisparados = 0; // Restablece el contador de proyectiles disparados.
 			MaxProyectilesDisparados = 20; // Establece el número máximo de proyectiles disparados
 			bCanFire = true; // Permite al jugador disparar nuevamente.
@@ -286,6 +321,8 @@ void AGalaga_USFX_L01Pawn::ReloadAmmo()
 				FString Message = FString::Printf(TEXT("Se recargaron +%d de municion"), MaxProyectilesDisparados);
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, Message);
 			}
+
+			NumItems -= 1; // Disminuye el contador de objetos en el inventario
 			CheckInventory();
 
 			// Sal del bucle ya que encontraste y manejaste un objeto de munición
@@ -311,7 +348,15 @@ void AGalaga_USFX_L01Pawn::CheckInventory()
 	if (MyInventory)
 	{
 		// Obtiene el número de objetos de inventario en el inventario del jugador
-		int32 NumItems = MyInventory->CurrentInventory.Num();
+		//Artificio para tener el numero de objetos en el inventario
+		
+		
+		// Inicializa una variable para contar el número de elementos
+		// Declarar la cola y obtener un puntero a ella
+		// Obtener un puntero a la cola de inventario
+		
+
+		//int32 NumItems = MyInventory->CurrentInventory.Num();
 
 		// Puedes hacer lo que quieras con NumItems, como mostrarlo en pantalla, usarlo en lógica de juego, etc.
 		if (GEngine)
@@ -330,12 +375,16 @@ void AGalaga_USFX_L01Pawn::CheckInventory()
 	}
 }
 
+
+
 void AGalaga_USFX_L01Pawn::ReloadEnergy()
 {
 	// Bandera para verificar si se encontró un objeto de munición
 	bool bFoundEnergy = false;
 	// Itera sobre los objetos en el inventario para encontrar uno de Energia
-	for (AInventoryActor* InventoryItem : MyInventory->CurrentInventory)
+	AInventoryActor* InventoryItem = nullptr;
+	//for (AInventoryActor* InventoryItem : MyInventory->CurrentInventory)
+	while (MyInventory->CurrentInventory.Dequeue(InventoryItem))
 	{
 		// Intenta hacer un cast a AInventoryActorEnergy
 		AInventoryActorEnergia* EnergyItem = Cast<AInventoryActorEnergia>(InventoryItem);
@@ -345,7 +394,7 @@ void AGalaga_USFX_L01Pawn::ReloadEnergy()
 			bFoundEnergy= true;
 			// Se encontró un objeto de Energia en el inventario
 			// Elimina el objeto de munición del inventario
-			MyInventory->RemoveFromInventory(EnergyItem);
+			//MyInventory->RemoveFromInventory(EnergyItem);
 			
 			// Muestra un mensaje de depuración
 			if (GEngine)
@@ -353,6 +402,7 @@ void AGalaga_USFX_L01Pawn::ReloadEnergy()
 				//FString Message = FString::Printf(TEXT("Se recargaron %d de municion"), MaxProyectilesDisparados);
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Se restablecio 100 pts de vida");
 			}
+			NumItems -= 1;
 			CheckInventory();
 			// Sal del bucle ya que encontraste y manejaste un objeto de munición
 			break;
