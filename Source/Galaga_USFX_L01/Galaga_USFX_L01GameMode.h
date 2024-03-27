@@ -9,6 +9,7 @@
 class ANaveEnemiga;
 class ANaveEnemigaTransporte;
 class ANaveEnemigaCaza;
+class AInventoryActor;
 
 UCLASS(MinimalAPI)
 class AGalaga_USFX_L01GameMode : public AGameModeBase
@@ -34,6 +35,7 @@ public:
 	TArray<ANaveEnemigaCaza*> TANavesEnemigasCaza;
 	TArray<ANaveEnemigaTransporte*> TANavesEnemigasTransporte;
 	TMap<FString, ANaveEnemiga*> NaveEnemigas; // Aquí se declara el TMap para almacenar las naves enemigas
+	TMap<int, FVector> UbicacionInventario; // Aquí se declara el TMap para almacenar las ubicaciones de los inventarios
 	//TMap<int32, FVector> PosicionesNavesEnemigas; // Aquí se declara el TMap para almacenar las posiciones de las naves enemigas
 
 private:

@@ -115,22 +115,38 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 
         //Para el spauwn de las objetos de inventario
         for (int i = 0; i < 6; i++) {
-			FVector PosicionInventario = FVector(ubicacionDeObjetosInventario.X, ubicacionDeObjetosInventario.Y + i * 100.0f, ubicacionDeObjetosInventario.Z);
+			UbicacionInventario.Add(i, FVector(ubicacionDeObjetosInventario.X, ubicacionDeObjetosInventario.Y + i * 100.0f, ubicacionDeObjetosInventario.Z));
              //Generar un número aleatorio entre 0 y 1
                 float RandomNumber = FMath::FRandRange(0.0f, 1.0f);
 
                 // Probabilidad de generar una nave caza o transporte (50% cada una)
                 if (RandomNumber <= 0.5f) {
-                    AInventoryActor* ObjetoInventario = World->SpawnActor<AInventoryActor>(AInventoryActorMunicion::StaticClass(), PosicionInventario, rotacionNave);
+                    AInventoryActor* ObjetoInventario = World->SpawnActor<AInventoryActor>(AInventoryActorMunicion::StaticClass(), UbicacionInventario[i], rotacionNave);
                     //Spawnea el objeto de inventario en una posicion y rotacion especifica  
+                    
                 }
                 else {
-                    AInventoryActor* ObjetoInventario = World->SpawnActor<AInventoryActor>(AInventoryActorEnergia::StaticClass(), PosicionInventario, rotacionNave);
+                    AInventoryActor* ObjetoInventario = World->SpawnActor<AInventoryActor>(AInventoryActorEnergia::StaticClass(), UbicacionInventario[i], rotacionNave);
                     //Spawnea el objeto de inventario en una posicion y rotacion especifica  
+                    
                 }
-            
-		}
+                FString UbInventarioString = FString::Printf(TEXT("X: %f, Y: %f, Z: %f"), UbicacionInventario[i].X, UbicacionInventario[i].Y, UbicacionInventario[i].Z);
+                //FString Message = FString::Printf(TEXT("Tienes %d objetos en tu inventario"), UbicacionInventario[i]);
+                GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Blue, UbInventarioString);
 
+                if (i == 2) {
+                    UbicacionInventario[2] = FVector(0.0,0.0,0.0);
+                    FString UbInventarioString2 = FString::Printf(TEXT(" Se cambio a X: %f, Y: %f, Z: %f"), UbicacionInventario[2].X, UbicacionInventario[2].Y, UbicacionInventario[2].Z);
+                    //FString Mensaje = FString::Printf(TEXT("Tienes %d objetos en tu inventario"), UbicacionInventario[2]);  
+                    //FString Message = FString::Printf(TEXT("Tienes %d objetos en tu inventario"), UbicacionInventario[i]);
+                    GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Green, UbInventarioString+UbInventarioString2);
+                }
+
+		}
+        UbicacionInventario.Remove(4);
+        if (!UbicacionInventario.Contains(4))
+        GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Green, "Se elimino la ubicacion 5");
+        
     }
 }
 
