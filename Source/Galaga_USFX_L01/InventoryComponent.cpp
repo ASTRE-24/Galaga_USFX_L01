@@ -35,13 +35,13 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 }
 int32 UInventoryComponent::AddToInventory(AInventoryActor* ActorToAdd)
 {
-	//return CurrentInventory.Add(ActorToAdd);
-	return CurrentInventory.Enqueue(ActorToAdd);
+	return CurrentInventory.Add(ActorToAdd);
+	//return CurrentInventory.Enqueue(ActorToAdd);
 }
 void UInventoryComponent::RemoveFromInventory(AInventoryActor* ActorToRemove)
 {
-	//CurrentInventory.Remove(ActorToRemove);
-	CurrentInventory.Dequeue(ActorToRemove);
+	CurrentInventory.Remove(ActorToRemove);
+	//CurrentInventory.Dequeue(ActorToRemove);
 }
 
 void UInventoryComponent::MoveInventoryItem()

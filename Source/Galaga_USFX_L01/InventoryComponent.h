@@ -19,8 +19,8 @@ public:
 	UInventoryComponent();
 
 	//UPROPERTY()
-	TQueue<AInventoryActor*> CurrentInventory; // Cola de objetos en el inventario
-	//TArray<AInventoryActor*> CurrentInventory;
+	//TQueue<AInventoryActor*> CurrentInventory; // Cola de objetos en el inventario
+	TArray<AInventoryActor*> CurrentInventory;
 
 	UFUNCTION()
 	int32 AddToInventory(AInventoryActor* ActorToAdd);	

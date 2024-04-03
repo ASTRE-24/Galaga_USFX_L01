@@ -75,9 +75,7 @@ void EmptyLinkFunctionForGeneratedCodeInventoryComponent() {}
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UInventoryComponent_AddToInventory_Statics::Function_MetaDataParams[] = {
-		{ "Comment", "// Cola de objetos en el inventario\n//TArray<AInventoryActor*> CurrentInventory;\n" },
 		{ "ModuleRelativePath", "InventoryComponent.h" },
-		{ "ToolTip", "Cola de objetos en el inventario\nTArray<AInventoryActor*> CurrentInventory;" },
 	};
 #endif
 	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UInventoryComponent_AddToInventory_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UInventoryComponent, nullptr, "AddToInventory", nullptr, nullptr, sizeof(InventoryComponent_eventAddToInventory_Parms), Z_Construct_UFunction_UInventoryComponent_AddToInventory_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UInventoryComponent_AddToInventory_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UInventoryComponent_AddToInventory_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UInventoryComponent_AddToInventory_Statics::Function_MetaDataParams)) };
@@ -170,7 +168,7 @@ void EmptyLinkFunctionForGeneratedCodeInventoryComponent() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_Galaga_USFX_L01,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UInventoryComponent_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UInventoryComponent_AddToInventory, "AddToInventory" }, // 2353215843
+		{ &Z_Construct_UFunction_UInventoryComponent_AddToInventory, "AddToInventory" }, // 743187945
 		{ &Z_Construct_UFunction_UInventoryComponent_MoveInventoryItem, "MoveInventoryItem" }, // 919897656
 		{ &Z_Construct_UFunction_UInventoryComponent_RemoveFromInventory, "RemoveFromInventory" }, // 4190216770
 	};
@@ -218,7 +216,7 @@ void EmptyLinkFunctionForGeneratedCodeInventoryComponent() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UInventoryComponent, 2656575583);
+	IMPLEMENT_CLASS(UInventoryComponent, 1592961776);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<UInventoryComponent>()
 	{
 		return UInventoryComponent::StaticClass();

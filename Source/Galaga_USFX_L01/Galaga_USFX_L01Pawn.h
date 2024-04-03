@@ -45,6 +45,10 @@ public:
 	UFUNCTION()
 	void ReloadAmmo();
 
+	void ReturnToInitialPosition();
+
+	void Saltar();
+	void FinSaltar();
 	
 	/** Offset from the ships location to spawn projectiles */
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite )
@@ -98,7 +102,9 @@ private:
 
 	int32 NumProyectilesDisparados;
 	int32 MaxProyectilesDisparados;
-	int32 NumItems;
+	//int32 NumItems;
+	FVector InicialPosicion;
+	bool bIsJumping;
 
 public:
 	/** Returns ShipMeshComponent subobject **/

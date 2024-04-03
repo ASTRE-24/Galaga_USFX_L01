@@ -56,12 +56,14 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	GunOffset = FVector(90.f, 0.f, 0.f);
 	FireRate = 0.1f;
 	bCanFire = true;
+	bIsJumping = false;	
 
 	NumProyectilesDisparados = 0;
 	MaxProyectilesDisparados = 5; //Establece el número máximo de proyectiles disparados
 	MyInventory =
 		CreateDefaultSubobject<UInventoryComponent>("MyInventory");
-	NumItems = 0;
+	//NumItems = 0;
+	InicialPosicion = FVector(-790.0f,10.0f, 215.0f);
 }
 
 void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -80,6 +82,8 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 
 	PlayerInputComponent->BindAction("ReloadAmmo", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ReloadAmmo);
 	PlayerInputComponent->BindAction("ReloadEnergy", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ReloadEnergy);
+	PlayerInputComponent->BindAction("ReturnToInitialPosition", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ReturnToInitialPosition);
+	PlayerInputComponent->BindAction("Saltar", IE_Pressed, this, &AGalaga_USFX_L01Pawn::Saltar);
 
 }
 
@@ -90,7 +94,7 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 	const float ForwardValue = GetInputAxisValue(MoveForwardBinding);
 	const float RightValue = GetInputAxisValue(MoveRightBinding);
 
-	// Clamp max size so that (X=1, Y=1) doesn't cause faster movement in diagonal directions
+	 //Clamp max size so that (X=1, Y=1) doesn't cause faster movement in diagonal directions
 	const FVector MoveDirection = FVector(ForwardValue, RightValue, 0.f).GetClampedToMaxSize(1.0f);
 
 	// Calculate  movement
@@ -118,6 +122,14 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 
 	// Try and fire a shot
 	FireShot(FireDirection);
+
+	/*if (GEngine)
+	{
+		FString Posicion = FString::Printf(TEXT(" Se cambio a X: %f, Y: %f, Z: %f"), 
+			InicialPosicion.X, InicialPosicion.Y, InicialPosicion.Z);
+		GEngine->AddOnScreenDebugMessage
+		(-1, 5.f, FColor::Red, Posicion);
+	}*/
 }
 
 void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
@@ -215,20 +227,23 @@ void AGalaga_USFX_L01Pawn::BeginPlay()
 
 void AGalaga_USFX_L01Pawn::DropItem()
 {
-	if (MyInventory->CurrentInventory.IsEmpty())//MyInventory->CurrentInventory.Num() == 0
+	if (MyInventory->CurrentInventory.Num() == 0)//MyInventory->CurrentInventory.IsEmpty()
 	{
-		if (GEngine)
+		/*if (GEngine)
 		{
 			FString Message = FString::Printf(TEXT("Tienes %d objetos en tu inventario"), NumItems);
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, Message);
 		}
+		return;*/
+		CheckInventory();
 		return;
 	}
-	AInventoryActor* Item = nullptr;
-	MyInventory->CurrentInventory.Dequeue(Item);//MyInventory->CurrentInventory.Last();
-		//MyInventory->CurrentInventory.Last();
-	//MyInventory->RemoveFromInventory(Item);
-	NumItems-=1;
+	//AInventoryActor* Item = nullptr;
+	//MyInventory->CurrentInventory.Dequeue(Item);
+	AInventoryActor* Item = MyInventory->CurrentInventory.Last();
+	//MyInventory->CurrentInventory.Last();
+	MyInventory->RemoveFromInventory(Item);
+	//NumItems-=1;
 	// Obtén la ubicación actual de la nave
 	FVector ShipLocation = GetActorLocation();
 	FVector ItemOrigin;
@@ -259,33 +274,32 @@ void AGalaga_USFX_L01Pawn::NotifyHit(class UPrimitiveComponent*
 		TakeItem(InventoryItem);
 	}
 }
-void AGalaga_USFX_L01Pawn::TakeItem(AInventoryActor*
-	InventoryItem)
+void AGalaga_USFX_L01Pawn::TakeItem(AInventoryActor* InventoryItem)
 {
 	InventoryItem->PickUp();
 	MyInventory->AddToInventory(InventoryItem);
 	// Declarar un TimerHandle
 	
-	NumItems+=1;	
+	//NumItems+=1;	
 
 	// Configurar el temporizador con SetTimer
-	float DelayInSeconds = 10.0f; // Tiempo de retraso en segundos
-	bool bLooping = false; // Si el temporizador debe repetirse automáticamente o no
-	AInventoryActorMunicion* AmmoItem = Cast<AInventoryActorMunicion>(InventoryItem);
-	if (AmmoItem)
-	{
-      FTimerHandle MyTimerHandle1;
-	  GetWorldTimerManager().SetTimer(MyTimerHandle1, this, &AGalaga_USFX_L01Pawn::ReloadAmmo, DelayInSeconds, bLooping);
-	}
+	//float DelayInSeconds = 10.0f; // Tiempo de retraso en segundos
+	//bool bLooping = false; // Si el temporizador debe repetirse automáticamente o no
+	//AInventoryActorMunicion* AmmoItem = Cast<AInventoryActorMunicion>(InventoryItem);
+	//if (AmmoItem)
+	//{
+ //     FTimerHandle MyTimerHandle1;
+	//  GetWorldTimerManager().SetTimer(MyTimerHandle1, this, &AGalaga_USFX_L01Pawn::ReloadAmmo, DelayInSeconds, bLooping);
+	//}
 
-	AInventoryActorEnergia* EnergyItem = Cast<AInventoryActorEnergia>(InventoryItem);
-	if (EnergyItem)
-	{
-		FTimerHandle MyTimerHandle2;
-		GetWorldTimerManager().SetTimer(MyTimerHandle2, this, &AGalaga_USFX_L01Pawn::ReloadEnergy, DelayInSeconds, bLooping);
-	}
+	//AInventoryActorEnergia* EnergyItem = Cast<AInventoryActorEnergia>(InventoryItem);
+	//if (EnergyItem)
+	//{
+	//	FTimerHandle MyTimerHandle2;
+	//	GetWorldTimerManager().SetTimer(MyTimerHandle2, this, &AGalaga_USFX_L01Pawn::ReloadEnergy, DelayInSeconds, bLooping);
+	//}
 
-	//GetWorldTimerManager().SetTimer(MyTimerHandle1, this, &AGalaga_USFX_L01Pawn::ReloadAmmo, DelayInSeconds, bLooping);
+	
 	
 	//Verifica el inventario después de recoger un objeto
 	CheckInventory();
@@ -297,10 +311,10 @@ void AGalaga_USFX_L01Pawn::ReloadAmmo()
 	bool bFoundAmmo = false;
 
 	// Itera sobre los objetos en el inventario para encontrar uno de munición
-	AInventoryActor* InventoryItem = nullptr;
+	//AInventoryActor* InventoryItem = nullptr;
 	
-	//for (AInventoryActor* InventoryItem : MyInventory->CurrentInventory)
-	while (MyInventory->CurrentInventory.Dequeue(InventoryItem))
+	for (AInventoryActor* InventoryItem : MyInventory->CurrentInventory)
+	//while (MyInventory->CurrentInventory.Dequeue(InventoryItem))
 	{
 		// Intenta hacer un cast a AInventoryActorMunicion
 		AInventoryActorMunicion* AmmoItem = Cast<AInventoryActorMunicion>(InventoryItem);
@@ -311,18 +325,19 @@ void AGalaga_USFX_L01Pawn::ReloadAmmo()
 
 			// Se encontró un objeto de munición en el inventario
 			// Elimina el objeto de munición del inventario			
-			//MyInventory->RemoveFromInventory(AmmoItem);
-			NumProyectilesDisparados = 0; // Restablece el contador de proyectiles disparados.
-			MaxProyectilesDisparados = 20; // Establece el número máximo de proyectiles disparados
+			MyInventory->RemoveFromInventory(AmmoItem);
+			//NumProyectilesDisparados = 0; // Restablece el contador de proyectiles disparados.
+			MaxProyectilesDisparados += 20; // Establece el número máximo de proyectiles disparados
+			int32 NumBalas = MaxProyectilesDisparados - NumProyectilesDisparados;
 			bCanFire = true; // Permite al jugador disparar nuevamente.
 
 			if (GEngine)
 			{
-				FString Message = FString::Printf(TEXT("Se recargaron +%d de municion"), MaxProyectilesDisparados);
+				FString Message = FString::Printf(TEXT("Se recargaron +20 de municion te quedan %d"), NumBalas);
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, Message);
 			}
 
-			NumItems -= 1; // Disminuye el contador de objetos en el inventario
+			//NumItems -= 1; // Disminuye el contador de objetos en el inventario
 			CheckInventory();
 
 			// Sal del bucle ya que encontraste y manejaste un objeto de munición
@@ -348,31 +363,27 @@ void AGalaga_USFX_L01Pawn::CheckInventory()
 	if (MyInventory)
 	{
 		// Obtiene el número de objetos de inventario en el inventario del jugador
-		//Artificio para tener el numero de objetos en el inventario
 		
-		
-		// Inicializa una variable para contar el número de elementos
-		// Declarar la cola y obtener un puntero a ella
-		// Obtener un puntero a la cola de inventario
-		
-
-		//int32 NumItems = MyInventory->CurrentInventory.Num();
-
+		int32 NumItems = MyInventory->CurrentInventory.Num();
+		if (NumItems == 0)
+		{
+			// Muestra un mensaje indicando que no se encontró ningún objeto de munición
+			if (GEngine)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, "No tienes objetos en el inventario");
+			}
+		}
 		// Puedes hacer lo que quieras con NumItems, como mostrarlo en pantalla, usarlo en lógica de juego, etc.
-		if (GEngine)
+		else
 		{
-			FString Message = FString::Printf(TEXT("Tienes %d objetos en tu inventario"), NumItems);
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, Message);
+			if (GEngine)
+			{
+				FString Message = FString::Printf(TEXT("Tienes %d objetos en tu inventario"), NumItems);
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, Message);
+			}
 		}
 	}
-	else
-	{
-		
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "No tienes un Items de municion en el inventario");
-		}
-	}
+	
 }
 
 
@@ -382,9 +393,9 @@ void AGalaga_USFX_L01Pawn::ReloadEnergy()
 	// Bandera para verificar si se encontró un objeto de munición
 	bool bFoundEnergy = false;
 	// Itera sobre los objetos en el inventario para encontrar uno de Energia
-	AInventoryActor* InventoryItem = nullptr;
-	//for (AInventoryActor* InventoryItem : MyInventory->CurrentInventory)
-	while (MyInventory->CurrentInventory.Dequeue(InventoryItem))
+	//AInventoryActor* InventoryItem = nullptr;
+	for (AInventoryActor* InventoryItem : MyInventory->CurrentInventory)
+	//while (MyInventory->CurrentInventory.Dequeue(InventoryItem))
 	{
 		// Intenta hacer un cast a AInventoryActorEnergy
 		AInventoryActorEnergia* EnergyItem = Cast<AInventoryActorEnergia>(InventoryItem);
@@ -402,7 +413,7 @@ void AGalaga_USFX_L01Pawn::ReloadEnergy()
 				//FString Message = FString::Printf(TEXT("Se recargaron %d de municion"), MaxProyectilesDisparados);
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Se restablecio 100 pts de vida");
 			}
-			NumItems -= 1;
+			//NumItems -= 1;
 			CheckInventory();
 			// Sal del bucle ya que encontraste y manejaste un objeto de munición
 			break;
@@ -418,5 +429,69 @@ void AGalaga_USFX_L01Pawn::ReloadEnergy()
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "No tienes Energia para recargar");
 		}
 	}
-}	
+}
 
+void AGalaga_USFX_L01Pawn::ReturnToInitialPosition()
+{
+	// Calcula la dirección desde la posición actual hasta la posición inicial
+	FVector ReturnDirection = InicialPosicion - GetActorLocation();
+	ReturnDirection.Normalize();
+
+	// Calcula la rotación necesaria para que la nave apunte hacia la posición inicial
+	FRotator TargetRotation = ReturnDirection.Rotation();
+
+	// Interpola gradualmente la rotación actual de la nave hacia la rotación objetivo
+	const float RotationInterpSpeed = 5.0f; // Velocidad de interpolación de rotación ajustable según sea necesario
+	FRotator NewRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), RotationInterpSpeed);
+
+	// Aplica la nueva rotación a la nave
+	SetActorRotation(NewRotation);
+
+	// Mueve la nave en la dirección de regreso a la posición inicial
+	const float ReturnSpeed = 1000.0f; // Velocidad de retorno ajustable según sea necesario
+	const float DeltaTime = GetWorld()->GetDeltaSeconds();
+	const FVector ReturnMovement = ReturnDirection * ReturnSpeed * DeltaTime;
+
+	// Comprueba si la nave está lo suficientemente cerca de la posición inicial
+	const float ReturnDistanceThreshold = 10.0f; // Umbral de distancia ajustable según sea necesario
+	if (FVector::DistSquared(GetActorLocation(), InicialPosicion) <= FMath::Square(ReturnDistanceThreshold))
+	{
+		// La nave está lo suficientemente cerca de la posición inicial, así que establece su posición y rotación exactamente en la posición inicial
+		SetActorLocationAndRotation(InicialPosicion, FRotator(0,0,0));
+	}
+	else
+	{
+		// La nave todavía no está lo suficientemente cerca de la posición inicial, así que sigue moviéndola hacia allí
+		SetActorLocation(GetActorLocation() + ReturnMovement);
+
+		// Llama a esta función nuevamente en el siguiente fotograma
+		GetWorldTimerManager().SetTimerForNextTick([this]() { ReturnToInitialPosition(); });
+	}
+}
+
+void AGalaga_USFX_L01Pawn::Saltar()
+{
+	// Si la nave no está ya en un salto
+	if (!bIsJumping)
+	{
+		// Realiza la lógica de salto aquí
+		FVector JumpDirection = FVector(0.0f, 0.0f, 500); // Ajusta la altura del salto según sea necesario
+		SetActorLocation(GetActorLocation() + JumpDirection);
+
+		// Establece la bandera de salto en verdadero
+		bIsJumping = true;
+		FTimerHandle JumpTimerHandle;	
+		// Programa una función para que la nave regrese al suelo después de un tiempo
+		GetWorld()->GetTimerManager().SetTimer(JumpTimerHandle, this, &AGalaga_USFX_L01Pawn::FinSaltar, 5, false);
+	}
+}
+
+void AGalaga_USFX_L01Pawn::FinSaltar()
+{
+	// Realiza la lógica de finalización del salto aquí
+	FVector JumpDirection = FVector(0.0f, 0.0f, -500); // Ajusta la altura del descenso según sea necesario
+	SetActorLocation(GetActorLocation() + JumpDirection);
+
+	// Establece la bandera de salto en falso
+	bIsJumping = false;
+}
