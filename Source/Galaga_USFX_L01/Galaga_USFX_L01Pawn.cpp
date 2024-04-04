@@ -56,7 +56,7 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	GunOffset = FVector(90.f, 0.f, 0.f);
 	FireRate = 0.1f;
 	bCanFire = true;
-	bIsJumping = false;	
+	
 
 	NumProyectilesDisparados = 0;
 	MaxProyectilesDisparados = 5; //Establece el número máximo de proyectiles disparados
@@ -64,17 +64,42 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 		CreateDefaultSubobject<UInventoryComponent>("MyInventory");
 	//NumItems = 0;
 	InicialPosicion = FVector(-790.0f,10.0f, 215.0f);
+	lastInput = FVector2D::ZeroVector;
+	AlturaSalto = 215 + 300.0f;
+	//Entrada para movimiento diagonal
+	
+	MoveDiagonalBindingForward = FInputAxisKeyMapping("MoveDiagonalForward", EKeys::Q, 1.f);
+	MoveDiagonalBindingForward2 = FInputAxisKeyMapping("MoveDiagonalForward", EKeys::C, -1.f);
+	MoveDiagonalBindingRight = FInputAxisKeyMapping("MoveDiagonalRight", EKeys::E, 1.f);
+	MoveDiagonalBindingRight2 = FInputAxisKeyMapping("MoveDiagonalRight", EKeys::Z, -1.f);
+	Retornar = FInputActionKeyMapping("ReturnToInitialPosition", EKeys::G, 0, 0, 0, 0);
+	Jump = FInputActionKeyMapping("Saltar", EKeys::T, 0, 0, 0, 0);
 }
 
 void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
+	//Super::SetupPlayerInputComponent(PlayerInputComponent);
 	check(PlayerInputComponent);
+	
+	GetWorld()->GetFirstPlayerController()->PlayerInput->AddAxisMapping(
+		MoveDiagonalBindingForward);
+	GetWorld()->GetFirstPlayerController()->PlayerInput->AddAxisMapping(
+		MoveDiagonalBindingForward2);
+	GetWorld()->GetFirstPlayerController()->PlayerInput->AddAxisMapping(
+		MoveDiagonalBindingRight);
+	GetWorld()->GetFirstPlayerController()->PlayerInput->AddAxisMapping(
+		MoveDiagonalBindingRight2);
 
+	UPlayerInput::AddEngineDefinedActionMapping(Retornar);
+	UPlayerInput::AddEngineDefinedActionMapping(Jump);
 	// set up gameplay key bindings
 	PlayerInputComponent->BindAxis(MoveForwardBinding);
 	PlayerInputComponent->BindAxis(MoveRightBinding);
 	PlayerInputComponent->BindAxis(FireForwardBinding);
 	PlayerInputComponent->BindAxis(FireRightBinding);
+	//Entrada para movimiento diagonal
+	PlayerInputComponent->BindAxis("MoveDiagonalRight", this, &AGalaga_USFX_L01Pawn::MoveDiagonalRight);
+	PlayerInputComponent->BindAxis("MoveDiagonalForward", this, &AGalaga_USFX_L01Pawn::MoveDiagonalForward);
 
 	PlayerInputComponent->BindAction("DropItem",
 		EInputEvent::IE_Pressed,this,
@@ -84,20 +109,24 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 	PlayerInputComponent->BindAction("ReloadEnergy", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ReloadEnergy);
 	PlayerInputComponent->BindAction("ReturnToInitialPosition", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ReturnToInitialPosition);
 	PlayerInputComponent->BindAction("Saltar", IE_Pressed, this, &AGalaga_USFX_L01Pawn::Saltar);
-
+	PlayerInputComponent->BindAction("TeleportToMouse", IE_Pressed, this, &AGalaga_USFX_L01Pawn::TeleportToMouse);
 }
 
 
 void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 {
+	
 	// Find movement direction
 	const float ForwardValue = GetInputAxisValue(MoveForwardBinding);
 	const float RightValue = GetInputAxisValue(MoveRightBinding);
 
-	 //Clamp max size so that (X=1, Y=1) doesn't cause faster movement in diagonal directions
-	const FVector MoveDirection = FVector(ForwardValue, RightValue, 0.f).GetClampedToMaxSize(1.0f);
+	// Combine the lastInput vector with the movement input
+	FVector CombinedMovement = FVector(lastInput.Y, lastInput.X, 0.f) + FVector(ForwardValue, RightValue, 0.f);
 
-	// Calculate  movement
+	// Clamp max size so that (X=1, Y=1) doesn't cause faster movement in diagonal directions
+	const FVector MoveDirection = CombinedMovement.GetClampedToMaxSize(1.0f);
+
+	// Calculate movement
 	const FVector Movement = MoveDirection * MoveSpeed * DeltaSeconds;
 
 	// If non-zero size, move this actor
@@ -115,6 +144,17 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 		}
 	}
 	
+	//Super::Tick(DeltaSeconds);
+	float len = lastInput.Size();
+	// Si la entrada del jugador es mayor que 1, normalícela
+	if (len > 1.f)
+	{
+		lastInput /= len;
+	}
+	//Poner a cero los últimos valores de entrada 
+	lastInput = FVector2D(0.f, 0.f);
+
+
 	// Create fire direction vector
 	const float FireForwardValue = GetInputAxisValue(FireForwardBinding);
 	const float FireRightValue = GetInputAxisValue(FireRightBinding);
@@ -471,27 +511,105 @@ void AGalaga_USFX_L01Pawn::ReturnToInitialPosition()
 
 void AGalaga_USFX_L01Pawn::Saltar()
 {
-	// Si la nave no está ya en un salto
-	if (!bIsJumping)
-	{
-		// Realiza la lógica de salto aquí
-		FVector JumpDirection = FVector(0.0f, 0.0f, 500); // Ajusta la altura del salto según sea necesario
-		SetActorLocation(GetActorLocation() + JumpDirection);
+	 //AlturaSalto = GetActorLocation().Z+300.0f; // Ajusta la altura del salto según sea necesario	
+	// Mueve la nave en la dirección de regreso a la posición inicial
+	
+	
 
-		// Establece la bandera de salto en verdadero
-		bIsJumping = true;
-		FTimerHandle JumpTimerHandle;	
-		// Programa una función para que la nave regrese al suelo después de un tiempo
-		GetWorld()->GetTimerManager().SetTimer(JumpTimerHandle, this, &AGalaga_USFX_L01Pawn::FinSaltar, 5, false);
+	const float ReturnSpeed = 1000.0f; // Velocidad de retorno ajustable según sea necesario
+	const float DeltaTime = GetWorld()->GetDeltaSeconds();
+	const FVector ReturnMovement = FVector(0, 0, 1) * ReturnSpeed * DeltaTime;
+	if (GetActorLocation().Z <= AlturaSalto)
+	{
+
+		SetActorLocation(GetActorLocation() + ReturnMovement);
+
+		// Llama a esta función nuevamente en el siguiente fotograma
+		GetWorldTimerManager().SetTimerForNextTick([this]() {Saltar(); });
+
+	}
+	else
+	{
+       FinSaltar();
 	}
 }
 
 void AGalaga_USFX_L01Pawn::FinSaltar()
 {
-	// Realiza la lógica de finalización del salto aquí
-	FVector JumpDirection = FVector(0.0f, 0.0f, -500); // Ajusta la altura del descenso según sea necesario
-	SetActorLocation(GetActorLocation() + JumpDirection);
+	const float ReturnSpeed = 1000.0f; // Velocidad de retorno ajustable según sea necesario
+	const float DeltaTime = GetWorld()->GetDeltaSeconds();
+	const FVector ReturnMovement = FVector(0, 0, -1) * ReturnSpeed * DeltaTime;
+	if (GetActorLocation().Z >= AlturaSalto -300.0f )
+	{
 
-	// Establece la bandera de salto en falso
-	bIsJumping = false;
+		SetActorLocation(GetActorLocation() + ReturnMovement);
+
+		// Llama a esta función nuevamente en el siguiente fotograma
+		GetWorldTimerManager().SetTimerForNextTick([this]() {FinSaltar(); });
+
+	}
+	
 }
+
+void AGalaga_USFX_L01Pawn::MoveDiagonalForward(float amount)
+{
+	// Define la dirección del movimiento diagonal basándose en la cantidad recibida
+	FVector2D DiagonalInput( lastInput.X - amount, lastInput.Y + amount);
+
+	// Normaliza el vector para asegurarse de que la velocidad del movimiento diagonal sea uniforme
+	DiagonalInput.Normalize();
+
+	// Asigna el vector de entrada diagonal a lastInput
+	lastInput = DiagonalInput;
+}
+
+void AGalaga_USFX_L01Pawn::MoveDiagonalRight(float amount)
+{
+	// Define la dirección del movimiento diagonal basándose en la cantidad recibida
+	FVector2D DiagonalInput(lastInput.X + amount, lastInput.Y + amount);
+
+	// Normaliza el vector para asegurarse de que la velocidad del movimiento diagonal sea uniforme
+	DiagonalInput.Normalize();
+
+	// Asigna el vector de entrada diagonal a lastInput
+	lastInput = DiagonalInput;
+}
+
+void AGalaga_USFX_L01Pawn::TeleportToMouse()
+{
+	// Obtener el controlador del jugador
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (!PlayerController)
+	{
+		return;
+	}
+
+	// Verificar si se ha hecho clic
+	if (!PlayerController->IsInputKeyDown(EKeys::LeftMouseButton))
+	{
+		return;
+	}
+
+	// Obtener la posición del clic en el mundo
+	FVector ClickWorldLocation, ClickWorldDirection;
+	PlayerController->DeprojectMousePositionToWorld(ClickWorldLocation, ClickWorldDirection);
+
+	// Encontrar la intersección con el plano XY a la altura deseada (Z = 215)
+	FVector CameraLocation = PlayerController->PlayerCameraManager->GetCameraLocation();
+	FVector RayEnd = ClickWorldLocation + (ClickWorldDirection * 10000.f); // Ajusta la distancia máxima del rayo según sea necesario
+
+	FHitResult HitResult;
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(this); // Ignorar la propia nave en la intersección
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, ClickWorldLocation, RayEnd, ECC_Visibility, CollisionParams);
+
+	if (bHit)
+	{
+		// Asegurarse de que la altura Z sea 215
+			HitResult.ImpactPoint.Z = 215;
+
+		// Teletransportar la nave al punto de intersección
+		SetActorLocation(HitResult.ImpactPoint);
+	}
+}
+

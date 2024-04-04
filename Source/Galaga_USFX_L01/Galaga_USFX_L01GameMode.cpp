@@ -42,6 +42,15 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     FVector ubicacionDeObjetosInventario = FVector(-700.0f, 300.0f, 700.0f);
     FRotator rotacionNave = FRotator(0.0f, 0.0f, 0.0f);
     FRotator rotacionNave90 = FRotator(0.0f, 90.0f, 0.0f);
+    
+    APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+    if (PlayerController)
+    {
+        // Ajusta las propiedades del controlador del jugador
+        PlayerController->bShowMouseCursor = true;
+        PlayerController->bEnableClickEvents = true;
+        PlayerController->bEnableMouseOverEvents = true;
+    }
 
     UWorld* const World = GetWorld();
     if (World != nullptr)

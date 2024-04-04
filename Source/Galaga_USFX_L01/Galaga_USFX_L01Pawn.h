@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "InventoryComponent.h"
 #include "InventoryActor.h"
+#include "GameFramework/PlayerInput.h"
+
 #include "Galaga_USFX_L01Pawn.generated.h"
 
 
@@ -49,7 +51,20 @@ public:
 
 	void Saltar();
 	void FinSaltar();
-	
+	//Movimiento en diagonal
+	void MoveDiagonalRight(float amount);
+	FInputAxisKeyMapping MoveDiagonalBindingRight;
+	FInputAxisKeyMapping MoveDiagonalBindingRight2;
+
+	void MoveDiagonalForward(float amount);
+	FInputAxisKeyMapping MoveDiagonalBindingForward;
+	FInputAxisKeyMapping MoveDiagonalBindingForward2;
+
+	FInputActionKeyMapping  Retornar;
+	FInputActionKeyMapping  Jump;
+
+	void TeleportToMouse();
+
 	/** Offset from the ships location to spawn projectiles */
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite )
 	FVector GunOffset;
@@ -89,6 +104,7 @@ public:
 	// Static names for axis bindings
 	static const FName MoveForwardBinding;
 	static const FName MoveRightBinding;
+	//static const FName MoveDiagonalBinding;
 	static const FName FireForwardBinding;
 	static const FName FireRightBinding;
 
@@ -104,7 +120,9 @@ private:
 	int32 MaxProyectilesDisparados;
 	//int32 NumItems;
 	FVector InicialPosicion;
-	bool bIsJumping;
+	float AlturaSalto;
+	FVector2D lastInput;
+	
 
 public:
 	/** Returns ShipMeshComponent subobject **/
