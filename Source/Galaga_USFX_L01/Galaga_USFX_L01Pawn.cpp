@@ -14,6 +14,9 @@
 #include "InventoryActor.h"
 #include "InventoryActorMunicion.h"
 #include "InventoryActorEnergia.h"
+#include "Escudo.h"
+#include "ActorSpawnerComponent.h"
+#include "Obstaculo.h"
 
 #include "Containers/Queue.h"
 #include "Sound/SoundBase.h"
@@ -56,7 +59,15 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	GunOffset = FVector(90.f, 0.f, 0.f);
 	FireRate = 0.1f;
 	bCanFire = true;
-	
+	bDisparoDoble = false;
+
+	// Inicializacion para componente de Escudo
+	ActorSpawnerComponent = CreateDefaultSubobject<UActorSpawnerComponent>(TEXT("ActorSpawnerComponent"));
+	if (ActorSpawnerComponent)
+	{
+		// Adjunta el ActorSpawnerComponent al RootComponent o a cualquier componente que desees
+		ActorSpawnerComponent->SetupAttachment(RootComponent);
+	}
 
 	NumProyectilesDisparados = 0;
 	MaxProyectilesDisparados = 5; //Establece el número máximo de proyectiles disparados
@@ -67,6 +78,9 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	lastInput = FVector2D::ZeroVector;
 	AlturaSalto = 215 + 300.0f;
 	//Entrada para movimiento diagonal
+
+	
+	
 	
 	MoveDiagonalBindingForward = FInputAxisKeyMapping("MoveDiagonalForward", EKeys::Q, 1.f);
 	MoveDiagonalBindingForward2 = FInputAxisKeyMapping("MoveDiagonalForward", EKeys::C, -1.f);
@@ -110,6 +124,10 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 	PlayerInputComponent->BindAction("ReturnToInitialPosition", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ReturnToInitialPosition);
 	PlayerInputComponent->BindAction("Saltar", IE_Pressed, this, &AGalaga_USFX_L01Pawn::Saltar);
 	PlayerInputComponent->BindAction("TeleportToMouse", IE_Pressed, this, &AGalaga_USFX_L01Pawn::TeleportToMouse);
+	PlayerInputComponent->BindAction("OnSpawnActor", IE_Pressed, this, &AGalaga_USFX_L01Pawn::OnSpawnActor);
+	PlayerInputComponent->BindAction("ActivarDisparoDoble", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ActivarDisparoDoble);
+
+
 }
 
 
@@ -160,9 +178,11 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 	const float FireRightValue = GetInputAxisValue(FireRightBinding);
 	const FVector FireDirection = FVector(FireForwardValue, FireRightValue, 0.f);
 
-	// Try and fire a shot
+	// Tipo de Disparo
+	
 	FireShot(FireDirection);
-
+	RepeatMovement();
+	
 	/*if (GEngine)
 	{
 		FString Posicion = FString::Printf(TEXT(" Se cambio a X: %f, Y: %f, Z: %f"), 
@@ -187,34 +207,61 @@ void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 			const FRotator FireRotation = FireDirection.Rotation();
 			// Spawn projectile at an offset from this pawn
 			const FVector SpawnLocation = GetActorLocation() + FireRotation.RotateVector(GunOffset);
-
-			UWorld* const World = GetWorld();
-			if (World != nullptr)
-			{
-				// spawn the projectile
-				// Spawn the three projectiles
-				//float BulletSpacing = 100.0f; // Ajusta el valor según sea necesario
-
-				for (int i = 0; i <3 ; ++i)
-				{
-					//World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocation, FireRotation);
-					 FRotator ModifiedRotation = FireRotation;
-					// Modify rotation for each projectile
-					ModifiedRotation.Yaw += (i - 1) * 20.0f; // Offset rotation by 10 degrees
-
-					// Calcular la ubicación de spawn de la bala actual
-                    //FVector BulletSpawnLocation = SpawnLocation + FireRotation.RotateVector(FVector(0.f, i * BulletSpacing, 0.f));
-
-                    // Spawn the projectile
-                    //World->SpawnActor<AGalaga_USFX_L01Projectile>(BulletSpawnLocation, FireRotation);
-                
-            
-					const FVector ModifiedSpawnLocation = GetActorLocation() + ModifiedRotation.RotateVector(GunOffset);
-
-					//// Spawn the projectile
-					World->SpawnActor<AGalaga_USFX_L01Projectile>(ModifiedSpawnLocation, ModifiedRotation);
-				}
+            UWorld* const World = GetWorld();
+			if (bDisparoDoble) {
 				
+				if (World != nullptr)
+				{
+					// Calcula la posición de spawn para el primer proyectil (a la izquierda de la nave)
+					const FVector SpawnLocationLeft = SpawnLocation - FireRotation.RotateVector(FVector(0.f, 60.f, 0.f));
+
+					// Spawnea el primer proyectil
+					World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationLeft, FireRotation);
+
+					// Calcula la posición de spawn para el segundo proyectil (a la derecha de la nave)
+					const FVector SpawnLocationRight = SpawnLocation + FireRotation.RotateVector(FVector(0.f, 60.f, 0.f));
+
+					// Spawnea el segundo proyectil
+					World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationRight, FireRotation);
+
+					// Intenta reproducir el sonido si está especificado
+					if (FireSound != nullptr)
+					{
+						UGameplayStatics::PlaySoundAtLocation(this, FireSound, GetActorLocation());
+					}
+
+				}
+			}
+			else
+			{
+				
+				if (World != nullptr)
+				{
+					// spawn the projectile
+					// Spawn the three projectiles
+					//float BulletSpacing = 100.0f; // Ajusta el valor según sea necesario
+
+					for (int i = 0; i < 3; ++i)
+					{
+						//World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocation, FireRotation);
+						FRotator ModifiedRotation = FireRotation;
+						// Modify rotation for each projectile
+						ModifiedRotation.Yaw += (i - 1) * 20.0f; // Offset rotation by 10 degrees
+
+						// Calcular la ubicación de spawn de la bala actual
+						//FVector BulletSpawnLocation = SpawnLocation + FireRotation.RotateVector(FVector(0.f, i * BulletSpacing, 0.f));
+
+						// Spawn the projectile
+						//World->SpawnActor<AGalaga_USFX_L01Projectile>(BulletSpawnLocation, FireRotation);
+
+
+						const FVector ModifiedSpawnLocation = GetActorLocation() + ModifiedRotation.RotateVector(GunOffset);
+
+						//// Spawn the projectile
+						World->SpawnActor<AGalaga_USFX_L01Projectile>(ModifiedSpawnLocation, ModifiedRotation);
+					}
+
+				}
 			}
 			// Restablece el contador cuando se alcance el límite máximo
 			if (NumProyectilesDisparados >= MaxProyectilesDisparados)
@@ -312,6 +359,34 @@ void AGalaga_USFX_L01Pawn::NotifyHit(class UPrimitiveComponent*
 	if (InventoryItem != nullptr)
 	{
 		TakeItem(InventoryItem);
+	}
+	AObstaculo* Obstaculo = Cast<AObstaculo>(Other);
+	if (Obstaculo != nullptr)
+	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "SE DESTRUYO ESTE OBSTACULO");
+		}
+		//Obstaculo->Destroy();
+		//Obstaculo->SetActorEnableCollision(false);
+		//Destroy();
+		// Calcula la posición deseada del objeto a una distancia constante detrás de la nave en la dirección opuesta a la normal de la colisión
+		//FVector DesiredLocation = GetActorLocation() - (HitNormal * 10);
+
+		
+		if (Obstaculo)
+		{
+			// Calcula la posición deseada del objeto a una distancia constante de la nave en la dirección opuesta a la normal de la colisión
+			Obstaculo->SetActorEnableCollision(false);
+			//FVector DesiredLocation = HitLocation - (HitNormal * 10);
+
+			// Mueve el objeto a la posición deseada
+			Other->SetActorLocation(FVector(0,0,0));
+
+			// Configura el objeto para que siga a la nave (puedes ajustar las reglas de transformación de adjuntar según tus necesidades)
+			Other->AttachToComponent(RootComponent, FAttachmentTransformRules::SnapToTargetIncludingScale);
+		
+		}
 	}
 }
 void AGalaga_USFX_L01Pawn::TakeItem(AInventoryActor* InventoryItem)
@@ -445,7 +520,7 @@ void AGalaga_USFX_L01Pawn::ReloadEnergy()
 			bFoundEnergy= true;
 			// Se encontró un objeto de Energia en el inventario
 			// Elimina el objeto de munición del inventario
-			//MyInventory->RemoveFromInventory(EnergyItem);
+			MyInventory->RemoveFromInventory(EnergyItem);
 			
 			// Muestra un mensaje de depuración
 			if (GEngine)
@@ -613,3 +688,57 @@ void AGalaga_USFX_L01Pawn::TeleportToMouse()
 	}
 }
 
+void AGalaga_USFX_L01Pawn::OnSpawnActor()
+{
+	
+	// Verifica si el ActorSpawnerComponent está válido
+	if (ActorSpawnerComponent)
+	{
+		// Llama a la función SpawnEscudo del ActorSpawnerComponent
+		ActorSpawnerComponent->SpawnEscudo();
+	}
+	
+}
+
+
+void AGalaga_USFX_L01Pawn::ActivarDisparoDoble()
+{
+	bDisparoDoble = true;
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Disparo Doble Activado");
+	}
+}
+
+// Estructura para almacenar los movimientos de la nave
+struct FMovementData
+{
+	FVector Location;
+	FRotator Rotation;
+	float TimeStamp;
+
+	FMovementData() : Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), TimeStamp(0.0f) {}
+};
+
+// Lista para almacenar los movimientos
+TArray<FMovementData> MovementHistory;
+
+// Método para almacenar los movimientos
+void AGalaga_USFX_L01Pawn::RecordMovement()
+{
+	FMovementData NewMovementData;
+	NewMovementData.Location = GetActorLocation();
+	NewMovementData.Rotation = GetActorRotation();
+	NewMovementData.TimeStamp = GetWorld()->TimeSeconds;
+
+	MovementHistory.Add(NewMovementData);
+}
+
+// Método para repetir los movimientos
+void AGalaga_USFX_L01Pawn::RepeatMovement()
+{
+	for (const FMovementData& Movement : MovementHistory)
+	{
+		SetActorLocationAndRotation(Movement.Location, Movement.Rotation);
+	}
+}

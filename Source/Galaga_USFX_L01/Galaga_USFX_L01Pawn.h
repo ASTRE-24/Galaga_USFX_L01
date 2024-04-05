@@ -10,7 +10,7 @@
 
 #include "Galaga_USFX_L01Pawn.generated.h"
 
-
+class UActorSpawnerComponent;
 UCLASS(Blueprintable)
 class AGalaga_USFX_L01Pawn : public APawn
 {
@@ -88,6 +88,7 @@ public:
 
 	/* Fire a shot in the specified direction */
 	void FireShot(FVector FireDirection);
+	
 
 	/* Handler for the fire timer expiry */
 	void ShotTimerExpired();
@@ -99,6 +100,12 @@ public:
 
 	//Saber el numero de inventario
 	void CheckInventory();
+
+	void OnSpawnActor();
+
+	void ActivarDisparoDoble();	
+	void RepeatMovement();
+	void RecordMovement();
 	
 
 	// Static names for axis bindings
@@ -122,6 +129,9 @@ private:
 	FVector InicialPosicion;
 	float AlturaSalto;
 	FVector2D lastInput;
+
+	//Banderas
+	bool bDisparoDoble;
 	
 
 public:
@@ -140,6 +150,9 @@ protected:
 
 public:
 	virtual void BeginPlay() override;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	UActorSpawnerComponent* ActorSpawnerComponent;
 
 };
 

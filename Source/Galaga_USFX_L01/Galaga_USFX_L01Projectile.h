@@ -24,6 +24,7 @@ class AGalaga_USFX_L01Projectile : public AActor
 
 public:
 	AGalaga_USFX_L01Projectile();
+	
 
 	/** Function to handle the projectile hitting something */
 	UFUNCTION()
