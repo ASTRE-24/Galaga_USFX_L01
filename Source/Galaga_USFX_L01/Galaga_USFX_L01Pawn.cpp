@@ -70,7 +70,7 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	}
 
 	NumProyectilesDisparados = 0;
-	MaxProyectilesDisparados = 5; //Establece el número máximo de proyectiles disparados
+	MaxProyectilesDisparados = 25; //Establece el número máximo de proyectiles disparados
 	MyInventory =
 		CreateDefaultSubobject<UInventoryComponent>("MyInventory");
 	//NumItems = 0;
@@ -181,7 +181,7 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 	// Tipo de Disparo
 	
 	FireShot(FireDirection);
-	RepeatMovement();
+	//RecordMovement();
 	
 	/*if (GEngine)
 	{
@@ -374,19 +374,27 @@ void AGalaga_USFX_L01Pawn::NotifyHit(class UPrimitiveComponent*
 		//FVector DesiredLocation = GetActorLocation() - (HitNormal * 10);
 
 		
-		if (Obstaculo)
-		{
-			// Calcula la posición deseada del objeto a una distancia constante de la nave en la dirección opuesta a la normal de la colisión
-			Obstaculo->SetActorEnableCollision(false);
-			//FVector DesiredLocation = HitLocation - (HitNormal * 10);
+		//if (Obstaculo)
+		//{
+		//	// Calcula la posición deseada del objeto a una distancia constante de la nave en la dirección opuesta a la normal de la colisión
+		//	Obstaculo->SetActorEnableCollision(false);
+		//	//FVector DesiredLocation = HitLocation - (HitNormal * 10);
 
-			// Mueve el objeto a la posición deseada
-			Other->SetActorLocation(FVector(0,0,0));
+		//	// Itera sobre el TArray MovementHistory
+		//		for (int32 i = 0; i < MovementHistory.Num(); ++i)
+		//		{
+		//			// Accede al elemento en la posición i del TArray MovementHistory
+		//			const FMovementData& Movement = MovementHistory[i];
 
-			// Configura el objeto para que siga a la nave (puedes ajustar las reglas de transformación de adjuntar según tus necesidades)
-			Other->AttachToComponent(RootComponent, FAttachmentTransformRules::SnapToTargetIncludingScale);
-		
-		}
+		//			// Configura la ubicación y rotación del obstáculo
+		//			Obstaculo->SetActorLocationAndRotation(Movement.Location, Movement.Rotation);
+
+		//			// Espera un tiempo antes de pasar al siguiente movimiento (opcional)
+		//			// Esto puede ayudar a crear una animación de repetición más suave
+		//			// FGenericPlatformProcess::Sleep(0.1f);
+		//		}
+		//
+		//}
 	}
 }
 void AGalaga_USFX_L01Pawn::TakeItem(AInventoryActor* InventoryItem)
@@ -711,17 +719,9 @@ void AGalaga_USFX_L01Pawn::ActivarDisparoDoble()
 }
 
 // Estructura para almacenar los movimientos de la nave
-struct FMovementData
-{
-	FVector Location;
-	FRotator Rotation;
-	float TimeStamp;
 
-	FMovementData() : Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), TimeStamp(0.0f) {}
-};
 
-// Lista para almacenar los movimientos
-TArray<FMovementData> MovementHistory;
+
 
 // Método para almacenar los movimientos
 void AGalaga_USFX_L01Pawn::RecordMovement()
@@ -732,6 +732,25 @@ void AGalaga_USFX_L01Pawn::RecordMovement()
 	NewMovementData.TimeStamp = GetWorld()->TimeSeconds;
 
 	MovementHistory.Add(NewMovementData);
+	// Obtener el tiempo actual del mundo
+	float CurrentTime = GetWorld()->TimeSeconds;
+
+	// Crear un mensaje de depuración con el valor de NewMovementData.TimeStamp
+	FString DebugMessage = FString::Printf(TEXT("TimeStamp: %f"), NewMovementData.TimeStamp);
+
+	// Mostrar el mensaje en el viewport
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, DebugMessage);
+	}
+
+	if (GEngine)
+	{
+		FString Posicion = FString::Printf(TEXT(" Se cambio a X: %f, Y: %f, Z: %f"),
+			NewMovementData.Location.X, NewMovementData.Location.Y, NewMovementData.Location.Z);
+		GEngine->AddOnScreenDebugMessage
+		(-1, 5.f, FColor::Red, Posicion);
+	}
 }
 
 // Método para repetir los movimientos

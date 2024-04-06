@@ -132,6 +132,17 @@ private:
 
 	//Banderas
 	bool bDisparoDoble;
+
+	struct FMovementData
+	{
+		FVector Location;
+		FRotator Rotation;
+		float TimeStamp;
+
+		FMovementData() : Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), TimeStamp(0.0f) {}
+	};
+	// Lista para almacenar los movimientos
+	TArray<FMovementData> MovementHistory;
 	
 
 public:

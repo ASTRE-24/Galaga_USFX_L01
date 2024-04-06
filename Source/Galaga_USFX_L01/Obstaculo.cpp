@@ -2,6 +2,7 @@
 
 
 #include "Obstaculo.h"
+#include "Galaga_USFX_L01Pawn.h"
 
 // Sets default values
 AObstaculo::AObstaculo()
@@ -37,6 +38,24 @@ void AObstaculo::BeginPlay()
 void AObstaculo::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+    // Encuentra el objeto del jugador
+    AGalaga_USFX_L01Pawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn<AGalaga_USFX_L01Pawn>();
+    
+    // Verifica si se encontró al jugador
+    if (PlayerPawn)
+    {
+        // Calcula la dirección hacia el jugador
+        FVector DirectionToPlayer = PlayerPawn->GetActorLocation() - GetActorLocation();
+        DirectionToPlayer.Normalize();
+
+        // Calcula la nueva posición para el obstáculo
+        FVector NewPosition = PlayerPawn->GetActorLocation() - (DirectionToPlayer * 200); // 100 es la distancia constante
+
+        // Mueve el obstáculo hacia la nueva posición
+        SetActorLocation(NewPosition);
+    }
+    //Obtener la referencia a un objeto de tipo AGalaga_USFX_L01Pawn
+   
 
 }
 
