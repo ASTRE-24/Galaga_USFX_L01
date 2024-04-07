@@ -58,8 +58,16 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	// Weapon
 	GunOffset = FVector(90.f, 0.f, 0.f);
 	FireRate = 0.1f;
+	PresionarTecla = 0;
+	Multiplicador = 0;
+	//Inicializar Banderas
 	bCanFire = true;
 	bDisparoDoble = false;
+	bChocaYDestruye = false;
+	bChocaYControla = false;
+	bChocaYMeDestruyo = false;
+	bChocarYAtravesar = false;
+
 
 	// Inicializacion para componente de Escudo
 	ActorSpawnerComponent = CreateDefaultSubobject<UActorSpawnerComponent>(TEXT("ActorSpawnerComponent"));
@@ -88,6 +96,11 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	MoveDiagonalBindingRight2 = FInputAxisKeyMapping("MoveDiagonalRight", EKeys::Z, -1.f);
 	Retornar = FInputActionKeyMapping("ReturnToInitialPosition", EKeys::G, 0, 0, 0, 0);
 	Jump = FInputActionKeyMapping("Saltar", EKeys::T, 0, 0, 0, 0);
+	ChocaDestruye = FInputActionKeyMapping("ChocaYDestruye", EKeys::V, 0, 0, 0, 0);
+	ChocaControla = FInputActionKeyMapping("ChocaYControla", EKeys::B, 0, 0, 0, 0);
+	ChocaMeDestruyo = FInputActionKeyMapping("ChocaYMeDestruyo", EKeys::N, 0, 0, 0, 0);
+	ChocarAtravesar = FInputActionKeyMapping("ChocarYAtravesar", EKeys::M, 0, 0, 0, 0);
+
 }
 
 void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -106,6 +119,11 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 
 	UPlayerInput::AddEngineDefinedActionMapping(Retornar);
 	UPlayerInput::AddEngineDefinedActionMapping(Jump);
+	UPlayerInput::AddEngineDefinedActionMapping(ChocaControla);
+	UPlayerInput::AddEngineDefinedActionMapping(ChocaDestruye);
+	UPlayerInput::AddEngineDefinedActionMapping(ChocaMeDestruyo);
+	UPlayerInput::AddEngineDefinedActionMapping(ChocarAtravesar);
+
 	// set up gameplay key bindings
 	PlayerInputComponent->BindAxis(MoveForwardBinding);
 	PlayerInputComponent->BindAxis(MoveRightBinding);
@@ -126,6 +144,10 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 	PlayerInputComponent->BindAction("TeleportToMouse", IE_Pressed, this, &AGalaga_USFX_L01Pawn::TeleportToMouse);
 	PlayerInputComponent->BindAction("OnSpawnActor", IE_Pressed, this, &AGalaga_USFX_L01Pawn::OnSpawnActor);
 	PlayerInputComponent->BindAction("ActivarDisparoDoble", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ActivarDisparoDoble);
+	PlayerInputComponent->BindAction("ChocaYDestruye", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ChocaYDestruye);
+	PlayerInputComponent->BindAction("ChocaYControla", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ChocaYControla);
+	PlayerInputComponent->BindAction("ChocaYMeDestruyo", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ChocaYMeDestruyo);
+	PlayerInputComponent->BindAction("ChocarYAtravesar", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ChocarYAtravesar);
 
 
 }
@@ -181,7 +203,7 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 	// Tipo de Disparo
 	
 	FireShot(FireDirection);
-	//RecordMovement();
+	
 	
 	/*if (GEngine)
 	{
@@ -360,41 +382,56 @@ void AGalaga_USFX_L01Pawn::NotifyHit(class UPrimitiveComponent*
 	{
 		TakeItem(InventoryItem);
 	}
+	
 	AObstaculo* Obstaculo = Cast<AObstaculo>(Other);
+	
 	if (Obstaculo != nullptr)
 	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "SE DESTRUYO ESTE OBSTACULO");
-		}
-		//Obstaculo->Destroy();
-		//Obstaculo->SetActorEnableCollision(false);
-		//Destroy();
-		// Calcula la posición deseada del objeto a una distancia constante detrás de la nave en la dirección opuesta a la normal de la colisión
-		//FVector DesiredLocation = GetActorLocation() - (HitNormal * 10);
-
 		
-		//if (Obstaculo)
-		//{
-		//	// Calcula la posición deseada del objeto a una distancia constante de la nave en la dirección opuesta a la normal de la colisión
-		//	Obstaculo->SetActorEnableCollision(false);
-		//	//FVector DesiredLocation = HitLocation - (HitNormal * 10);
+		if (bChocaYControla)
+		{
+			Obstaculo->movimiento = true;
+			Obstaculo->distanciaObs = Multiplicador * 125;
+			Obstaculo->movimientoObstaculo();
+			if (GEngine)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "EL OBSTACULO TE SEGUIRA");
+			}
+			Multiplicador += 1;
+			return;
+		}
+		if(!bChocaYControla) Obstaculo->movimiento = false;
 
-		//	// Itera sobre el TArray MovementHistory
-		//		for (int32 i = 0; i < MovementHistory.Num(); ++i)
-		//		{
-		//			// Accede al elemento en la posición i del TArray MovementHistory
-		//			const FMovementData& Movement = MovementHistory[i];
+		if (bChocarYAtravesar)
+		{
+			Obstaculo->SetActorEnableCollision(false);
+			if (GEngine)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "ATRAVESASTE ESTE OBSTACULO");
+			}
+			return;
+		}
+		if(!bChocarYAtravesar) Obstaculo->SetActorEnableCollision(true);
 
-		//			// Configura la ubicación y rotación del obstáculo
-		//			Obstaculo->SetActorLocationAndRotation(Movement.Location, Movement.Rotation);
+		if (bChocaYDestruye)
+		{
+			Obstaculo->Destroy();
+			if (GEngine)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "SE DESTRUYO ESTE OBSTACULO");
+			}
+			return;
+		}
+		if (bChocaYMeDestruyo)
+		{
+			Destroy();
 
-		//			// Espera un tiempo antes de pasar al siguiente movimiento (opcional)
-		//			// Esto puede ayudar a crear una animación de repetición más suave
-		//			// FGenericPlatformProcess::Sleep(0.1f);
-		//		}
-		//
-		//}
+			if (GEngine)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "NAVE DESTRUIDA: FIN DEL JUEGO");
+			}
+			return;
+		}
 	}
 }
 void AGalaga_USFX_L01Pawn::TakeItem(AInventoryActor* InventoryItem)
@@ -711,53 +748,87 @@ void AGalaga_USFX_L01Pawn::OnSpawnActor()
 
 void AGalaga_USFX_L01Pawn::ActivarDisparoDoble()
 {
-	bDisparoDoble = true;
-	if (GEngine)
+	if (PresionarTecla == 0)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Disparo Doble Activado");
+		bDisparoDoble = true;
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Disparo Doble Activado");
+		}
+		PresionarTecla = 1;
+	}
+	else
+	{
+		bDisparoDoble = false;
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Disparo Doble Desactivado");
+		}
+		PresionarTecla = 0;
 	}
 }
 
-// Estructura para almacenar los movimientos de la nave
-
-
-
-
-// Método para almacenar los movimientos
-void AGalaga_USFX_L01Pawn::RecordMovement()
+//Funciones para activar las banderas de colision
+void AGalaga_USFX_L01Pawn::ChocaYDestruye()
 {
-	FMovementData NewMovementData;
-	NewMovementData.Location = GetActorLocation();
-	NewMovementData.Rotation = GetActorRotation();
-	NewMovementData.TimeStamp = GetWorld()->TimeSeconds;
-
-	MovementHistory.Add(NewMovementData);
-	// Obtener el tiempo actual del mundo
-	float CurrentTime = GetWorld()->TimeSeconds;
-
-	// Crear un mensaje de depuración con el valor de NewMovementData.TimeStamp
-	FString DebugMessage = FString::Printf(TEXT("TimeStamp: %f"), NewMovementData.TimeStamp);
-
-	// Mostrar el mensaje en el viewport
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, DebugMessage);
-	}
+	
+	bChocaYDestruye = true;
+	//Descactivo las banderas activadas por otras teclas
+	bChocarYAtravesar = false;
+	bChocaYControla = false;
+	bChocaYMeDestruyo = false;
 
 	if (GEngine)
 	{
-		FString Posicion = FString::Printf(TEXT(" Se cambio a X: %f, Y: %f, Z: %f"),
-			NewMovementData.Location.X, NewMovementData.Location.Y, NewMovementData.Location.Z);
-		GEngine->AddOnScreenDebugMessage
-		(-1, 5.f, FColor::Red, Posicion);
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Choca y Destruye: Activado");
+		//informar al jugador que se desactivaron las otras banderas
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Se desactivaron las demas colisiones");
 	}
 }
 
-// Método para repetir los movimientos
-void AGalaga_USFX_L01Pawn::RepeatMovement()
+void AGalaga_USFX_L01Pawn::ChocaYControla()
 {
-	for (const FMovementData& Movement : MovementHistory)
+	bChocaYControla = true;
+	//Descactivo las banderas activadas por otras teclas
+	bChocaYDestruye = false;
+	bChocaYMeDestruyo = false;
+	bChocarYAtravesar = false;
+	if (GEngine)
 	{
-		SetActorLocationAndRotation(Movement.Location, Movement.Rotation);
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Choca y Controla: Activado");
+		//informar al jugador que se desactivaron las otras banderas
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Se desactivaron las demas colisiones");
 	}
 }
+
+void AGalaga_USFX_L01Pawn::ChocaYMeDestruyo()
+{
+	bChocaYMeDestruyo = true;
+	//Descactivo las banderas activadas por otras teclas
+	bChocaYDestruye = false;
+	bChocaYControla = false;
+	bChocarYAtravesar = false;
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Choca y Me Destruyo: Activado");
+		//informar al jugador que se desactivaron las otras banderas
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Se desactivaron las demas colisiones");
+	}
+}
+
+void AGalaga_USFX_L01Pawn::ChocarYAtravesar()
+{
+	bChocarYAtravesar = true;
+	//Descactivo las banderas activadas por otras teclas
+	bChocaYDestruye = false;
+	bChocaYControla = false;
+	bChocaYMeDestruyo = false;
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Chocar y Atravesar: Activado");
+		//informar al jugador que se desactivaron las otras banderas
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Se desactivaron las demas colisiones");
+	}
+}
+
+

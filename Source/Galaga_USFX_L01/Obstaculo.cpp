@@ -25,37 +25,45 @@ AObstaculo::AObstaculo()
         // Modifica la escala del componente de malla estática
         Obstaculo->SetWorldScale3D(FVector(1.0f, 1.0f, 1.0f)); // Aquí se ajusta la escala
     }
+    movimiento = false;
+    distanciaObs = 0;
 }
 
 // Called when the game starts or when spawned
 void AObstaculo::BeginPlay()
 {
 	Super::BeginPlay();
-	
+    
 }
 
 // Called every frame
 void AObstaculo::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-    // Encuentra el objeto del jugador
-    AGalaga_USFX_L01Pawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn<AGalaga_USFX_L01Pawn>();
-    
-    // Verifica si se encontró al jugador
-    if (PlayerPawn)
-    {
-        // Calcula la dirección hacia el jugador
-        FVector DirectionToPlayer = PlayerPawn->GetActorLocation() - GetActorLocation();
-        DirectionToPlayer.Normalize();
-
-        // Calcula la nueva posición para el obstáculo
-        FVector NewPosition = PlayerPawn->GetActorLocation() - (DirectionToPlayer * 200); // 100 es la distancia constante
-
-        // Mueve el obstáculo hacia la nueva posición
-        SetActorLocation(NewPosition);
+    if (movimiento) {
+        movimientoObstaculo();
     }
-    //Obtener la referencia a un objeto de tipo AGalaga_USFX_L01Pawn
    
 
 }
+
+void AObstaculo::movimientoObstaculo()
+{
+	// Encuentra el objeto del jugador
+	AGalaga_USFX_L01Pawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn<AGalaga_USFX_L01Pawn>();
+
+	// Verifica si se encontró al jugador
+    if (PlayerPawn)
+    {
+		// Calcula la dirección hacia el jugador
+		FVector DirectionToPlayer = PlayerPawn->GetActorLocation() - GetActorLocation();
+		DirectionToPlayer.Normalize();
+
+		// Calcula la nueva posición para el obstáculo
+		FVector NewPosition = PlayerPawn->GetActorLocation() - (DirectionToPlayer * (200+distanciaObs)); // 100 es la distancia constante
+
+		// Mueve el obstáculo hacia la nueva posición
+		SetActorLocation(NewPosition);
+	}
+}   
 

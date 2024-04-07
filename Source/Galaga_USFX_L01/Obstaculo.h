@@ -22,5 +22,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	//Banderas
+	float distanciaObs;
+	bool movimiento;
+	void movimientoObstaculo();
 
 };

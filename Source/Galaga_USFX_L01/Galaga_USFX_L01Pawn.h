@@ -60,8 +60,14 @@ public:
 	FInputAxisKeyMapping MoveDiagonalBindingForward;
 	FInputAxisKeyMapping MoveDiagonalBindingForward2;
 
+	//Funciones para los botones
 	FInputActionKeyMapping  Retornar;
 	FInputActionKeyMapping  Jump;
+	//FInputActionKeyMapping  Saltar;
+	FInputActionKeyMapping  ChocaDestruye;
+	FInputActionKeyMapping  ChocaControla;
+	FInputActionKeyMapping  ChocaMeDestruyo;
+	FInputActionKeyMapping  ChocarAtravesar;
 
 	void TeleportToMouse();
 
@@ -106,6 +112,11 @@ public:
 	void ActivarDisparoDoble();	
 	void RepeatMovement();
 	void RecordMovement();
+	//Funciones para los botones
+	void ChocaYDestruye();
+	void ChocaYControla();
+	void ChocaYMeDestruyo();
+	void ChocarYAtravesar();
 	
 
 	// Static names for axis bindings
@@ -129,20 +140,19 @@ private:
 	FVector InicialPosicion;
 	float AlturaSalto;
 	FVector2D lastInput;
+	int PresionarTecla;
+	float Multiplicador;
 
 	//Banderas
 	bool bDisparoDoble;
+	bool bChocaYDestruye;
+	bool bChocaYControla;
+	bool bChocaYMeDestruyo;
+	bool bChocarYAtravesar;
 
-	struct FMovementData
-	{
-		FVector Location;
-		FRotator Rotation;
-		float TimeStamp;
 
-		FMovementData() : Location(FVector::ZeroVector), Rotation(FRotator::ZeroRotator), TimeStamp(0.0f) {}
-	};
-	// Lista para almacenar los movimientos
-	TArray<FMovementData> MovementHistory;
+	
+ 
 	
 
 public:
