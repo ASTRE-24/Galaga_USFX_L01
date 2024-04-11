@@ -24,6 +24,8 @@ public:
 	//ANaveEnemigaTransporte* NaveEnemigaTransporte01;
 	ANaveEnemigaCaza* NaveEnemigaCaza01;
 	FString GetUniqueNameForNave(); // Declaración de la función aquí
+	void NaveInvisible();
+	void HacerVisible(int32 Llave);
 
 protected:
 	// Called when the game starts or when spawned

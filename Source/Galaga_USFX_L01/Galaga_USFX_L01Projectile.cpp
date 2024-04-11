@@ -5,6 +5,9 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "NaveEnemiga.h"
+#include "Obstaculo.h"
+#include "InventoryActor.h"
 #include "Engine/StaticMesh.h"
 
 AGalaga_USFX_L01Projectile::AGalaga_USFX_L01Projectile() 
@@ -41,7 +44,26 @@ void AGalaga_USFX_L01Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
-		OtherComp->AddImpulseAtLocation(GetVelocity() * 20.0f, GetActorLocation());
+		OtherComp->AddImpulseAtLocation(GetVelocity() * 20.0f, GetActorLocation());//simular la fuerza de la bala
+		
+	}
+	ANaveEnemiga* nave = Cast<ANaveEnemiga>(OtherActor);
+
+	if (nave != nullptr)
+	{
+		nave->Destroy();//destruir la nave enemiga
+	}
+
+	AObstaculo* obstaculo = Cast<AObstaculo>(OtherActor);
+	if (obstaculo != nullptr)
+	{
+		obstaculo->Destroy();//destruir el obstaculo
+	}
+
+	AInventoryActor* item = Cast<AInventoryActor>(OtherActor);
+	if (item != nullptr)
+	{
+		item->Destroy();//destruir el item
 	}
 
 	Destroy();

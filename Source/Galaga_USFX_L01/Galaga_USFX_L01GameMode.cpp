@@ -157,12 +157,36 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
         //GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Green, "Se elimino la ubicacion 5");
         
     }
+    //Llama a la funcion NaveInvisible cada 5 segundos
+    FTimerHandle TimerHandle_NaveInvisible;
+    GetWorldTimerManager().SetTimer(TimerHandle_NaveInvisible, this, &AGalaga_USFX_L01GameMode::NaveInvisible, 5.0f, true);
 }
 
 FString AGalaga_USFX_L01GameMode::GetUniqueNameForNave()
 {
     static int32 Counter = 0;
+    if (GEngine)
+    {
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, FString::Printf(TEXT("NaveEnemiga_%d"), Counter));
+	}
     return FString::Printf(TEXT("NaveEnemiga_%d"), Counter++);
 }
+
+//hacer que una nave enemiga aleatoria sea invisble cada 5 segundos
+void AGalaga_USFX_L01GameMode::NaveInvisible()
+{
+	int32 RandomIndex = FMath::RandRange(0, NaveEnemigas.Num()-1);//Genera un numero aleatorio entre 1 y el tamaño del TMap
+    NaveEnemigas[FString::Printf(TEXT("NaveEnemiga_%d"), RandomIndex)]->SetActorHiddenInGame(true);//Hace invisible la nave enemiga
+    //Llama a la funcion HacerVisible cada 2 segundos
+
+    FTimerHandle TimerHandle_HacerVisible;
+   //GetWorldTimerManager().SetTimer(TimerHandle_HacerVisible, this, &AGalaga_USFX_L01GameMode::HacerVisible, 2.0f, false, RandomIndex);
+}
+
+void AGalaga_USFX_L01GameMode::HacerVisible(int32 Llave)
+{
+    	//sssNaveEnemigas[Llave]->SetActorHiddenInGame(false);//Hace visible la nave enemiga
+}
+
 
 
