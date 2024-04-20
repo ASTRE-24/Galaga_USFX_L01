@@ -19,6 +19,7 @@ ANaveEnemigaCaza::ANaveEnemigaCaza()
 	// Inicializar el componente de disparo
 	DisparoComponent = CreateDefaultSubobject<UActorComponentDisparo>(TEXT("DisparoComponent"));
 	// Asignar valores necesarios (como FireRate, GunOffset, etc.) al componente de disparo si es necesario
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("NaveEnemigaCaza Constructor"));
 }
 
 void ANaveEnemigaCaza::Mover(float DeltaTime)

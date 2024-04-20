@@ -21,6 +21,9 @@
 #include "InventoryActor.h"
 #include "InventoryActorEnergia.h"
 #include "InventoryActorMunicion.h"
+#include "SolicitudDeNavesApoyo.h"
+#include "SolicitudDeNavesAtaque.h"
+#include "SolicitudDeNavesInformante.h"
 
 
 
@@ -55,32 +58,64 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     UWorld* const World = GetWorld();
     if (World != nullptr)
     {
-        //for (int i = 0; i < 6; i++) {
-        //    //Esto es para crear las naves enemigas en una ubicacion especifica para comenzar
-        //    FVector PosicionNaveActualX = FVector(ubicacionInicioNavesEnemigas.X, ubicacionInicioNavesEnemigas.Y + i * 600.0f, ubicacionInicioNavesEnemigas.Z);
-        //    
-        //    for (int j = 0; j < 5; j++) {
-        //        FVector PosicionNaveActualY = FVector(PosicionNaveActualX.X - j * 528.5f, PosicionNaveActualX.Y, PosicionNaveActualX.Z);
-        //        //PosicionesNavesEnemigas.Add(j, PosicionNaveActualY);//Agrega la posicion de la nave al TMap
-        //        ANaveEnemiga* NaveEnemigaTemporal = nullptr; // Crear un puntero a nave enemiga
+        //Creacion de las solicitudes de naves
+        ASolicitudDeNaves* SolicitudDeNavesAtaque = World->SpawnActor<ASolicitudDeNavesAtaque>(ASolicitudDeNavesAtaque::StaticClass());
+        ASolicitudDeNaves* SolicitudDeNavesApoyo = World->SpawnActor<ASolicitudDeNavesApoyo>(ASolicitudDeNavesApoyo::StaticClass());
+        ASolicitudDeNaves* SolicitudDeNavesInformante = World->SpawnActor<ASolicitudDeNavesInformante>(ASolicitudDeNavesInformante::StaticClass());
 
-        //        // Generar un número aleatorio entre 0 y 1
-        //        float RandomNumber = FMath::FRandRange(0.0f, 1.0f);
+        //Aniadir los nombres al TArray
+        NombresNavesAtaque.Add("NaveEnemigaCaza");
+        NombresNavesAtaque.Add("NaveEnemigaCazaSigilosa");
+        NombresNavesAtaque.Add("NaveEnemigaCazaVeloz");
+        NombresNavesApoyo.Add("NaveEnemigaTransporte");
+        NombresNavesApoyo.Add("NaveEnemigaTransporteFurtivo");
+        NombresNavesApoyo.Add("NaveEnemigaTransporteLogistico");
+        NombresNavesInformante.Add("NaveEnemigaEspia");
+        NombresNavesInformante.Add("NaveEnemigaEspiaInfiltrada");
+        NombresNavesInformante.Add("NaveEnemigaEspiaTactica");
+        NombresNavesApoyo.Add("NaveEnemigaNodriza");
+        NombresNavesApoyo.Add("NaveEnemigaNodrizaBlindada");
+        NombresNavesApoyo.Add("NaveEnemigaNodrizaTactico");
+        NombresNavesApoyo.Add("NaveEnemigaReabastecimiento");
+        NombresNavesApoyo.Add("NaveReabastecimientoEnergia");
+        NombresNavesApoyo.Add("NaveReabastecimientoMunicion");
+        //Aniadir los nombres al TArray categorias
+        CategoriasNaves.Add(NombresNavesAtaque);
+        CategoriasNaves.Add(NombresNavesApoyo);
+        CategoriasNaves.Add(NombresNavesInformante);
 
-        //        // Probabilidad de generar una nave caza o transporte (50% cada una)
-        //        if (RandomNumber <= 0.5f) {
-        //            NaveEnemigaTemporal = World->SpawnActor<ANaveReabastecimientoMunicion>(PosicionNaveActualY, rotacionNave); // Spawn nave caza
-        //        }
-        //        else {
-        //            NaveEnemigaTemporal = World->SpawnActor<ANaveReabastecimientoEnergia>(PosicionNaveActualY, rotacionNave); // Spawn nave transporte
-        //        }
+        //Creacion d elas naves enemigas
 
-        //        if (NaveEnemigaTemporal != nullptr) {
-        //            NaveEnemigas.Add(GetUniqueNameForNave(), NaveEnemigaTemporal); // Agregar nave al TMap
-        //        }
-        //    }
-        //}
-        //TiempoTranscurrido = 0;
+        for (int i = 0; i < 6; i++) {
+            FVector PosicionNaveActualX = FVector(ubicacionInicioNavesEnemigas.X, ubicacionInicioNavesEnemigas.Y + i * 600.0f, ubicacionInicioNavesEnemigas.Z);
+
+            for (int j = 0; j < 3; j++) {
+                FVector PosicionNaveActualY = FVector(PosicionNaveActualX.X - j * 528.5f, PosicionNaveActualX.Y, PosicionNaveActualX.Z);
+
+                // Selecciona un tipo de nave aleatorio
+                int32 CategoriaNave = FMath::RandRange(0, CategoriasNaves.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+                if (CategoriaNave == 0)
+                {
+                    int32 RandomIndex = FMath::RandRange(0, NombresNavesAtaque.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+                    // Spawnea la nave aleatoria
+                    ANaveEnemiga* NaveEnemigaAtaque = SolicitudDeNavesAtaque->OrdenarNaveEnemiga(NombresNavesAtaque[RandomIndex], PosicionNaveActualY, rotacionNave);
+                }
+                else if (CategoriaNave == 1)
+                {
+					int32 RandomIndex = FMath::RandRange(0, NombresNavesApoyo.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+					// Spawnea la nave aleatoria
+					ANaveEnemiga* NaveEnemigaApoyo = SolicitudDeNavesApoyo->OrdenarNaveEnemiga(NombresNavesApoyo[RandomIndex], PosicionNaveActualY, rotacionNave);
+				}
+                else if (CategoriaNave == 2)
+                {
+					int32 RandomIndex = FMath::RandRange(0, NombresNavesInformante.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+					// Spawnea la nave aleatoria
+					ANaveEnemiga* NaveEnemigaInformante = SolicitudDeNavesInformante->OrdenarNaveEnemiga(NombresNavesInformante[RandomIndex], PosicionNaveActualY, rotacionNave);
+				}
+
+            }
+        }
+        
 
         // Tipos de naves disponibles
         TArray<TSubclassOf<ANaveEnemiga>> TiposDeNaves;//Crea un TArray de subclases de ANaveEnemiga
@@ -102,24 +137,24 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 
         
 
-        for (int i = 0; i < 6; i++) {
-            FVector PosicionNaveActualX = FVector(ubicacionInicioNavesEnemigas.X, ubicacionInicioNavesEnemigas.Y + i * 600.0f, ubicacionInicioNavesEnemigas.Z);
+        //for (int i = 0; i < 6; i++) {
+        //    FVector PosicionNaveActualX = FVector(ubicacionInicioNavesEnemigas.X, ubicacionInicioNavesEnemigas.Y + i * 600.0f, ubicacionInicioNavesEnemigas.Z);
 
-            for (int j = 0; j < 1; j++) {
-                FVector PosicionNaveActualY = FVector(PosicionNaveActualX.X - j * 528.5f, PosicionNaveActualX.Y, PosicionNaveActualX.Z);
+        //    for (int j = 0; j < 1; j++) {
+        //        FVector PosicionNaveActualY = FVector(PosicionNaveActualX.X - j * 528.5f, PosicionNaveActualX.Y, PosicionNaveActualX.Z);
 
-                // Selecciona un tipo de nave aleatorio
-                int32 RandomIndex = FMath::RandRange(0, TiposDeNaves.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
-                TSubclassOf<ANaveEnemiga> NaveClass = TiposDeNaves[RandomIndex]; //Selecciona una subclase de ANaveEnemiga aleatoria
+        //        // Selecciona un tipo de nave aleatorio
+        //        int32 RandomIndex = FMath::RandRange(0, TiposDeNaves.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+        //        TSubclassOf<ANaveEnemiga> NaveClass = TiposDeNaves[RandomIndex]; //Selecciona una subclase de ANaveEnemiga aleatoria
 
-                // Spawnea la nave aleatoria
-                ANaveEnemiga* NaveEnemigaTemporal = World->SpawnActor<ANaveEnemiga>(NaveClass, PosicionNaveActualY, rotacionNave);//Spawnea la nave enemiga en una posicion y rotacion especifica
+        //        // Spawnea la nave aleatoria
+        //        ANaveEnemiga* NaveEnemigaTemporal = World->SpawnActor<ANaveEnemiga>(NaveClass, PosicionNaveActualY, rotacionNave);//Spawnea la nave enemiga en una posicion y rotacion especifica
 
-                if (NaveEnemigaTemporal != nullptr) {
-                    NaveEnemigas.Add(GetUniqueNameForNave(), NaveEnemigaTemporal);// Agregar nave al TMap
-                }
-            }
-        }
+        //        if (NaveEnemigaTemporal != nullptr) {
+        //            NaveEnemigas.Add(GetUniqueNameForNave(), NaveEnemigaTemporal);// Agregar nave al TMap
+        //        }
+        //    }
+        //}
         TiempoTranscurrido = 0;
 
         //Para el spauwn de las objetos de inventario
@@ -139,53 +174,18 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
                     //Spawnea el objeto de inventario en una posicion y rotacion especifica  
                     
                 }
-               // FString UbInventarioString = FString::Printf(TEXT("X: %f, Y: %f, Z: %f"), UbicacionInventario[i].X, UbicacionInventario[i].Y, UbicacionInventario[i].Z);
-                //FString Message = FString::Printf(TEXT("Tienes %d objetos en tu inventario"), UbicacionInventario[i]);
-               // GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Blue, UbInventarioString);
-
-                //if (i == 2) {
-                   // UbicacionInventario[2] = FVector(0.0,0.0,0.0);
-                   // FString UbInventarioString2 = FString::Printf(TEXT(" Se cambio a X: %f, Y: %f, Z: %f"), UbicacionInventario[2].X, UbicacionInventario[2].Y, UbicacionInventario[2].Z);
-                    //FString Mensaje = FString::Printf(TEXT("Tienes %d objetos en tu inventario"), UbicacionInventario[2]);  
-                    //FString Message = FString::Printf(TEXT("Tienes %d objetos en tu inventario"), UbicacionInventario[i]);
-                   // GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Green, UbInventarioString+UbInventarioString2);
-                //}
-
+               
 		}
-        UbicacionInventario.Remove(4);
-        //if (!UbicacionInventario.Contains(4))
-        //GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Green, "Se elimino la ubicacion 5");
         
     }
-    //Llama a la funcion NaveInvisible cada 5 segundos
-    FTimerHandle TimerHandle_NaveInvisible;
-    GetWorldTimerManager().SetTimer(TimerHandle_NaveInvisible, this, &AGalaga_USFX_L01GameMode::NaveInvisible, 5.0f, true);
+    
 }
 
 FString AGalaga_USFX_L01GameMode::GetUniqueNameForNave()
 {
     static int32 Counter = 0;
-    if (GEngine)
-    {
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, FString::Printf(TEXT("NaveEnemiga_%d"), Counter));
-	}
+    
     return FString::Printf(TEXT("NaveEnemiga_%d"), Counter++);
-}
-
-//hacer que una nave enemiga aleatoria sea invisble cada 5 segundos
-void AGalaga_USFX_L01GameMode::NaveInvisible()
-{
-	int32 RandomIndex = FMath::RandRange(0, NaveEnemigas.Num()-1);//Genera un numero aleatorio entre 1 y el tamaño del TMap
-    NaveEnemigas[FString::Printf(TEXT("NaveEnemiga_%d"), RandomIndex)]->SetActorHiddenInGame(true);//Hace invisible la nave enemiga
-    //Llama a la funcion HacerVisible cada 2 segundos
-
-    FTimerHandle TimerHandle_HacerVisible;
-   //GetWorldTimerManager().SetTimer(TimerHandle_HacerVisible, this, &AGalaga_USFX_L01GameMode::HacerVisible, 2.0f, false, RandomIndex);
-}
-
-void AGalaga_USFX_L01GameMode::HacerVisible(int32 Llave)
-{
-    	//sssNaveEnemigas[Llave]->SetActorHiddenInGame(false);//Hace visible la nave enemiga
 }
 
 

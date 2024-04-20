@@ -766,8 +766,8 @@ void AGalaga_USFX_L01Pawn::ActivarDisparoDoble()
 		}
 		PresionarTecla = 0;
 	}
-	AObstaculo* spaun = GetWorld()->SpawnActor<AObstaculo>(AObstaculo::StaticClass(), GetActorLocation()-GetActorForwardVector()*100, GetActorRotation());
-	spaun->SetActorEnableCollision(false);
+	/*AObstaculo* spaun = GetWorld()->SpawnActor<AObstaculo>(AObstaculo::StaticClass(), GetActorLocation()-GetActorForwardVector()*100, GetActorRotation());
+	spaun->SetActorEnableCollision(false);*/
 }
 
 //Funciones para activar las banderas de colision

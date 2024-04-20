@@ -47,24 +47,24 @@ void AGalaga_USFX_L01Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 20.0f, GetActorLocation());//simular la fuerza de la bala
 		
 	}
-	ANaveEnemiga* nave = Cast<ANaveEnemiga>(OtherActor);
+	//ANaveEnemiga* nave = Cast<ANaveEnemiga>(OtherActor);
 
-	if (nave != nullptr)
-	{
-		nave->Destroy();//destruir la nave enemiga
-	}
+	//if (nave != nullptr)
+	//{
+	//	nave->Destroy();//destruir la nave enemiga
+	//}
 
-	AObstaculo* obstaculo = Cast<AObstaculo>(OtherActor);
-	if (obstaculo != nullptr)
-	{
-		obstaculo->Destroy();//destruir el obstaculo
-	}
+	//AObstaculo* obstaculo = Cast<AObstaculo>(OtherActor);
+	//if (obstaculo != nullptr)
+	//{
+	//	obstaculo->Destroy();//destruir el obstaculo
+	//}
 
-	AInventoryActor* item = Cast<AInventoryActor>(OtherActor);
-	if (item != nullptr)
-	{
-		item->Destroy();//destruir el item
-	}
+	//AInventoryActor* item = Cast<AInventoryActor>(OtherActor);
+	//if (item != nullptr)
+	//{
+	//	item->Destroy();//destruir el item
+	//}
 
 	Destroy();
 }
