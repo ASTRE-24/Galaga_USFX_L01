@@ -7,8 +7,6 @@
 			"Escudo.cpp.obj",
 			"Galaga_USFX_L01.cpp.obj",
 			"Galaga_USFX_L01GameMode.cpp.obj",
-			"Galaga_USFX_L01Pawn.cpp.obj",
-			"Galaga_USFX_L01Projectile.cpp.obj",
 			"InventoryActor.cpp.obj",
 			"InventoryActorEnergia.cpp.obj",
 			"InventoryActorMunicion.cpp.obj",
@@ -34,7 +32,9 @@
 			"SolicitudDeNaves.cpp.obj",
 			"SolicitudDeNavesApoyo.cpp.obj",
 			"SolicitudDeNavesAtaque.cpp.obj",
-			"SolicitudDeNavesInformante.cpp.obj"
+			"SolicitudDeNavesInformante.cpp.obj",
+			"Galaga_USFX_L01Pawn.cpp.obj",
+			"Galaga_USFX_L01Projectile.cpp.obj"
 		],
 		"Module.Galaga_USFX_L01.gen.cpp.obj": [
 			"ActorComponentDisparo.gen.cpp.obj",

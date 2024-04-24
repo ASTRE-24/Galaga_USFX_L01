@@ -4,8 +4,6 @@
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Escudo.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Galaga_USFX_L01.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Galaga_USFX_L01GameMode.cpp"
-#include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Galaga_USFX_L01Pawn.cpp"
-#include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Galaga_USFX_L01Projectile.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/InventoryActor.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/InventoryActorEnergia.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/InventoryActorMunicion.cpp"

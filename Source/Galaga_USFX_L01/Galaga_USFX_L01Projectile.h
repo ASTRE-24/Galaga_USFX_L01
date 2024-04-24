@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Particles/ParticleSystem.h"
 #include "Galaga_USFX_L01Projectile.generated.h"
 
 class UProjectileMovementComponent;
@@ -21,6 +23,9 @@ class AGalaga_USFX_L01Projectile : public AActor
 	/** Projectile movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	UProjectileMovementComponent* ProjectileMovement;
+
+	UParticleSystemComponent* ExplosionParticle;
+	UParticleSystem* ExplosionParticleTemplate;
 
 public:
 	AGalaga_USFX_L01Projectile();

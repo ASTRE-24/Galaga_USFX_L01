@@ -8,12 +8,13 @@
 #include "NaveEnemiga.h"
 #include "Obstaculo.h"
 #include "InventoryActor.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "Engine/StaticMesh.h"
 
 AGalaga_USFX_L01Projectile::AGalaga_USFX_L01Projectile() 
 {
 	// Static reference to the mesh to use for the projectile
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ProjectileMeshAsset(TEXT("/Game/TwinStick/Meshes/TwinStickProjectile.TwinStickProjectile"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ProjectileMeshAsset(TEXT("StaticMesh'/Game/StarterContent/Mehes/Balas/762x51_bullet_Bullet1.762x51_bullet_Bullet1'"));
 
 	// Create mesh component for the projectile sphere
 	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileMesh0"));
@@ -37,6 +38,14 @@ AGalaga_USFX_L01Projectile::AGalaga_USFX_L01Projectile()
 
 	// Die after 3 seconds by default
 	InitialLifeSpan = 3.0f;
+	// Declarar una variable para el componente de efecto de partículas
+	
+
+	// En el constructor de AGalaga_USFX_L01Projectile, después de configurar ProjectileMesh
+	ExplosionParticle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ExplosionParticle"));
+	ExplosionParticle->SetupAttachment(RootComponent);
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> ParticleSystemAsset(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Explosion.P_Explosion'")); // Ruta al sistema de partículas en tu proyecto
+	ExplosionParticleTemplate = ParticleSystemAsset.Object;
 }
 
 void AGalaga_USFX_L01Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -45,27 +54,14 @@ void AGalaga_USFX_L01Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 20.0f, GetActorLocation());//simular la fuerza de la bala
+			// Instanciar el efecto de partículas en la ubicación de la colisión
+			ExplosionParticle->SetTemplate(ExplosionParticleTemplate);
+			ExplosionParticle->SetWorldLocation(Hit.ImpactPoint);
+			ExplosionParticle->ActivateSystem();
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Colision"));
 		
 	}
-	//ANaveEnemiga* nave = Cast<ANaveEnemiga>(OtherActor);
-
-	//if (nave != nullptr)
-	//{
-	//	nave->Destroy();//destruir la nave enemiga
-	//}
-
-	//AObstaculo* obstaculo = Cast<AObstaculo>(OtherActor);
-	//if (obstaculo != nullptr)
-	//{
-	//	obstaculo->Destroy();//destruir el obstaculo
-	//}
-
-	//AInventoryActor* item = Cast<AInventoryActor>(OtherActor);
-	//if (item != nullptr)
-	//{
-	//	item->Destroy();//destruir el item
-	//}
-
+	
 	Destroy();
 }
 

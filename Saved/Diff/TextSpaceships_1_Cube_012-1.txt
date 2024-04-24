@@ -1,0 +1,40 @@
+Begin Object Class=/Script/Engine.StaticMesh Name="Spaceships_1_Cube_012"
+   Begin Object Class=/Script/UnrealEd.SceneThumbnailInfo Name="SceneThumbnailInfo_0"
+   End Object
+   Begin Object Class=/Script/NavigationSystem.NavCollision Name="NavCollision_0"
+   End Object
+   Begin Object Class=/Script/Engine.BodySetup Name="BodySetup_0"
+   End Object
+   Begin Object Class=/Script/UnrealEd.FbxStaticMeshImportData Name="FbxStaticMeshImportData_0"
+   End Object
+   Begin Object Class=/Script/Engine.AssetImportData Name="AssetImportData"
+   End Object
+   Begin Object Name="SceneThumbnailInfo_0"
+   End Object
+   Begin Object Name="NavCollision_0"
+   End Object
+   Begin Object Name="BodySetup_0"
+      AggGeom=(ConvexElems=((VertexData=((X=23871.593750,Y=473.658325,Z=245.847672),(X=23871.505859,Y=1164.626953,Z=245.847672),(X=23911.781250,Y=1204.906982,Z=245.847672),(X=24602.841797,Y=1204.906982,Z=245.847672),(X=24643.246094,Y=1164.502930,Z=245.847672),(X=24643.191406,Y=473.688477,Z=245.847672),(X=24602.791016,Y=433.287201,Z=245.847672),(X=23911.964844,Y=433.287262,Z=245.847672),(X=23740.152344,Y=1033.274292,Z=114.408112),(X=23740.136719,Y=605.116089,Z=114.408112),(X=24043.449219,Y=301.805176,Z=114.408112),(X=24471.304688,Y=301.805054,Z=114.408112),(X=24774.625000,Y=605.125549,Z=114.408112),(X=24774.625000,Y=1033.124634,Z=114.408112),(X=24471.435547,Y=1336.312500,Z=114.408112),(X=24043.189453,Y=1336.312500,Z=114.408112),(X=24471.419922,Y=301.919556,Z=114.422447),(X=24043.332031,Y=301.919617,Z=114.422455),(X=24643.125000,Y=1164.624878,Z=245.875000),(X=23871.625000,Y=1164.750610,Z=245.875000),(X=24471.500000,Y=1336.250000,Z=114.454765),(X=24774.544922,Y=1033.204956,Z=114.454781),(X=23911.875000,Y=433.375061,Z=245.875000),(X=24043.187500,Y=302.000000,Z=114.453316),(X=23740.208984,Y=604.978516,Z=114.453331),(X=24602.875000,Y=433.437500,Z=245.875000)),IndexData=(0,1,2,0,2,3,0,3,4,0,4,5,0,5,6,0,6,7,8,9,10,8,10,11,8,11,12,8,12,13,8,13,14,8,14,15,3,2,15,3,15,14,7,6,16,7,16,17,5,18,13,5,13,12,19,0,9,19,9,8,18,3,20,18,20,21,0,22,23,0,23,24,25,5,12,25,12,16,2,19,8,2,8,15),ElemBox=(Min=(X=23740.136719,Y=301.805054,Z=114.408112),Max=(X=24774.625000,Y=1336.312500,Z=245.875000),IsValid=1))))
+      DefaultInstance=(ObjectType=ECC_WorldStatic,CollisionProfileName="BlockAll")
+   End Object
+   Begin Object Name="FbxStaticMeshImportData_0"
+      ImportMaterialOriginalNameData(0)="Material_011"
+      ImportMeshLodData(0)=(SectionOriginalMaterialName=("Material_011"))
+      ImportUniformScale=2.000000
+      bForceFrontXAxis=True
+   End Object
+   Begin Object Name="AssetImportData"
+   End Object
+   SourceModels(0)=(BuildSettings=(bRecomputeNormals=False,bComputeWeightedNormals=True))
+   SectionInfoMap=(Map=((0, ())))
+   OriginalSectionInfoMap=(Map=((0, ())))
+   ImportVersion=1
+   LightmapUVVersion=9
+   StaticMaterials(0)=(MaterialInterface=Material'"/Game/StarterContent/Mehes/NavesEnemigas/Material_011.Material_011"',MaterialSlotName="Material_011",ImportedMaterialSlotName="Material_011",UVChannelData=(bInitialized=True))
+   LightMapResolution=64
+   LightMapCoordinateIndex=1
+   AssetImportData=FbxStaticMeshImportData'"FbxStaticMeshImportData_0"'
+   ThumbnailInfo=SceneThumbnailInfo'"SceneThumbnailInfo_0"'
+   EditorCameraPosition=(bIsSet=True,CamOrbitPoint=(X=24257.328125,Y=819.129883,Z=180.127899),CamOrbitZoom=(X=23133.476562,Y=9581.873047,Z=4981.015137),CamOrbitRotation=(Pitch=-11.250841,Yaw=-157.500702,Roll=0.000003))
+   ExtendedBounds=(Origin=(X=24257.328125,Y=819.129883,Z=180.127899),BoxExtent=(X=516.982422,Y=516.982300,Z=65.619766),SphereRadius=521.130737)
+End Object
