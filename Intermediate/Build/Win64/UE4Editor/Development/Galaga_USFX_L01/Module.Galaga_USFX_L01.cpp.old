@@ -9,7 +9,6 @@
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/InventoryComponent.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/MovimientoVertical.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemiga.cpp"
-#include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaCaza.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaCazaSigilosa.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaCazaVeloz.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaEspia.cpp"
