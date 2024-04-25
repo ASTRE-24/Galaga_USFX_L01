@@ -72,7 +72,7 @@ void ANaveEnemigaCazaVeloz::Mover(float DeltaTime)
 void ANaveEnemigaCazaVeloz::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	Mover(DeltaTime);
+	//Mover(DeltaTime);
 }
 
 void ANaveEnemigaCazaVeloz::Escapar() {

@@ -83,6 +83,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
         CategoriasNaves.Add(NombresNavesAtaque);
         CategoriasNaves.Add(NombresNavesApoyo);
         CategoriasNaves.Add(NombresNavesInformante);
+        
 
         //Creacion d elas naves enemigas
 
@@ -91,26 +92,29 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 
             for (int j = 0; j < 3; j++) {
                 FVector PosicionNaveActualY = FVector(PosicionNaveActualX.X - j * 528.5f, PosicionNaveActualX.Y, PosicionNaveActualX.Z);
-
+                
                 // Selecciona un tipo de nave aleatorio
-                int32 CategoriaNave = FMath::RandRange(0, CategoriasNaves.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+                int32 CategoriaNave = 0;//FMath::RandRange(0, CategoriasNaves.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
                 if (CategoriaNave == 0)
                 {
                     int32 RandomIndex = FMath::RandRange(0, NombresNavesAtaque.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
                     // Spawnea la nave aleatoria
                     ANaveEnemiga* NaveEnemigaAtaque = SolicitudDeNavesAtaque->OrdenarNaveEnemiga(NombresNavesAtaque[RandomIndex], PosicionNaveActualY, rotacionNave);
+                    if (j == 2) NaveEnemigaAtaque->bShoulDispara = true;
                 }
                 else if (CategoriaNave == 1)
                 {
 					int32 RandomIndex = FMath::RandRange(0, NombresNavesApoyo.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
 					// Spawnea la nave aleatoria
 					ANaveEnemiga* NaveEnemigaApoyo = SolicitudDeNavesApoyo->OrdenarNaveEnemiga(NombresNavesApoyo[RandomIndex], PosicionNaveActualY, rotacionNave);
+                    if (j == 2) NaveEnemigaApoyo->bShoulDispara = true;
 				}
                 else if (CategoriaNave == 2)
                 {
 					int32 RandomIndex = FMath::RandRange(0, NombresNavesInformante.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
 					// Spawnea la nave aleatoria
 					ANaveEnemiga* NaveEnemigaInformante = SolicitudDeNavesInformante->OrdenarNaveEnemiga(NombresNavesInformante[RandomIndex], PosicionNaveActualY, rotacionNave);
+                    if (j == 2) NaveEnemigaInformante->bShoulDispara = true;
 				}
 
             }

@@ -1,5 +1,7 @@
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_USFX_L01\Definitions.Galaga_USFX_L01.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemiga.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\ActorComponentDisparo.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ActorComponentDisparo.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemiga.generated.h
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\Particles/ParticleSystemComponent.h
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\Particles/ParticleSystem.h
@@ -17,3 +19,5 @@ D:\game\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\DialogueTyp
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStaticsTypes.h
 D:\game\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameplayStaticsTypes.generated.h
 D:\game\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameplayStatics.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\Galaga_USFX_L01Projectile.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Galaga_USFX_L01Projectile.generated.h

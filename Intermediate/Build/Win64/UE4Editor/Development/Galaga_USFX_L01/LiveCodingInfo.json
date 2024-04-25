@@ -2,19 +2,14 @@
 	"RemapUnityFiles": 
 	{
 		"Module.Galaga_USFX_L01.cpp.obj": [
-			"ActorComponentDisparo.cpp.obj",
 			"ActorSpawnerComponent.cpp.obj",
 			"Escudo.cpp.obj",
 			"Galaga_USFX_L01.cpp.obj",
-			"Galaga_USFX_L01Pawn.cpp.obj",
 			"InventoryActor.cpp.obj",
 			"InventoryActorEnergia.cpp.obj",
 			"InventoryActorMunicion.cpp.obj",
 			"InventoryComponent.cpp.obj",
 			"MovimientoVertical.cpp.obj",
-			"NaveEnemigaCaza.cpp.obj",
-			"NaveEnemigaCazaSigilosa.cpp.obj",
-			"NaveEnemigaCazaVeloz.cpp.obj",
 			"NaveEnemigaEspia.cpp.obj",
 			"NaveEnemigaEspiaInfiltrada.cpp.obj",
 			"NaveEnemigaEspiaTactica.cpp.obj",
@@ -32,9 +27,14 @@
 			"SolicitudDeNavesApoyo.cpp.obj",
 			"SolicitudDeNavesAtaque.cpp.obj",
 			"SolicitudDeNavesInformante.cpp.obj",
+			"ActorComponentDisparo.cpp.obj",
 			"Galaga_USFX_L01GameMode.cpp.obj",
+			"Galaga_USFX_L01Pawn.cpp.obj",
 			"Galaga_USFX_L01Projectile.cpp.obj",
-			"NaveEnemiga.cpp.obj"
+			"NaveEnemiga.cpp.obj",
+			"NaveEnemigaCaza.cpp.obj",
+			"NaveEnemigaCazaSigilosa.cpp.obj",
+			"NaveEnemigaCazaVeloz.cpp.obj"
 		],
 		"Module.Galaga_USFX_L01.gen.cpp.obj": [
 			"ActorComponentDisparo.gen.cpp.obj",

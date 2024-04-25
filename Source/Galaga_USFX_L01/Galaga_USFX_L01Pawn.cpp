@@ -238,14 +238,20 @@ void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 					const FVector SpawnLocationLeft = SpawnLocation - FireRotation.RotateVector(FVector(0.f, 60.f, 0.f));
 
 					// Spawnea el primer proyectil
-					World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationLeft, FireRotation);
-
+					AGalaga_USFX_L01Projectile* Proyectil1 = World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationLeft, FireRotation);
+					if (Proyectil1)
+					{
+						Proyectil1->SetOriginActor(this);
+					}
 					// Calcula la posición de spawn para el segundo proyectil (a la derecha de la nave)
 					const FVector SpawnLocationRight = SpawnLocation + FireRotation.RotateVector(FVector(0.f, 60.f, 0.f));
 
 					// Spawnea el segundo proyectil
-					World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationRight, FireRotation);
-
+					AGalaga_USFX_L01Projectile* Proyectil2 = World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationRight, FireRotation);
+					if (Proyectil2) 
+					{
+						Proyectil2->SetOriginActor(this);
+					}
 					// Intenta reproducir el sonido si está especificado
 					if (FireSound != nullptr)
 					{
@@ -280,7 +286,11 @@ void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 						const FVector ModifiedSpawnLocation = GetActorLocation() + ModifiedRotation.RotateVector(GunOffset);
 
 						//// Spawn the projectile
-						World->SpawnActor<AGalaga_USFX_L01Projectile>(ModifiedSpawnLocation, ModifiedRotation);
+						AGalaga_USFX_L01Projectile* Proyectil = World->SpawnActor<AGalaga_USFX_L01Projectile>(ModifiedSpawnLocation, ModifiedRotation);
+						if (Proyectil)
+						{
+							Proyectil->SetOriginActor(this);
+						}
 					}
 
 				}

@@ -56,8 +56,12 @@ void UActorComponentDisparo::DispararProyectil()
         {
             // Spawn del proyectil
             // (Asume que 'ProjectileClass' es la clase del proyectil que deseas disparar)
-            World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocation, FireRotation);
-
+            AGalaga_USFX_L01Projectile* Proyectil = World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocation, FireRotation);
+            if (Proyectil)
+            {
+				Proyectil->SetOriginActor(GetOwner());
+				
+			}
             // Configuración del temporizador para controlar la velocidad de disparo
             bCanFire = false;
             World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &UActorComponentDisparo::ShotTimerExpired, FireRate);

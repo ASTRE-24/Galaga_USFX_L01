@@ -17,7 +17,7 @@ ANaveEnemigaCazaSigilosa::ANaveEnemigaCazaSigilosa()
 void ANaveEnemigaCazaSigilosa::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	Mover(DeltaTime);
+	//Mover(DeltaTime);
 }
 
 void ANaveEnemigaCazaSigilosa::Mover(float DeltaTime) {

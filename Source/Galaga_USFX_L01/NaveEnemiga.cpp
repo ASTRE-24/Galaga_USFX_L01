@@ -5,6 +5,8 @@
 #include "NaveEnemiga.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Galaga_USFX_L01Projectile.h"
+#include "ActorComponentDisparo.h"
 #include "TimerManager.h"
 
 // Sets default values
@@ -19,7 +21,8 @@ ANaveEnemiga::ANaveEnemiga()
 	//mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
 	mallaNaveEnemiga->SetupAttachment(RootComponent);
 	RootComponent = mallaNaveEnemiga;
-
+	DisparoComponent = CreateDefaultSubobject<UActorComponentDisparo>(TEXT("DisparoComponent"));
+	bShoulDispara = false;
 	
 
 	// Configurar la plantilla de partículas (reemplaza "Path/To/Your/ParticleSystem" con la ruta correcta)
@@ -37,6 +40,7 @@ ANaveEnemiga::ANaveEnemiga()
 void ANaveEnemiga::BeginPlay()
 {
 	Super::BeginPlay();
+	
 
 }
 
@@ -44,7 +48,17 @@ void ANaveEnemiga::BeginPlay()
 void ANaveEnemiga::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	if (bShoulDispara)
+	{
+		if (DisparoComponent)
+		{
+			DisparoComponent->DispararProyectil();
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("No se pudo disparar"));
+		}
+	}
 }
 
 void ANaveEnemiga::DestruirNave() 
@@ -73,5 +87,7 @@ void ANaveEnemiga::DestruirNave()
 	// Destruir la nave enemiga
 	Destroy();
 }
+
+
 
 

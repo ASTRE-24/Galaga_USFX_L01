@@ -115,9 +115,6 @@
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\NaveEnemiga.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\Source\Galaga_USFX_L01\NaveEnemigaCaza.cpp">
-      <Filter>Source\Galaga_USFX_L01</Filter>
-    </ClCompile>
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\NaveEnemigaCaza.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>

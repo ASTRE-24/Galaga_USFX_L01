@@ -58,10 +58,7 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ANaveEnemigaCaza)
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_NaveEnemigaCaza_h_17_PRIVATE_PROPERTY_OFFSET \
-	FORCEINLINE static uint32 __PPO__DisparoComponent() { return STRUCT_OFFSET(ANaveEnemigaCaza, DisparoComponent); }
-
-
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_NaveEnemigaCaza_h_17_PRIVATE_PROPERTY_OFFSET
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_NaveEnemigaCaza_h_14_PROLOG
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_NaveEnemigaCaza_h_17_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \

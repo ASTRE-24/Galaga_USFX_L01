@@ -5,6 +5,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "ActorComponentDisparo.h"
 #include "NaveEnemiga.generated.h"
 
 UCLASS(abstract)
@@ -18,6 +19,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Effects")
 	UParticleSystem* DestructionParticle;
+    bool bShoulDispara;
 
 protected:
 
@@ -36,6 +38,7 @@ protected:
 
 	float peso;
 	float volumen;
+	
 	
 
 
@@ -84,6 +87,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	void DestruirNave();
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Disparo", meta = (AllowPrivateAccess = "true"))
+	UActorComponentDisparo* DisparoComponent; // Declara el componente DisparoComponent
 
 protected:
 	//virtual void Mover() = 0;

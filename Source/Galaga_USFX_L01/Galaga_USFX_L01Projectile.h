@@ -30,16 +30,17 @@ class AGalaga_USFX_L01Projectile : public AActor
 public:
 	AGalaga_USFX_L01Projectile();
 	
+	virtual void NotifyHit(class UPrimitiveComponent*
+		MyComp, AActor* Other, class UPrimitiveComponent* OtherComp,
+		bool bSelfMoved, FVector HitLocation, FVector HitNormal,
+		FVector NormalImpulse, const FHitResult& Hit) override;
 
 	/** Function to handle the projectile hitting something */
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
-	virtual void NotifyHit(class UPrimitiveComponent* MyComp,
-		AActor* Other, class UPrimitiveComponent* OtherComp,
-		bool bSelfMoved, FVector HitLocation, FVector
-		HitNormal, FVector NormalImpulse, const FHitResult&
-		Hit) override;
-
+	AActor* OriginActor;
+	void SetOriginActor(AActor* _OriginActor) { OriginActor = _OriginActor; }
+	AActor* GetOriginActor() { return OriginActor; }
 	/** Returns ProjectileMesh subobject **/
 	FORCEINLINE UStaticMeshComponent* GetProjectileMesh() const { return ProjectileMesh; }
 	/** Returns ProjectileMovement subobject **/
