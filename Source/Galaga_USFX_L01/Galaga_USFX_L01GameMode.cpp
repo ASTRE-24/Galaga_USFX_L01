@@ -40,7 +40,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 {
     Super::BeginPlay();
     //Set the game state to playing
-    FVector ubicacionInicioNavesEnemigas = FVector(1850.0f, -1540.7f, 250.0f);
+    FVector ubicacionInicioNavesEnemigas = FVector(1850.0f, -1540.7f, 216.0f);
     FVector ubicacionInicioNavesEnemigasTransporte = FVector(500.0f, 500.0f, 250.0f);
     FVector ubicacionDeObjetosInventario = FVector(-700.0f, 300.0f, 700.0f);
     FRotator rotacionNave = FRotator(0.0f, 0.0f, 0.0f);

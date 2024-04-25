@@ -72,7 +72,7 @@ void EmptyLinkFunctionForGeneratedCodeNaveEnemigaTransporteFurtivo() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ANaveEnemigaTransporteFurtivo, 1559248188);
+	IMPLEMENT_CLASS(ANaveEnemigaTransporteFurtivo, 2007519244);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<ANaveEnemigaTransporteFurtivo>()
 	{
 		return ANaveEnemigaTransporteFurtivo::StaticClass();

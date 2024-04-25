@@ -16,6 +16,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Projectile, meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* mallaNaveEnemiga;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Effects")
+	UParticleSystem* DestructionParticle;
+
 protected:
 
 	float velocidad;
@@ -80,10 +83,12 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	void DestruirNave();
 
 protected:
 	//virtual void Mover() = 0;
 	void Mover(float DeltaTime) PURE_VIRTUAL(ANaveEnemiga::Mover, );
 	void Disparar() PURE_VIRTUAL(ANaveEnemiga::Disparar, );
 	//virtual ANaveEnemiga* FabricarNaves(FString NombreNave);
+	
 };

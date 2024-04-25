@@ -8,6 +8,7 @@
 #include "NaveEnemiga.h"
 #include "Obstaculo.h"
 #include "InventoryActor.h"
+#include "Galaga_USFX_L01Pawn.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Engine/StaticMesh.h"
 
@@ -45,7 +46,13 @@ AGalaga_USFX_L01Projectile::AGalaga_USFX_L01Projectile()
 	ExplosionParticle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ExplosionParticle"));
 	ExplosionParticle->SetupAttachment(RootComponent);
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> ParticleSystemAsset(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Explosion.P_Explosion'")); // Ruta al sistema de partículas en tu proyecto
-	ExplosionParticleTemplate = ParticleSystemAsset.Object;
+	if (ParticleSystemAsset.Succeeded())
+	{
+		ExplosionParticle->SetTemplate(ParticleSystemAsset.Object);
+		ExplosionParticle->SetRelativeScale3D(FVector(0.5f, 0.5f, 0.5f)); // Escala a la mitad
+	}
+
+	
 }
 
 void AGalaga_USFX_L01Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -53,15 +60,39 @@ void AGalaga_USFX_L01Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* Oth
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
-		OtherComp->AddImpulseAtLocation(GetVelocity() * 20.0f, GetActorLocation());//simular la fuerza de la bala
-			// Instanciar el efecto de partículas en la ubicación de la colisión
-			ExplosionParticle->SetTemplate(ExplosionParticleTemplate);
+		OtherComp->AddImpulseAtLocation(GetVelocity() * 20.0f, GetActorLocation()); // simular la fuerza de la bala
+
+		// Instanciar el efecto de partículas en la ubicación de la colisión
+		if (ExplosionParticle)
+		{
 			ExplosionParticle->SetWorldLocation(Hit.ImpactPoint);
 			ExplosionParticle->ActivateSystem();
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Colision"));
+		}
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Colision"));
+	}
+
+	Destroy();
+}
+void AGalaga_USFX_L01Projectile::NotifyHit(class UPrimitiveComponent*
+	MyComp, AActor* Other, class UPrimitiveComponent* OtherComp,
+	bool bSelfMoved, FVector HitLocation, FVector HitNormal,
+	FVector NormalImpulse, const FHitResult& Hit)
+{
+	ANaveEnemiga* NaveEnemiga =
+		Cast<ANaveEnemiga>(Other);
+	if (NaveEnemiga != nullptr)
+	{
+		NaveEnemiga->DestruirNave();
 		
 	}
-	
-	Destroy();
+
+	AGalaga_USFX_L01Pawn* NaveJugador =
+		Cast<AGalaga_USFX_L01Pawn>(Other);
+	if (NaveJugador != nullptr)
+	{
+		//NaveJugador->Destroy();
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Destruir nave jugador"));
+	}
 }
 
