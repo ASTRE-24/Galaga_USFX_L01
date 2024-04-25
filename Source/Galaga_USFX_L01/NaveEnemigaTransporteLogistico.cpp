@@ -5,9 +5,9 @@
 
 ANaveEnemigaTransporteLogistico::ANaveEnemigaTransporteLogistico()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Tube.Shape_Tube'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/Spaceships_7.Spaceships_7'"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
-    mallaNaveEnemiga->SetWorldScale3D(FVector(0.7f, 0.7f, 0.7f));//Para Modificar la escala de la nave
+    mallaNaveEnemiga->SetWorldScale3D(FVector(0.5f, 0.9f, 1.0f));//Para Modificar la escala de la nave
 	Timer = 0.0f; //Inicializa el timer en 0    
 	TiempoTranscurrido = 0.0f;
 }

@@ -5,8 +5,9 @@
 
 ANaveEnemigaTransporteFurtivo::ANaveEnemigaTransporteFurtivo()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Cone.Shape_Cone'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/Spaceships_3.Spaceships_3'"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
+    mallaNaveEnemiga->SetWorldScale3D(FVector(0.5f, 1.0f, 1.0f));
     Timer = 0.0f; //Inicializa el timer en 0    
     TiempoTranscurrido = 0.0f;
 }

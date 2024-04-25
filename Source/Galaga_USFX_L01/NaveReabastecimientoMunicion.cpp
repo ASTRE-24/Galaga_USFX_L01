@@ -5,8 +5,9 @@
 
 ANaveReabastecimientoMunicion::ANaveReabastecimientoMunicion()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Wedge_B.Shape_Wedge_B'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/Spaceships_4.Spaceships_4'"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
+    mallaNaveEnemiga->SetWorldScale3D(FVector(0.5f, 1.0f, 1.0f));
 
 }
 

@@ -5,10 +5,11 @@
 
 ANaveEnemigaEspia::ANaveEnemigaEspia()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_WideCapsule.Shape_WideCapsule'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/B-2_v1_obj.B-2_v1_obj'"));
 	//// Create the mesh component
 	//mallaNaveEnemiga = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
+    mallaNaveEnemiga->SetWorldScale3D(FVector(1.6f, 1.0f, 1.0f));
     Timer = 0.0f; //Inicializa el timer en 0
     TiempoTrascurrido = 0; //Inicializa el tiempo transcurrido en 0
 

@@ -6,12 +6,12 @@
 
 ANaveEnemigaCaza::ANaveEnemigaCaza()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_TriPyramid.Shape_TriPyramid'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/CajaSalud/MK6_OBJ.MK6_OBJ'"));
 	//// Create the mesh component
 	//mallaNaveEnemiga = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
-	//mallaNaveEnemiga->SetWorldScale3D(FVector(0.5f, 0.5f, 0.5f));
-
+	mallaNaveEnemiga->SetWorldScale3D(FVector(0.7f, 0.8f, 1.0f));
+	
 	Timer = 0.0f; //Inicializa el timer en 0
 	bShouldMove = true; //Inicializa el booleano en true
 	TiempoParaDetenerse = 5.0f; //Inicializa el tiempo para detenerse en 5 segundos

@@ -159,7 +159,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 
         //Para el spauwn de las objetos de inventario
         for (int i = 0; i < 6; i++) {
-			UbicacionInventario.Add(i, FVector(ubicacionDeObjetosInventario.X, ubicacionDeObjetosInventario.Y + i * 100.0f, ubicacionDeObjetosInventario.Z));
+			UbicacionInventario.Add(i, FVector(ubicacionDeObjetosInventario.X, ubicacionDeObjetosInventario.Y + i * 140.0f, ubicacionDeObjetosInventario.Z));
              //Generar un número aleatorio entre 0 y 1
                 float RandomNumber = FMath::FRandRange(0.0f, 1.0f);
 

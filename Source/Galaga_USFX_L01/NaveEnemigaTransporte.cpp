@@ -6,8 +6,9 @@
 
 ANaveEnemigaTransporte::ANaveEnemigaTransporte()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_NarrowCapsule.Shape_NarrowCapsule'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/Spaceships_2.Spaceships_2'"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
+	mallaNaveEnemiga->SetWorldScale3D(FVector(0.6f, 1.0f, 1.0f));
 	
 	//Asiganar el indice de fila en el Constructor
 	

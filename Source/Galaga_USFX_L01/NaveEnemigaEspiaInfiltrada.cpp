@@ -5,10 +5,11 @@
 
 ANaveEnemigaEspiaInfiltrada::ANaveEnemigaEspiaInfiltrada()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Torus.Shape_Torus'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/Spaceships_10.Spaceships_10'"));
 	//// Create the mesh component
 	//mallaNaveEnemiga = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
+    mallaNaveEnemiga->SetWorldScale3D(FVector(0.38f, 1.0f, 1.0f));
 
 }
 

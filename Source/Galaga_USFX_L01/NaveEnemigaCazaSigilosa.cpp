@@ -5,10 +5,11 @@
 
 ANaveEnemigaCazaSigilosa::ANaveEnemigaCazaSigilosa()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Sphere.Shape_Sphere'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/Spaceships_9.Spaceships_9'"));
 	//// Create the mesh component
 	//mallaNaveEnemiga = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
+    mallaNaveEnemiga->SetWorldScale3D(FVector(0.4f, 1.0f, 1.0f));
     Timer = 0.0f; //Inicializa el timer en 0   
     TiempoTranscurrido = 0.0f;
 }

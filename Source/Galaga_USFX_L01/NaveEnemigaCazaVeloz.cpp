@@ -5,10 +5,11 @@
 
 ANaveEnemigaCazaVeloz::ANaveEnemigaCazaVeloz()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_TriPyramid.Shape_TriPyramid'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/Fighter_01.Fighter_01'"));
 	//// Create the mesh component
 	//mallaNaveEnemiga = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
+    mallaNaveEnemiga->SetWorldScale3D(FVector(0.8f, 0.8f, 1.0f));
     Timer = 0.0f; //Inicializa el timer en 0
     TiempoTranscurrido = 0.0f;
 

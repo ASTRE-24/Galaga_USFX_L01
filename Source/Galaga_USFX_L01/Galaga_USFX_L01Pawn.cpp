@@ -29,7 +29,7 @@ const FName AGalaga_USFX_L01Pawn::FireRightBinding("FireRight");
 
 AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 {	
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/Nave/Fighter_03.Fighter_03'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/Spaceships_6.Spaceships_6'"));
 	// Create the mesh component
 	ShipMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	RootComponent = ShipMeshComponent;

@@ -6,7 +6,7 @@
 AInventoryActorEnergia::AInventoryActorEnergia()
 {
     static ConstructorHelpers::FObjectFinder<UStaticMesh> 
-        CylinderMeshAsset(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Tube.Shape_Tube'"));
+        CylinderMeshAsset(TEXT("StaticMesh'/Game/StarterContent/Mehes/CajaSalud/First_Aid_Kit_Caja01.First_Aid_Kit_Caja01'"));
     if (CylinderMeshAsset.Succeeded())
     {
         GetStaticMeshComponent()->SetStaticMesh(CylinderMeshAsset.Object);

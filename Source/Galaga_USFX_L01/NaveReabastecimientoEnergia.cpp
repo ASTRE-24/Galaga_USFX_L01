@@ -5,9 +5,9 @@
 
 ANaveReabastecimientoEnergia::ANaveReabastecimientoEnergia()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Trim_90_Out.Shape_Trim_90_Out'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/Spaceships_8.Spaceships_8'"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
-    mallaNaveEnemiga->SetWorldScale3D(FVector(2.5f, 2.5f, 2.5f));
+    mallaNaveEnemiga->SetWorldScale3D(FVector(0.4f, 0.85f, 1.0f));
 
 }
 
