@@ -18,6 +18,8 @@ class AGalaga_USFX_L01GameMode : public AGameModeBase
 
 public:
 	AGalaga_USFX_L01GameMode();
+	class ABuilderConcretoPNReparar* ReparacionPorta;
+	class ADirectorPortaNave* IngenieroPortaNave;
 
 public:
 	//ANaveEnemiga* NaveEnemiga01;

@@ -25,7 +25,9 @@
 #include "SolicitudDeNavesAtaque.h"
 #include "SolicitudDeNavesInformante.h"
 
-
+#include "BuilderConcretoPNReparar.h"
+#include "DirectorPortaNave.h"
+#include "PortaNave.h"
 
 AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 {
@@ -43,9 +45,17 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     FVector ubicacionInicioNavesEnemigas = FVector(1850.0f, -1540.7f, 216.0f);
     FVector ubicacionInicioNavesEnemigasTransporte = FVector(500.0f, 500.0f, 250.0f);
     FVector ubicacionDeObjetosInventario = FVector(-700.0f, 300.0f, 700.0f);
-    FRotator rotacionNave = FRotator(0.0f, 0.0f, 0.0f);
+    FRotator rotacionNave = FRotator(0.0f, 180.0f, 0.0f);
     FRotator rotacionNave90 = FRotator(0.0f, 90.0f, 0.0f);
-    
+
+    ReparacionPorta = GetWorld()->SpawnActor<ABuilderConcretoPNReparar>(ABuilderConcretoPNReparar::StaticClass());
+    IngenieroPortaNave = GetWorld()->SpawnActor<ADirectorPortaNave>(ADirectorPortaNave::StaticClass());
+    IngenieroPortaNave->SetBuilderPortaNave(ReparacionPorta);
+    IngenieroPortaNave->ConstruirPortaNave();
+
+    APortaNave* portal = IngenieroPortaNave->GetPortaNave();
+    portal->caracteristicas();
+
     APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
     if (PlayerController)
     {

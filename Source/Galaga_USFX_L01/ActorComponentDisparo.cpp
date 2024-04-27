@@ -14,7 +14,7 @@ UActorComponentDisparo::UActorComponentDisparo()
 	PrimaryComponentTick.bCanEverTick = true;
 	bCanFire = true;
 	FireRate = 2.0f; // Ajusta según sea necesario
-	GunOffset = FVector(100.0f, 0.0f, 0.0f); // Ajusta según sea necesario
+	GunOffset = FVector(120.0f, 0.0f, 0.0f); // Ajusta según sea necesario
 
     // Cache our sound effect
     static ConstructorHelpers::FObjectFinder<USoundBase> FireAudio(TEXT("/Game/TwinStick/Audio/TwinStickFire.TwinStickFire"));
@@ -48,7 +48,7 @@ void UActorComponentDisparo::DispararProyectil()
     if (bCanFire)
     {
         // Obtiene la rotación y la ubicación del propietario del componente
-        FRotator FireRotation = GetOwner()->GetActorRotation()+FRotator(0.0f,-180.0f,0.0f);
+        FRotator FireRotation = GetOwner()->GetActorRotation()+FRotator(0.0f,0.0f,0.0f);
         FVector SpawnLocation = GetOwner()->GetActorLocation() + FireRotation.RotateVector(GunOffset);
 
         UWorld* const World = GetWorld();
