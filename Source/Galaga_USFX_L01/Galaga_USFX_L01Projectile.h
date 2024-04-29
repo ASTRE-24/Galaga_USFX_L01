@@ -38,7 +38,9 @@ public:
 	/** Function to handle the projectile hitting something */
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	
 	AActor* OriginActor;
+	
 	void SetOriginActor(AActor* _OriginActor) { OriginActor = _OriginActor; }
 	AActor* GetOriginActor() { return OriginActor; }
 	/** Returns ProjectileMesh subobject **/

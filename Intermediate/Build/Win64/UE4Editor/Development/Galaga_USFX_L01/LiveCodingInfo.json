@@ -2,9 +2,14 @@
 	"RemapUnityFiles": 
 	{
 		"Module.Galaga_USFX_L01.cpp.obj": [
+			"ActorComponentDisparo.cpp.obj",
 			"ActorSpawnerComponent.cpp.obj",
+			"BuilderConcretoPNReparar.cpp.obj",
+			"BuilderPortaNave.cpp.obj",
+			"DirectorPortaNave.cpp.obj",
 			"Escudo.cpp.obj",
 			"Galaga_USFX_L01.cpp.obj",
+			"Galaga_USFX_L01GameMode.cpp.obj",
 			"Galaga_USFX_L01Pawn.cpp.obj",
 			"Galaga_USFX_L01Projectile.cpp.obj",
 			"InventoryActor.cpp.obj",
@@ -29,20 +34,19 @@
 			"NaveReabastecimientoEnergia.cpp.obj",
 			"NaveReabastecimientoMunicion.cpp.obj",
 			"Obstaculo.cpp.obj",
+			"PortaNave.cpp.obj",
 			"SolicitudDeNaves.cpp.obj",
 			"SolicitudDeNavesApoyo.cpp.obj",
 			"SolicitudDeNavesAtaque.cpp.obj",
 			"SolicitudDeNavesInformante.cpp.obj",
-			"ActorComponentDisparo.cpp.obj",
-			"BuilderConcretoPNReparar.cpp.obj",
-			"BuilderPortaNave.cpp.obj",
-			"DirectorPortaNave.cpp.obj",
-			"Galaga_USFX_L01GameMode.cpp.obj",
-			"PortaNave.cpp.obj"
+			"Armas.cpp.obj"
 		],
 		"Module.Galaga_USFX_L01.gen.cpp.obj": [
 			"ActorComponentDisparo.gen.cpp.obj",
 			"ActorSpawnerComponent.gen.cpp.obj",
+			"BuilderConcretoPNReparar.gen.cpp.obj",
+			"BuilderPortaNave.gen.cpp.obj",
+			"DirectorPortaNave.gen.cpp.obj",
 			"Escudo.gen.cpp.obj",
 			"Galaga_USFX_L01GameMode.gen.cpp.obj",
 			"Galaga_USFX_L01Pawn.gen.cpp.obj",
@@ -69,15 +73,13 @@
 			"NaveReabastecimientoEnergia.gen.cpp.obj",
 			"NaveReabastecimientoMunicion.gen.cpp.obj",
 			"Obstaculo.gen.cpp.obj",
+			"PortaNave.gen.cpp.obj",
 			"SolicitudDeNaves.gen.cpp.obj",
 			"SolicitudDeNavesApoyo.gen.cpp.obj",
 			"SolicitudDeNavesAtaque.gen.cpp.obj",
 			"SolicitudDeNavesInformante.gen.cpp.obj",
-			"BuilderConcretoPNReparar.gen.cpp.obj",
-			"BuilderPortaNave.gen.cpp.obj",
-			"DirectorPortaNave.gen.cpp.obj",
-			"Galaga_USFX_L01.init.gen.cpp.obj",
-			"PortaNave.gen.cpp.obj"
+			"Armas.gen.cpp.obj",
+			"Galaga_USFX_L01.init.gen.cpp.obj"
 		]
 	}
 }

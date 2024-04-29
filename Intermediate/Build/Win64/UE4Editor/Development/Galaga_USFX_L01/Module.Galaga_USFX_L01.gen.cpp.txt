@@ -7,6 +7,15 @@ D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/ActorSpawnerComponent.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/ActorSpawnerComponent.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ActorSpawnerComponent.generated.h
+D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/BuilderConcretoPNReparar.gen.cpp
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/BuilderConcretoPNReparar.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\BuilderPortaNave.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\BuilderPortaNave.generated.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\BuilderConcretoPNReparar.generated.h
+D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/BuilderPortaNave.gen.cpp
+D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/DirectorPortaNave.gen.cpp
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/DirectorPortaNave.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\DirectorPortaNave.generated.h
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Escudo.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/Escudo.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Escudo.generated.h
@@ -108,6 +117,9 @@ D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Obstaculo.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/Obstaculo.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Obstaculo.generated.h
+D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/PortaNave.gen.cpp
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/PortaNave.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\PortaNave.generated.h
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/SolicitudDeNaves.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/SolicitudDeNaves.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\SolicitudDeNaves.generated.h
