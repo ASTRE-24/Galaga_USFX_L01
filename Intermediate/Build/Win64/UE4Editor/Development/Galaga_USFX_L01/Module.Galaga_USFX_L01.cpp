@@ -21,7 +21,6 @@
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaEspia.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaEspiaInfiltrada.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaEspiaTactica.cpp"
-#include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaNodriza.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaNodrizaBlindada.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaNodrizaTactico.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaReabastecimiento.cpp"

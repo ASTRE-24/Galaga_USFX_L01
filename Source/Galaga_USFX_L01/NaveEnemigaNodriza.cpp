@@ -9,6 +9,7 @@ ANaveEnemigaNodriza::ANaveEnemigaNodriza()
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
     Timer = 0.0f; //Inicializa el timer en 0 
     TiempoTranscurrido = 0.0f; 
+    SetVelocidad(600);
 }
 
 void ANaveEnemigaNodriza::Mover(float DeltaTime)
@@ -63,24 +64,48 @@ void ANaveEnemigaNodriza::Mover(float DeltaTime)
 void ANaveEnemigaNodriza::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Mover(DeltaTime);
+    //Mover(DeltaTime);
+    movimientoNaveNodriza(DeltaTime);
+    
 }
+
+
 
 void ANaveEnemigaNodriza::Disparar()
 {
-}
-
-void ANaveEnemigaNodriza::Destruirse()
-{
 
 }
 
-void ANaveEnemigaNodriza::Escapar()
+void ANaveEnemigaNodriza::movimientoNaveNodriza(float DeltaTime)
+{
+    if (GetActorLocation().Y >= 0.f && GetActorLocation().X<=1500)
+    {
+        float newY = GetActorLocation().Y - GetVelocidad() * DeltaTime;
+        SetActorLocation(FVector(GetActorLocation().X, newY, GetActorLocation().Z));return;
+    }
+    else if (GetActorLocation().Y <= 0.f && GetActorLocation().X <= 1500.f)
+    {
+        float newX = GetActorLocation().X + GetVelocidad() * DeltaTime;
+        SetActorLocation(FVector(newX, GetActorLocation().Y, GetActorLocation().Z));return;
+    }
+    else if(GetActorLocation().X >= 1500) retiroNaveNodriza(DeltaTime);
+}
+void ANaveEnemigaNodriza::movimientoNavesEnemigas()
 {
 
 }
+void ANaveEnemigaNodriza::tipoDeArma()
+{
+    arma = GetWorld()->SpawnActor<AArmas>(AArmas::StaticClass(), FVector(0, 0, 215), FRotator(0, 0, 0));
 
-void ANaveEnemigaNodriza::Atacar()
+}
+void ANaveEnemigaNodriza::tiposNavesEnemigas()
 {
 
+}
+void ANaveEnemigaNodriza::retiroNaveNodriza(float DeltaTime)
+{
+    float newY = GetActorLocation().Y + GetVelocidad() * DeltaTime;
+    SetActorLocation(FVector(GetActorLocation().X, newY, GetActorLocation().Z));
+    if (GetActorLocation().Y >= 1000) Destroy();
 }

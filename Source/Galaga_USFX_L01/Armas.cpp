@@ -159,6 +159,7 @@ void AArmas::ArmaDisparoTriple(AActor* NaveDisparo)
         UWorld* const World = GetWorld();
         if (World)
         {
+
             // Calcula la posición de spawn para el primer proyectil (a la izquierda de la nave)
             const FVector SpawnLocationLeft = SpawnLocation - FireRotation.RotateVector(FVector(0.f, 60.f, 0.f));
 

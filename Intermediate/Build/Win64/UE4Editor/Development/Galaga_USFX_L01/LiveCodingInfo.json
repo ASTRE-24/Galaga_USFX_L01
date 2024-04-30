@@ -24,7 +24,6 @@
 			"NaveEnemigaEspia.cpp.obj",
 			"NaveEnemigaEspiaInfiltrada.cpp.obj",
 			"NaveEnemigaEspiaTactica.cpp.obj",
-			"NaveEnemigaNodriza.cpp.obj",
 			"NaveEnemigaNodrizaBlindada.cpp.obj",
 			"NaveEnemigaNodrizaTactico.cpp.obj",
 			"NaveEnemigaReabastecimiento.cpp.obj",
@@ -39,11 +38,19 @@
 			"SolicitudDeNavesApoyo.cpp.obj",
 			"SolicitudDeNavesAtaque.cpp.obj",
 			"SolicitudDeNavesInformante.cpp.obj",
-			"Armas.cpp.obj"
+			"Armas.cpp.obj",
+			"BuilderNaveNodrizaFase1.cpp.obj",
+			"BuilderNaveNodrizaFase2.cpp.obj",
+			"BuilderNaveNodrizaFase3.cpp.obj",
+			"DirectorNaveNodriza.cpp.obj",
+			"InterfaceBuilderNaveNodriza.cpp.obj",
+			"InterfaceNaveNodriza.cpp.obj",
+			"NaveEnemigaNodriza.cpp.obj"
 		],
 		"Module.Galaga_USFX_L01.gen.cpp.obj": [
 			"ActorComponentDisparo.gen.cpp.obj",
 			"ActorSpawnerComponent.gen.cpp.obj",
+			"Armas.gen.cpp.obj",
 			"BuilderConcretoPNReparar.gen.cpp.obj",
 			"BuilderPortaNave.gen.cpp.obj",
 			"DirectorPortaNave.gen.cpp.obj",
@@ -63,9 +70,6 @@
 			"NaveEnemigaEspia.gen.cpp.obj",
 			"NaveEnemigaEspiaInfiltrada.gen.cpp.obj",
 			"NaveEnemigaEspiaTactica.gen.cpp.obj",
-			"NaveEnemigaNodriza.gen.cpp.obj",
-			"NaveEnemigaNodrizaBlindada.gen.cpp.obj",
-			"NaveEnemigaNodrizaTactico.gen.cpp.obj",
 			"NaveEnemigaReabastecimiento.gen.cpp.obj",
 			"NaveEnemigaTransporte.gen.cpp.obj",
 			"NaveEnemigaTransporteFurtivo.gen.cpp.obj",
@@ -78,8 +82,16 @@
 			"SolicitudDeNavesApoyo.gen.cpp.obj",
 			"SolicitudDeNavesAtaque.gen.cpp.obj",
 			"SolicitudDeNavesInformante.gen.cpp.obj",
-			"Armas.gen.cpp.obj",
-			"Galaga_USFX_L01.init.gen.cpp.obj"
+			"BuilderNaveNodrizaFase1.gen.cpp.obj",
+			"BuilderNaveNodrizaFase2.gen.cpp.obj",
+			"BuilderNaveNodrizaFase3.gen.cpp.obj",
+			"DirectorNaveNodriza.gen.cpp.obj",
+			"Galaga_USFX_L01.init.gen.cpp.obj",
+			"InterfaceBuilderNaveNodriza.gen.cpp.obj",
+			"InterfaceNaveNodriza.gen.cpp.obj",
+			"NaveEnemigaNodriza.gen.cpp.obj",
+			"NaveEnemigaNodrizaBlindada.gen.cpp.obj",
+			"NaveEnemigaNodrizaTactico.gen.cpp.obj"
 		]
 	}
 }
