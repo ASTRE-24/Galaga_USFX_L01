@@ -2,6 +2,8 @@ D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemigaTransporteFurtivo.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemigaTransporte.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemiga.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\ActorComponentDisparo.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ActorComponentDisparo.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemiga.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaTransporte.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaTransporteFurtivo.generated.h

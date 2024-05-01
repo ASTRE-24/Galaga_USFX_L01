@@ -27,19 +27,21 @@ void ADirectorNaveNodriza::Tick(float DeltaTime)
 
 void ADirectorNaveNodriza::construirNaveNodriza()
 {
-	constructorNaveFase1->construirMovimientoNaveNodriza();
-	constructorNaveFase1->construirMovimientoNavesEnemigas();
-	constructorNaveFase1->construirTipoDeArma();
-	constructorNaveFase1->construirTiposNavesEnemigas();
+	
+	constructorNaves->construirMovimientoNaveNodriza();
+	constructorNaves->construirFormacionNavesEnemigas();
+	constructorNaves->construirTipoDeArma();
+	constructorNaves->construirTiposNavesEnemigas();
 }
 
 void ADirectorNaveNodriza::enviarConstructor(AActor* constructor)
 {
-	constructorNaveFase1 = Cast<IInterfaceBuilderNaveNodriza>(constructor);
+	constructorNaves = Cast<IInterfaceBuilderNaveNodriza>(constructor);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Constructor enviado"));
 }
 
 ANaveEnemigaNodriza* ADirectorNaveNodriza::obtenerNave()
 {
-	return constructorNaveFase1->getNaveNodriza();
+	return constructorNaves->getNaveNodriza();
 }
 

@@ -77,7 +77,7 @@ void ANaveReabastecimientoMunicion::Mover(float DeltaTime)
 void ANaveReabastecimientoMunicion::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Mover(DeltaTime);
+   
 }
 
 

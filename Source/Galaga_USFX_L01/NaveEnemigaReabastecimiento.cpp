@@ -80,6 +80,7 @@ void ANaveEnemigaReabastecimiento::Mover(float DeltaTime)
 void ANaveEnemigaReabastecimiento::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+	if (bMoverse)
     Mover(DeltaTime);
 }
 

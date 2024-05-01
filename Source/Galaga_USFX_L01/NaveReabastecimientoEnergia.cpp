@@ -77,7 +77,7 @@ void ANaveReabastecimientoEnergia::Mover(float DeltaTime)
 void ANaveReabastecimientoEnergia::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Mover(DeltaTime);
+    
 }
 
 

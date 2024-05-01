@@ -23,6 +23,8 @@ public:
 
 	class ADirectorNaveNodriza* DirectorNodriza;
 	class ABuilderNaveNodrizaFase1* BuilderNodrizaFase1;
+	class ABuilderNaveNodrizaFase2* BuilderNodrizaFase2;
+	class ABuilderNaveNodrizaFase3* BuilderNodrizaFase3;
 
 public:
 	//ANaveEnemiga* NaveEnemiga01;

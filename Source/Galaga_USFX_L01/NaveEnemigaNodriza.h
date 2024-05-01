@@ -33,6 +33,7 @@ public:
 	FTimerHandle TimerInicial; //Timer para spawnear naves
 	int indiceNave; //Indice de la nave
 	int indicePosicion; //Indice de la posicion
+	FString tipoMovimiento; //Tipo de movimiento
 
 
 public:
@@ -40,9 +41,11 @@ public:
 
 	FORCEINLINE int GetNumNavesGeneradas() const { return numNavesGeneradas; }
 	FORCEINLINE float GetTiempoGeneracionNaves() const { return tiempoGeneracionNaves; }
+	FORCEINLINE FString GetTipoMovimiento() const { return tipoMovimiento; }
 
 	FORCEINLINE void SetNumNavesGeneradas(float _numNavesGeneradas) { numNavesGeneradas = _numNavesGeneradas; }
 	FORCEINLINE void SetTiempoGeneracionNaves(float _tiempoGeneracionNaves) { tiempoGeneracionNaves = _tiempoGeneracionNaves; }
+	FORCEINLINE void SetTipoMovimiento(FString _tipoMovimiento) { tipoMovimiento = _tipoMovimiento; }
 
 protected:
 	virtual void Mover(float DeltaTime);
@@ -53,7 +56,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
 	virtual void movimientoNaveNodriza() override;
-	virtual void movimientoNavesEnemigas() override;
+	virtual void formacionNavesEnemigas(FString formacion) override;
 	virtual void tipoDeArma() override;
 	virtual void tiposNavesEnemigas() override;
 	virtual void retiroNaveNodriza() override;

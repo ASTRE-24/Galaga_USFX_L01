@@ -15,7 +15,7 @@ class GALAGA_USFX_L01_API ADirectorNaveNodriza : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ADirectorNaveNodriza();
-	IInterfaceBuilderNaveNodriza* constructorNaveFase1;
+	IInterfaceBuilderNaveNodriza* constructorNaves;
 
 protected:
 	// Called when the game starts or when spawned

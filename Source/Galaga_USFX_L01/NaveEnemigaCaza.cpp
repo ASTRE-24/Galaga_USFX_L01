@@ -73,7 +73,10 @@ void ANaveEnemigaCaza::Disparar()
 void ANaveEnemigaCaza::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//Mover(DeltaTime);
+	if (bMoverse)
+	{
+		Mover(DeltaTime);
+	}
 	
 }
 

@@ -59,7 +59,10 @@ void ANaveEnemigaEspia::Mover(float DeltaTime)
 void ANaveEnemigaEspia::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Mover(DeltaTime);
+	if (bMoverse)
+	{
+		Mover(DeltaTime);
+	}
 }
 
 void ANaveEnemigaEspia::Disparar()

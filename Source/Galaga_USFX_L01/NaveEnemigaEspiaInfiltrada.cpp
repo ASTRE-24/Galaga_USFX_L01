@@ -57,7 +57,7 @@ void ANaveEnemigaEspiaInfiltrada::Mover(float DeltaTime)
 void ANaveEnemigaEspiaInfiltrada::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Mover(DeltaTime);
+   
 }
 
 void ANaveEnemigaEspiaInfiltrada::Atacar()

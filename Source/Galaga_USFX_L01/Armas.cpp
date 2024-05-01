@@ -24,7 +24,7 @@ AArmas::AArmas()
         Obstaculo->SetStaticMesh(ShipMesh.Object);
 
         // Modifica la escala del componente de malla estática
-        Obstaculo->SetWorldScale3D(FVector(1.0f, 1.0f, 1.0f)); // Aquí se ajusta la escala
+        Obstaculo->SetWorldScale3D(FVector(0.1f, 0.1f, 0.1f)); // Aquí se ajusta la escala
     }
     MunicionInicial = 100;
     MunicionActual = MunicionInicial;

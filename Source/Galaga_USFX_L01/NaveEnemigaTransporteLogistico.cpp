@@ -65,7 +65,7 @@ void ANaveEnemigaTransporteLogistico::Mover(float DeltaTime) {
 void ANaveEnemigaTransporteLogistico::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Mover(DeltaTime);
+    
     
 }
 

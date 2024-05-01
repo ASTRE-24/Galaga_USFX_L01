@@ -23,7 +23,7 @@ class GALAGA_USFX_L01_API IInterfaceBuilderNaveNodriza
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	virtual void construirMovimientoNaveNodriza() = 0;
-	virtual void construirMovimientoNavesEnemigas() = 0;
+	virtual void construirFormacionNavesEnemigas() = 0;
 	virtual void construirTipoDeArma() = 0;
 	virtual void construirTiposNavesEnemigas() = 0;
 	virtual class ANaveEnemigaNodriza* getNaveNodriza() = 0;

@@ -17,6 +17,8 @@ void ABuilderNaveNodrizaFase1::BeginPlay()
 {
 	Super::BeginPlay();
 	naveNodriza = GetWorld()->SpawnActor<ANaveEnemigaNodriza>(ANaveEnemigaNodriza::StaticClass(), FVector(-900,1250,215), FRotator (0,0,0));
+	naveNodriza->SetActorScale3D(FVector(0.5, 0.5, 0.5));
+	naveNodriza->SetTipoMovimiento("Movimiento 1");
 }
 
 // Called every frame
@@ -31,9 +33,9 @@ void ABuilderNaveNodrizaFase1::construirMovimientoNaveNodriza()
 	naveNodriza->movimientoNaveNodriza();
 }
 
-void ABuilderNaveNodrizaFase1::construirMovimientoNavesEnemigas()
+void ABuilderNaveNodrizaFase1::construirFormacionNavesEnemigas()
 {
-	naveNodriza->movimientoNavesEnemigas();
+	naveNodriza->formacionNavesEnemigas("Posicion 1");
 }
 
 void ABuilderNaveNodrizaFase1::construirTipoDeArma()

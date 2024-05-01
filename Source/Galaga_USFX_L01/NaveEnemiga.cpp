@@ -23,6 +23,7 @@ ANaveEnemiga::ANaveEnemiga()
 	RootComponent = mallaNaveEnemiga;
 	DisparoComponent = CreateDefaultSubobject<UActorComponentDisparo>(TEXT("DisparoComponent"));
 	bShoulDispara = false;
+	bMoverse = false;
 	
 
 	// Configurar la plantilla de partículas (reemplaza "Path/To/Your/ParticleSystem" con la ruta correcta)

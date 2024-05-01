@@ -30,6 +30,8 @@
 #include "PortaNave.h"
 #include "DirectorNaveNodriza.h"
 #include "BuilderNaveNodrizaFase1.h"
+#include "BuilderNaveNodrizaFase2.h"
+#include "BuilderNaveNodrizaFase3.h"
 
 AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 {
@@ -56,8 +58,10 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     IngenieroPortaNave->ConstruirPortaNave();
 
 	DirectorNodriza = GetWorld()->SpawnActor<ADirectorNaveNodriza>(ADirectorNaveNodriza::StaticClass());
-	BuilderNodrizaFase1 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase1>(ABuilderNaveNodrizaFase1::StaticClass());
-	DirectorNodriza->enviarConstructor(BuilderNodrizaFase1);
+	//BuilderNodrizaFase1 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase1>(ABuilderNaveNodrizaFase1::StaticClass());
+	BuilderNodrizaFase2 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase2>(ABuilderNaveNodrizaFase2::StaticClass());
+	//BuilderNodrizaFase3 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase3>(ABuilderNaveNodrizaFase3::StaticClass());
+	DirectorNodriza->enviarConstructor(BuilderNodrizaFase2);
 	DirectorNodriza->construirNaveNodriza();
 	ANaveEnemigaNodriza* NaveNodriza = DirectorNodriza->obtenerNave();
 

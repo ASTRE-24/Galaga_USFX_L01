@@ -27,7 +27,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void construirMovimientoNaveNodriza() override;
-	virtual void construirMovimientoNavesEnemigas() override;
+	virtual void construirFormacionNavesEnemigas() override;
 	virtual void construirTipoDeArma() override;
 	virtual void construirTiposNavesEnemigas() override;
 	virtual class ANaveEnemigaNodriza* getNaveNodriza() override;

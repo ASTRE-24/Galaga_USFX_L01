@@ -4,16 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "InterfaceBuilderNaveNodriza.h"
+#include "NaveEnemigaNodriza.h"
 #include "BuilderNaveNodrizaFase2.generated.h"
 
 UCLASS()
-class GALAGA_USFX_L01_API ABuilderNaveNodrizaFase2 : public AActor
+class GALAGA_USFX_L01_API ABuilderNaveNodrizaFase2 : public AActor, public IInterfaceBuilderNaveNodriza
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
 	ABuilderNaveNodrizaFase2();
+	ANaveEnemigaNodriza* naveNodriza;
 
 protected:
 	// Called when the game starts or when spawned
@@ -22,5 +25,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	virtual void construirMovimientoNaveNodriza() override;
+	virtual void construirFormacionNavesEnemigas() override;
+	virtual void construirTipoDeArma() override;
+	virtual void construirTiposNavesEnemigas() override;
+	virtual class ANaveEnemigaNodriza* getNaveNodriza() override;
 
 };

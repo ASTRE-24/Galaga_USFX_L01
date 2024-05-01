@@ -66,7 +66,10 @@ void ANaveEnemigaTransporte::Disparar()
 void ANaveEnemigaTransporte::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	Mover(DeltaTime);
+	if (bMoverse)
+	{
+		Mover(DeltaTime);
+	}
 	
 }
 

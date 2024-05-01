@@ -74,6 +74,6 @@ void ANaveEnemigaTransporteFurtivo::Mover(float DeltaTime) {
 void ANaveEnemigaTransporteFurtivo::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Mover(DeltaTime);
+    
 
 }
