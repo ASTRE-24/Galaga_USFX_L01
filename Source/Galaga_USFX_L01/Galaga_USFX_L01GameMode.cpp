@@ -28,6 +28,8 @@
 #include "BuilderConcretoPNReparar.h"
 #include "DirectorPortaNave.h"
 #include "PortaNave.h"
+#include "DirectorNaveNodriza.h"
+#include "BuilderNaveNodrizaFase1.h"
 
 AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 {
@@ -53,6 +55,12 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     IngenieroPortaNave->SetBuilderPortaNave(ReparacionPorta);
     IngenieroPortaNave->ConstruirPortaNave();
 
+	DirectorNodriza = GetWorld()->SpawnActor<ADirectorNaveNodriza>(ADirectorNaveNodriza::StaticClass());
+	BuilderNodrizaFase1 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase1>(ABuilderNaveNodrizaFase1::StaticClass());
+	DirectorNodriza->enviarConstructor(BuilderNodrizaFase1);
+	DirectorNodriza->construirNaveNodriza();
+	ANaveEnemigaNodriza* NaveNodriza = DirectorNodriza->obtenerNave();
+
     APortaNave* portal = IngenieroPortaNave->GetPortaNave();
     portal->caracteristicas();
 
@@ -68,67 +76,66 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     UWorld* const World = GetWorld();
     if (World != nullptr)
     {
-        //Creacion de las solicitudes de naves
-        ASolicitudDeNaves* SolicitudDeNavesAtaque = World->SpawnActor<ASolicitudDeNavesAtaque>(ASolicitudDeNavesAtaque::StaticClass());
-        ASolicitudDeNaves* SolicitudDeNavesApoyo = World->SpawnActor<ASolicitudDeNavesApoyo>(ASolicitudDeNavesApoyo::StaticClass());
-        ASolicitudDeNaves* SolicitudDeNavesInformante = World->SpawnActor<ASolicitudDeNavesInformante>(ASolicitudDeNavesInformante::StaticClass());
+    //    //Creacion de las solicitudes de naves
+    //    ASolicitudDeNaves* SolicitudDeNavesAtaque = World->SpawnActor<ASolicitudDeNavesAtaque>(ASolicitudDeNavesAtaque::StaticClass());
+    //    ASolicitudDeNaves* SolicitudDeNavesApoyo = World->SpawnActor<ASolicitudDeNavesApoyo>(ASolicitudDeNavesApoyo::StaticClass());
+    //    ASolicitudDeNaves* SolicitudDeNavesInformante = World->SpawnActor<ASolicitudDeNavesInformante>(ASolicitudDeNavesInformante::StaticClass());
 
-        //Aniadir los nombres al TArray
-        NombresNavesAtaque.Add("NaveEnemigaCaza");
-        NombresNavesAtaque.Add("NaveEnemigaCazaSigilosa");
-        NombresNavesAtaque.Add("NaveEnemigaCazaVeloz");
-        NombresNavesApoyo.Add("NaveEnemigaTransporte");
-        NombresNavesApoyo.Add("NaveEnemigaTransporteFurtivo");
-        NombresNavesApoyo.Add("NaveEnemigaTransporteLogistico");
-        NombresNavesInformante.Add("NaveEnemigaEspia");
-        NombresNavesInformante.Add("NaveEnemigaEspiaInfiltrada");
-        NombresNavesInformante.Add("NaveEnemigaEspiaTactica");
-        NombresNavesApoyo.Add("NaveEnemigaNodriza");
-        NombresNavesApoyo.Add("NaveEnemigaNodrizaBlindada");
-        NombresNavesApoyo.Add("NaveEnemigaNodrizaTactico");
-        NombresNavesApoyo.Add("NaveEnemigaReabastecimiento");
-        NombresNavesApoyo.Add("NaveReabastecimientoEnergia");
-        NombresNavesApoyo.Add("NaveReabastecimientoMunicion");
-        //Aniadir los nombres al TArray categorias
-        CategoriasNaves.Add(NombresNavesAtaque);
-        CategoriasNaves.Add(NombresNavesApoyo);
-        CategoriasNaves.Add(NombresNavesInformante);
-        
+    //    
 
-        //Creacion d elas naves enemigas
+    //    //Aniadir los nombres al TArray
+    //    NombresNavesAtaque.Add("NaveEnemigaCaza");
+    //    NombresNavesAtaque.Add("NaveEnemigaCazaSigilosa");
+    //    NombresNavesAtaque.Add("NaveEnemigaCazaVeloz");
+    //    NombresNavesApoyo.Add("NaveEnemigaTransporte");
+    //    NombresNavesApoyo.Add("NaveEnemigaTransporteFurtivo");
+    //    NombresNavesApoyo.Add("NaveEnemigaTransporteLogistico");
+    //    NombresNavesInformante.Add("NaveEnemigaEspia");
+    //    NombresNavesInformante.Add("NaveEnemigaEspiaInfiltrada");
+    //    NombresNavesInformante.Add("NaveEnemigaEspiaTactica");
+    //    NombresNavesApoyo.Add("NaveEnemigaNodriza");
+    //    NombresNavesApoyo.Add("NaveEnemigaNodrizaBlindada");
+    //    NombresNavesApoyo.Add("NaveEnemigaNodrizaTactico");
+    //    NombresNavesApoyo.Add("NaveEnemigaReabastecimiento");
+    //    NombresNavesApoyo.Add("NaveReabastecimientoEnergia");
+    //    NombresNavesApoyo.Add("NaveReabastecimientoMunicion");
+    //    
+    //    
 
-        for (int i = 0; i < 6; i++) {
-            FVector PosicionNaveActualX = FVector(ubicacionInicioNavesEnemigas.X, ubicacionInicioNavesEnemigas.Y + i * 600.0f, ubicacionInicioNavesEnemigas.Z);
+    //    //Creacion de las naves enemigas
 
-            for (int j = 0; j < 3; j++) {
-                FVector PosicionNaveActualY = FVector(PosicionNaveActualX.X - j * 528.5f, PosicionNaveActualX.Y, PosicionNaveActualX.Z);
-                
-                // Selecciona un tipo de nave aleatorio
-                int32 CategoriaNave = 0;//FMath::RandRange(0, CategoriasNaves.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
-                if (CategoriaNave == 0)
-                {
-                    int32 RandomIndex = FMath::RandRange(0, NombresNavesAtaque.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
-                    // Spawnea la nave aleatoria
-                    ANaveEnemiga* NaveEnemigaAtaque = SolicitudDeNavesAtaque->OrdenarNaveEnemiga(NombresNavesAtaque[RandomIndex], PosicionNaveActualY, rotacionNave);
-                    if (j == 2) NaveEnemigaAtaque->bShoulDispara = true;
-                }
-                else if (CategoriaNave == 1)
-                {
-					int32 RandomIndex = FMath::RandRange(0, NombresNavesApoyo.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
-					// Spawnea la nave aleatoria
-					ANaveEnemiga* NaveEnemigaApoyo = SolicitudDeNavesApoyo->OrdenarNaveEnemiga(NombresNavesApoyo[RandomIndex], PosicionNaveActualY, rotacionNave);
-                    if (j == 2) NaveEnemigaApoyo->bShoulDispara = true;
-				}
-                else if (CategoriaNave == 2)
-                {
-					int32 RandomIndex = FMath::RandRange(0, NombresNavesInformante.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
-					// Spawnea la nave aleatoria
-					ANaveEnemiga* NaveEnemigaInformante = SolicitudDeNavesInformante->OrdenarNaveEnemiga(NombresNavesInformante[RandomIndex], PosicionNaveActualY, rotacionNave);
-                    if (j == 2) NaveEnemigaInformante->bShoulDispara = true;
-				}
+    //    for (int i = 0; i < 6; i++) {
+    //        FVector PosicionNaveActualX = FVector(ubicacionInicioNavesEnemigas.X, ubicacionInicioNavesEnemigas.Y + i * 600.0f, ubicacionInicioNavesEnemigas.Z);
 
-            }
-        }
+    //        for (int j = 0; j < 3; j++) {
+    //            FVector PosicionNaveActualY = FVector(PosicionNaveActualX.X - j * 528.5f, PosicionNaveActualX.Y, PosicionNaveActualX.Z);
+    //            
+    //            // Selecciona un tipo de nave aleatorio
+    //            int32 CategoriaNave = 0;//FMath::RandRange(0, CategoriasNaves.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+    //            if (CategoriaNave == 0)
+    //            {
+    //                int32 RandomIndex = FMath::RandRange(0, NombresNavesAtaque.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+    //                // Spawnea la nave aleatoria
+    //                ANaveEnemiga* NaveEnemigaAtaque = SolicitudDeNavesAtaque->OrdenarNaveEnemiga(NombresNavesAtaque[RandomIndex], PosicionNaveActualY, rotacionNave);
+    //                if (j == 2) NaveEnemigaAtaque->bShoulDispara = true;
+    //            }
+    //            else if (CategoriaNave == 1)
+    //            {
+				//	int32 RandomIndex = FMath::RandRange(0, NombresNavesApoyo.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+				//	// Spawnea la nave aleatoria
+				//	ANaveEnemiga* NaveEnemigaApoyo = SolicitudDeNavesApoyo->OrdenarNaveEnemiga(NombresNavesApoyo[RandomIndex], PosicionNaveActualY, rotacionNave);
+    //                if (j == 2) NaveEnemigaApoyo->bShoulDispara = true;
+				//}
+    //            else if (CategoriaNave == 2)
+    //            {
+				//	int32 RandomIndex = FMath::RandRange(0, NombresNavesInformante.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+				//	// Spawnea la nave aleatoria
+				//	ANaveEnemiga* NaveEnemigaInformante = SolicitudDeNavesInformante->OrdenarNaveEnemiga(NombresNavesInformante[RandomIndex], PosicionNaveActualY, rotacionNave);
+    //                if (j == 2) NaveEnemigaInformante->bShoulDispara = true;
+				//}
+
+    //        }
+    //    }
         
 
         // Tipos de naves disponibles
@@ -162,7 +169,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
         //        TSubclassOf<ANaveEnemiga> NaveClass = TiposDeNaves[RandomIndex]; //Selecciona una subclase de ANaveEnemiga aleatoria
 
         //        // Spawnea la nave aleatoria
-        //        ANaveEnemiga* NaveEnemigaTemporal = World->SpawnActor<ANaveEnemiga>(NaveClass, PosicionNaveActualY, rotacionNave);//Spawnea la nave enemiga en una posicion y rotacion especifica
+        //       ANaveEnemiga* NaveEnemigaTemporal = World->SpawnActor<ANaveEnemiga>(NaveClass, PosicionNaveActualY, rotacionNave);//Spawnea la nave enemiga en una posicion y rotacion especifica
 
         //        if (NaveEnemigaTemporal != nullptr) {
         //            NaveEnemigas.Add(GetUniqueNameForNave(), NaveEnemigaTemporal);// Agregar nave al TMap

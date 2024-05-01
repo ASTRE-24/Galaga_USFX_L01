@@ -39,5 +39,6 @@ public:
 	void ArmaDisparoTriple(AActor* NaveDisparo);
 	void ArmaDisparoTripleAbanico(AActor* NaveDisparo);
 	void ShotTimerExpired();
+	void SeguirNave(FVector posicion, FRotator rotacion);
 
 };

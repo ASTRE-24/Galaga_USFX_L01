@@ -25,3 +25,21 @@ void ADirectorNaveNodriza::Tick(float DeltaTime)
 
 }
 
+void ADirectorNaveNodriza::construirNaveNodriza()
+{
+	constructorNaveFase1->construirMovimientoNaveNodriza();
+	constructorNaveFase1->construirMovimientoNavesEnemigas();
+	constructorNaveFase1->construirTipoDeArma();
+	constructorNaveFase1->construirTiposNavesEnemigas();
+}
+
+void ADirectorNaveNodriza::enviarConstructor(AActor* constructor)
+{
+	constructorNaveFase1 = Cast<IInterfaceBuilderNaveNodriza>(constructor);
+}
+
+ANaveEnemigaNodriza* ADirectorNaveNodriza::obtenerNave()
+{
+	return constructorNaveFase1->getNaveNodriza();
+}
+

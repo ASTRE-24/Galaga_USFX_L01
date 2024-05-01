@@ -51,22 +51,7 @@ void AArmas::BeginPlay()
 void AArmas::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-    if (TipoDisparo == 1)
-    {
-		ArmasDisparoNormal(this);
-	}
-    else if (TipoDisparo == 2)
-    {
-		ArmaDisparoDoble(this);
-	}
-    else if (TipoDisparo == 0)
-    {
-		ArmaDisparoTriple(this);
-	}
-    else if (TipoDisparo == 4)
-    {
-		ArmaDisparoTripleAbanico(this);
-	}
+    
 }
 
 
@@ -244,5 +229,11 @@ void AArmas::ArmaDisparoTripleAbanico(AActor* NaveDisparo)
 void AArmas::ShotTimerExpired()
 {
 	bCanFire = true;
+}
+
+void AArmas::SeguirNave(FVector posicion, FRotator rotacion)
+{
+	SetActorLocation(posicion);
+	SetActorRotation(rotacion);
 }
 

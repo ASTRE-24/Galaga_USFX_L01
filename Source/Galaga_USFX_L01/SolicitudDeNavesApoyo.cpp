@@ -12,44 +12,44 @@
 #include "NaveEnemigaNodrizaBlindada.h"
 #include "NaveEnemigaNodrizaTactico.h"
 
-ANaveEnemiga* ASolicitudDeNavesApoyo::CrearNaveEnemiga(FString NombreNave, FVector Posicion, FRotator Rotacion)
+ANaveEnemiga* ASolicitudDeNavesApoyo::CrearNaveEnemiga(FString NombreNave)
 {
 	//ANaveEnemiga* NaveEnemiga = nullptr;
 	if (NombreNave == "NaveEnemigaTransporte")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaTransporte>(ANaveEnemigaTransporte::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaTransporte>(ANaveEnemigaTransporte::StaticClass());
 	}
 	else if (NombreNave == "NaveEnemigaTransporteFurtivo")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaTransporteFurtivo>(ANaveEnemigaTransporteFurtivo::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaTransporteFurtivo>(ANaveEnemigaTransporteFurtivo::StaticClass());
 	}
 	else if (NombreNave == "NaveEnemigaTransporteLogistico")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaTransporteLogistico>(ANaveEnemigaTransporteLogistico::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaTransporteLogistico>(ANaveEnemigaTransporteLogistico::StaticClass());
 	}
 	else if (NombreNave == "NaveEnemigaReabastecimiento")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaReabastecimiento>(ANaveEnemigaReabastecimiento::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaReabastecimiento>(ANaveEnemigaReabastecimiento::StaticClass());
 	}
 	else if (NombreNave == "NaveReabastecimientoEnergia")
 	{
-		return GetWorld()->SpawnActor<ANaveReabastecimientoEnergia>(ANaveReabastecimientoEnergia::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveReabastecimientoEnergia>(ANaveReabastecimientoEnergia::StaticClass());
 	}
 	else if (NombreNave == "NaveReabastecimientoMunicion")
 	{
-		return GetWorld()->SpawnActor<ANaveReabastecimientoMunicion>(ANaveReabastecimientoMunicion::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveReabastecimientoMunicion>(ANaveReabastecimientoMunicion::StaticClass());
 	}
 	else if (NombreNave == "NaveEnemigaNodriza")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaNodriza>(ANaveEnemigaNodriza::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaNodriza>(ANaveEnemigaNodriza::StaticClass());
 	}
 	else if (NombreNave == "NaveEnemigaNodrizaBlindada")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaNodrizaBlindada>(ANaveEnemigaNodrizaBlindada::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaNodrizaBlindada>(ANaveEnemigaNodrizaBlindada::StaticClass());
 	}
 	else if (NombreNave == "NaveEnemigaNodrizaTactico")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaNodrizaTactico>(ANaveEnemigaNodrizaTactico::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaNodrizaTactico>(ANaveEnemigaNodrizaTactico::StaticClass());
 	}
 	else return nullptr;
 }

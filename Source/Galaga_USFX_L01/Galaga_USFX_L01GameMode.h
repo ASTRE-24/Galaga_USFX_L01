@@ -21,6 +21,9 @@ public:
 	class ABuilderConcretoPNReparar* ReparacionPorta;
 	class ADirectorPortaNave* IngenieroPortaNave;
 
+	class ADirectorNaveNodriza* DirectorNodriza;
+	class ABuilderNaveNodrizaFase1* BuilderNodrizaFase1;
+
 public:
 	//ANaveEnemiga* NaveEnemiga01;
 	//ANaveEnemigaTransporte* NaveEnemigaTransporte01;
@@ -39,11 +42,10 @@ public:
 	TArray<ANaveEnemigaTransporte*> TANavesEnemigasTransporte;
 	TMap<FString, ANaveEnemiga*> NaveEnemigas; // Aquí se declara el TMap para almacenar las naves enemigas
 	TMap<int, FVector> UbicacionInventario; // Aquí se declara el TMap para almacenar las ubicaciones de los inventarios
-	//TMap<int32, FVector> PosicionesNavesEnemigas; // Aquí se declara el TMap para almacenar las posiciones de las naves enemigas
 	TArray<FString> NombresNavesAtaque; // Aquí se declara el TArray para almacenar los nombres de las naves enemigas de ataque
 	TArray<FString> NombresNavesApoyo; // Aquí se declara el TArray para almacenar los nombres de las naves enemigas de apoyo
 	TArray<FString> NombresNavesInformante; // Aquí se declara el TArray para almacenar los nombres de las naves enemigas de informante
-	TArray<TArray<FString>> CategoriasNaves; // Aquí se declara el TArray para almacenar las categorías de las naves enemigas
+	//TMap<int, FVector> PosicionesNavesEnemigas; // Aquí se declara el TMap para almacenar las posiciones de las naves enemigas
 
 private:
 	

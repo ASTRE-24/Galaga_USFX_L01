@@ -2,6 +2,7 @@
 
 
 #include "BuilderNaveNodrizaFase1.h"
+#include "TimerManager.h"
 
 // Sets default values
 ABuilderNaveNodrizaFase1::ABuilderNaveNodrizaFase1()
@@ -15,7 +16,7 @@ ABuilderNaveNodrizaFase1::ABuilderNaveNodrizaFase1()
 void ABuilderNaveNodrizaFase1::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	naveNodriza = GetWorld()->SpawnActor<ANaveEnemigaNodriza>(ANaveEnemigaNodriza::StaticClass(), FVector(-900,1250,215), FRotator (0,0,0));
 }
 
 // Called every frame
@@ -27,7 +28,7 @@ void ABuilderNaveNodrizaFase1::Tick(float DeltaTime)
 
 void ABuilderNaveNodrizaFase1::construirMovimientoNaveNodriza()
 {
-	//naveNodriza->movimientoNaveNodriza();
+	naveNodriza->movimientoNaveNodriza();
 }
 
 void ABuilderNaveNodrizaFase1::construirMovimientoNavesEnemigas()
@@ -45,10 +46,6 @@ void ABuilderNaveNodrizaFase1::construirTiposNavesEnemigas()
 	naveNodriza->tiposNavesEnemigas();
 }
 
-void ABuilderNaveNodrizaFase1::construirRetiroNaveNodriza()
-{
-	//naveNodriza->retiroNaveNodriza();
-}
 
 class ANaveEnemigaNodriza* ABuilderNaveNodrizaFase1::getNaveNodriza()
 {

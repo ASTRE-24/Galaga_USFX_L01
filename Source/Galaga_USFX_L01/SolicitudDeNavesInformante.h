@@ -16,5 +16,5 @@ class GALAGA_USFX_L01_API ASolicitudDeNavesInformante : public ASolicitudDeNaves
 public:
 
 	//Prepara la nave enemiga de informante
-	virtual ANaveEnemiga* CrearNaveEnemiga(FString NombreNave, FVector Posicion, FRotator Rotacion) override;
+	virtual ANaveEnemiga* CrearNaveEnemiga(FString NombreNave) override;
 };

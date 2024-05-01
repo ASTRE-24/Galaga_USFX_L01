@@ -2,12 +2,12 @@ D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\SolicitudDeNavesAtaque.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\SolicitudDeNaves.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemiga.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\ActorComponentDisparo.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ActorComponentDisparo.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemiga.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\SolicitudDeNaves.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\SolicitudDeNavesAtaque.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemigaCaza.h
-D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\ActorComponentDisparo.h
-D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ActorComponentDisparo.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaCaza.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemigaCazaSigilosa.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaCazaSigilosa.generated.h

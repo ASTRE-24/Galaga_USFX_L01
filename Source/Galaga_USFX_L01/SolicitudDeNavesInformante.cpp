@@ -6,20 +6,20 @@
 #include "NaveEnemigaEspiaInfiltrada.h"
 #include "NaveEnemigaEspiaTactica.h"
 
-ANaveEnemiga* ASolicitudDeNavesInformante::CrearNaveEnemiga(FString NombreNave, FVector Posicion, FRotator Rotacion)
+ANaveEnemiga* ASolicitudDeNavesInformante::CrearNaveEnemiga(FString NombreNave)
 {
 	//ANaveEnemiga* NaveEnemiga = nullptr;
 	if (NombreNave == "NaveEnemigaEspia")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaEspia>(ANaveEnemigaEspia::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaEspia>(ANaveEnemigaEspia::StaticClass());
 	}
 	else if (NombreNave == "NaveEnemigaEspiaInfiltrada")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaEspiaInfiltrada>(ANaveEnemigaEspiaInfiltrada::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaEspiaInfiltrada>(ANaveEnemigaEspiaInfiltrada::StaticClass());
 	}
 	else if (NombreNave == "NaveEnemigaEspiaTactica")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaEspiaTactica>(ANaveEnemigaEspiaTactica::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaEspiaTactica>(ANaveEnemigaEspiaTactica::StaticClass());
 	}
 	else return nullptr;
 }

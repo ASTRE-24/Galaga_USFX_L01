@@ -26,6 +26,5 @@ public:
 	virtual void construirMovimientoNavesEnemigas() = 0;
 	virtual void construirTipoDeArma() = 0;
 	virtual void construirTiposNavesEnemigas() = 0;
-	virtual void construirRetiroNaveNodriza() = 0;
 	virtual class ANaveEnemigaNodriza* getNaveNodriza() = 0;
 };

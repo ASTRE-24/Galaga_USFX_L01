@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "InterfaceBuilderNaveNodriza.h"
 #include "DirectorNaveNodriza.generated.h"
 
 UCLASS()
@@ -14,6 +15,7 @@ class GALAGA_USFX_L01_API ADirectorNaveNodriza : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ADirectorNaveNodriza();
+	IInterfaceBuilderNaveNodriza* constructorNaveFase1;
 
 protected:
 	// Called when the game starts or when spawned
@@ -22,5 +24,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	void construirNaveNodriza();
+	void enviarConstructor(AActor* constructor);
+	class ANaveEnemigaNodriza* obtenerNave();
 };

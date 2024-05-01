@@ -25,10 +25,10 @@ void ASolicitudDeNaves::Tick(float DeltaTime)
 
 }
 
-ANaveEnemiga* ASolicitudDeNaves::OrdenarNaveEnemiga(FString Categoria, FVector Pocision, FRotator Rotacion)
+ANaveEnemiga* ASolicitudDeNaves::OrdenarNaveEnemiga(FString Categoria)
 {
 	//crear una nave enemiga
-	ANaveEnemiga* NaveEnemiga = CrearNaveEnemiga(Categoria, Pocision, Rotacion);
+	ANaveEnemiga* NaveEnemiga = CrearNaveEnemiga(Categoria);
 	return NaveEnemiga;
 }
 

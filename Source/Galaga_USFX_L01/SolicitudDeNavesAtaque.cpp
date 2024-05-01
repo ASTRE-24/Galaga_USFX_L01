@@ -6,20 +6,20 @@
 #include "NaveEnemigaCazaSigilosa.h"
 #include "NaveEnemigaCazaVeloz.h"
 
-ANaveEnemiga* ASolicitudDeNavesAtaque::CrearNaveEnemiga(FString NombreNave, FVector Posicion, FRotator Rotacion)
+ANaveEnemiga* ASolicitudDeNavesAtaque::CrearNaveEnemiga(FString NombreNave)
 {
 	//ANaveEnemiga* NaveEnemiga = nullptr;
 	if (NombreNave == "NaveEnemigaCaza")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaCaza>(ANaveEnemigaCaza::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaCaza>(ANaveEnemigaCaza::StaticClass());
 	}
 	else if (NombreNave == "NaveEnemigaCazaSigilosa")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaCazaSigilosa>(ANaveEnemigaCazaSigilosa::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaCazaSigilosa>(ANaveEnemigaCazaSigilosa::StaticClass());
 	}
 	else if (NombreNave == "NaveEnemigaCazaVeloz")
 	{
-		return GetWorld()->SpawnActor<ANaveEnemigaCazaVeloz>(ANaveEnemigaCazaVeloz::StaticClass(), Posicion, Rotacion);
+		return GetWorld()->SpawnActor<ANaveEnemigaCazaVeloz>(ANaveEnemigaCazaVeloz::StaticClass());
 	}
 	else return nullptr;
 }

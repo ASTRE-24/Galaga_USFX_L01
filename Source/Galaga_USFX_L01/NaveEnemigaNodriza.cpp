@@ -2,13 +2,19 @@
 
 
 #include "NaveEnemigaNodriza.h"
+#include "TimerManager.h"
+#include "SolicitudDeNavesApoyo.h"
+#include "SolicitudDeNavesAtaque.h"
+#include "SolicitudDeNavesInformante.h"
 
 ANaveEnemigaNodriza::ANaveEnemigaNodriza()
 {
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Cube.Shape_Cube'"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
     Timer = 0.0f; //Inicializa el timer en 0 
-    TiempoTranscurrido = 0.0f; 
+    TiempoTranscurrido = 0.0f;
+    indicePosicion = 0;
+	indiceNave = 0;
     SetVelocidad(600);
 }
 
@@ -65,47 +71,224 @@ void ANaveEnemigaNodriza::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
     //Mover(DeltaTime);
-    movimientoNaveNodriza(DeltaTime);
-    
+	FVector Posicion = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 100);
+    //movimientoNaveNodriza(DeltaTime);
+	arma->ArmaDisparoDoble(this);
+	arma->SeguirNave(Posicion, GetActorRotation());
+
 }
 
+void ANaveEnemigaNodriza::BeginPlay()
+{
+	Super::BeginPlay();
+    FVector ubicacionInicioNavesEnemigas = FVector(1850.0f, -1540.7f, 216.0f);
+    FRotator rotacionNave = FRotator(0.0f, 180.0f, 0.0f);
+    for (int i = 0; i < 6; i++) {
+        FVector PosicionNaveActualX = FVector(ubicacionInicioNavesEnemigas.X, ubicacionInicioNavesEnemigas.Y + i * 600.0f, ubicacionInicioNavesEnemigas.Z);
 
+        for (int j = 0; j < 3; j++) {
+            FVector PosicionNaveActualY = FVector(PosicionNaveActualX.X - j * 528.5f, PosicionNaveActualX.Y, PosicionNaveActualX.Z);
+             PosicionesNaves.Add( PosicionNaveActualY);
+        }
+    }
+	GetWorld()->GetTimerManager().SetTimer(TimerNaves, this, &ANaveEnemigaNodriza::retiroNaveNodriza, 10.0f, false);
+    GetWorld()->GetTimerManager().SetTimer(TimerSpawnNaves, this, &ANaveEnemigaNodriza::repartirNaves, 2.0f, false);
+
+}
 
 void ANaveEnemigaNodriza::Disparar()
 {
 
 }
 
-void ANaveEnemigaNodriza::movimientoNaveNodriza(float DeltaTime)
+void ANaveEnemigaNodriza::movimientoNaveNodriza()
 {
+    const float ReturnSpeed = GetVelocidad(); // Velocidad de retorno ajustable según sea necesario
+    const float DeltaTime = GetWorld()->GetDeltaSeconds();
     if (GetActorLocation().Y >= 0.f && GetActorLocation().X<=1500)
     {
-        float newY = GetActorLocation().Y - GetVelocidad() * DeltaTime;
-        SetActorLocation(FVector(GetActorLocation().X, newY, GetActorLocation().Z));return;
+        const FVector ReturnMovement = FVector(0, -1, 0) * ReturnSpeed * DeltaTime;
+        SetActorLocation(GetActorLocation() + ReturnMovement);
+        GetWorldTimerManager().SetTimerForNextTick([this]() {movimientoNaveNodriza(); });
     }
     else if (GetActorLocation().Y <= 0.f && GetActorLocation().X <= 1500.f)
     {
-        float newX = GetActorLocation().X + GetVelocidad() * DeltaTime;
-        SetActorLocation(FVector(newX, GetActorLocation().Y, GetActorLocation().Z));return;
+        const FVector ReturnMovement = FVector(1, 0, 0) * ReturnSpeed * DeltaTime;
+        SetActorLocation(GetActorLocation() + ReturnMovement);
+        GetWorldTimerManager().SetTimerForNextTick([this]() {movimientoNaveNodriza(); });
+        
     }
-    else if(GetActorLocation().X >= 1500) retiroNaveNodriza(DeltaTime);
+    else if (GetActorLocation().X >= 1500)
+    {
+		
+		
+    }
 }
 void ANaveEnemigaNodriza::movimientoNavesEnemigas()
 {
+    //// Calcula la dirección desde la posición actual hasta la posición inicial
+    //FVector ReturnDirection = InicialPosicion - GetActorLocation();
+    //ReturnDirection.Normalize();
 
+    //// Calcula la rotación necesaria para que la nave apunte hacia la posición inicial
+    //FRotator TargetRotation = ReturnDirection.Rotation();
+
+    //// Interpola gradualmente la rotación actual de la nave hacia la rotación objetivo
+    //const float RotationInterpSpeed = 5.0f; // Velocidad de interpolación de rotación ajustable según sea necesario
+    //FRotator NewRotation = FMath::RInterpTo(GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), RotationInterpSpeed);
+
+    //// Aplica la nueva rotación a la nave
+    //SetActorRotation(NewRotation);
+
+    //// Mueve la nave en la dirección de regreso a la posición inicial
+    //const float ReturnSpeed = 1000.0f; // Velocidad de retorno ajustable según sea necesario
+    //const float DeltaTime = GetWorld()->GetDeltaSeconds();
+    //const FVector ReturnMovement = ReturnDirection * ReturnSpeed * DeltaTime;
+
+    //// Comprueba si la nave está lo suficientemente cerca de la posición inicial
+    //const float ReturnDistanceThreshold = 10.0f; // Umbral de distancia ajustable según sea necesario
+    //if (FVector::DistSquared(GetActorLocation(), InicialPosicion) <= FMath::Square(ReturnDistanceThreshold))
+    //{
+    //    // La nave está lo suficientemente cerca de la posición inicial, así que establece su posición y rotación exactamente en la posición inicial
+    //    SetActorLocationAndRotation(InicialPosicion, FRotator(0, 0, 0));
+    //}
+    //else
+    //{
+    //    // La nave todavía no está lo suficientemente cerca de la posición inicial, así que sigue moviéndola hacia allí
+    //    SetActorLocation(GetActorLocation() + ReturnMovement);
+
+    //    // Llama a esta función nuevamente en el siguiente fotograma
+    //    GetWorldTimerManager().SetTimerForNextTick([this]() { movimientoNavesEnemigas(); });
+    //}
 }
 void ANaveEnemigaNodriza::tipoDeArma()
 {
-    arma = GetWorld()->SpawnActor<AArmas>(AArmas::StaticClass(), FVector(0, 0, 215), FRotator(0, 0, 0));
+    arma = GetWorld()->SpawnActor<AArmas>(AArmas::StaticClass(), FVector(GetActorLocation().X, GetActorLocation().Y,
+        GetActorLocation().Z ), FRotator(0, 0, 0));
 
 }
 void ANaveEnemigaNodriza::tiposNavesEnemigas()
 {
+    FVector ubicacionInicioNavesEnemigas = FVector(1850.0f, -1540.7f, 216.0f);
+    FRotator rotacionNave = FRotator(0.0f, 180.0f, 0.0f);
+    //Creacion de las solicitudes de naves
+    ASolicitudDeNaves* SolicitudDeNavesAtaque = GetWorld()->SpawnActor<ASolicitudDeNavesAtaque>(ASolicitudDeNavesAtaque::StaticClass());
+    ASolicitudDeNaves* SolicitudDeNavesApoyo = GetWorld()->SpawnActor<ASolicitudDeNavesApoyo>(ASolicitudDeNavesApoyo::StaticClass());
+    ASolicitudDeNaves* SolicitudDeNavesInformante = GetWorld()->SpawnActor<ASolicitudDeNavesInformante>(ASolicitudDeNavesInformante::StaticClass());
+    //Aniadir los nombres al TArray
+    NombresNavesAtaque.Add("NaveEnemigaCaza");
+    NombresNavesAtaque.Add("NaveEnemigaCazaSigilosa");
+    NombresNavesAtaque.Add("NaveEnemigaCazaVeloz");
+    NombresNavesApoyo.Add("NaveEnemigaTransporte");
+    NombresNavesApoyo.Add("NaveEnemigaTransporteFurtivo");
+    NombresNavesApoyo.Add("NaveEnemigaTransporteLogistico");
+    NombresNavesInformante.Add("NaveEnemigaEspia");
+    NombresNavesInformante.Add("NaveEnemigaEspiaInfiltrada");
+    NombresNavesInformante.Add("NaveEnemigaEspiaTactica");
+    NombresNavesApoyo.Add("NaveEnemigaReabastecimiento");
+    NombresNavesApoyo.Add("NaveReabastecimientoEnergia");
+    NombresNavesApoyo.Add("NaveReabastecimientoMunicion");
+
+
+    UWorld* const World = GetWorld();
+    if (World != nullptr)
+    {
+        //Creacion de las naves enemigas
+
+        for (int i = 0; i < 18; i++) {
+            // Selecciona un tipo de nave aleatorio
+            int32 CategoriaNave = 0;//FMath::RandRange(0, CategoriasNaves.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+            if (CategoriaNave == 0)
+            {
+                int32 RandomIndex = FMath::RandRange(0, NombresNavesAtaque.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+                // Spawnea la nave aleatoria
+                ANaveEnemiga* NaveEnemigaAtaque = SolicitudDeNavesAtaque->OrdenarNaveEnemiga(NombresNavesAtaque[RandomIndex]);
+                
+                NavesEnemigas.Add( NaveEnemigaAtaque);
+                
+            }
+            else if (CategoriaNave == 1)
+            {
+                int32 RandomIndex = FMath::RandRange(0, NombresNavesApoyo.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+                // Spawnea la nave aleatoria
+                ANaveEnemiga* NaveEnemigaApoyo = SolicitudDeNavesApoyo->OrdenarNaveEnemiga(NombresNavesApoyo[RandomIndex]);
+               
+            }
+            else if (CategoriaNave == 2)
+            {
+                int32 RandomIndex = FMath::RandRange(0, NombresNavesInformante.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
+                // Spawnea la nave aleatoria
+                ANaveEnemiga* NaveEnemigaInformante = SolicitudDeNavesInformante->OrdenarNaveEnemiga(NombresNavesInformante[RandomIndex]);
+                
+            }  
+        }
+    }
+}
+
+void ANaveEnemigaNodriza::retiroNaveNodriza()
+{
+    const float ReturnSpeed = GetVelocidad(); // Velocidad de retorno ajustable según sea necesario
+    const float DeltaTime = GetWorld()->GetDeltaSeconds();
+    const FVector ReturnMovement = FVector(0, 1, 0) * ReturnSpeed * DeltaTime;
+    if (GetActorLocation().Y >= 1000)
+    {
+		Destroy();
+		arma->Destroy();
+    }
+    else 
+    {
+        SetActorLocation(GetActorLocation() + ReturnMovement);
+
+        // Llama a esta función nuevamente en el siguiente fotograma
+        GetWorldTimerManager().SetTimerForNextTick([this]() {retiroNaveNodriza(); });
+    }
 
 }
-void ANaveEnemigaNodriza::retiroNaveNodriza(float DeltaTime)
+
+void ANaveEnemigaNodriza::repartirNaves()
 {
-    float newY = GetActorLocation().Y + GetVelocidad() * DeltaTime;
-    SetActorLocation(FVector(GetActorLocation().X, newY, GetActorLocation().Z));
-    if (GetActorLocation().Y >= 1000) Destroy();
+	for (int i = 0; i < NavesEnemigas.Num(); i++)
+    {
+		NavesEnemigas[i]->SetActorLocation(GetActorLocation());
+		posicionesIniciales(i);
+    }
+	//GetWorld()->GetTimerManager().SetTimer(TimerInicial, this, &ANaveEnemigaNodriza::posicionesIniciales, 5.0f, false);
+}
+
+void ANaveEnemigaNodriza::posicionesIniciales(int g)
+{
+    int parametroG = g;
+    FVector ReturnDirection = PosicionesNaves[g] - NavesEnemigas[g]->GetActorLocation();
+    ReturnDirection.Normalize();
+
+    // Calcula la rotación necesaria para que la nave apunte hacia la posición inicial
+    FRotator TargetRotation = ReturnDirection.Rotation();
+
+    // Interpola gradualmente la rotación actual de la nave hacia la rotación objetivo
+    const float RotationInterpSpeed = 5.0f; // Velocidad de interpolación de rotación ajustable según sea necesario
+    FRotator NewRotation = FMath::RInterpTo(NavesEnemigas[g]->GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), RotationInterpSpeed);
+
+    // Aplica la nueva rotación a la nave
+    SetActorRotation(NewRotation);
+
+    // Mueve la nave en la dirección de regreso a la posición inicial
+    const float ReturnSpeed2 = 1000.0f; // Velocidad de retorno ajustable según sea necesario
+    const float DeltaTime2 = GetWorld()->GetDeltaSeconds();
+    const FVector ReturnMovement2 = ReturnDirection * ReturnSpeed2 * DeltaTime2;
+
+    // Comprueba si la nave está lo suficientemente cerca de la posición inicial
+    const float ReturnDistanceThreshold = 10.0f; // Umbral de distancia ajustable según sea necesario
+    if (FVector::DistSquared(NavesEnemigas[g]->GetActorLocation(), PosicionesNaves[g]) <= FMath::Square(ReturnDistanceThreshold))
+    {
+        // La nave está lo suficientemente cerca de la posición inicial, así que establece su posición y rotación exactamente en la posición inicial
+        NavesEnemigas[g]->SetActorLocationAndRotation(PosicionesNaves[g], FRotator(0, 0, 0));
+    }
+    else
+    {
+        // La nave todavía no está lo suficientemente cerca de la posición inicial, así que sigue moviéndola hacia allí
+        NavesEnemigas[g]->SetActorLocation(NavesEnemigas[g]->GetActorLocation() + ReturnMovement2);
+
+        // Llama a esta función nuevamente en el siguiente fotograma
+        GetWorldTimerManager().SetTimerForNextTick([=]() { posicionesIniciales(parametroG); });
+    }
 }

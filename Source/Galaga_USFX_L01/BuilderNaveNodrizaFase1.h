@@ -17,6 +17,7 @@ public:
 	// Sets default values for this actor's properties
 	ABuilderNaveNodrizaFase1();
 	ANaveEnemigaNodriza* naveNodriza;
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -29,6 +30,5 @@ public:
 	virtual void construirMovimientoNavesEnemigas() override;
 	virtual void construirTipoDeArma() override;
 	virtual void construirTiposNavesEnemigas() override;
-	virtual void construirRetiroNaveNodriza() override;
 	virtual class ANaveEnemigaNodriza* getNaveNodriza() override;
 };

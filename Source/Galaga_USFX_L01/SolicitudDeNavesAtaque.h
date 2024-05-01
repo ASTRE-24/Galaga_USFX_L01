@@ -15,6 +15,6 @@ class GALAGA_USFX_L01_API ASolicitudDeNavesAtaque : public ASolicitudDeNaves
 	GENERATED_BODY()
 public:
 		//Prepara la nave enemiga de ataque
-		virtual ANaveEnemiga* CrearNaveEnemiga(FString NombreNave, FVector Posicion, FRotator Rotacion) override;
+		virtual ANaveEnemiga* CrearNaveEnemiga(FString NombreNave) override;
 	
 };
