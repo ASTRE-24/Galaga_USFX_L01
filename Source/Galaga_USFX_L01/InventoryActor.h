@@ -29,5 +29,6 @@ protected:
 	// Componente de movimiento vertical
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movimiento")
 	UMovimientoVertical* MovementComponent;
+
 	
 };

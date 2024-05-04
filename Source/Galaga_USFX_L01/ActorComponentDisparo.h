@@ -17,8 +17,10 @@ public:
 	UActorComponentDisparo();
 
 	//Dispara un proyectil
-	void DispararProyectil();
-
+    void ArmasDisparoNormal();
+    void ArmaDisparoDoble();
+    void ArmaDisparoTriple();
+    void ArmaDisparoTripleAbanico();
     void StartFireTimer();
 
 protected:

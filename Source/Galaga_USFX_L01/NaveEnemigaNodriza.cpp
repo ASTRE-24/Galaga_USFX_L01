@@ -134,7 +134,7 @@ void ANaveEnemigaNodriza::movimientoNaveNodriza()
         {
             Timer += DeltaTime;
             const FVector ReturnMovement = FVector(1, 1, 0.7) * FVector(ReturnSpeed * DeltaTime, Amplitud * FMath::Sin(Frecuencia * Timer), 0.7);
-            SetActorLocation(GetActorLocation() + ReturnMovement);
+            SetActorLocationAndRotation(GetActorLocation() + ReturnMovement, FRotator(0, 0, 0));
             if (GetActorLocation().X >= 1500.0f)
             {
 
@@ -412,27 +412,27 @@ void ANaveEnemigaNodriza::posicionesIniciales(int g)
     FRotator NewRotation = FMath::RInterpTo(NavesEnemigas[g]->GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), RotationInterpSpeed);
 
     // Aplica la nueva rotación a la nave
-    SetActorRotation(NewRotation);
+    NavesEnemigas[g]->SetActorRotation(NewRotation);
 
     // Mueve la nave en la dirección de regreso a la posición inicial
-    const float ReturnSpeed2 = 1000.0f; // Velocidad de retorno ajustable según sea necesario
-    const float DeltaTime2 = GetWorld()->GetDeltaSeconds();
-    const FVector ReturnMovement2 = ReturnDirection * ReturnSpeed2 * DeltaTime2;
+    const float ReturnSpeed = 1000.0f; // Velocidad de retorno ajustable según sea necesario
+    const float DeltaTime = GetWorld()->GetDeltaSeconds();
+    const FVector ReturnMovement = ReturnDirection * ReturnSpeed * DeltaTime;
 
     // Comprueba si la nave está lo suficientemente cerca de la posición inicial
-    const float ReturnDistanceThreshold = 10.0f; // Umbral de distancia ajustable según sea necesario
+    const float ReturnDistanceThreshold = 50.0f; // Umbral de distancia ajustable según sea necesario
     if (FVector::DistSquared(NavesEnemigas[g]->GetActorLocation(), PosicionesNaves[g]) <= FMath::Square(ReturnDistanceThreshold))
     {
         // La nave está lo suficientemente cerca de la posición inicial, así que establece su posición y rotación exactamente en la posición inicial
         NavesEnemigas[g]->SetActorLocationAndRotation(PosicionesNaves[g], FRotator(0, 180, 0));
-		if (g >= 12 && g <= 17)
-		NavesEnemigas[g]->bShoulDispara = true;
+		// (g >= 12 && g <= 17)
+		//NavesEnemigas[g]->bShoulDispara = true;
 		//NavesEnemigas[g]->SetMoverse(true);
     }
     else
     {
         // La nave todavía no está lo suficientemente cerca de la posición inicial, así que sigue moviéndola hacia allí
-        NavesEnemigas[g]->SetActorLocation(NavesEnemigas[g]->GetActorLocation() + ReturnMovement2);
+        NavesEnemigas[g]->SetActorLocation(NavesEnemigas[g]->GetActorLocation() + ReturnMovement);
 
         // Llama a esta función nuevamente en el siguiente fotograma
         GetWorldTimerManager().SetTimerForNextTick([=]() { posicionesIniciales(parametroG); });

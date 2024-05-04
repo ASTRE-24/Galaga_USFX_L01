@@ -42,7 +42,7 @@ void UActorComponentDisparo::TickComponent(float DeltaTime, ELevelTick TickType,
 }
 
 // Dispara un proyectil
-void UActorComponentDisparo::DispararProyectil()
+void UActorComponentDisparo::ArmasDisparoNormal()
 {
     // Si es posible disparar
     if (bCanFire)
@@ -75,6 +75,139 @@ void UActorComponentDisparo::DispararProyectil()
     }
 }
 
+void UActorComponentDisparo::ArmaDisparoDoble()
+{
+	// Si es posible disparar
+	if (bCanFire)
+	{
+		// Obtiene la rotación y la ubicación del propietario del componente
+		FRotator FireRotation = GetOwner()->GetActorRotation() + FRotator(0.0f, 0.0f, 0.0f);
+		FVector SpawnLocation = GetOwner()->GetActorLocation() + FireRotation.RotateVector(GunOffset);
+
+		UWorld* const World = GetWorld();
+		if (World)
+		{
+			// Calcula la posición de spawn para el primer proyectil (a la izquierda de la nave)
+			const FVector SpawnLocationLeft = SpawnLocation - FireRotation.RotateVector(FVector(0.f, 60.f, 0.f));
+
+			// Spawnea el primer proyectil
+			AGalaga_USFX_L01Projectile* Proyectil1 = World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationLeft, FireRotation);
+			if (Proyectil1)
+			{
+				Proyectil1->SetOriginActor(GetOwner());
+			}
+			// Calcula la posición de spawn para el segundo proyectil (a la derecha de la nave)
+			const FVector SpawnLocationRight = SpawnLocation + FireRotation.RotateVector(FVector(0.f, 60.f, 0.f));
+
+			// Spawnea el segundo proyectil
+			AGalaga_USFX_L01Projectile* Proyectil2 = World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationRight, FireRotation);
+			if (Proyectil2)
+			{
+				Proyectil2->SetOriginActor(GetOwner());
+			}
+			bCanFire = false;
+			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &UActorComponentDisparo::ShotTimerExpired, FireRate);
+
+			// Reproducir el sonido de disparo
+			if (FireSound)
+			{
+				UGameplayStatics::PlaySoundAtLocation(GetWorld(), FireSound, GetOwner()->GetActorLocation());
+			}
+		}
+	}
+}
+
+void UActorComponentDisparo::ArmaDisparoTriple()
+{
+	// Si es posible disparar
+	if (bCanFire)
+	{
+		// Obtiene la rotación y la ubicación del propietario del componente
+		FRotator FireRotation = GetOwner()->GetActorRotation() + FRotator(0.0f, 0.0f, 0.0f);
+		FVector SpawnLocation = GetOwner()->GetActorLocation() + FireRotation.RotateVector(GunOffset);
+
+		UWorld* const World = GetWorld();
+		if (World)
+		{
+			// Calcula la posición de spawn para el primer proyectil (a la izquierda de la nave)
+			const FVector SpawnLocationLeft = SpawnLocation - FireRotation.RotateVector(FVector(0.f, 60.f, 0.f));
+
+			// Spawnea el primer proyectil
+			AGalaga_USFX_L01Projectile* Proyectil1 = World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationLeft, FireRotation);
+			if (Proyectil1)
+			{
+				Proyectil1->SetOriginActor(GetOwner());
+			}
+			//Calcula la posición de spawn para el segundo proyectil (en el centro de la nave)
+			const FVector SpawnLocationCenter = SpawnLocation + FireRotation.RotateVector(FVector(0.f, 0.f, 0.f));
+
+			// Spawnea el segundo proyectil
+			AGalaga_USFX_L01Projectile* Proyectil2 = World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationCenter, FireRotation);
+			if (Proyectil2)
+			{
+				Proyectil2->SetOriginActor(GetOwner());
+			}
+			// Calcula la posición de spawn para el segundo proyectil (a la derecha de la nave)
+			const FVector SpawnLocationRight = SpawnLocation + FireRotation.RotateVector(FVector(0.f, 60.f, 0.f));
+
+			// Spawnea el segundo proyectil
+			AGalaga_USFX_L01Projectile* Proyectil3 = World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationRight, FireRotation);
+			if (Proyectil3)
+			{
+				Proyectil3->SetOriginActor(GetOwner());
+			}
+			bCanFire = false;
+			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &UActorComponentDisparo::ShotTimerExpired, FireRate);
+
+			// Reproducir el sonido de disparo
+			if (FireSound)
+			{
+				UGameplayStatics::PlaySoundAtLocation(GetWorld(), FireSound, GetOwner()->GetActorLocation());
+			}
+		}
+	}
+}
+
+void UActorComponentDisparo::ArmaDisparoTripleAbanico()
+{
+	// Si es posible disparar
+	if (bCanFire)
+	{
+		// Obtiene la rotación y la ubicación del propietario del componente
+		FRotator FireRotation = GetOwner()->GetActorRotation() + FRotator(0.0f, 0.0f, 0.0f);
+		FVector SpawnLocation = GetOwner()->GetActorLocation() + FireRotation.RotateVector(GunOffset);
+
+		UWorld* const World = GetWorld();
+		if (World)
+		{
+			for (int i = 0; i < 3; ++i)
+			{
+
+				FRotator ModifiedRotation = FireRotation;
+				// Modify rotation for each projectile
+				ModifiedRotation.Yaw += (i - 1) * 20.0f; // Offset rotation by 10 degrees
+
+				const FVector ModifiedLocation = GetOwner()->GetActorLocation() + ModifiedRotation.RotateVector(GunOffset);
+
+				//// Spawn the projectile
+				AGalaga_USFX_L01Projectile* Proyectil = World->SpawnActor<AGalaga_USFX_L01Projectile>(ModifiedLocation, ModifiedRotation);
+				if (Proyectil)
+				{
+					Proyectil->SetOriginActor(GetOwner());
+				}
+			}
+			bCanFire = false;
+			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &UActorComponentDisparo::ShotTimerExpired, FireRate);
+
+			// Reproducir el sonido de disparo
+			if (FireSound)
+			{
+				UGameplayStatics::PlaySoundAtLocation(GetWorld(), FireSound, GetOwner()->GetActorLocation());
+			}
+		}
+	}
+}
+
 // Función para el temporizador de disparo expirado
 void UActorComponentDisparo::ShotTimerExpired()
 {
@@ -90,5 +223,5 @@ void UActorComponentDisparo::StartFireTimer()
     }
 
     // Configura un temporizador que dispara cada cierto tiempo
-    GetWorld()->GetTimerManager().SetTimer(TimerHandle_FireTimer, this, &UActorComponentDisparo::DispararProyectil, FireRate, true);
+    //GetWorld()->GetTimerManager().SetTimer(TimerHandle_FireTimer, this, &UActorComponentDisparo::DispararProyectil, FireRate, true);
 }

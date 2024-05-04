@@ -390,8 +390,14 @@ void AGalaga_USFX_L01Pawn::NotifyHit(class UPrimitiveComponent*
 		Cast<AInventoryActor>(Other);
 	if (InventoryItem != nullptr)
 	{
+		
 		TakeItem(InventoryItem);
 	}
+
+	AInventoryActorEnergia* EnergyItem =
+		Cast<AInventoryActorEnergia>(Other);
+	if (EnergyItem != nullptr)
+		EnergyItem->mensaje();
 	
 	AObstaculo* Obstaculo = Cast<AObstaculo>(Other);
 	

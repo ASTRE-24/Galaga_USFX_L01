@@ -35,6 +35,7 @@ AInventoryActor::AInventoryActor():Super()
 	GetStaticMeshComponent()->SetMobility(EComponentMobility::Movable);
 	SetActorEnableCollision(true);
 	MovementComponent = CreateDefaultSubobject<UMovimientoVertical>(TEXT("MovimientoVertical"));
+
 }
 
 void AInventoryActor::BeginPlay()

@@ -15,5 +15,6 @@ class GALAGA_USFX_L01_API AInventoryActorEnergia : public AInventoryActor
 	GENERATED_BODY()
 
 	AInventoryActorEnergia();
-	
+public:
+	void mensaje();
 };

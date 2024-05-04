@@ -13,3 +13,7 @@ AInventoryActorEnergia::AInventoryActorEnergia()
     }
 }
 
+void AInventoryActorEnergia::mensaje()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Mensaje de la clase hija"));
+}

@@ -35,7 +35,7 @@ protected:
 	int tipoNave; //Cada valor numerico representa a un tipo de nave enemiga
 	float experiencia;
 	float energia;
-
+	FString tipoArma;
 	float peso;
 	float volumen;
 	bool bMoverse;
@@ -60,6 +60,7 @@ public:
 	FORCEINLINE float GetPeso() const { return peso; }
 	FORCEINLINE float GetVolumen() const { return volumen; }
 	FORCEINLINE bool GetMoverse() const { return bMoverse; }
+	FORCEINLINE FString GetTipoArma() const { return tipoArma; }
 
 	FORCEINLINE void SetVelocidad(float _velocidad) { velocidad = _velocidad; }
 	FORCEINLINE void SetResistencia(float _resistencia) { resistencia = _resistencia; }
@@ -76,6 +77,7 @@ public:
 	FORCEINLINE void SetPeso(float _peso) { peso = _peso; }
 	FORCEINLINE void SetVolumen(float _volumen) { volumen = _volumen; }
 	FORCEINLINE void SetMoverse(bool _bMoverse) { bMoverse = _bMoverse; }
+	FORCEINLINE void SetTipoArma(FString _tipoArma) { tipoArma = _tipoArma; }
 
 public:
 	// Sets default values for this actor's properties

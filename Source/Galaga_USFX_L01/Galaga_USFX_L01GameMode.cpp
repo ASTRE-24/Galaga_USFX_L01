@@ -57,13 +57,13 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     IngenieroPortaNave->SetBuilderPortaNave(ReparacionPorta);
     IngenieroPortaNave->ConstruirPortaNave();
 
-	DirectorNodriza = GetWorld()->SpawnActor<ADirectorNaveNodriza>(ADirectorNaveNodriza::StaticClass());
-	//BuilderNodrizaFase1 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase1>(ABuilderNaveNodrizaFase1::StaticClass());
-	BuilderNodrizaFase2 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase2>(ABuilderNaveNodrizaFase2::StaticClass());
-	//BuilderNodrizaFase3 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase3>(ABuilderNaveNodrizaFase3::StaticClass());
-	DirectorNodriza->enviarConstructor(BuilderNodrizaFase2);
-	DirectorNodriza->construirNaveNodriza();
-	ANaveEnemigaNodriza* NaveNodriza = DirectorNodriza->obtenerNave();
+	//DirectorNodriza = GetWorld()->SpawnActor<ADirectorNaveNodriza>(ADirectorNaveNodriza::StaticClass());
+	////BuilderNodrizaFase1 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase1>(ABuilderNaveNodrizaFase1::StaticClass());
+	//BuilderNodrizaFase2 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase2>(ABuilderNaveNodrizaFase2::StaticClass());
+	////BuilderNodrizaFase3 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase3>(ABuilderNaveNodrizaFase3::StaticClass());
+	//DirectorNodriza->enviarConstructor(BuilderNodrizaFase2);
+	//DirectorNodriza->construirNaveNodriza();
+	//ANaveEnemigaNodriza* NaveNodriza = DirectorNodriza->obtenerNave();
 
     APortaNave* portal = IngenieroPortaNave->GetPortaNave();
     portal->caracteristicas();

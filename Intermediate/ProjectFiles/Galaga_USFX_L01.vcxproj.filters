@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\Galaga_USFX_L01.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{1449E842-6B41-4F5C-96A6-EB252C584A01}</UniqueIdentifier>
+      <UniqueIdentifier>{FA803D8E-80FC-4794-B342-AD7F1CA64360}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\Galaga_USFX_L01.Target.cs">
       <Filter>Source</Filter>
@@ -14,7 +14,7 @@
     <None Include="..\..\.gitattributes" />
     <None Include="..\..\.gitignore" />
     <Filter Include="Config">
-      <UniqueIdentifier>{3670EA8A-C34F-4A97-B98E-D2692279A28E}</UniqueIdentifier>
+      <UniqueIdentifier>{F02674C4-9678-491C-B8C3-0D7088265877}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -32,7 +32,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\Galaga_USFX_L01">
-      <UniqueIdentifier>{9C006690-40E6-4EDD-A607-75F5D1CF003E}</UniqueIdentifier>
+      <UniqueIdentifier>{C37B57F5-1F8D-4296-A0BF-4D630B45A356}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\ActorComponentDisparo.cpp">
       <Filter>Source\Galaga_USFX_L01</Filter>
@@ -80,6 +80,24 @@
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\BuilderPortaNave.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\CapsulaEnemigaArma.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\CapsulaEnemigaArma.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\CapsulaEnemigaEnergia.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\CapsulaEnemigaEnergia.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\CapsulaEnemigaMunicion.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\CapsulaEnemigaMunicion.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\DirectorNaveNodriza.cpp">
@@ -133,6 +151,12 @@
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\InterfaceBuilderNaveNodriza.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\InterfaceCapsulaEnemiga.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\InterfaceCapsulaEnemiga.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\InterfaceNaveNodriza.cpp">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClCompile>
@@ -143,6 +167,12 @@
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\InventoryActor.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\InventoryActorArma.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\InventoryActorArma.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\InventoryActorEnergia.cpp">
@@ -167,6 +197,12 @@
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\MovimientoVertical.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\MyInterface.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\MyInterface.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\NaveEnemiga.cpp">

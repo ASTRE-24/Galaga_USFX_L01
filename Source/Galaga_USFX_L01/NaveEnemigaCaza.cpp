@@ -2,6 +2,10 @@
 
 
 #include "NaveEnemigaCaza.h"
+#include "Galaga_USFX_L01Pawn.h"
+#include "NaveEnemigaEspia.h"
+#include "InventoryActor.h"
+#include "Components/BoxComponent.h"
 #include "ActorComponentDisparo.h"
 
 ANaveEnemigaCaza::ANaveEnemigaCaza()
@@ -11,12 +15,14 @@ ANaveEnemigaCaza::ANaveEnemigaCaza()
 	//mallaNaveEnemiga = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
 	mallaNaveEnemiga->SetWorldScale3D(FVector(0.7f, 0.8f, 1.0f));
-	
+	//mallaNaveEnemiga->SetSimulatePhysics(true);
+	//mallaNaveEnemiga->SetCollisionProfileName(TEXT("Ph"));
 	Timer = 0.0f; //Inicializa el timer en 0
 	TiempoParaDetenerse = 5.0f; //Inicializa el tiempo para detenerse en 5 segundos
 	TiempoParaReanudar = 2.0f; //Tiempo para reanudar el movimiento
 	// Inicializar el componente de disparo
 	
+
 	// Asignar valores necesarios (como FireRate, GunOffset, etc.) al componente de disparo si es necesario
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("NaveEnemigaCaza Constructor"));
 }
@@ -76,6 +82,7 @@ void ANaveEnemigaCaza::Tick(float DeltaTime)
 	if (bMoverse)
 	{
 		Mover(DeltaTime);
+		
 	}
 	
 }
@@ -101,3 +108,19 @@ void ANaveEnemigaCaza::BeginPlay()
 
 	
 }
+void ANaveEnemigaCaza::NotifyHit(class UPrimitiveComponent*
+	MyComp, AActor* Other, class UPrimitiveComponent* OtherComp,
+	bool bSelfMoved, FVector HitLocation, FVector HitNormal,
+	FVector NormalImpulse, const FHitResult& Hit)
+{
+
+	AInventoryActor* NaveEnemiga = Cast<AInventoryActor>(Other);
+	if (NaveEnemiga)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Colision"));
+	}
+	else return;
+
+
+}
+

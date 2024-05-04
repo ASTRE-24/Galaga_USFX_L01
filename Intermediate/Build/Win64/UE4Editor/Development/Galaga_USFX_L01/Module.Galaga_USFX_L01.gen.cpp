@@ -4,6 +4,8 @@
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Armas.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/BuilderConcretoPNReparar.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/BuilderNaveNodrizaFase1.gen.cpp"
+#include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/BuilderNaveNodrizaFase2.gen.cpp"
+#include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/BuilderNaveNodrizaFase3.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/BuilderPortaNave.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/DirectorNaveNodriza.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/DirectorPortaNave.gen.cpp"

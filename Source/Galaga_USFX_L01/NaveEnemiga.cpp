@@ -24,6 +24,7 @@ ANaveEnemiga::ANaveEnemiga()
 	DisparoComponent = CreateDefaultSubobject<UActorComponentDisparo>(TEXT("DisparoComponent"));
 	bShoulDispara = false;
 	bMoverse = false;
+	tipoArma = "";
 	
 
 	// Configurar la plantilla de partículas (reemplaza "Path/To/Your/ParticleSystem" con la ruta correcta)
@@ -51,13 +52,21 @@ void ANaveEnemiga::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (bShoulDispara)
 	{
-		if (DisparoComponent)
+		if (tipoArma == "Normal")
 		{
-			DisparoComponent->DispararProyectil();
+			DisparoComponent->ArmasDisparoNormal();
 		}
-		else
+		else if (tipoArma == "Doble")
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("No se pudo disparar"));
+			DisparoComponent->ArmaDisparoDoble();
+		}
+		else if (tipoArma == "Triple")
+		{
+			DisparoComponent->ArmaDisparoTriple();
+		}
+		else if (tipoArma == "TripleAbanico")
+		{
+			DisparoComponent->ArmaDisparoTripleAbanico();
 		}
 	}
 }

@@ -62,7 +62,7 @@ void AArmas::ArmasDisparoNormal(AActor* NaveDisparo)
     {
 
         // Obtiene la rotación y la ubicación del propietario del componente
-        FRotator FireRotation = GetActorRotation() + FRotator(0.0f, -1800.0f, 0.0f);
+        FRotator FireRotation = GetActorRotation() + FRotator(0.0f, -180.0f, 0.0f);
         FVector SpawnLocation = GetActorLocation() + FireRotation.RotateVector(GunOffset);
 
         UWorld* const World = GetWorld();
