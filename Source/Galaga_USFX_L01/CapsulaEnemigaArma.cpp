@@ -4,6 +4,7 @@
 #include "CapsulaEnemigaArma.h"
 #include "GameFramework/Actor.h"
 #include "NaveEnemiga.h"
+#include "NaveEnemigaNodriza.h"
 #include "Engine/StaticMeshActor.h"
 #include "Components/StaticMeshComponent.h"
 
@@ -52,10 +53,24 @@ void ACapsulaEnemigaArma::NotifyHit(class UPrimitiveComponent*
 {
 
     ANaveEnemiga* NaveEnemiga = Cast<ANaveEnemiga>(Other);
-    if (NaveEnemiga)
+    if (!NaveEnemiga->IsA(ANaveEnemigaNodriza::StaticClass()))
     {
+		usarCapsulaEnemiga(NaveEnemiga);
         Destroy();
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Colision destruir perro"));
     }
-    else return;
+    else Destroy();
+}
+
+void ACapsulaEnemigaArma::usarCapsulaEnemiga(ANaveEnemiga* naveEnemiga)
+{
+	naveEnemiga->bShoulDispara = true;
+	int32 random = FMath::RandRange(0, 3);
+	if (random == 0)
+		naveEnemiga->SetTipoArma("Normal");
+	else if (random == 1)
+		naveEnemiga->SetTipoArma("Triple");
+	else if (random == 2)
+		naveEnemiga->SetTipoArma("TripleAbanico");
+	else if (random == 3)
+	naveEnemiga->SetTipoArma("Doble");
 }

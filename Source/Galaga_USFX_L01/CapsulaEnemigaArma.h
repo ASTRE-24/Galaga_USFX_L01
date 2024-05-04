@@ -5,10 +5,11 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "MovimientoVertical.h"
+#include "InterfaceCapsulaEnemiga.h"
 #include "CapsulaEnemigaArma.generated.h"
 
 UCLASS()
-class GALAGA_USFX_L01_API ACapsulaEnemigaArma : public AActor
+class GALAGA_USFX_L01_API ACapsulaEnemigaArma : public AActor, public IInterfaceCapsulaEnemiga
 {
 	GENERATED_BODY()
 	
@@ -29,4 +30,5 @@ public:
 		MyComp, AActor* Other, class UPrimitiveComponent* OtherComp,
 		bool bSelfMoved, FVector HitLocation, FVector HitNormal,
 		FVector NormalImpulse, const FHitResult& Hit) override;
+	virtual void usarCapsulaEnemiga(ANaveEnemiga* naveEnemiga) override;
 };

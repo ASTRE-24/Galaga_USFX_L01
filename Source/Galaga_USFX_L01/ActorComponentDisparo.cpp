@@ -5,6 +5,7 @@
 #include "Galaga_USFX_L01Projectile.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Galaga_USFX_L01Pawn.h"
 
 // Sets default values for this component's properties
 UActorComponentDisparo::UActorComponentDisparo()
@@ -13,7 +14,7 @@ UActorComponentDisparo::UActorComponentDisparo()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 	bCanFire = true;
-	FireRate = 2.0f; // Ajusta según sea necesario
+	FireRate = 2.f; // Ajusta según sea necesario
 	GunOffset = FVector(120.0f, 0.0f, 0.0f); // Ajusta según sea necesario
 
     // Cache our sound effect
@@ -64,6 +65,8 @@ void UActorComponentDisparo::ArmasDisparoNormal()
 			}
             // Configuración del temporizador para controlar la velocidad de disparo
             bCanFire = false;
+			if (GetOwner()->IsA(AGalaga_USFX_L01Pawn::StaticClass()))
+				FireRate = 0.2;
             World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &UActorComponentDisparo::ShotTimerExpired, FireRate);
 
             // Reproducir el sonido de disparo
@@ -106,6 +109,8 @@ void UActorComponentDisparo::ArmaDisparoDoble()
 				Proyectil2->SetOriginActor(GetOwner());
 			}
 			bCanFire = false;
+			if (GetOwner()->IsA(AGalaga_USFX_L01Pawn::StaticClass()))
+				FireRate = 0.2;
 			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &UActorComponentDisparo::ShotTimerExpired, FireRate);
 
 			// Reproducir el sonido de disparo
@@ -157,6 +162,8 @@ void UActorComponentDisparo::ArmaDisparoTriple()
 				Proyectil3->SetOriginActor(GetOwner());
 			}
 			bCanFire = false;
+			if (GetOwner()->IsA(AGalaga_USFX_L01Pawn::StaticClass()))
+				FireRate = 0.2;
 			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &UActorComponentDisparo::ShotTimerExpired, FireRate);
 
 			// Reproducir el sonido de disparo
@@ -197,6 +204,8 @@ void UActorComponentDisparo::ArmaDisparoTripleAbanico()
 				}
 			}
 			bCanFire = false;
+			if (GetOwner()->IsA(AGalaga_USFX_L01Pawn::StaticClass()))
+				FireRate = 0.2;
 			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &UActorComponentDisparo::ShotTimerExpired, FireRate);
 
 			// Reproducir el sonido de disparo

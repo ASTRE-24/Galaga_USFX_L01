@@ -16,20 +16,5 @@ AInventoryActorArma::AInventoryActorArma()
     {
         GetStaticMeshComponent()->SetStaticMesh(CylinderMeshAsset.Object);
     }
-	GetStaticMeshComponent()->SetSimulatePhysics(true);
-	GetStaticMeshComponent()->SetNotifyRigidBodyCollision(true);
 }
 
-void AInventoryActorArma::NotifyHit(class UPrimitiveComponent*
-	MyComp, AActor* Other, class UPrimitiveComponent* OtherComp,
-	bool bSelfMoved, FVector HitLocation, FVector HitNormal,
-	FVector NormalImpulse, const FHitResult& Hit)
-{
-
-	ANaveEnemiga* NaveEnemiga = Cast<ANaveEnemiga>(Other);
-	if (NaveEnemiga)
-	{
-		Destroy();
-	}
-	else return;
-}

@@ -13,10 +13,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define GALAGA_USFX_L01_InterfaceCapsulaEnemiga_generated_h
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_SPARSE_DATA
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_RPC_WRAPPERS
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_RPC_WRAPPERS_NO_PURE_DECLS
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_STANDARD_CONSTRUCTORS \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_SPARSE_DATA
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_RPC_WRAPPERS
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_RPC_WRAPPERS_NO_PURE_DECLS
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	GALAGA_USFX_L01_API UInterfaceCapsulaEnemiga(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_ABSTRACT_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UInterfaceCapsulaEnemiga) \
@@ -29,7 +29,7 @@ private: \
 public:
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_ENHANCED_CONSTRUCTORS \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	GALAGA_USFX_L01_API UInterfaceCapsulaEnemiga(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -42,7 +42,7 @@ public: \
 	DEFINE_ABSTRACT_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UInterfaceCapsulaEnemiga)
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_GENERATED_UINTERFACE_BODY() \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_GENERATED_UINTERFACE_BODY() \
 private: \
 	static void StaticRegisterNativesUInterfaceCapsulaEnemiga(); \
 	friend struct Z_Construct_UClass_UInterfaceCapsulaEnemiga_Statics; \
@@ -51,22 +51,22 @@ public: \
 	DECLARE_SERIALIZER(UInterfaceCapsulaEnemiga)
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_GENERATED_BODY_LEGACY \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_GENERATED_BODY_LEGACY \
 		PRAGMA_DISABLE_DEPRECATION_WARNINGS \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_GENERATED_UINTERFACE_BODY() \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_STANDARD_CONSTRUCTORS \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_GENERATED_UINTERFACE_BODY() \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_STANDARD_CONSTRUCTORS \
 	PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_GENERATED_BODY \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_GENERATED_BODY \
 	PRAGMA_DISABLE_DEPRECATION_WARNINGS \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_GENERATED_UINTERFACE_BODY() \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_ENHANCED_CONSTRUCTORS \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_GENERATED_UINTERFACE_BODY() \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_ENHANCED_CONSTRUCTORS \
 private: \
 	PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_INCLASS_IINTERFACE_NO_PURE_DECLS \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_INCLASS_IINTERFACE_NO_PURE_DECLS \
 protected: \
 	virtual ~IInterfaceCapsulaEnemiga() {} \
 public: \
@@ -75,7 +75,7 @@ public: \
 	virtual UObject* _getUObject() const { check(0 && "Missing required implementation."); return nullptr; }
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_INCLASS_IINTERFACE \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_INCLASS_IINTERFACE \
 protected: \
 	virtual ~IInterfaceCapsulaEnemiga() {} \
 public: \
@@ -84,23 +84,23 @@ public: \
 	virtual UObject* _getUObject() const { check(0 && "Missing required implementation."); return nullptr; }
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_10_PROLOG
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_21_GENERATED_BODY_LEGACY \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_11_PROLOG
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_22_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_SPARSE_DATA \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_RPC_WRAPPERS \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_INCLASS_IINTERFACE \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_SPARSE_DATA \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_RPC_WRAPPERS \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_INCLASS_IINTERFACE \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_21_GENERATED_BODY \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_22_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_SPARSE_DATA \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_13_INCLASS_IINTERFACE_NO_PURE_DECLS \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_SPARSE_DATA \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_InterfaceCapsulaEnemiga_h_14_INCLASS_IINTERFACE_NO_PURE_DECLS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

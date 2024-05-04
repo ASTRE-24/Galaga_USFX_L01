@@ -17,7 +17,7 @@
 #include "Escudo.h"
 #include "ActorSpawnerComponent.h"
 #include "Obstaculo.h"
-
+#include "InventoryActorArma.h"
 #include "Containers/Queue.h"
 #include "Sound/SoundBase.h"
 #include "Kismet/GameplayStatics.h" // Necesario para usar usar la musica de fondo
@@ -39,6 +39,7 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	// Cache our sound effect
 	static ConstructorHelpers::FObjectFinder<USoundBase> FireAudio(TEXT("/Game/TwinStick/Audio/TwinStickFire.TwinStickFire"));
 	FireSound = FireAudio.Object;
+	DisparoComponent = CreateDefaultSubobject<UActorComponentDisparo>(TEXT("DisparoComponent"));
 
 	// Create a camera boom...
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
@@ -57,8 +58,7 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	MoveSpeed = 1000.0f;
 	// Weapon
 	GunOffset = FVector(120.f, 0.f, 0.f);
-	FireRate = 0.1f;
-	PresionarTecla = 0;
+	FireRate = 0.2f;
 	Multiplicador = 0;
 	//Inicializar Banderas
 	bCanFire = true;
@@ -67,6 +67,7 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	bChocaYControla = false;
 	bChocaYMeDestruyo = false;
 	bChocarYAtravesar = false;
+	tipoArma = "Normal";
 
 
 	// Inicializacion para componente de Escudo
@@ -143,7 +144,7 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 	PlayerInputComponent->BindAction("Saltar", IE_Pressed, this, &AGalaga_USFX_L01Pawn::Saltar);
 	PlayerInputComponent->BindAction("TeleportToMouse", IE_Pressed, this, &AGalaga_USFX_L01Pawn::TeleportToMouse);
 	PlayerInputComponent->BindAction("OnSpawnActor", IE_Pressed, this, &AGalaga_USFX_L01Pawn::OnSpawnActor);
-	PlayerInputComponent->BindAction("ActivarDisparoDoble", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ActivarDisparoDoble);
+	PlayerInputComponent->BindAction("ActivarDisparo", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ActivarDisparo);
 	PlayerInputComponent->BindAction("ChocaYDestruye", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ChocaYDestruye);
 	PlayerInputComponent->BindAction("ChocaYControla", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ChocaYControla);
 	PlayerInputComponent->BindAction("ChocaYMeDestruyo", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ChocaYMeDestruyo);
@@ -204,14 +205,6 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 	
 	FireShot(FireDirection);
 	
-	
-	/*if (GEngine)
-	{
-		FString Posicion = FString::Printf(TEXT(" Se cambio a X: %f, Y: %f, Z: %f"), 
-			InicialPosicion.X, InicialPosicion.Y, InicialPosicion.Z);
-		GEngine->AddOnScreenDebugMessage
-		(-1, 5.f, FColor::Red, Posicion);
-	}*/
 }
 
 void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
@@ -230,70 +223,21 @@ void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 			// Spawn projectile at an offset from this pawn
 			const FVector SpawnLocation = GetActorLocation() + FireRotation.RotateVector(GunOffset);
             UWorld* const World = GetWorld();
-			if (bDisparoDoble) {
+			if (tipoArma == "Normal") {
 				
-				if (World != nullptr)
-				{
-					// Calcula la posición de spawn para el primer proyectil (a la izquierda de la nave)
-					const FVector SpawnLocationLeft = SpawnLocation - FireRotation.RotateVector(FVector(0.f, 60.f, 0.f));
-
-					// Spawnea el primer proyectil
-					AGalaga_USFX_L01Projectile* Proyectil1 = World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationLeft, FireRotation);
-					if (Proyectil1)
-					{
-						Proyectil1->SetOriginActor(this);
-					}
-					// Calcula la posición de spawn para el segundo proyectil (a la derecha de la nave)
-					const FVector SpawnLocationRight = SpawnLocation + FireRotation.RotateVector(FVector(0.f, 60.f, 0.f));
-
-					// Spawnea el segundo proyectil
-					AGalaga_USFX_L01Projectile* Proyectil2 = World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationRight, FireRotation);
-					if (Proyectil2) 
-					{
-						Proyectil2->SetOriginActor(this);
-					}
-					// Intenta reproducir el sonido si está especificado
-					if (FireSound != nullptr)
-					{
-						UGameplayStatics::PlaySoundAtLocation(this, FireSound, GetActorLocation());
-					}
-
-				}
+				DisparoComponent->ArmasDisparoNormal();
 			}
-			else
+			else if (tipoArma == "Doble")
 			{
-				
-				if (World != nullptr)
-				{
-					// spawn the projectile
-					// Spawn the three projectiles
-					//float BulletSpacing = 100.0f; // Ajusta el valor según sea necesario
-
-					for (int i = 0; i < 3; ++i)
-					{
-						//World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocation, FireRotation);
-						FRotator ModifiedRotation = FireRotation;
-						// Modify rotation for each projectile
-						ModifiedRotation.Yaw += (i - 1) * 20.0f; // Offset rotation by 10 degrees
-
-						// Calcular la ubicación de spawn de la bala actual
-						//FVector BulletSpawnLocation = SpawnLocation + FireRotation.RotateVector(FVector(0.f, i * BulletSpacing, 0.f));
-
-						// Spawn the projectile
-						//World->SpawnActor<AGalaga_USFX_L01Projectile>(BulletSpawnLocation, FireRotation);
-
-
-						const FVector ModifiedSpawnLocation = GetActorLocation() + ModifiedRotation.RotateVector(GunOffset);
-
-						//// Spawn the projectile
-						AGalaga_USFX_L01Projectile* Proyectil = World->SpawnActor<AGalaga_USFX_L01Projectile>(ModifiedSpawnLocation, ModifiedRotation);
-						if (Proyectil)
-						{
-							Proyectil->SetOriginActor(this);
-						}
-					}
-
-				}
+				DisparoComponent->ArmaDisparoDoble();
+			}
+			else if (tipoArma == "Triple")
+			{
+				DisparoComponent->ArmaDisparoTriple();
+			}
+			else if (tipoArma == "Triple Abanico")
+			{
+				DisparoComponent->ArmaDisparoTripleAbanico();
 			}
 			// Restablece el contador cuando se alcance el límite máximo
 			if (NumProyectilesDisparados >= MaxProyectilesDisparados)
@@ -327,7 +271,7 @@ void AGalaga_USFX_L01Pawn::ShotTimerExpired()
 		if (GEngine)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "No tienes municiones");
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Presiona Q para recargar");
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Presiona O para recargar");
 			
 
 		}
@@ -454,28 +398,6 @@ void AGalaga_USFX_L01Pawn::TakeItem(AInventoryActor* InventoryItem)
 {
 	InventoryItem->PickUp();
 	MyInventory->AddToInventory(InventoryItem);
-	// Declarar un TimerHandle
-	
-	//NumItems+=1;	
-
-	// Configurar el temporizador con SetTimer
-	//float DelayInSeconds = 10.0f; // Tiempo de retraso en segundos
-	//bool bLooping = false; // Si el temporizador debe repetirse automáticamente o no
-	//AInventoryActorMunicion* AmmoItem = Cast<AInventoryActorMunicion>(InventoryItem);
-	//if (AmmoItem)
-	//{
- //     FTimerHandle MyTimerHandle1;
-	//  GetWorldTimerManager().SetTimer(MyTimerHandle1, this, &AGalaga_USFX_L01Pawn::ReloadAmmo, DelayInSeconds, bLooping);
-	//}
-
-	//AInventoryActorEnergia* EnergyItem = Cast<AInventoryActorEnergia>(InventoryItem);
-	//if (EnergyItem)
-	//{
-	//	FTimerHandle MyTimerHandle2;
-	//	GetWorldTimerManager().SetTimer(MyTimerHandle2, this, &AGalaga_USFX_L01Pawn::ReloadEnergy, DelayInSeconds, bLooping);
-	//}
-
-	
 	
 	//Verifica el inventario después de recoger un objeto
 	CheckInventory();
@@ -762,28 +684,50 @@ void AGalaga_USFX_L01Pawn::OnSpawnActor()
 }
 
 
-void AGalaga_USFX_L01Pawn::ActivarDisparoDoble()
+void AGalaga_USFX_L01Pawn::ActivarDisparo()
 {
-	if (PresionarTecla == 0)
+	// Bandera para verificar si se encontró un objeto de munición
+	bool bFoundGun = false;
+	for (AInventoryActor* InventoryItem : MyInventory->CurrentInventory)
 	{
-		bDisparoDoble = true;
+		// Intenta hacer un cast a AInventoryActorMunicion
+		AInventoryActorArma* GunItem = Cast<AInventoryActorArma>(InventoryItem);
+		if (GunItem)
+		{
+			// Se encontró un objeto de munición en el inventario
+			bFoundGun = true;
+
+			// Se encontró un objeto de munición en el inventario
+			// Elimina el objeto de munición del inventario			
+			MyInventory->RemoveFromInventory(GunItem);
+			//NumProyectilesDisparados = 0; // Restablece el contador de proyectiles disparados.
+
+			int32 random = FMath::RandRange(0, 2);
+			if (random == 0) tipoArma = "Doble";
+			else if (random == 1) tipoArma = "Triple";
+			else if (random == 2) tipoArma = "Triple Abanico";
+			if (GEngine)
+			{
+				
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, "Arma con disparo "+ tipoArma);
+			}
+
+			//NumItems -= 1; // Disminuye el contador de objetos en el inventario
+			CheckInventory();
+
+			// Sal del bucle ya que encontraste y manejaste un objeto de munición
+			break;
+		}
+	}
+	// Verifica si no se encontró ningún objeto de munición
+	if (!bFoundGun)
+	{
+		// Muestra un mensaje indicando que no se encontró ningún objeto de munición
 		if (GEngine)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Disparo Doble Activado");
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "No tienes otro tipo de Arma");
 		}
-		PresionarTecla = 1;
 	}
-	else
-	{
-		bDisparoDoble = false;
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Disparo Doble Desactivado");
-		}
-		PresionarTecla = 0;
-	}
-	/*AObstaculo* spaun = GetWorld()->SpawnActor<AObstaculo>(AObstaculo::StaticClass(), GetActorLocation()-GetActorForwardVector()*100, GetActorRotation());
-	spaun->SetActorEnableCollision(false);*/
 }
 
 //Funciones para activar las banderas de colision

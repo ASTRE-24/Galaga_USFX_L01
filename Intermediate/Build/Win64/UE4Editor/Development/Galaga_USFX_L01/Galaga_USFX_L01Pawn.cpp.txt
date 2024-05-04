@@ -14,6 +14,8 @@ D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\MovimientoVertical.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\MovimientoVertical.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\InventoryActor.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\InventoryComponent.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\ActorComponentDisparo.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ActorComponentDisparo.generated.h
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/PlayerInput.h
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Public\GestureRecognizer.h
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Public\KeyState.h
@@ -42,6 +44,8 @@ D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\ActorSpawnerComponent.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ActorSpawnerComponent.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\Obstaculo.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Obstaculo.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\InventoryActorArma.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\InventoryActorArma.generated.h
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\Kismet/GameplayStatics.h
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\Kismet/KismetSystemLibrary.h
 D:\game\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/PropertyAccessUtil.h

@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "InventoryComponent.h"
 #include "InventoryActor.h"
+#include "ActorComponentDisparo.h"
 #include "GameFramework/PlayerInput.h"
 
 #include "Galaga_USFX_L01Pawn.generated.h"
@@ -27,6 +28,9 @@ class AGalaga_USFX_L01Pawn : public APawn
 	/** Camera boom positioning the camera above the character */
 	UPROPERTY(Category = Camera, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Disparo", meta = (AllowPrivateAccess = "true"))
+	UActorComponentDisparo* DisparoComponent; // Declara el componente DisparoComponent
 
 public:
 	AGalaga_USFX_L01Pawn();
@@ -109,7 +113,7 @@ public:
 
 	void OnSpawnActor();
 
-	void ActivarDisparoDoble();	
+	void ActivarDisparo();	
 	void RepeatMovement();
 	void RecordMovement();
 	//Funciones para los botones
@@ -140,7 +144,6 @@ private:
 	FVector InicialPosicion;
 	float AlturaSalto;
 	FVector2D lastInput;
-	int PresionarTecla;
 	float Multiplicador;
 
 	//Banderas
@@ -149,11 +152,7 @@ private:
 	bool bChocaYControla;
 	bool bChocaYMeDestruyo;
 	bool bChocarYAtravesar;
-
-
-	
- 
-	
+	FString tipoArma;
 
 public:
 	/** Returns ShipMeshComponent subobject **/

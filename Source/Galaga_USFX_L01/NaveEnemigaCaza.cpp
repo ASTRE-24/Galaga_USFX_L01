@@ -108,19 +108,5 @@ void ANaveEnemigaCaza::BeginPlay()
 
 	
 }
-void ANaveEnemigaCaza::NotifyHit(class UPrimitiveComponent*
-	MyComp, AActor* Other, class UPrimitiveComponent* OtherComp,
-	bool bSelfMoved, FVector HitLocation, FVector HitNormal,
-	FVector NormalImpulse, const FHitResult& Hit)
-{
 
-	AInventoryActor* NaveEnemiga = Cast<AInventoryActor>(Other);
-	if (NaveEnemiga)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Colision"));
-	}
-	else return;
-
-
-}
 

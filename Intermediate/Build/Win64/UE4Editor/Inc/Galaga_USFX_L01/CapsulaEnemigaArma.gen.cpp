@@ -18,6 +18,7 @@ void EmptyLinkFunctionForGeneratedCodeCapsulaEnemigaArma() {}
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	UPackage* Z_Construct_UPackage__Script_Galaga_USFX_L01();
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UMovimientoVertical_NoRegister();
+	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UInterfaceCapsulaEnemiga_NoRegister();
 // End Cross Module References
 	void ACapsulaEnemigaArma::StaticRegisterNativesACapsulaEnemigaArma()
 	{
@@ -37,6 +38,7 @@ void EmptyLinkFunctionForGeneratedCodeCapsulaEnemigaArma() {}
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_MovementComponent;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+		static const UE4CodeGen_Private::FImplementedInterfaceParams InterfaceParams[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
 	};
@@ -61,6 +63,9 @@ void EmptyLinkFunctionForGeneratedCodeCapsulaEnemigaArma() {}
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ACapsulaEnemigaArma_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACapsulaEnemigaArma_Statics::NewProp_MovementComponent,
 	};
+		const UE4CodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_ACapsulaEnemigaArma_Statics::InterfaceParams[] = {
+			{ Z_Construct_UClass_UInterfaceCapsulaEnemiga_NoRegister, (int32)VTABLE_OFFSET(ACapsulaEnemigaArma, IInterfaceCapsulaEnemiga), false },
+		};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ACapsulaEnemigaArma_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ACapsulaEnemigaArma>::IsAbstract,
 	};
@@ -71,11 +76,11 @@ void EmptyLinkFunctionForGeneratedCodeCapsulaEnemigaArma() {}
 		DependentSingletons,
 		nullptr,
 		Z_Construct_UClass_ACapsulaEnemigaArma_Statics::PropPointers,
-		nullptr,
+		InterfaceParams,
 		UE_ARRAY_COUNT(DependentSingletons),
 		0,
 		UE_ARRAY_COUNT(Z_Construct_UClass_ACapsulaEnemigaArma_Statics::PropPointers),
-		0,
+		UE_ARRAY_COUNT(InterfaceParams),
 		0x009000A4u,
 		METADATA_PARAMS(Z_Construct_UClass_ACapsulaEnemigaArma_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_ACapsulaEnemigaArma_Statics::Class_MetaDataParams))
 	};
@@ -88,7 +93,7 @@ void EmptyLinkFunctionForGeneratedCodeCapsulaEnemigaArma() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ACapsulaEnemigaArma, 2938412729);
+	IMPLEMENT_CLASS(ACapsulaEnemigaArma, 3908756676);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<ACapsulaEnemigaArma>()
 	{
 		return ACapsulaEnemigaArma::StaticClass();

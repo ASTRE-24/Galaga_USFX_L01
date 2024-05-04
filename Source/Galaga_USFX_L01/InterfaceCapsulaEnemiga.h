@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
+#include "NaveEnemiga.h"
 #include "InterfaceCapsulaEnemiga.generated.h"
 
 // This class does not need to be modified.
@@ -22,5 +23,5 @@ class GALAGA_USFX_L01_API IInterfaceCapsulaEnemiga
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	virtual void usarCapsulaEnemiga() = 0;
+	virtual void usarCapsulaEnemiga(ANaveEnemiga* naveEnemiga) = 0;
 };
