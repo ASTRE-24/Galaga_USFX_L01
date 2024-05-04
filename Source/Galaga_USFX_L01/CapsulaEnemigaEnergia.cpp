@@ -20,7 +20,7 @@ ACapsulaEnemigaEnergia::ACapsulaEnemigaEnergia()
     MovementComponent = CreateDefaultSubobject<UMovimientoVertical>(TEXT("MovimientoVertical")); // Crea el componente de movimiento vertical
 
     // Carga la malla estática desde el contenido del proyecto
-    static ConstructorHelpers::FObjectFinder<UStaticMesh> CylinderMeshAsset(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_WideCapsule.Shape_WideCapsule'"));
+    static ConstructorHelpers::FObjectFinder<UStaticMesh> CylinderMeshAsset(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_QuadPyramid.Shape_QuadPyramid'"));
     if (CylinderMeshAsset.Succeeded())
     {
         StaticMeshComponent->SetStaticMesh(CylinderMeshAsset.Object);
@@ -59,6 +59,7 @@ void ACapsulaEnemigaEnergia::NotifyHit(class UPrimitiveComponent*
         Destroy();
     }
     else Destroy();
+    return;
 }
 
 void ACapsulaEnemigaEnergia::usarCapsulaEnemiga(ANaveEnemiga* naveEnemiga)

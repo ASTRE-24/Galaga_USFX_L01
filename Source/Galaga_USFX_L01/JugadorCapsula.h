@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "InventarioAFactory.h"
 #include "JugadorCapsula.generated.h"
 
 UCLASS()
-class GALAGA_USFX_L01_API AJugadorCapsula : public AActor
+class GALAGA_USFX_L01_API AJugadorCapsula : public AActor, public IInventarioAFactory
 {
 	GENERATED_BODY()
 	
@@ -22,5 +23,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	virtual AActor* crearCapsulaArma(FVector posicion) override;
+	virtual AActor* crearCapsulaEnergia(FVector posicion) override;
+	virtual AActor* crearCapsulaMunicion(FVector posicion) override;
 };

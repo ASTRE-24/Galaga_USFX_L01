@@ -22,7 +22,7 @@ class GALAGA_USFX_L01_API IInventarioAFactory
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	virtual void crearCapsulaArma() = 0;
-	virtual void crearCapsulaEnergia() = 0;
-	virtual void crearCapsulaMunicion() = 0;
+	virtual AActor* crearCapsulaArma(FVector posicion) = 0;
+	virtual AActor* crearCapsulaEnergia(FVector posicion) = 0;
+	virtual AActor* crearCapsulaMunicion(FVector posicion) = 0;
 };

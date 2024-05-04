@@ -59,6 +59,7 @@ void ACapsulaEnemigaArma::NotifyHit(class UPrimitiveComponent*
         Destroy();
     }
     else Destroy();
+    return;
 }
 
 void ACapsulaEnemigaArma::usarCapsulaEnemiga(ANaveEnemiga* naveEnemiga)

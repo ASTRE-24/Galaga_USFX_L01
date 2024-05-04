@@ -25,9 +25,5 @@ void AInventoryActorMunicion::CustomizeAppearance()
         GetStaticMeshComponent()->SetStaticMesh(CylinderMeshAsset.Object);
     }
 
-    // Ejemplo: Cambiar el material
-    // Puedes cargar un material o configurar un material preexistente aquí
-
-    // No olvides llamar al método de la clase base después de hacer los cambios necesarios
-   // Super::CustomizeAppearance();
+    
 }

@@ -2,6 +2,9 @@
 
 
 #include "EnemigoCapsula.h"
+#include "CapsulaEnemigaArma.h"
+#include "CapsulaEnemigaEnergia.h"
+#include "CapsulaEnemigaMunicion.h"
 
 // Sets default values
 AEnemigoCapsula::AEnemigoCapsula()
@@ -23,5 +26,20 @@ void AEnemigoCapsula::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+AActor* AEnemigoCapsula::crearCapsulaArma(FVector posicion)
+{
+	return GetWorld()->SpawnActor<ACapsulaEnemigaArma>(ACapsulaEnemigaArma::StaticClass(), posicion, FRotator (0,0,0));
+}
+
+AActor* AEnemigoCapsula::crearCapsulaEnergia(FVector posicion)
+{
+	return GetWorld()->SpawnActor<ACapsulaEnemigaEnergia>(ACapsulaEnemigaEnergia::StaticClass(), posicion, FRotator(0, 0, 0));
+}
+
+AActor* AEnemigoCapsula::crearCapsulaMunicion(FVector posicion)
+{
+	return GetWorld()->SpawnActor<ACapsulaEnemigaMunicion>(ACapsulaEnemigaMunicion::StaticClass(), posicion, FRotator(0, 0, 0));
 }
 

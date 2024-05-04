@@ -702,7 +702,7 @@ void AGalaga_USFX_L01Pawn::ActivarDisparo()
 			MyInventory->RemoveFromInventory(GunItem);
 			//NumProyectilesDisparados = 0; // Restablece el contador de proyectiles disparados.
 
-			int32 random = FMath::RandRange(0, 2);
+			int32 random = FMath::RandRange(0, 3);
 			if (random == 0) tipoArma = "Doble";
 			else if (random == 1) tipoArma = "Triple";
 			else if (random == 2) tipoArma = "Triple Abanico";

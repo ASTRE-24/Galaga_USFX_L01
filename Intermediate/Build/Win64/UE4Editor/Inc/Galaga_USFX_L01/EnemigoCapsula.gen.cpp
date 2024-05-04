@@ -17,6 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeEnemigoCapsula() {}
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_AEnemigoCapsula();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	UPackage* Z_Construct_UPackage__Script_Galaga_USFX_L01();
+	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UInventarioAFactory_NoRegister();
 // End Cross Module References
 	void AEnemigoCapsula::StaticRegisterNativesAEnemigoCapsula()
 	{
@@ -31,6 +32,7 @@ void EmptyLinkFunctionForGeneratedCodeEnemigoCapsula() {}
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+		static const UE4CodeGen_Private::FImplementedInterfaceParams InterfaceParams[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
 	};
@@ -44,6 +46,9 @@ void EmptyLinkFunctionForGeneratedCodeEnemigoCapsula() {}
 		{ "ModuleRelativePath", "EnemigoCapsula.h" },
 	};
 #endif
+		const UE4CodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_AEnemigoCapsula_Statics::InterfaceParams[] = {
+			{ Z_Construct_UClass_UInventarioAFactory_NoRegister, (int32)VTABLE_OFFSET(AEnemigoCapsula, IInventarioAFactory), false },
+		};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AEnemigoCapsula_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AEnemigoCapsula>::IsAbstract,
 	};
@@ -54,11 +59,11 @@ void EmptyLinkFunctionForGeneratedCodeEnemigoCapsula() {}
 		DependentSingletons,
 		nullptr,
 		nullptr,
-		nullptr,
+		InterfaceParams,
 		UE_ARRAY_COUNT(DependentSingletons),
 		0,
 		0,
-		0,
+		UE_ARRAY_COUNT(InterfaceParams),
 		0x009000A4u,
 		METADATA_PARAMS(Z_Construct_UClass_AEnemigoCapsula_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_AEnemigoCapsula_Statics::Class_MetaDataParams))
 	};
@@ -71,7 +76,7 @@ void EmptyLinkFunctionForGeneratedCodeEnemigoCapsula() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AEnemigoCapsula, 1571544867);
+	IMPLEMENT_CLASS(AEnemigoCapsula, 2149921953);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<AEnemigoCapsula>()
 	{
 		return AEnemigoCapsula::StaticClass();

@@ -101,13 +101,13 @@ void ANaveEnemigaNodriza::movimientoNaveNodriza()
         if (GetActorLocation().Y >= 0.f && GetActorLocation().X <= 1500)
         {
             const FVector ReturnMovement = FVector(0, -1, 0) * ReturnSpeed * DeltaTime;
-            SetActorLocation(GetActorLocation() + ReturnMovement);
+            SetActorLocationAndRotation(GetActorLocation() + ReturnMovement, FRotator(0, -90, 0));
             GetWorldTimerManager().SetTimerForNextTick([this]() {movimientoNaveNodriza(); });
         }
         else if (GetActorLocation().Y <= 0.f && GetActorLocation().X <= 1500.f)
         {
-            const FVector ReturnMovement = FVector(1, 0, 0.7) * ReturnSpeed * DeltaTime;
-            SetActorLocationAndRotation(GetActorLocation() + ReturnMovement, FRotator(0, -90, 0));
+            const FVector ReturnMovement = FVector(1, 0, 0.13) * ReturnSpeed * DeltaTime;
+            SetActorLocationAndRotation(GetActorLocation() + ReturnMovement, FRotator(0, 0, 0));
 			if (GetActorLocation().X >= 1500.0f)
 			{
 				
@@ -185,7 +185,7 @@ void ANaveEnemigaNodriza::movimientoNaveNodriza()
             Timer = FMath::Sin(TiempoTranscurrido); //Alternando para que sea positivo y negativo
             Timer += DeltaTime;
             const FVector ReturnMovement = FVector(1, 1, 0.2) * FVector(ReturnSpeed/3 * DeltaTime ,PendienteActual * DeltaTime , 0.7);
-            SetActorLocation(GetActorLocation() + ReturnMovement);
+            SetActorLocationAndRotation(GetActorLocation() + ReturnMovement, FRotator(0, 0, 0));
             if (GetActorLocation().X >= 1500.0f)
             {
                 

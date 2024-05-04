@@ -24,7 +24,8 @@
 #include "SolicitudDeNavesApoyo.h"
 #include "SolicitudDeNavesAtaque.h"
 #include "SolicitudDeNavesInformante.h"
-
+#include "JugadorCapsula.h"
+#include "EnemigoCapsula.h"
 #include "BuilderConcretoPNReparar.h"
 #include "DirectorPortaNave.h"
 #include "PortaNave.h"
@@ -32,6 +33,7 @@
 #include "BuilderNaveNodrizaFase1.h"
 #include "BuilderNaveNodrizaFase2.h"
 #include "BuilderNaveNodrizaFase3.h"
+#include "TimerManager.h"
 
 AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 {
@@ -52,18 +54,53 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     FRotator rotacionNave = FRotator(0.0f, 180.0f, 0.0f);
     FRotator rotacionNave90 = FRotator(0.0f, 90.0f, 0.0f);
 
+	
     ReparacionPorta = GetWorld()->SpawnActor<ABuilderConcretoPNReparar>(ABuilderConcretoPNReparar::StaticClass());
     IngenieroPortaNave = GetWorld()->SpawnActor<ADirectorPortaNave>(ADirectorPortaNave::StaticClass());
     IngenieroPortaNave->SetBuilderPortaNave(ReparacionPorta);
     IngenieroPortaNave->ConstruirPortaNave();
 
-	//DirectorNodriza = GetWorld()->SpawnActor<ADirectorNaveNodriza>(ADirectorNaveNodriza::StaticClass());
-	////BuilderNodrizaFase1 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase1>(ABuilderNaveNodrizaFase1::StaticClass());
-	//BuilderNodrizaFase2 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase2>(ABuilderNaveNodrizaFase2::StaticClass());
-	////BuilderNodrizaFase3 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase3>(ABuilderNaveNodrizaFase3::StaticClass());
-	//DirectorNodriza->enviarConstructor(BuilderNodrizaFase2);
-	//DirectorNodriza->construirNaveNodriza();
-	//ANaveEnemigaNodriza* NaveNodriza = DirectorNodriza->obtenerNave();
+	DirectorNodriza = GetWorld()->SpawnActor<ADirectorNaveNodriza>(ADirectorNaveNodriza::StaticClass());
+	BuilderNodrizaFase1 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase1>(ABuilderNaveNodrizaFase1::StaticClass());
+	/*BuilderNodrizaFase2 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase2>(ABuilderNaveNodrizaFase2::StaticClass());
+	BuilderNodrizaFase3 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase3>(ABuilderNaveNodrizaFase3::StaticClass());*/
+	DirectorNodriza->enviarConstructor(BuilderNodrizaFase1);
+	DirectorNodriza->construirNaveNodriza();
+    ANaveEnemigaNodriza* NaveNodriza = DirectorNodriza->obtenerNave();
+    /*DirectorNodriza->enviarConstructor(BuilderNodrizaFase2);
+    DirectorNodriza->construirNaveNodriza();
+    ANaveEnemigaNodriza* NaveNodriza2 = DirectorNodriza->obtenerNave();
+    DirectorNodriza->enviarConstructor(BuilderNodrizaFase3);
+    DirectorNodriza->construirNaveNodriza();
+	ANaveEnemigaNodriza* NaveNodriza3 = DirectorNodriza->obtenerNave();*/
+	posicionCapsulasEnemigas = NaveNodriza->GetPosicionesNaves();
+	NavesEnemigas = NaveNodriza->GetNavesEnemigas();
+
+    //Creacion de los distintos tipos de capsulas
+    AJugadorCapsula* JugadorCapsula = GetWorld()->SpawnActor<AJugadorCapsula>(AJugadorCapsula::StaticClass());
+    for (int i = 0; i < 7; i++) {
+        UbicacionInventario.Add(i, FVector(ubicacionDeObjetosInventario.X, ubicacionDeObjetosInventario.Y + i * 140.0f, ubicacionDeObjetosInventario.Z));
+        //Generar un número aleatorio entre 0 y 1
+        int RandomNumber = FMath::FRandRange(0, 3);
+        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Numero aleatorio: %d"), RandomNumber));
+        if (RandomNumber == 0)
+        {
+            JugadorCapsula->crearCapsulaArma(UbicacionInventario[i]);
+        }
+        else if (RandomNumber == 1)
+        {
+            JugadorCapsula->crearCapsulaEnergia(UbicacionInventario[i]);
+        }
+        else if (RandomNumber == 2)
+        {
+            JugadorCapsula->crearCapsulaMunicion(UbicacionInventario[i]);
+        }
+
+    }
+
+    CapsulaEnemiga = GetWorld()->SpawnActor<AEnemigoCapsula>(AEnemigoCapsula::StaticClass());
+	GetWorldTimerManager().SetTimer(TimerCapsulas, this, &AGalaga_USFX_L01GameMode::SapwnCapsulasEnemigas, 10.0f, true);
+
 
     APortaNave* portal = IngenieroPortaNave->GetPortaNave();
     portal->caracteristicas();
@@ -181,27 +218,6 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
         //    }
         //}
         TiempoTranscurrido = 0;
-
-        //Para el spauwn de las objetos de inventario
-        for (int i = 0; i < 6; i++) {
-			UbicacionInventario.Add(i, FVector(ubicacionDeObjetosInventario.X, ubicacionDeObjetosInventario.Y + i * 140.0f, ubicacionDeObjetosInventario.Z));
-             //Generar un número aleatorio entre 0 y 1
-                float RandomNumber = FMath::FRandRange(0.0f, 1.0f);
-
-                // Probabilidad de generar una nave caza o transporte (50% cada una)
-                if (RandomNumber <= 0.5f) {
-                    AInventoryActor* ObjetoInventario = World->SpawnActor<AInventoryActor>(AInventoryActorMunicion::StaticClass(), UbicacionInventario[i], rotacionNave);
-                    //Spawnea el objeto de inventario en una posicion y rotacion especifica  
-                    
-                }
-                else {
-                    AInventoryActor* ObjetoInventario = World->SpawnActor<AInventoryActor>(AInventoryActorEnergia::StaticClass(), UbicacionInventario[i], rotacionNave);
-                    //Spawnea el objeto de inventario en una posicion y rotacion especifica  
-                    
-                }
-               
-		}
-        
     }
     
 }
@@ -211,6 +227,32 @@ FString AGalaga_USFX_L01GameMode::GetUniqueNameForNave()
     static int32 Counter = 0;
     
     return FString::Printf(TEXT("NaveEnemiga_%d"), Counter++);
+}
+
+void AGalaga_USFX_L01GameMode::SapwnCapsulasEnemigas()
+{
+	UWorld* const World = GetWorld();
+	if (World != nullptr)
+	{
+        for (int i = 0; i < NavesEnemigas.Num(); i++) {
+            
+            int RandomNumber = FMath::FRandRange(0, 3);
+			FVector PosicionNaveActual = posicionCapsulasEnemigas[i] + FVector(0.0f, 0.0f, 500.0f);
+            if (RandomNumber == 0)
+            {
+                CapsulaEnemiga->crearCapsulaArma(PosicionNaveActual);
+            }
+            else if (RandomNumber == 1)
+            {
+                CapsulaEnemiga->crearCapsulaEnergia(PosicionNaveActual);
+            }
+            else if (RandomNumber == 2)
+            {
+                CapsulaEnemiga->crearCapsulaMunicion(PosicionNaveActual);
+            }
+
+        }
+	}
 }
 
 

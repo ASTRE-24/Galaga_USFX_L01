@@ -38,16 +38,6 @@ void UMovimientoVertical::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 			// Find a new position for the object to go to
 			auto NewPos = Parent->GetActorLocation() + FVector(0, 0, -1);
-			/*FVector
-			(
-				FMath::FRandRange(-1, 1) *
-				MovementRadius,
-				FMath::FRandRange(-1, 1) *
-				MovementRadius,
-				FMath::FRandRange(-1, 1) *
-				MovementRadius
-			);*/
-			// Update the object's position
 			Parent->SetActorLocation(NewPos);
 		}
 	}

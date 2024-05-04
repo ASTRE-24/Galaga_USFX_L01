@@ -25,7 +25,7 @@ public:
 	class ABuilderNaveNodrizaFase1* BuilderNodrizaFase1;
 	class ABuilderNaveNodrizaFase2* BuilderNodrizaFase2;
 	class ABuilderNaveNodrizaFase3* BuilderNodrizaFase3;
-
+	class AEnemigoCapsula* CapsulaEnemiga;
 public:
 	//ANaveEnemiga* NaveEnemiga01;
 	//ANaveEnemigaTransporte* NaveEnemigaTransporte01;
@@ -36,18 +36,20 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	void SapwnCapsulasEnemigas();
 
 public:
 	//Definicion de las naves enemigas en un array
 	//TArray<ANaveEnemiga*> TANavesEnemigas;
 	TArray<ANaveEnemigaCaza*> TANavesEnemigasCaza;
 	TArray<ANaveEnemigaTransporte*> TANavesEnemigasTransporte;
-	TMap<FString, ANaveEnemiga*> NaveEnemigas; // Aquí se declara el TMap para almacenar las naves enemigas
+	TArray<ANaveEnemiga*> NavesEnemigas; // Aquí se declara el TMap para almacenar las naves enemigas
 	TMap<int, FVector> UbicacionInventario; // Aquí se declara el TMap para almacenar las ubicaciones de los inventarios
 	TArray<FString> NombresNavesAtaque; // Aquí se declara el TArray para almacenar los nombres de las naves enemigas de ataque
 	TArray<FString> NombresNavesApoyo; // Aquí se declara el TArray para almacenar los nombres de las naves enemigas de apoyo
 	TArray<FString> NombresNavesInformante; // Aquí se declara el TArray para almacenar los nombres de las naves enemigas de informante
-	//TMap<int, FVector> PosicionesNavesEnemigas; // Aquí se declara el TMap para almacenar las posiciones de las naves enemigas
+	TArray<FVector> posicionCapsulasEnemigas; // Aquí se declara el TArray para almacenar las posiciones de las cápsulas enemigas
+	FTimerHandle TimerCapsulas;
 
 private:
 	

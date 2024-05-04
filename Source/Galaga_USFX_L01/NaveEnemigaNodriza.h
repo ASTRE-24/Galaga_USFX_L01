@@ -42,10 +42,13 @@ public:
 	FORCEINLINE int GetNumNavesGeneradas() const { return numNavesGeneradas; }
 	FORCEINLINE float GetTiempoGeneracionNaves() const { return tiempoGeneracionNaves; }
 	FORCEINLINE FString GetTipoMovimiento() const { return tipoMovimiento; }
+	FORCEINLINE TArray<FVector> GetPosicionesNaves() const { return PosicionesNaves; }
+	FORCEINLINE TArray<ANaveEnemiga*> GetNavesEnemigas() const { return NavesEnemigas; }
 
 	FORCEINLINE void SetNumNavesGeneradas(float _numNavesGeneradas) { numNavesGeneradas = _numNavesGeneradas; }
 	FORCEINLINE void SetTiempoGeneracionNaves(float _tiempoGeneracionNaves) { tiempoGeneracionNaves = _tiempoGeneracionNaves; }
 	FORCEINLINE void SetTipoMovimiento(FString _tipoMovimiento) { tipoMovimiento = _tipoMovimiento; }
+	FORCEINLINE void SetPosicionesNaves(TArray<FVector> _PosicionesNaves) { PosicionesNaves = _PosicionesNaves; }
 
 protected:
 	virtual void Mover(float DeltaTime);

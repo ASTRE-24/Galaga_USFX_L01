@@ -187,18 +187,6 @@
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\InventoryActorArma.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\Source\Galaga_USFX_L01\InventoryActorEnemigoArma.cpp">
-      <Filter>Source\Galaga_USFX_L01</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\Galaga_USFX_L01\InventoryActorEnemigoArma.h">
-      <Filter>Source\Galaga_USFX_L01</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\Source\Galaga_USFX_L01\InventoryActorEnemigoEnergia.cpp">
-      <Filter>Source\Galaga_USFX_L01</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\Galaga_USFX_L01\InventoryActorEnemigoEnergia.h">
-      <Filter>Source\Galaga_USFX_L01</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\InventoryActorEnergia.cpp">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClCompile>
