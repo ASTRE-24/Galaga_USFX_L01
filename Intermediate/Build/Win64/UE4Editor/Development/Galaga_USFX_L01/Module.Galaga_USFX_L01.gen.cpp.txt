@@ -52,9 +52,15 @@ D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/DirectorPortaNave.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/DirectorPortaNave.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\DirectorPortaNave.generated.h
+D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/EnemigoCapsula.gen.cpp
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/EnemigoCapsula.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\InventarioAFactory.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\InventarioAFactory.generated.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\EnemigoCapsula.generated.h
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Escudo.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/Escudo.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Escudo.generated.h
+D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Galaga_USFX_L01.init.gen.cpp
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Galaga_USFX_L01GameMode.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/Galaga_USFX_L01GameMode.h
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/GameModeBase.h
@@ -95,8 +101,6 @@ D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/InterfaceCapsulaEnemiga.gen.cpp
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/InterfaceNaveNodriza.gen.cpp
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/InventarioAFactory.gen.cpp
-D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/InventarioAFactory.h
-D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\InventarioAFactory.generated.h
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/InventoryActor.gen.cpp
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/InventoryActorArma.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/InventoryActorArma.h
@@ -108,6 +112,9 @@ D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/InventoryActorMunicion.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\InventoryActorMunicion.generated.h
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/InventoryComponent.gen.cpp
+D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/JugadorCapsula.gen.cpp
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/JugadorCapsula.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\JugadorCapsula.generated.h
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/MovimientoVertical.gen.cpp
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/MyInterface.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/MyInterface.h

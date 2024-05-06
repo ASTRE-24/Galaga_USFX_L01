@@ -77,7 +77,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 	NavesEnemigas = NaveNodriza->GetNavesEnemigas();
 
     //Creacion de los distintos tipos de capsulas
-    AJugadorCapsula* JugadorCapsula = GetWorld()->SpawnActor<AJugadorCapsula>(AJugadorCapsula::StaticClass());
+    InventarioAB = GetWorld()->SpawnActor<IInventarioAFactory>(AJugadorCapsula::StaticClass());
     for (int i = 0; i < 7; i++) {
         UbicacionInventario.Add(i, FVector(ubicacionDeObjetosInventario.X, ubicacionDeObjetosInventario.Y + i * 140.0f, ubicacionDeObjetosInventario.Z));
         //Generar un número aleatorio entre 0 y 1
@@ -85,20 +85,20 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
         GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Numero aleatorio: %d"), RandomNumber));
         if (RandomNumber == 0)
         {
-            JugadorCapsula->crearCapsulaArma(UbicacionInventario[i]);
+            InventarioAB->crearCapsulaArma(UbicacionInventario[i]);
         }
         else if (RandomNumber == 1)
         {
-            JugadorCapsula->crearCapsulaEnergia(UbicacionInventario[i]);
+            InventarioAB->crearCapsulaEnergia(UbicacionInventario[i]);
         }
         else if (RandomNumber == 2)
         {
-            JugadorCapsula->crearCapsulaMunicion(UbicacionInventario[i]);
+            InventarioAB->crearCapsulaMunicion(UbicacionInventario[i]);
         }
 
     }
 
-    CapsulaEnemiga = GetWorld()->SpawnActor<AEnemigoCapsula>(AEnemigoCapsula::StaticClass());
+    InventarioAB = GetWorld()->SpawnActor<IInventarioAFactory>(AEnemigoCapsula::StaticClass());
 	GetWorldTimerManager().SetTimer(TimerCapsulas, this, &AGalaga_USFX_L01GameMode::SapwnCapsulasEnemigas, 10.0f, true);
 
 
@@ -240,15 +240,15 @@ void AGalaga_USFX_L01GameMode::SapwnCapsulasEnemigas()
 			FVector PosicionNaveActual = posicionCapsulasEnemigas[i] + FVector(0.0f, 0.0f, 500.0f);
             if (RandomNumber == 0)
             {
-                CapsulaEnemiga->crearCapsulaArma(PosicionNaveActual);
+                InventarioAB->crearCapsulaArma(PosicionNaveActual);
             }
             else if (RandomNumber == 1)
             {
-                CapsulaEnemiga->crearCapsulaEnergia(PosicionNaveActual);
+                InventarioAB->crearCapsulaEnergia(PosicionNaveActual);
             }
             else if (RandomNumber == 2)
             {
-                CapsulaEnemiga->crearCapsulaMunicion(PosicionNaveActual);
+                InventarioAB->crearCapsulaMunicion(PosicionNaveActual);
             }
 
         }

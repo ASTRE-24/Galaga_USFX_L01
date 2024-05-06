@@ -20,7 +20,7 @@ public:
 	AGalaga_USFX_L01GameMode();
 	class ABuilderConcretoPNReparar* ReparacionPorta;
 	class ADirectorPortaNave* IngenieroPortaNave;
-
+	class IInventarioAFactory* InventarioAB;
 	class ADirectorNaveNodriza* DirectorNodriza;
 	class ABuilderNaveNodrizaFase1* BuilderNodrizaFase1;
 	class ABuilderNaveNodrizaFase2* BuilderNodrizaFase2;
