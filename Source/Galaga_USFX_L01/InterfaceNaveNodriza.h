@@ -27,5 +27,5 @@ public:
 	virtual void tipoDeArma() = 0;
 	virtual void tiposNavesEnemigas() = 0;
 	virtual void retiroNaveNodriza() = 0;
-
+	
 };

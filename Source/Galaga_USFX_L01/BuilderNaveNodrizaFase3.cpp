@@ -2,6 +2,7 @@
 
 
 #include "BuilderNaveNodrizaFase3.h"
+#include "NaveEnemigaNodrizaTactico.h"
 
 
 // Sets default values
@@ -16,9 +17,11 @@ ABuilderNaveNodrizaFase3::ABuilderNaveNodrizaFase3()
 void ABuilderNaveNodrizaFase3::BeginPlay()
 {
 	Super::BeginPlay();
-	naveNodriza = GetWorld()->SpawnActor<ANaveEnemigaNodriza>(ANaveEnemigaNodriza::StaticClass(), FVector(-900, 1250, 215), FRotator(0, 0, 0));
+	naveNodriza = GetWorld()->SpawnActor<ANaveEnemigaNodriza>(ANaveEnemigaNodrizaTactico::StaticClass(), FVector(-900, 1250, 215), FRotator(0, 0, 0));
 	naveNodriza->SetActorScale3D(FVector(0.5, 0.5, 0.5));
 	naveNodriza->SetTipoMovimiento("Movimiento 3");
+	naveNodriza->SetTipoArma("Triple Abanico");
+	naveNodriza->SetCategiaNave(3);
 }
 
 // Called every frame

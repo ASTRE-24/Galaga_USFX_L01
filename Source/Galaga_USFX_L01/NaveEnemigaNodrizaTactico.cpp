@@ -5,9 +5,8 @@
 
 ANaveEnemigaNodrizaTactico::ANaveEnemigaNodrizaTactico()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Trim_90_In.Shape_Trim_90_In'"));
-	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
-    mallaNaveEnemiga->SetWorldScale3D(FVector(2.5f, 2.5f, 2.5f));
+    static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/Balas/SciFi_Fighter.SciFi_Fighter'"));
+    mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
 
 }
 
@@ -63,7 +62,7 @@ void ANaveEnemigaNodrizaTactico::Mover(float DeltaTime)
 void ANaveEnemigaNodrizaTactico::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Mover(DeltaTime);
+    //Mover(DeltaTime);
 }
 
 void ANaveEnemigaNodrizaTactico::DesplegarTropas()

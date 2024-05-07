@@ -19,6 +19,8 @@ void ABuilderNaveNodrizaFase1::BeginPlay()
 	naveNodriza = GetWorld()->SpawnActor<ANaveEnemigaNodriza>(ANaveEnemigaNodriza::StaticClass(), FVector(-900,1250,215), FRotator (0,0,0));
 	naveNodriza->SetActorScale3D(FVector(0.5, 0.5, 0.5));
 	naveNodriza->SetTipoMovimiento("Movimiento 1");
+	naveNodriza->SetTipoArma("Doble");
+	naveNodriza->SetCategiaNave(1);
 }
 
 // Called every frame

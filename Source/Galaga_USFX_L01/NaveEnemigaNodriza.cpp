@@ -9,13 +9,14 @@
 
 ANaveEnemigaNodriza::ANaveEnemigaNodriza()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/source.source'"));
-	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
+    static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/Balas/Spacecraf.Spacecraf'"));
+    mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
     Timer = 0.0f; //Inicializa el timer en 0 
     TiempoTranscurrido = 0.0f;
     indicePosicion = 0;
 	indiceNave = 0;
 	tipoMovimiento = "";
+	categoriaNave = 0;
     SetVelocidad(600);
 }
 
@@ -72,10 +73,24 @@ void ANaveEnemigaNodriza::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
     //Mover(DeltaTime);
-	FVector Posicion = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 100);
+	FVector Posicion = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 110);
     //movimientoNaveNodriza(DeltaTime);
-	arma->ArmaDisparoDoble(this);
-	arma->SeguirNave(Posicion, GetActorRotation());
+    if (tipoArma == "Doble")
+    {
+       arma->ArmaDisparoDoble(this);
+	   arma->SeguirNave(Posicion, GetActorRotation());
+    }
+    else if (tipoArma == "Triple")
+    {
+        arma->ArmaDisparoTriple(this);
+        arma->SeguirNave(Posicion, GetActorRotation());
+    }
+    else if (tipoArma == "Triple Abanico")
+    {
+        arma->ArmaDisparoTripleAbanico(this);
+        arma->SeguirNave(Posicion, GetActorRotation());
+    }
+    
 
 }
 
@@ -252,7 +267,7 @@ void ANaveEnemigaNodriza::formacionNavesEnemigas(FString formacion)
 void ANaveEnemigaNodriza::tipoDeArma()
 {
     arma = GetWorld()->SpawnActor<AArmas>(AArmas::StaticClass(), FVector(GetActorLocation().X, GetActorLocation().Y,
-        GetActorLocation().Z ), FRotator(0, 0, 0));
+        GetActorLocation().Z), FRotator(0, 0, 0));
 
 }
 void ANaveEnemigaNodriza::tiposNavesEnemigas()
@@ -285,8 +300,8 @@ void ANaveEnemigaNodriza::tiposNavesEnemigas()
 
         for (int i = 0; i < PosicionesNaves.Num(); i++) {
             // Selecciona un tipo de nave aleatorio
-            int32 CategoriaNave = FMath::RandRange(0, 2);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
-            if (CategoriaNave == 0)
+           
+            if (categoriaNave == 1)
             {
                 int32 RandomIndex = FMath::RandRange(0, NombresNavesAtaque.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
                 // Spawnea la nave aleatoria
@@ -295,7 +310,7 @@ void ANaveEnemigaNodriza::tiposNavesEnemigas()
                 NavesEnemigas.Add( NaveEnemigaAtaque);
                 
             }
-            else if (CategoriaNave == 1)
+            else if (categoriaNave == 2)
             {
                 int32 RandomIndex = FMath::RandRange(0, NombresNavesApoyo.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
                 // Spawnea la nave aleatoria
@@ -303,7 +318,7 @@ void ANaveEnemigaNodriza::tiposNavesEnemigas()
                 NavesEnemigas.Add(NaveEnemigaApoyo);
                
             }
-            else if (CategoriaNave == 2)
+            else if (categoriaNave == 3)
             {
                 int32 RandomIndex = FMath::RandRange(0, NombresNavesInformante.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
                 // Spawnea la nave aleatoria
@@ -317,80 +332,84 @@ void ANaveEnemigaNodriza::tiposNavesEnemigas()
 
 void ANaveEnemigaNodriza::retiroNaveNodriza()
 {
-    const float Amplitud = 5.0f;
-    const float Frecuencia = 4.0f;
-    const float ReturnSpeed = GetVelocidad(); // Velocidad de retorno ajustable según sea necesario
-    const float DeltaTime = GetWorld()->GetDeltaSeconds();
-    if (tipoMovimiento == "Movimiento 1")
-    {      
-        if (GetActorLocation().Y >= 1000)
-        {
-            Destroy();
-            arma->Destroy();
-        }
-        else
-        {
-            Timer += DeltaTime;
-            const FVector ReturnMovement = FVector(0, 1, 0) * ReturnSpeed * DeltaTime;
-            SetActorLocationAndRotation(GetActorLocation() + ReturnMovement, FRotator(0, 90, 0));
-
-            // Llama a esta función nuevamente en el siguiente fotograma
-            GetWorldTimerManager().SetTimerForNextTick([this]() {retiroNaveNodriza(); });
-        }
-    }
-    else if (tipoMovimiento == "Movimiento 2")
+    if (this)
     {
-        if (GetActorLocation().Y >= 1000)
+        const float Amplitud = 5.0f;
+        const float Frecuencia = 4.0f;
+        const float ReturnSpeed = GetVelocidad(); // Velocidad de retorno ajustable según sea necesario
+        const float DeltaTime = GetWorld()->GetDeltaSeconds();
+        if (tipoMovimiento == "Movimiento 1")
         {
-            Destroy();
-            arma->Destroy();
-        }
-        else
-        {
-            Timer += DeltaTime;
-            const FVector ReturnMovement = FVector(-1, 1, 0) * FVector(Amplitud * FMath::Sin(Frecuencia * Timer), ReturnSpeed * DeltaTime, 0);
-            SetActorLocationAndRotation(GetActorLocation() + ReturnMovement, FRotator(0, 90, 0));
-
-            // Llama a esta función nuevamente en el siguiente fotograma
-            GetWorldTimerManager().SetTimerForNextTick([this]() {retiroNaveNodriza(); });
-        }
-    }
-	else if (tipoMovimiento == "Movimiento 3")
-    {      
-        if (GetActorLocation().Y >= 1000)
-        {
-			Destroy();
-			arma->Destroy();
-		}
-        else
-        {
-            float PendienteActual;
-            if (Timer <= 1.0f && Timer >= 0)
+            if (GetActorLocation().Y >= 1000)
             {
-
-                PendienteActual = -75;
-              
+                Destroy();
+                arma->Destroy();
             }
             else
             {
-                PendienteActual = 75;              
-            }
-            TiempoTranscurrido += PI / 2 * DeltaTime;
-            Timer = FMath::Sin(TiempoTranscurrido); //Alternando para que sea positivo y negativo
-            Timer += DeltaTime;
-            const FVector ReturnMovement = FVector(1, 1, 0) * FVector(PendienteActual * DeltaTime, ReturnSpeed/3 * DeltaTime, 0);
-            // Reinicia el temporizador
-            SetActorLocationAndRotation(GetActorLocation() + ReturnMovement, FRotator(0, 90, 0));
+                Timer += DeltaTime;
+                const FVector ReturnMovement = FVector(0, 1, 0) * ReturnSpeed * DeltaTime;
+                SetActorLocationAndRotation(GetActorLocation() + ReturnMovement, FRotator(0, 90, 0));
 
-			// Llama a esta función nuevamente en el siguiente fotograma
-			GetWorldTimerManager().SetTimerForNextTick([this]() {retiroNaveNodriza(); });
+                // Llama a esta función nuevamente en el siguiente fotograma
+                GetWorldTimerManager().SetTimerForNextTick([this]() {retiroNaveNodriza(); });
+            }
+        }
+        else if (tipoMovimiento == "Movimiento 2")
+        {
+            if (GetActorLocation().Y >= 1000)
+            {
+                Destroy();
+                arma->Destroy();
+            }
+            else
+            {
+                Timer += DeltaTime;
+                const FVector ReturnMovement = FVector(-1, 1, 0) * FVector(Amplitud * FMath::Sin(Frecuencia * Timer), ReturnSpeed * DeltaTime, 0);
+                SetActorLocationAndRotation(GetActorLocation() + ReturnMovement, FRotator(0, 90, 0));
+
+                // Llama a esta función nuevamente en el siguiente fotograma
+                GetWorldTimerManager().SetTimerForNextTick([this]() {retiroNaveNodriza(); });
+            }
+        }
+        else if (tipoMovimiento == "Movimiento 3")
+        {
+            if (GetActorLocation().Y >= 1000)
+            {
+                Destroy();
+                arma->Destroy();
+            }
+            else
+            {
+                float PendienteActual;
+                if (Timer <= 1.0f && Timer >= 0)
+                {
+
+                    PendienteActual = -75;
+
+                }
+                else
+                {
+                    PendienteActual = 75;
+                }
+                TiempoTranscurrido += PI / 2 * DeltaTime;
+                Timer = FMath::Sin(TiempoTranscurrido); //Alternando para que sea positivo y negativo
+                Timer += DeltaTime;
+                const FVector ReturnMovement = FVector(1, 1, 0) * FVector(PendienteActual * DeltaTime, ReturnSpeed / 3 * DeltaTime, 0);
+                // Reinicia el temporizador
+                SetActorLocationAndRotation(GetActorLocation() + ReturnMovement, FRotator(0, 90, 0));
+
+                // Llama a esta función nuevamente en el siguiente fotograma
+                GetWorldTimerManager().SetTimerForNextTick([this]() {retiroNaveNodriza(); });
+            }
         }
     }
 }
 
 void ANaveEnemigaNodriza::repartirNaves()
 {
-	for (int i = 0; i < NavesEnemigas.Num(); i++)
+	if (this)
+    for (int i = 0; i < NavesEnemigas.Num(); i++)
     {
 		NavesEnemigas[i]->SetActorLocation(FVector(GetActorLocation().X, GetActorLocation().Y, 215.0f));
 		posicionesIniciales(i);
@@ -438,3 +457,4 @@ void ANaveEnemigaNodriza::posicionesIniciales(int g)
         GetWorldTimerManager().SetTimerForNextTick([=]() { posicionesIniciales(parametroG); });
     }
 }
+

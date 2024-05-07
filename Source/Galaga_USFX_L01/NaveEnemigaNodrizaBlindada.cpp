@@ -5,8 +5,8 @@
 
 ANaveEnemigaNodrizaBlindada::ANaveEnemigaNodrizaBlindada()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Pipe.Shape_Pipe'"));
-	mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
+    static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/NavesEnemigas/source.source'"));
+    mallaNaveEnemiga->SetStaticMesh(ShipMesh.Object);
 
 }
 
@@ -61,7 +61,7 @@ void ANaveEnemigaNodrizaBlindada::Mover(float DeltaTime)
 void ANaveEnemigaNodrizaBlindada::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    Mover(DeltaTime);
+    //Mover(DeltaTime);
 }
 
 void ANaveEnemigaNodrizaBlindada::ActivarEscudo()

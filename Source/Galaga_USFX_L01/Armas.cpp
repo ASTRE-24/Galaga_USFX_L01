@@ -152,7 +152,7 @@ void AArmas::ArmaDisparoTriple(AActor* NaveDisparo)
             AGalaga_USFX_L01Projectile* Proyectil1 = World->SpawnActor<AGalaga_USFX_L01Projectile>(SpawnLocationLeft, FireRotation);
             if (Proyectil1)
             {
-                Proyectil1->SetOriginActor(this);
+                Proyectil1->SetOriginActor(NaveDisparo);
             }
             //Calcula la posición de spawn para el segundo proyectil (en el centro de la nave)
             const FVector SpawnLocationCenter = SpawnLocation + FireRotation.RotateVector(FVector(0.f, 0.f, 0.f));
