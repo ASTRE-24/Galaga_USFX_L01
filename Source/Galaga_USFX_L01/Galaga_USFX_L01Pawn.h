@@ -7,6 +7,8 @@
 #include "InventoryComponent.h"
 #include "InventoryActor.h"
 #include "ActorComponentDisparo.h"
+#include "GameControlAdapter.h"
+#include "LogisticaJuego.h"
 #include "GameFramework/PlayerInput.h"
 
 #include "Galaga_USFX_L01Pawn.generated.h"
@@ -153,6 +155,14 @@ private:
 	bool bChocaYMeDestruyo;
 	bool bChocarYAtravesar;
 	FString tipoArma;
+
+	//para el adaptador
+	int32 Score;
+	int32 Lives;
+	float Health;
+
+	UGameControlAdapter* GameControlAdapter;
+	ULogisticaJuego* LogisticaJuego;
 
 public:
 	/** Returns ShipMeshComponent subobject **/

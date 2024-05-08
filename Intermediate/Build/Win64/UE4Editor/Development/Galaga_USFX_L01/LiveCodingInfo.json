@@ -4,7 +4,11 @@
 		"Module.Galaga_USFX_L01.cpp.obj": [
 			"ActorComponentDisparo.cpp.obj",
 			"ActorSpawnerComponent.cpp.obj",
+			"Armas.cpp.obj",
 			"BuilderConcretoPNReparar.cpp.obj",
+			"BuilderNaveNodrizaFase1.cpp.obj",
+			"BuilderNaveNodrizaFase2.cpp.obj",
+			"BuilderNaveNodrizaFase3.cpp.obj",
 			"BuilderPortaNave.cpp.obj",
 			"CapsulaEnemigaArma.cpp.obj",
 			"CapsulaEnemigaEnergia.cpp.obj",
@@ -14,7 +18,6 @@
 			"EnemigoCapsula.cpp.obj",
 			"Escudo.cpp.obj",
 			"Galaga_USFX_L01.cpp.obj",
-			"Galaga_USFX_L01Pawn.cpp.obj",
 			"Galaga_USFX_L01Projectile.cpp.obj",
 			"InterfaceBuilderNaveNodriza.cpp.obj",
 			"InterfaceCapsulaEnemiga.cpp.obj",
@@ -37,6 +40,8 @@
 			"NaveEnemigaEspia.cpp.obj",
 			"NaveEnemigaEspiaInfiltrada.cpp.obj",
 			"NaveEnemigaEspiaTactica.cpp.obj",
+			"NaveEnemigaNodrizaBlindada.cpp.obj",
+			"NaveEnemigaNodrizaTactico.cpp.obj",
 			"NaveEnemigaReabastecimiento.cpp.obj",
 			"NaveEnemigaTransporte.cpp.obj",
 			"NaveEnemigaTransporteFurtivo.cpp.obj",
@@ -49,14 +54,12 @@
 			"SolicitudDeNavesApoyo.cpp.obj",
 			"SolicitudDeNavesAtaque.cpp.obj",
 			"SolicitudDeNavesInformante.cpp.obj",
-			"Armas.cpp.obj",
-			"BuilderNaveNodrizaFase1.cpp.obj",
-			"BuilderNaveNodrizaFase2.cpp.obj",
-			"BuilderNaveNodrizaFase3.cpp.obj",
+			"ControlLogisticaJuego.cpp.obj",
 			"Galaga_USFX_L01GameMode.cpp.obj",
-			"NaveEnemigaNodriza.cpp.obj",
-			"NaveEnemigaNodrizaBlindada.cpp.obj",
-			"NaveEnemigaNodrizaTactico.cpp.obj"
+			"Galaga_USFX_L01Pawn.cpp.obj",
+			"GameControlAdapter.cpp.obj",
+			"LogisticaJuego.cpp.obj",
+			"NaveEnemigaNodriza.cpp.obj"
 		],
 		"Module.Galaga_USFX_L01.gen.cpp.obj": [
 			"ActorComponentDisparo.gen.cpp.obj",
@@ -74,7 +77,6 @@
 			"DirectorPortaNave.gen.cpp.obj",
 			"EnemigoCapsula.gen.cpp.obj",
 			"Escudo.gen.cpp.obj",
-			"Galaga_USFX_L01.init.gen.cpp.obj",
 			"Galaga_USFX_L01GameMode.gen.cpp.obj",
 			"Galaga_USFX_L01Pawn.gen.cpp.obj",
 			"Galaga_USFX_L01Projectile.gen.cpp.obj",
@@ -111,7 +113,11 @@
 			"SolicitudDeNaves.gen.cpp.obj",
 			"SolicitudDeNavesApoyo.gen.cpp.obj",
 			"SolicitudDeNavesAtaque.gen.cpp.obj",
-			"SolicitudDeNavesInformante.gen.cpp.obj"
+			"SolicitudDeNavesInformante.gen.cpp.obj",
+			"ControlLogisticaJuego.gen.cpp.obj",
+			"Galaga_USFX_L01.init.gen.cpp.obj",
+			"GameControlAdapter.gen.cpp.obj",
+			"LogisticaJuego.gen.cpp.obj"
 		]
 	}
 }

@@ -55,7 +55,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     FRotator rotacionNave90 = FRotator(0.0f, 90.0f, 0.0f);
 
 	
-    ReparacionPorta = GetWorld()->SpawnActor<ABuilderConcretoPNReparar>(ABuilderConcretoPNReparar::StaticClass());
+    /*ReparacionPorta = GetWorld()->SpawnActor<ABuilderConcretoPNReparar>(ABuilderConcretoPNReparar::StaticClass());
     IngenieroPortaNave = GetWorld()->SpawnActor<ADirectorPortaNave>(ADirectorPortaNave::StaticClass());
     IngenieroPortaNave->SetBuilderPortaNave(ReparacionPorta);
     IngenieroPortaNave->ConstruirPortaNave();
@@ -74,7 +74,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     DirectorNodriza->construirNaveNodriza();
 	ANaveEnemigaNodriza* NaveNodriza3 = DirectorNodriza->obtenerNave();
 	posicionCapsulasEnemigas = NaveNodriza->GetPosicionesNaves();
-	NavesEnemigas = NaveNodriza->GetNavesEnemigas();
+	NavesEnemigas = NaveNodriza->GetNavesEnemigas();*/
 
     //Creacion de los distintos tipos de capsulas
     InventarioAB = GetWorld()->SpawnActor<IInventarioAFactory>(AJugadorCapsula::StaticClass());
@@ -99,11 +99,11 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     }
 
     InventarioAB = GetWorld()->SpawnActor<IInventarioAFactory>(AEnemigoCapsula::StaticClass());
-	GetWorldTimerManager().SetTimer(TimerCapsulas, this, &AGalaga_USFX_L01GameMode::SapwnCapsulasEnemigas, 10.0f, true);
+	//GetWorldTimerManager().SetTimer(TimerCapsulas, this, &AGalaga_USFX_L01GameMode::SapwnCapsulasEnemigas, 10.0f, true);
 
 
-    APortaNave* portal = IngenieroPortaNave->GetPortaNave();
-    portal->caracteristicas();
+    /*APortaNave* portal = IngenieroPortaNave->GetPortaNave();
+    portal->caracteristicas();*/
 
     APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
     if (PlayerController)

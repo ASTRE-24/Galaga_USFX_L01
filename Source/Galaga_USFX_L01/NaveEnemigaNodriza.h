@@ -6,6 +6,9 @@
 #include "NaveEnemiga.h"
 #include "InterfaceNaveNodriza.h"
 #include "Armas.h"
+#include "SolicitudDeNavesApoyo.h"
+#include "SolicitudDeNavesAtaque.h"
+#include "SolicitudDeNavesInformante.h"
 #include "NaveEnemigaNodriza.generated.h"
 
 /**
@@ -23,6 +26,9 @@ public:
 	float Timer; //Timer para el movimiento de la nave
 	float TiempoTranscurrido; //Tiempo transcurrido
 	AArmas* arma;
+	ASolicitudDeNaves* SolicitudDeNavesAtaque;
+	ASolicitudDeNaves* SolicitudDeNavesApoyo;
+	ASolicitudDeNaves* SolicitudDeNavesInformante;
 	FString forma;
 	TArray<FString>NombresNavesAtaque; //Nombres de las naves de ataque
 	TArray<FString>NombresNavesApoyo; //Nombres de las naves de apoyo

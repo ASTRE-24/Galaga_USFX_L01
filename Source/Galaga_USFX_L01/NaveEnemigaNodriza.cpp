@@ -275,9 +275,9 @@ void ANaveEnemigaNodriza::tiposNavesEnemigas()
     FVector ubicacionInicioNavesEnemigas = FVector(1850.0f, -1540.7f, 216.0f);
     FRotator rotacionNave = FRotator(0.0f, 180.0f, 0.0f);
     //Creacion de las solicitudes de naves
-    ASolicitudDeNaves* SolicitudDeNavesAtaque = GetWorld()->SpawnActor<ASolicitudDeNavesAtaque>(ASolicitudDeNavesAtaque::StaticClass());
-    ASolicitudDeNaves* SolicitudDeNavesApoyo = GetWorld()->SpawnActor<ASolicitudDeNavesApoyo>(ASolicitudDeNavesApoyo::StaticClass());
-    ASolicitudDeNaves* SolicitudDeNavesInformante = GetWorld()->SpawnActor<ASolicitudDeNavesInformante>(ASolicitudDeNavesInformante::StaticClass());
+    SolicitudDeNavesAtaque = GetWorld()->SpawnActor<ASolicitudDeNavesAtaque>(ASolicitudDeNavesAtaque::StaticClass());
+    SolicitudDeNavesApoyo = GetWorld()->SpawnActor<ASolicitudDeNavesApoyo>(ASolicitudDeNavesApoyo::StaticClass());
+    SolicitudDeNavesInformante = GetWorld()->SpawnActor<ASolicitudDeNavesInformante>(ASolicitudDeNavesInformante::StaticClass());
     //Aniadir los nombres al TArray
     NombresNavesAtaque.Add("NaveEnemigaCaza");
     NombresNavesAtaque.Add("NaveEnemigaCazaSigilosa");
