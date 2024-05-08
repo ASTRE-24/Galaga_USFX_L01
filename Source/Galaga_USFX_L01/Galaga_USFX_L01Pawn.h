@@ -131,6 +131,13 @@ public:
 	//static const FName MoveDiagonalBinding;
 	static const FName FireForwardBinding;
 	static const FName FireRightBinding;
+	//para el adaptador
+	int32 Score;
+	int32 Lives;
+	float Health;
+
+	UGameControlAdapter* GameControlAdapter;
+	ULogisticaJuego* LogisticaJuego;
 
 private:
 
@@ -156,13 +163,7 @@ private:
 	bool bChocarYAtravesar;
 	FString tipoArma;
 
-	//para el adaptador
-	int32 Score;
-	int32 Lives;
-	float Health;
-
-	UGameControlAdapter* GameControlAdapter;
-	ULogisticaJuego* LogisticaJuego;
+	
 
 public:
 	/** Returns ShipMeshComponent subobject **/

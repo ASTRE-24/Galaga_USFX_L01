@@ -54,6 +54,9 @@ D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/CapsulaEnemigaMunicion.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/CapsulaEnemigaMunicion.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\CapsulaEnemigaMunicion.generated.h
+D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/ControlLogisticaJuego.gen.cpp
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/ControlLogisticaJuego.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ControlLogisticaJuego.generated.h
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/DirectorNaveNodriza.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/DirectorNaveNodriza.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\DirectorNaveNodriza.generated.h
@@ -68,6 +71,7 @@ D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Escudo.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/Escudo.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Escudo.generated.h
+D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Galaga_USFX_L01.init.gen.cpp
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Galaga_USFX_L01GameMode.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/Galaga_USFX_L01GameMode.h
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/GameModeBase.h
@@ -96,8 +100,6 @@ D:\game\UE_4.27\Engine\Source\Runtime\Core\Public\Math/UnitConversion.h
 D:\game\UE_4.27\Engine\Source\Runtime\Core\Public\Math/UnitConversion.inl
 D:\game\UE_4.27\Engine\Source\Runtime\Core\Public\Internationalization/PolyglotTextData.h
 D:\game\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\AssetRegistry/ARFilter.h
-D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\ControlLogisticaJuego.h
-D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ControlLogisticaJuego.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\LogisticaJuego.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\LogisticaJuego.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\GameControlAdapter.generated.h
@@ -116,6 +118,7 @@ D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\Particles/Emitter.h
 D:\game\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\Emitter.generated.h
 D:\game\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ParticleSystemComponent.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Galaga_USFX_L01Projectile.generated.h
+D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/GameControlAdapter.gen.cpp
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/InterfaceBuilderNaveNodriza.gen.cpp
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/InterfaceCapsulaEnemiga.gen.cpp
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/InterfaceNaveNodriza.gen.cpp
@@ -134,6 +137,7 @@ D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/JugadorCapsula.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/JugadorCapsula.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\JugadorCapsula.generated.h
+D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/LogisticaJuego.gen.cpp
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/MovimientoVertical.gen.cpp
 D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/MyInterface.gen.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01/MyInterface.h

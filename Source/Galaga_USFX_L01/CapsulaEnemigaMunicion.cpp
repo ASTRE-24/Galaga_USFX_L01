@@ -52,10 +52,14 @@ void ACapsulaEnemigaMunicion::NotifyHit(class UPrimitiveComponent*
 {
 
     ANaveEnemiga* NaveEnemiga = Cast<ANaveEnemiga>(Other);
-    if (!NaveEnemiga->IsA(ANaveEnemigaNodriza::StaticClass()))
+    if (NaveEnemiga)
     {
-        usarCapsulaEnemiga(NaveEnemiga);
-        Destroy();
+        if (!NaveEnemiga->IsA(ANaveEnemigaNodriza::StaticClass()))
+        {
+            usarCapsulaEnemiga(NaveEnemiga);
+            Destroy();
+        }
+        else Destroy();
     }
     else Destroy();
     return;

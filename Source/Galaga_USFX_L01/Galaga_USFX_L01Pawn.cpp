@@ -207,11 +207,6 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 	
 	FireShot(FireDirection);
 
-	//Para controlar la puntuacion
-	GameControlAdapter->RecordScore(1 + DeltaSeconds);
-	Score = GameControlAdapter->GetScore();
-	FVector2D ScreenPosition(1.f, 0.5f); // Posición en el borde derecho de la pantalla (1.0f, 0.5f)
-	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("Puntuacion: %d"), Score), false, ScreenPosition);
 	
 }
 
@@ -295,7 +290,9 @@ void AGalaga_USFX_L01Pawn::BeginPlay()
 	LogisticaJuego = NewObject<ULogisticaJuego>();
 	GameControlAdapter = NewObject<UGameControlAdapter>();
 	GameControlAdapter->SetLogisticaJuego(LogisticaJuego);
-	
+	GameControlAdapter->SetHealth(100.0f);
+	Health = GameControlAdapter->GetHealth();
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, TEXT("Salud: " + FString::SanitizeFloat(Health)));
 }
 
 void AGalaga_USFX_L01Pawn::DropItem()
