@@ -21,7 +21,7 @@ private: \
 	static void StaticRegisterNativesAObstaculo(); \
 	friend struct Z_Construct_UClass_AObstaculo_Statics; \
 public: \
-	DECLARE_CLASS(AObstaculo, AActor, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/Galaga_USFX_L01"), NO_API) \
+	DECLARE_CLASS(AObstaculo, AActor, COMPILED_IN_FLAGS(CLASS_Abstract | CLASS_Config), CASTCLASS_None, TEXT("/Script/Galaga_USFX_L01"), NO_API) \
 	DECLARE_SERIALIZER(AObstaculo)
 
 
@@ -30,14 +30,14 @@ private: \
 	static void StaticRegisterNativesAObstaculo(); \
 	friend struct Z_Construct_UClass_AObstaculo_Statics; \
 public: \
-	DECLARE_CLASS(AObstaculo, AActor, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/Galaga_USFX_L01"), NO_API) \
+	DECLARE_CLASS(AObstaculo, AActor, COMPILED_IN_FLAGS(CLASS_Abstract | CLASS_Config), CASTCLASS_None, TEXT("/Script/Galaga_USFX_L01"), NO_API) \
 	DECLARE_SERIALIZER(AObstaculo)
 
 
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_Obstaculo_h_12_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AObstaculo(const FObjectInitializer& ObjectInitializer); \
-	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AObstaculo) \
+	DEFINE_ABSTRACT_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AObstaculo) \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AObstaculo); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AObstaculo); \
 private: \
@@ -55,7 +55,7 @@ private: \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AObstaculo); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AObstaculo); \
-	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AObstaculo)
+	DEFINE_ABSTRACT_DEFAULT_CONSTRUCTOR_CALL(AObstaculo)
 
 
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_Obstaculo_h_12_PRIVATE_PROPERTY_OFFSET

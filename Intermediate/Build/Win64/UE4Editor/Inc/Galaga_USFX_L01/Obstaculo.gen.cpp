@@ -59,7 +59,7 @@ void EmptyLinkFunctionForGeneratedCodeObstaculo() {}
 		0,
 		0,
 		0,
-		0x009000A4u,
+		0x009000A5u,
 		METADATA_PARAMS(Z_Construct_UClass_AObstaculo_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_AObstaculo_Statics::Class_MetaDataParams))
 	};
 	UClass* Z_Construct_UClass_AObstaculo()
@@ -71,7 +71,7 @@ void EmptyLinkFunctionForGeneratedCodeObstaculo() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AObstaculo, 2780774559);
+	IMPLEMENT_CLASS(AObstaculo, 2187158554);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<AObstaculo>()
 	{
 		return AObstaculo::StaticClass();

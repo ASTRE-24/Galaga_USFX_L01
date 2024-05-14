@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Obstaculo.generated.h"
 
-UCLASS()
+UCLASS(abstract)
 class GALAGA_USFX_L01_API AObstaculo : public AActor
 {
 	GENERATED_BODY()
@@ -14,7 +14,11 @@ class GALAGA_USFX_L01_API AObstaculo : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AObstaculo();
-
+	float damage;
+	float tiempoGeneracion;
+	float velocidad;
+	float limiteCaida;
+	FVector posicion;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -25,6 +29,7 @@ public:
 	//Banderas
 	float distanciaObs;
 	bool movimiento;
-	void movimientoObstaculo();
+	virtual void movimientoObstaculo() PURE_VIRTUAL(AObstaculo::movimientoObstaculo, );
+	virtual void danioObstaculo() PURE_VIRTUAL(AObstaculo::danioObstaculo, );
 
 };

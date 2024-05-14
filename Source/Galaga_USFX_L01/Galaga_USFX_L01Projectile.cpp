@@ -81,7 +81,10 @@ void AGalaga_USFX_L01Projectile::NotifyHit(class UPrimitiveComponent*
 	bool bSelfMoved, FVector HitLocation, FVector HitNormal,
 	FVector NormalImpulse, const FHitResult& Hit)
 {
-
+	if (!MyComp || !Other || !OtherComp)
+	{
+		return; // Salir temprano si alguno de los punteros es nulo
+	}
 	ANaveEnemiga* NaveEnemiga = Cast<ANaveEnemiga>(Other);
 	AGalaga_USFX_L01Pawn* NaveJugador = Cast<AGalaga_USFX_L01Pawn>(Other);
 	if (NaveJugador)

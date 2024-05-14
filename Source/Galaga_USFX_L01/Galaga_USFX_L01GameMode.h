@@ -26,6 +26,7 @@ public:
 	class ABuilderNaveNodrizaFase2* BuilderNodrizaFase2;
 	class ABuilderNaveNodrizaFase3* BuilderNodrizaFase3;
 	class AEnemigoCapsula* CapsulaEnemiga;
+	class ASpawnFacade* SpawnFacade;
 public:
 	//ANaveEnemiga* NaveEnemiga01;
 	//ANaveEnemigaTransporte* NaveEnemigaTransporte01;
@@ -55,10 +56,6 @@ private:
 	
 	int TiempoTranscurrido;
 	
-//public:
-//	// Called every frame
-//	virtual void Tick(float DeltaTime) override;
-
 };
 
 

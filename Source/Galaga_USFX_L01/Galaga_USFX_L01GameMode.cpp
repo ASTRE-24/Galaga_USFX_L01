@@ -34,6 +34,7 @@
 #include "BuilderNaveNodrizaFase2.h"
 #include "BuilderNaveNodrizaFase3.h"
 #include "TimerManager.h"
+#include "SpawnFacade.h"
 
 AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 {
@@ -54,52 +55,38 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     FRotator rotacionNave = FRotator(0.0f, 180.0f, 0.0f);
     FRotator rotacionNave90 = FRotator(0.0f, 90.0f, 0.0f);
 
+	SpawnFacade = GetWorld()->SpawnActor<ASpawnFacade>(ASpawnFacade::StaticClass());
+	SpawnFacade->invocarNaves();
+	SpawnFacade->invocarObstaculos();
+	SpawnFacade->invocarCapsula();
+	SpawnFacade->realizaTareas();
 	
     /*ReparacionPorta = GetWorld()->SpawnActor<ABuilderConcretoPNReparar>(ABuilderConcretoPNReparar::StaticClass());
     IngenieroPortaNave = GetWorld()->SpawnActor<ADirectorPortaNave>(ADirectorPortaNave::StaticClass());
     IngenieroPortaNave->SetBuilderPortaNave(ReparacionPorta);
     IngenieroPortaNave->ConstruirPortaNave();*/
 
-	DirectorNodriza = GetWorld()->SpawnActor<ADirectorNaveNodriza>(ADirectorNaveNodriza::StaticClass());
-	BuilderNodrizaFase1 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase1>(ABuilderNaveNodrizaFase1::StaticClass());
+	//DirectorNodriza = GetWorld()->SpawnActor<ADirectorNaveNodriza>(ADirectorNaveNodriza::StaticClass());
+	//BuilderNodrizaFase1 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase1>(ABuilderNaveNodrizaFase1::StaticClass());
 	//BuilderNodrizaFase2 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase2>(ABuilderNaveNodrizaFase2::StaticClass());
 	//BuilderNodrizaFase3 = GetWorld()->SpawnActor<ABuilderNaveNodrizaFase3>(ABuilderNaveNodrizaFase3::StaticClass());
-	DirectorNodriza->enviarConstructor(BuilderNodrizaFase1);
-	DirectorNodriza->construirNaveNodriza();
-    ANaveEnemigaNodriza* NaveNodriza = DirectorNodriza->obtenerNave();
+	//DirectorNodriza->enviarConstructor(BuilderNodrizaFase1);
+	//DirectorNodriza->construirNaveNodriza();
+    //ANaveEnemigaNodriza* NaveNodriza = DirectorNodriza->obtenerNave();
     /*DirectorNodriza->enviarConstructor(BuilderNodrizaFase2);
     DirectorNodriza->construirNaveNodriza();
     ANaveEnemigaNodriza* NaveNodriza2 = DirectorNodriza->obtenerNave();
     DirectorNodriza->enviarConstructor(BuilderNodrizaFase3);
     DirectorNodriza->construirNaveNodriza();
 	ANaveEnemigaNodriza* NaveNodriza3 = DirectorNodriza->obtenerNave();*/
-	posicionCapsulasEnemigas = NaveNodriza->GetPosicionesNaves();
-	NavesEnemigas = NaveNodriza->GetNavesEnemigas();
+	//posicionCapsulasEnemigas = NaveNodriza->GetPosicionesNaves();
+	//NavesEnemigas = NaveNodriza->GetNavesEnemigas();
 
     //Creacion de los distintos tipos de capsulas
-    InventarioAB = GetWorld()->SpawnActor<IInventarioAFactory>(AJugadorCapsula::StaticClass());
-    for (int i = 0; i < 7; i++) {
-        UbicacionInventario.Add(i, FVector(ubicacionDeObjetosInventario.X, ubicacionDeObjetosInventario.Y + i * 140.0f, ubicacionDeObjetosInventario.Z));
-        //Generar un número aleatorio entre 0 y 1
-        int RandomNumber = FMath::FRandRange(0, 3);
-        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Numero aleatorio: %d"), RandomNumber));
-        if (RandomNumber == 0)
-        {
-            InventarioAB->crearCapsulaArma(UbicacionInventario[i]);
-        }
-        else if (RandomNumber == 1)
-        {
-            InventarioAB->crearCapsulaEnergia(UbicacionInventario[i]);
-        }
-        else if (RandomNumber == 2)
-        {
-            InventarioAB->crearCapsulaMunicion(UbicacionInventario[i]);
-        }
-
-    }
+    
 
     InventarioAB = GetWorld()->SpawnActor<IInventarioAFactory>(AEnemigoCapsula::StaticClass());
-	GetWorldTimerManager().SetTimer(TimerCapsulas, this, &AGalaga_USFX_L01GameMode::SapwnCapsulasEnemigas, 10.0f, true);
+	//GetWorldTimerManager().SetTimer(TimerCapsulas, this, &AGalaga_USFX_L01GameMode::SapwnCapsulasEnemigas, 10.0f, true);
 
 
     /*APortaNave* portal = IngenieroPortaNave->GetPortaNave();
@@ -180,8 +167,8 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
         
 
         // Tipos de naves disponibles
-        TArray<TSubclassOf<ANaveEnemiga>> TiposDeNaves;//Crea un TArray de subclases de ANaveEnemiga
-        TiposDeNaves.Add(ANaveEnemigaCaza::StaticClass()); //Agrega la subclase ANaveEnemigaCaza al TArray
+        //TArray<TSubclassOf<ANaveEnemiga>> TiposDeNaves;//Crea un TArray de subclases de ANaveEnemiga
+        //TiposDeNaves.Add(ANaveEnemigaCaza::StaticClass()); //Agrega la subclase ANaveEnemigaCaza al TArray
         /*TiposDeNaves.Add(ANaveEnemigaCazaVeloz::StaticClass());
         TiposDeNaves.Add(ANaveEnemigaCazaSigilosa::StaticClass());
         TiposDeNaves.Add(ANaveEnemigaTransporte::StaticClass());
@@ -217,7 +204,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
         //        }
         //    }
         //}
-        TiempoTranscurrido = 0;
+        //TiempoTranscurrido = 0;
     }
     
 }
