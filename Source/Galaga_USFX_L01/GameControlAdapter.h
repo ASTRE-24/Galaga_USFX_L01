@@ -19,15 +19,15 @@ class GALAGA_USFX_L01_API UGameControlAdapter : public UObject, public IControlL
 public: 
     // Constructor y destructor
     UGameControlAdapter();
-    virtual ~UGameControlAdapter();
+    
 
     // Implementación de los métodos de la interfaz IScoreRecorder
-    virtual void RecordScore(int32 Score) override;
-    virtual int32 GetScore() const override;
+    virtual void RecordScore(float Score) override;
+    virtual float GetScore() override;
     virtual void LoseLife() override;
-    virtual int32 GetLives() const override;
+    virtual float GetLives() override;
     virtual void SetHealth(float NewHealth) override;
-    virtual float GetHealth() const override;
+    virtual float GetHealth() override;
 
     // Setter para ExternalGameControllerInstance
     void SetLogisticaJuego(ULogisticaJuego* Controller);

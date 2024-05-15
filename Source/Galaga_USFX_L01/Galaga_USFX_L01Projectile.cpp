@@ -82,10 +82,7 @@ void AGalaga_USFX_L01Projectile::NotifyHit(class UPrimitiveComponent*
 	bool bSelfMoved, FVector HitLocation, FVector HitNormal,
 	FVector NormalImpulse, const FHitResult& Hit)
 {
-	if (!MyComp || !Other || !OtherComp)
-	{
-		return; // Salir temprano si alguno de los punteros es nulo
-	}
+	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
 	ANaveEnemiga* NaveEnemiga = Cast<ANaveEnemiga>(Other);
 	AGalaga_USFX_L01Pawn* NaveJugador = Cast<AGalaga_USFX_L01Pawn>(Other);
 	if (NaveJugador)
@@ -103,6 +100,7 @@ void AGalaga_USFX_L01Projectile::NotifyHit(class UPrimitiveComponent*
 				NaveJugador->ReturnToInitialPosition();
 			}
 			NaveJugador->GameControlAdapter->SetHealth(NaveJugador->Health);
+			if (NaveJugador->GameControlAdapter)
 			NaveJugador->Health = NaveJugador->GameControlAdapter->GetHealth();
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, TEXT("Salud: " + FString::SanitizeFloat(NaveJugador->Health)));
 			

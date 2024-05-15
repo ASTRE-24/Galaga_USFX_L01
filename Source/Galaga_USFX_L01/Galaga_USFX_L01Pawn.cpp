@@ -23,6 +23,9 @@
 #include "Containers/Queue.h"
 #include "Sound/SoundBase.h"
 #include "Kismet/GameplayStatics.h" // Necesario para usar usar la musica de fondo
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
+#include "Components/SphereComponent.h"
 
 const FName AGalaga_USFX_L01Pawn::MoveForwardBinding("MoveForward");
 const FName AGalaga_USFX_L01Pawn::MoveRightBinding("MoveRight");
@@ -37,6 +40,12 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	RootComponent = ShipMeshComponent;
 	ShipMeshComponent->SetCollisionProfileName(UCollisionProfile::Pawn_ProfileName);
 	ShipMeshComponent->SetStaticMesh(ShipMesh.Object);
+
+	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComponent"));
+	RootComponent = CollisionComponent;
+
+	CollisionComponent->SetCollisionProfileName(TEXT("Pawn"));
+	CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &AGalaga_USFX_L01Pawn::OnOverlapBegin);
 	
 	// Cache our sound effect
 	static ConstructorHelpers::FObjectFinder<USoundBase> FireAudio(TEXT("/Game/TwinStick/Audio/TwinStickFire.TwinStickFire"));
@@ -157,6 +166,16 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 
 }
 
+void AGalaga_USFX_L01Pawn::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor && (OtherActor != this) && OtherComp)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Colisión detectada"));
+		// Aquí puedes definir lo que sucede cuando ocurre una colisión
+		UE_LOG(LogTemp, Warning, TEXT("Colisión detectada con: %s"), *OtherActor->GetName());
+	}
+}
 
 void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 {

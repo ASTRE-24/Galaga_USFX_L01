@@ -10,8 +10,8 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class UPrimitiveComponent;
 class AActor;
-struct FVector;
 struct FHitResult;
+struct FVector;
 class AInventoryActor;
 #ifdef GALAGA_USFX_L01_Galaga_USFX_L01Pawn_generated_h
 #error "Galaga_USFX_L01Pawn.generated.h already included, missing '#pragma once' in Galaga_USFX_L01Pawn.h"
@@ -22,6 +22,7 @@ class AInventoryActor;
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_Galaga_USFX_L01Pawn_h_20_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execReloadAmmo); \
+	DECLARE_FUNCTION(execOnOverlapBegin); \
 	DECLARE_FUNCTION(execNotifyHit); \
 	DECLARE_FUNCTION(execTakeItem); \
 	DECLARE_FUNCTION(execDropItem);
@@ -30,6 +31,7 @@ class AInventoryActor;
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_Galaga_USFX_L01Pawn_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execReloadAmmo); \
+	DECLARE_FUNCTION(execOnOverlapBegin); \
 	DECLARE_FUNCTION(execNotifyHit); \
 	DECLARE_FUNCTION(execTakeItem); \
 	DECLARE_FUNCTION(execDropItem);
@@ -82,6 +84,7 @@ public: \
 	FORCEINLINE static uint32 __PPO__CameraComponent() { return STRUCT_OFFSET(AGalaga_USFX_L01Pawn, CameraComponent); } \
 	FORCEINLINE static uint32 __PPO__CameraBoom() { return STRUCT_OFFSET(AGalaga_USFX_L01Pawn, CameraBoom); } \
 	FORCEINLINE static uint32 __PPO__DisparoComponent() { return STRUCT_OFFSET(AGalaga_USFX_L01Pawn, DisparoComponent); } \
+	FORCEINLINE static uint32 __PPO__CollisionComponent() { return STRUCT_OFFSET(AGalaga_USFX_L01Pawn, CollisionComponent); } \
 	FORCEINLINE static uint32 __PPO__Music() { return STRUCT_OFFSET(AGalaga_USFX_L01Pawn, Music); }
 
 

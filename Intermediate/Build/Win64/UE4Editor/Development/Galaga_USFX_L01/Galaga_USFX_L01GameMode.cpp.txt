@@ -40,6 +40,8 @@ D:\game\UE_4.27\Engine\Source\Runtime\Engine\Public\KeyState.h
 D:\game\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerInput.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Galaga_USFX_L01Pawn.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemiga.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\MovimentoNavesEnemigas.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\MovimentoNavesEnemigas.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemiga.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\NaveEnemigaTransporte.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaTransporte.generated.h

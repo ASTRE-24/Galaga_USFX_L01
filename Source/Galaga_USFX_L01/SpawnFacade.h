@@ -43,6 +43,8 @@ public:
 	void invocarNaves();
 	void invocarObstaculos();
 	void invocarCapsula();
+
+private:
 	void posiciones();
 	void realizaTareas();
 };

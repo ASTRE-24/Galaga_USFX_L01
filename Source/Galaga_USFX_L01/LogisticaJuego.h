@@ -16,23 +16,23 @@ class GALAGA_USFX_L01_API ULogisticaJuego : public UObject
 public:
     // Constructor y destructor
     ULogisticaJuego();
-    virtual ~ULogisticaJuego();
+    
 
     // Métodos para gestionar los puntajes
-    void AddScore(int32 Score);
-    int32 GetScore() const;
+    void AddScore(float Score);
+    float GetScore();
 
     // Métodos para gestionar las vidas
     void LoseLife();
-    int32 GetLives() const;
+    float GetLives() ;
 
     // Métodos para gestionar la barra de salud
     void SetHealth(float NewHealth);
-    float GetHealth() const;
+    float GetHealth();
 
 private:
     // Variables para puntajes, vidas y salud
-    int32 Score;
-    int32 Lives;
+    float Score;
+    float Lives;
     float Health;
 };

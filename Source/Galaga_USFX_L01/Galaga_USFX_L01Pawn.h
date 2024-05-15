@@ -51,6 +51,10 @@ public:
 		Hit) override;
 
 	UFUNCTION()
+	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor,
+		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
 	void ReloadAmmo();
 
 	void ReturnToInitialPosition();
@@ -132,8 +136,8 @@ public:
 	static const FName FireForwardBinding;
 	static const FName FireRightBinding;
 	//para el adaptador
-	int32 Score;
-	int32 Lives;
+	float Score;
+	float Lives;
 	float Health;
 
 	UGameControlAdapter* GameControlAdapter;
@@ -162,7 +166,8 @@ private:
 	bool bChocaYMeDestruyo;
 	bool bChocarYAtravesar;
 	FString tipoArma;
-
+	UPROPERTY(VisibleAnywhere)
+	class USphereComponent* CollisionComponent;
 	
 
 public:

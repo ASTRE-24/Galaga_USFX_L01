@@ -21,6 +21,7 @@ AObstaculoPared::AObstaculoPared()
         // Modifica la escala del componente de malla estática
         Obstaculo->SetWorldScale3D(FVector(1.0f, 1.0f, 1.0f)); // Aquí se ajusta la escala
     }
+	ciclos = 0;
 }
 
 void AObstaculoPared::BeginPlay()
@@ -31,7 +32,12 @@ void AObstaculoPared::BeginPlay()
 void AObstaculoPared::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	movimientoObstaculo(DeltaTime);
+	if (ciclos < 4)
+	{
+
+		movimientoObstaculo(DeltaTime);
+	}
+	else Destroy();
 }
 
 void AObstaculoPared::movimientoObstaculo(float DeltaTime)
@@ -43,7 +49,7 @@ void AObstaculoPared::movimientoObstaculo(float DeltaTime)
 	{
 
 		SetActorLocation(FVector(1050.0f, posicion.Y, posicion.Z));
-
+		ciclos++;
 
 	}
 	if (GetActorLocation().Y >= 1850)

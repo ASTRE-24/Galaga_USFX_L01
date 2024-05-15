@@ -111,6 +111,7 @@ void ASpawnFacade::invocarObstaculos()
 		}
 		ubicacionDeObjetosInventario = ubicacionDeObjetosInventario + FVector(0.0f, 300.0f, 0.0f);
 	}
+
 }
 
 void ASpawnFacade::invocarCapsula()
@@ -134,6 +135,7 @@ void ASpawnFacade::invocarCapsula()
             inventarioFactory->crearCapsulaMunicion(UbicacionInventario[i]);
         }
     }
+
     inventarioFactory = GetWorld()->SpawnActor<IInventarioAFactory>(AEnemigoCapsula::StaticClass());
     for (int i = 0; i < navesEnemigas.Num(); i++) {
 

@@ -72,7 +72,7 @@ void EmptyLinkFunctionForGeneratedCodeObstaculoMeteoro() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AObstaculoMeteoro, 3596836698);
+	IMPLEMENT_CLASS(AObstaculoMeteoro, 4126301451);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<AObstaculoMeteoro>()
 	{
 		return AObstaculoMeteoro::StaticClass();

@@ -23,20 +23,20 @@ class GALAGA_USFX_L01_API IControlLogisticaJuego
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
     // Método para registrar la puntuación
-    virtual void RecordScore(int32 Score) = 0;
+    virtual void RecordScore(float Score) = 0;
 
     // Método para obtener la puntuación
-    virtual int32 GetScore() const = 0;
+    virtual float GetScore() = 0;
 
     // Método para perder una vida
     virtual void LoseLife() = 0;
 
     // Método para obtener la cantidad de vidas
-    virtual int32 GetLives() const = 0;
+    virtual float GetLives() = 0;
 
     // Método para establecer la salud
     virtual void SetHealth(float NewHealth) = 0;
 
     // Método para obtener la salud
-    virtual float GetHealth() const = 0;
+    virtual float GetHealth() = 0;
 };

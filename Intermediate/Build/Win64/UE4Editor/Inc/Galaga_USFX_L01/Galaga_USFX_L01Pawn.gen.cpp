@@ -28,6 +28,7 @@ void EmptyLinkFunctionForGeneratedCodeGalaga_USFX_L01Pawn() {}
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UActorComponentDisparo_NoRegister();
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UInventoryComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USoundBase_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_USphereComponent_NoRegister();
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UActorSpawnerComponent_NoRegister();
 // End Cross Module References
 	DEFINE_FUNCTION(AGalaga_USFX_L01Pawn::execReloadAmmo)
@@ -35,6 +36,19 @@ void EmptyLinkFunctionForGeneratedCodeGalaga_USFX_L01Pawn() {}
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		P_THIS->ReloadAmmo();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AGalaga_USFX_L01Pawn::execOnOverlapBegin)
+	{
+		P_GET_OBJECT(UPrimitiveComponent,Z_Param_OverlappedComp);
+		P_GET_OBJECT(AActor,Z_Param_OtherActor);
+		P_GET_OBJECT(UPrimitiveComponent,Z_Param_OtherComp);
+		P_GET_PROPERTY(FIntProperty,Z_Param_OtherBodyIndex);
+		P_GET_UBOOL(Z_Param_bFromSweep);
+		P_GET_STRUCT_REF(FHitResult,Z_Param_Out_SweepResult);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnOverlapBegin(Z_Param_OverlappedComp,Z_Param_OtherActor,Z_Param_OtherComp,Z_Param_OtherBodyIndex,Z_Param_bFromSweep,Z_Param_Out_SweepResult);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AGalaga_USFX_L01Pawn::execNotifyHit)
@@ -73,6 +87,7 @@ void EmptyLinkFunctionForGeneratedCodeGalaga_USFX_L01Pawn() {}
 		static const FNameNativePtrPair Funcs[] = {
 			{ "DropItem", &AGalaga_USFX_L01Pawn::execDropItem },
 			{ "NotifyHit", &AGalaga_USFX_L01Pawn::execNotifyHit },
+			{ "OnOverlapBegin", &AGalaga_USFX_L01Pawn::execOnOverlapBegin },
 			{ "ReloadAmmo", &AGalaga_USFX_L01Pawn::execReloadAmmo },
 			{ "TakeItem", &AGalaga_USFX_L01Pawn::execTakeItem },
 		};
@@ -189,6 +204,87 @@ void EmptyLinkFunctionForGeneratedCodeGalaga_USFX_L01Pawn() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics
+	{
+		struct Galaga_USFX_L01Pawn_eventOnOverlapBegin_Parms
+		{
+			UPrimitiveComponent* OverlappedComp;
+			AActor* OtherActor;
+			UPrimitiveComponent* OtherComp;
+			int32 OtherBodyIndex;
+			bool bFromSweep;
+			FHitResult SweepResult;
+		};
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_OverlappedComp_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_OverlappedComp;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_OtherActor;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_OtherComp_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_OtherComp;
+		static const UE4CodeGen_Private::FIntPropertyParams NewProp_OtherBodyIndex;
+		static void NewProp_bFromSweep_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bFromSweep;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_SweepResult_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_SweepResult;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OverlappedComp_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OverlappedComp = { "OverlappedComp", nullptr, (EPropertyFlags)0x0010000000080080, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Galaga_USFX_L01Pawn_eventOnOverlapBegin_Parms, OverlappedComp), Z_Construct_UClass_UPrimitiveComponent_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OverlappedComp_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OverlappedComp_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OtherActor = { "OtherActor", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Galaga_USFX_L01Pawn_eventOnOverlapBegin_Parms, OtherActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OtherComp_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OtherComp = { "OtherComp", nullptr, (EPropertyFlags)0x0010000000080080, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Galaga_USFX_L01Pawn_eventOnOverlapBegin_Parms, OtherComp), Z_Construct_UClass_UPrimitiveComponent_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OtherComp_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OtherComp_MetaData)) };
+	const UE4CodeGen_Private::FIntPropertyParams Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OtherBodyIndex = { "OtherBodyIndex", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Galaga_USFX_L01Pawn_eventOnOverlapBegin_Parms, OtherBodyIndex), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_bFromSweep_SetBit(void* Obj)
+	{
+		((Galaga_USFX_L01Pawn_eventOnOverlapBegin_Parms*)Obj)->bFromSweep = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_bFromSweep = { "bFromSweep", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(Galaga_USFX_L01Pawn_eventOnOverlapBegin_Parms), &Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_bFromSweep_SetBit, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_SweepResult_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_SweepResult = { "SweepResult", nullptr, (EPropertyFlags)0x0010008008000182, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Galaga_USFX_L01Pawn_eventOnOverlapBegin_Parms, SweepResult), Z_Construct_UScriptStruct_FHitResult, METADATA_PARAMS(Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_SweepResult_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_SweepResult_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OverlappedComp,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OtherActor,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OtherComp,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_OtherBodyIndex,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_bFromSweep,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::NewProp_SweepResult,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Galaga_USFX_L01Pawn.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AGalaga_USFX_L01Pawn, nullptr, "OnOverlapBegin", nullptr, nullptr, sizeof(Galaga_USFX_L01Pawn_eventOnOverlapBegin_Parms), Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00420401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_AGalaga_USFX_L01Pawn_ReloadAmmo_Statics
 	{
 #if WITH_METADATA
@@ -291,6 +387,10 @@ void EmptyLinkFunctionForGeneratedCodeGalaga_USFX_L01Pawn() {}
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_FireSound;
 #if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CollisionComponent_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CollisionComponent;
+#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Music_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_Music;
@@ -309,6 +409,7 @@ void EmptyLinkFunctionForGeneratedCodeGalaga_USFX_L01Pawn() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AGalaga_USFX_L01Pawn_DropItem, "DropItem" }, // 1474267305
 		{ &Z_Construct_UFunction_AGalaga_USFX_L01Pawn_NotifyHit, "NotifyHit" }, // 2820915263
+		{ &Z_Construct_UFunction_AGalaga_USFX_L01Pawn_OnOverlapBegin, "OnOverlapBegin" }, // 3649492771
 		{ &Z_Construct_UFunction_AGalaga_USFX_L01Pawn_ReloadAmmo, "ReloadAmmo" }, // 818580144
 		{ &Z_Construct_UFunction_AGalaga_USFX_L01Pawn_TakeItem, "TakeItem" }, // 2951260232
 	};
@@ -407,6 +508,14 @@ void EmptyLinkFunctionForGeneratedCodeGalaga_USFX_L01Pawn() {}
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_FireSound = { "FireSound", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AGalaga_USFX_L01Pawn, FireSound), Z_Construct_UClass_USoundBase_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_FireSound_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_FireSound_MetaData)) };
 #if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_CollisionComponent_MetaData[] = {
+		{ "Category", "Galaga_USFX_L01Pawn" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Galaga_USFX_L01Pawn.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_CollisionComponent = { "CollisionComponent", nullptr, (EPropertyFlags)0x00400000000a0009, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AGalaga_USFX_L01Pawn, CollisionComponent), Z_Construct_UClass_USphereComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_CollisionComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_CollisionComponent_MetaData)) };
+#if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_Music_MetaData[] = {
 		{ "Category", "Sound" },
 		{ "Comment", "//Referencia al sonido de la m?sica de fondo\n// EditAnywhere permite modificar el valor de la variable en el editor\n" },
@@ -433,6 +542,7 @@ void EmptyLinkFunctionForGeneratedCodeGalaga_USFX_L01Pawn() {}
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_FireRate,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_MoveSpeed,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_FireSound,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_CollisionComponent,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_Music,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGalaga_USFX_L01Pawn_Statics::NewProp_ActorSpawnerComponent,
 	};
@@ -463,7 +573,7 @@ void EmptyLinkFunctionForGeneratedCodeGalaga_USFX_L01Pawn() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AGalaga_USFX_L01Pawn, 2362704464);
+	IMPLEMENT_CLASS(AGalaga_USFX_L01Pawn, 3365720636);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<AGalaga_USFX_L01Pawn>()
 	{
 		return AGalaga_USFX_L01Pawn::StaticClass();

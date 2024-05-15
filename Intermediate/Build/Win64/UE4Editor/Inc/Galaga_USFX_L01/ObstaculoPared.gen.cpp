@@ -72,7 +72,7 @@ void EmptyLinkFunctionForGeneratedCodeObstaculoPared() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AObstaculoPared, 77283152);
+	IMPLEMENT_CLASS(AObstaculoPared, 3339388366);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<AObstaculoPared>()
 	{
 		return AObstaculoPared::StaticClass();

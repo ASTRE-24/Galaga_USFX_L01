@@ -8,17 +8,13 @@ UGameControlAdapter::UGameControlAdapter()
     // Constructor
 }
 
-UGameControlAdapter::~UGameControlAdapter()
-{
-    // Destructor
-}
 
-void UGameControlAdapter::RecordScore(int32 Score)
+void UGameControlAdapter::RecordScore(float Score)
 {
     ClaseExternaInstance->AddScore(Score);
 }
 
-int32 UGameControlAdapter::GetScore() const
+float UGameControlAdapter::GetScore() 
 {
     return ClaseExternaInstance->GetScore();
 }
@@ -28,7 +24,7 @@ void UGameControlAdapter::LoseLife()
     ClaseExternaInstance->LoseLife();
 }
 
-int32 UGameControlAdapter::GetLives() const
+float UGameControlAdapter::GetLives() 
 {
     return ClaseExternaInstance->GetLives();
 }
@@ -38,7 +34,7 @@ void UGameControlAdapter::SetHealth(float NewHealth)
     ClaseExternaInstance->SetHealth(NewHealth);
 }
 
-float UGameControlAdapter::GetHealth() const
+float UGameControlAdapter::GetHealth()
 {
     return ClaseExternaInstance->GetHealth();
 }

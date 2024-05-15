@@ -3,13 +3,17 @@
 
 #include "Obstaculo.h"
 #include "Galaga_USFX_L01Pawn.h"
+#include "Components/BoxComponent.h"
 
 // Sets default values
 AObstaculo::AObstaculo()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-    
+    CollisionComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionComponent"));
+    RootComponent = CollisionComponent;
+
+    CollisionComponent->SetCollisionProfileName(TEXT("BlockAll"));
     movimiento = false;
     distanciaObs = 0;
 	velocidad = 500;

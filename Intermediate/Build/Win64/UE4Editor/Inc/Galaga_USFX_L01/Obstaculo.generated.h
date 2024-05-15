@@ -58,7 +58,10 @@ public: \
 	DEFINE_ABSTRACT_DEFAULT_CONSTRUCTOR_CALL(AObstaculo)
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_Obstaculo_h_12_PRIVATE_PROPERTY_OFFSET
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_Obstaculo_h_12_PRIVATE_PROPERTY_OFFSET \
+	FORCEINLINE static uint32 __PPO__CollisionComponent() { return STRUCT_OFFSET(AObstaculo, CollisionComponent); }
+
+
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_Obstaculo_h_9_PROLOG
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_Obstaculo_h_12_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \

@@ -16,7 +16,7 @@ class GALAGA_USFX_L01_API AObstaculoPared : public AObstaculo
 	
 public:
 	AObstaculoPared();
-
+	int ciclos;
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	virtual void movimientoObstaculo(float DeltaTime) override;

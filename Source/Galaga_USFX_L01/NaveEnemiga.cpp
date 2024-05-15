@@ -51,6 +51,7 @@ void ANaveEnemiga::BeginPlay()
 void ANaveEnemiga::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	MovementComponent->movimientoZigzag(DeltaTime);
 	if (bShoulDispara)
 	{
 		if (tipoArma == "Normal")

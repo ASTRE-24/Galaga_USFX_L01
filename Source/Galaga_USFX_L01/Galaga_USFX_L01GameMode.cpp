@@ -56,10 +56,9 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     FRotator rotacionNave90 = FRotator(0.0f, 90.0f, 0.0f);
 
 	SpawnFacade = GetWorld()->SpawnActor<ASpawnFacade>(ASpawnFacade::StaticClass());
-	SpawnFacade->invocarNaves();
+    SpawnFacade->invocarNaves();
 	SpawnFacade->invocarObstaculos();
 	SpawnFacade->invocarCapsula();
-	SpawnFacade->realizaTareas();
 	
     /*ReparacionPorta = GetWorld()->SpawnActor<ABuilderConcretoPNReparar>(ABuilderConcretoPNReparar::StaticClass());
     IngenieroPortaNave = GetWorld()->SpawnActor<ADirectorPortaNave>(ADirectorPortaNave::StaticClass());

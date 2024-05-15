@@ -9,17 +9,13 @@ ULogisticaJuego::ULogisticaJuego()
     // Constructor
 }
 
-ULogisticaJuego::~ULogisticaJuego()
-{
-    // Destructor
-}
 
-void ULogisticaJuego::AddScore(int32 ScoreToAdd)
+void ULogisticaJuego::AddScore(float ScoreToAdd)
 {
     Score += ScoreToAdd;
 }
 
-int32 ULogisticaJuego::GetScore() const
+float ULogisticaJuego::GetScore()
 {
     return Score;
 }
@@ -32,7 +28,7 @@ void ULogisticaJuego::LoseLife()
     }
 }
 
-int32 ULogisticaJuego::GetLives() const
+float ULogisticaJuego::GetLives()
 {
     return Lives;
 }
@@ -42,7 +38,7 @@ void ULogisticaJuego::SetHealth(float NewHealth)
     Health = FMath::Clamp(NewHealth, 0.f, 500.f);
 }
 
-float ULogisticaJuego::GetHealth() const
+float ULogisticaJuego::GetHealth()
 {
     return Health;
 }
