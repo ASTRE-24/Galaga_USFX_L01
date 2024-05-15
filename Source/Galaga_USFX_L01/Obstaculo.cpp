@@ -12,6 +12,7 @@ AObstaculo::AObstaculo()
     
     movimiento = false;
     distanciaObs = 0;
+	velocidad = 500;
 }
 
 // Called when the game starts or when spawned

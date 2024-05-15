@@ -1,3 +1,4 @@
+
 // Copyright Epic Games, Inc. All Rights Reserve
 
 #include "Galaga_USFX_L01Projectile.h"
@@ -93,9 +94,6 @@ void AGalaga_USFX_L01Projectile::NotifyHit(class UPrimitiveComponent*
 		{
 			//AGalaga_USFX_L01Pawn* GalagaPawn = Cast<AGalaga_USFX_L01Pawn>(this->GetOriginActor());
 			NaveJugador->Health -= 10;
-			NaveJugador->GameControlAdapter->SetHealth(NaveJugador->Health);
-			NaveJugador->Health = NaveJugador->GameControlAdapter->GetHealth();
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, TEXT("Salud: " + FString::SanitizeFloat(NaveJugador->Health)));
 			if (NaveJugador->Health <= 0)
 			{
 				NaveJugador->GameControlAdapter->LoseLife();
@@ -104,6 +102,10 @@ void AGalaga_USFX_L01Projectile::NotifyHit(class UPrimitiveComponent*
 				NaveJugador->GameControlAdapter->SetHealth(NaveJugador->Health);
 				NaveJugador->ReturnToInitialPosition();
 			}
+			NaveJugador->GameControlAdapter->SetHealth(NaveJugador->Health);
+			NaveJugador->Health = NaveJugador->GameControlAdapter->GetHealth();
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, TEXT("Salud: " + FString::SanitizeFloat(NaveJugador->Health)));
+			
 		}
 		return;
 

@@ -22,6 +22,7 @@ ANaveEnemiga::ANaveEnemiga()
 	mallaNaveEnemiga->SetupAttachment(RootComponent);
 	RootComponent = mallaNaveEnemiga;
 	DisparoComponent = CreateDefaultSubobject<UActorComponentDisparo>(TEXT("DisparoComponent"));
+	MovementComponent = CreateDefaultSubobject<UMovimentoNavesEnemigas>(TEXT("MovementComponent"));
 	bShoulDispara = false;
 	bMoverse = false;
 	tipoArma = "";

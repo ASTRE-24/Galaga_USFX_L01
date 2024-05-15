@@ -15,9 +15,10 @@ class GALAGA_USFX_L01_API AObstaculoMeteoro : public AObstaculo
 	GENERATED_BODY()
 public:
 	AObstaculoMeteoro();
+	float ciclos;
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-	virtual void movimientoObstaculo() override;
-	virtual void danioObstaculo() override;
+	virtual void movimientoObstaculo(float DeltaTime) override;
+	virtual float danioObstaculo() override;
 };

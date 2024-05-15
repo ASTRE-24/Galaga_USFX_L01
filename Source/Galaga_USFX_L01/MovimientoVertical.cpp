@@ -29,8 +29,6 @@ void UMovimientoVertical::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	AActor* Parent = GetOwner();
-	
-
 	if (Parent)
 	{
 		if (Parent->GetActorLocation().Z >= 215.f)

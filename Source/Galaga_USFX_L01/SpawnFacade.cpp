@@ -90,7 +90,7 @@ void ASpawnFacade::invocarNaves()
 void ASpawnFacade::invocarObstaculos()
 {
     FVector ubicacionDeObjetosInventario = FVector(-700.0f, -1300.0f, 215.0f);
-	for (int i = 0; i <= 5;i++) {
+	for (int i = 0; i < 12; i++) {
 		UWorld* const World = GetWorld();
 		if (World != nullptr)
 		{
@@ -157,6 +157,7 @@ void ASpawnFacade::invocarCapsula()
 
 void ASpawnFacade::realizaTareas()
 {
+
 }
 
 void ASpawnFacade::posiciones()

@@ -6,6 +6,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "ActorComponentDisparo.h"
+#include "MovimentoNavesEnemigas.h"
 #include "NaveEnemiga.generated.h"
 
 UCLASS(abstract)
@@ -93,6 +94,8 @@ public:
 	void DestruirNave();
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Disparo", meta = (AllowPrivateAccess = "true"))
 	UActorComponentDisparo* DisparoComponent; // Declara el componente DisparoComponent
+	UPROPERTY(VisibleAnywhere)
+	UMovimentoNavesEnemigas* MovementComponent;
 
 protected:
 	//virtual void Mover() = 0;

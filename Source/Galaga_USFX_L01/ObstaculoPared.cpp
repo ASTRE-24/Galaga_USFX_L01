@@ -31,12 +31,34 @@ void AObstaculoPared::BeginPlay()
 void AObstaculoPared::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	movimientoObstaculo(DeltaTime);
 }
 
-void AObstaculoPared::movimientoObstaculo()
+void AObstaculoPared::movimientoObstaculo(float DeltaTime)
 {
+	posicion = GetActorLocation();
+	float NewX = posicion.X - velocidad * DeltaTime;
+	SetActorLocation(FVector(NewX, posicion.Y, posicion.Z));
+	if (GetActorLocation().X <= -1800.0f)
+	{
+
+		SetActorLocation(FVector(1050.0f, posicion.Y, posicion.Z));
+
+
+	}
+	if (GetActorLocation().Y >= 1850)
+	{
+		SetActorLocation(FVector(NewX, -1850.0f, posicion.Z));
+	}
+
+	if (GetActorLocation().Y <= -1850)
+	{
+		SetActorLocation(FVector(NewX, 1850.0f, posicion.Z));
+	}
 }
 
-void AObstaculoPared::danioObstaculo()
+float AObstaculoPared::danioObstaculo()
 {
+	damage = 5;
+	return damage;
 }

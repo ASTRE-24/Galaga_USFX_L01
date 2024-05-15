@@ -17,6 +17,8 @@
 #include "Escudo.h"
 #include "ActorSpawnerComponent.h"
 #include "Obstaculo.h"
+#include "ObstaculoMeteoro.h"
+#include "ObstaculoPared.h"
 #include "InventoryActorArma.h"
 #include "Containers/Queue.h"
 #include "Sound/SoundBase.h"
@@ -290,7 +292,7 @@ void AGalaga_USFX_L01Pawn::BeginPlay()
 	LogisticaJuego = NewObject<ULogisticaJuego>();
 	GameControlAdapter = NewObject<UGameControlAdapter>();
 	GameControlAdapter->SetLogisticaJuego(LogisticaJuego);
-	GameControlAdapter->SetHealth(100.0f);
+	GameControlAdapter->SetHealth(500.0f);
 	Health = GameControlAdapter->GetHealth();
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, TEXT("Salud: " + FString::SanitizeFloat(Health)));
 }
@@ -345,61 +347,77 @@ void AGalaga_USFX_L01Pawn::NotifyHit(class UPrimitiveComponent*
 		TakeItem(InventoryItem);
 	}
 
+
 	AInventoryActorEnergia* EnergyItem =
 		Cast<AInventoryActorEnergia>(Other);
 	if (EnergyItem != nullptr)
 		EnergyItem->mensaje();
 	
 	AObstaculo* Obstaculo = Cast<AObstaculo>(Other);
-	
-	if (Obstaculo != nullptr)
+	if (Obstaculo)
 	{
-		
-		if (bChocaYControla)
+		Health -= Obstaculo->danioObstaculo();
+		if (Health <= 0)
 		{
-			Obstaculo->movimiento = true;
-			Obstaculo->distanciaObs = Multiplicador * 125;
-			Obstaculo->movimientoObstaculo();
-			if (GEngine)
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "EL OBSTACULO TE SEGUIRA");
-			}
-			Multiplicador += 1;
-			return;
+			GameControlAdapter->LoseLife();
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vidas: " + FString::FromInt(GameControlAdapter->GetLives())));
+			Health = 500;
+			GameControlAdapter->SetHealth(Health);
+			ReturnToInitialPosition();
 		}
-		if(!bChocaYControla) Obstaculo->movimiento = false;
-
-		if (bChocarYAtravesar)
-		{
-			Obstaculo->SetActorEnableCollision(false);
-			if (GEngine)
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "ATRAVESASTE ESTE OBSTACULO");
-			}
-			return;
-		}
-		if(!bChocarYAtravesar) Obstaculo->SetActorEnableCollision(true);
-
-		if (bChocaYDestruye)
-		{
-			Obstaculo->Destroy();
-			if (GEngine)
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "SE DESTRUYO ESTE OBSTACULO");
-			}
-			return;
-		}
-		if (bChocaYMeDestruyo)
-		{
-			Destroy();
-
-			if (GEngine)
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "NAVE DESTRUIDA: FIN DEL JUEGO");
-			}
-			return;
-		}
+		GameControlAdapter->SetHealth(Health);
+		Health = GameControlAdapter->GetHealth();
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, TEXT("Salud: " + FString::SanitizeFloat(Health)));
+		Obstaculo->Destroy();
 	}
+	//if (Obstaculo != nullptr)
+	//{
+	//	
+	//	if (bChocaYControla)
+	//	{
+	//		Obstaculo->movimiento = true;
+	//		Obstaculo->distanciaObs = Multiplicador * 125;
+	//		//Obstaculo->movimientoObstaculo();
+	//		if (GEngine)
+	//		{
+	//			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "EL OBSTACULO TE SEGUIRA");
+	//		}
+	//		Multiplicador += 1;
+	//		return;
+	//	}
+	//	if(!bChocaYControla) Obstaculo->movimiento = false;
+
+	//	if (bChocarYAtravesar)
+	//	{
+	//		Obstaculo->SetActorEnableCollision(false);
+	//		if (GEngine)
+	//		{
+	//			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "ATRAVESASTE ESTE OBSTACULO");
+	//		}
+	//		return;
+	//	}
+	//	if(!bChocarYAtravesar) Obstaculo->SetActorEnableCollision(true);
+
+	//	if (bChocaYDestruye)
+	//	{
+	//		Obstaculo->Destroy();
+	//		if (GEngine)
+	//		{
+	//			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "SE DESTRUYO ESTE OBSTACULO");
+	//		}
+	//		return;
+	//	}
+	//	if (bChocaYMeDestruyo)
+	//	{
+	//		Destroy();
+
+	//		if (GEngine)
+	//		{
+	//			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "NAVE DESTRUIDA: FIN DEL JUEGO");
+	//		}
+	//		return;
+	//	}
+	//}
 }
 void AGalaga_USFX_L01Pawn::TakeItem(AInventoryActor* InventoryItem)
 {

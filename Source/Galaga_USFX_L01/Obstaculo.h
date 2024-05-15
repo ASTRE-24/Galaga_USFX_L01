@@ -29,7 +29,7 @@ public:
 	//Banderas
 	float distanciaObs;
 	bool movimiento;
-	virtual void movimientoObstaculo() PURE_VIRTUAL(AObstaculo::movimientoObstaculo, );
-	virtual void danioObstaculo() PURE_VIRTUAL(AObstaculo::danioObstaculo, );
+	virtual void movimientoObstaculo(float deltatime) PURE_VIRTUAL(AObstaculo::movimientoObstaculo, );
+	virtual float danioObstaculo() PURE_VIRTUAL(AObstaculo::danioObstaculo, return 0;);
 
 };

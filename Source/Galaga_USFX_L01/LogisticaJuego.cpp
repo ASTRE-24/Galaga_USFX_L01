@@ -4,7 +4,7 @@
 #include "LogisticaJuego.h"
 
 ULogisticaJuego::ULogisticaJuego()
-    : Score(0), Lives(3), Health(100.f)
+    : Score(0), Lives(3), Health(500.f)
 {
     // Constructor
 }
@@ -39,7 +39,7 @@ int32 ULogisticaJuego::GetLives() const
 
 void ULogisticaJuego::SetHealth(float NewHealth)
 {
-    Health = FMath::Clamp(NewHealth, 0.f, 100.f);
+    Health = FMath::Clamp(NewHealth, 0.f, 500.f);
 }
 
 float ULogisticaJuego::GetHealth() const
