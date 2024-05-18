@@ -25,6 +25,7 @@ ANaveEnemiga::ANaveEnemiga()
 	MovementComponent = CreateDefaultSubobject<UMovimentoNavesEnemigas>(TEXT("MovementComponent"));
 	bShoulDispara = false;
 	bMoverse = false;
+	bMovimiento = false;
 	tipoArma = "";
 	
 
@@ -51,6 +52,7 @@ void ANaveEnemiga::BeginPlay()
 void ANaveEnemiga::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (bMovimiento)
 	MovementComponent->movimientoZigzag(DeltaTime);
 	if (bShoulDispara)
 	{

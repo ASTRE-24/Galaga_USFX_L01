@@ -30,6 +30,7 @@ public:
 
 	TArray<ANaveEnemiga*> navesEnemigas;
 	TArray<AObstaculo*> obstaculos;
+	TArray<AActor*> capsulas;
 	TMap<int, FVector> UbicacionInventario;
 	TArray<FVector> PosicionesNaves;
 
@@ -46,5 +47,6 @@ public:
 
 private:
 	void posiciones();
-	void realizaTareas();
+	void realizaTareas(TArray<class ANaveEnemiga*> _NavesEnemigas, 
+		TArray<class AObstaculo*> _Obstaculos, TArray<class AActor*> _Capsulas);
 };

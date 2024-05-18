@@ -19,6 +19,7 @@ public:
 	float velocidad;
 	float limiteCaida;
 	FVector posicion;
+	bool bMoverse;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -30,7 +31,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	//Banderas
 	float distanciaObs;
-	bool movimiento;
 	virtual void movimientoObstaculo(float deltatime) PURE_VIRTUAL(AObstaculo::movimientoObstaculo, );
 	virtual float danioObstaculo() PURE_VIRTUAL(AObstaculo::danioObstaculo, return 0;);
 

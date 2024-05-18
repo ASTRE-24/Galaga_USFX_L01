@@ -49,3 +49,12 @@ void AInventoryActor::CustomizeAppearance()
 {
 	// No hace nada en la clase base, las clases hijas pueden sobrescribir esta función
 }
+
+void AInventoryActor::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (bMoverse)
+	{
+		MovementComponent->MoveVertical(DeltaTime);
+	}
+}

@@ -32,6 +32,7 @@ void AObstaculoMeteoro::BeginPlay()
 void AObstaculoMeteoro::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (bMoverse)
 	if (ciclos < 4)
 	{
 		

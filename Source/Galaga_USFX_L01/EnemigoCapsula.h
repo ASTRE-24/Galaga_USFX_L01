@@ -16,6 +16,7 @@ class GALAGA_USFX_L01_API AEnemigoCapsula : public AActor, public IInventarioAFa
 public:	
 	// Sets default values for this actor's properties
 	AEnemigoCapsula();
+	bool Move = true;
 
 protected:
 	// Called when the game starts or when spawned

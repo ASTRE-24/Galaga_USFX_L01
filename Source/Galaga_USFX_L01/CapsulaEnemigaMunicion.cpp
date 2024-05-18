@@ -42,7 +42,10 @@ void ACapsulaEnemigaMunicion::BeginPlay()
 void ACapsulaEnemigaMunicion::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	if (bMoverse)
+    {
+		MovementComponent->MoveVertical(DeltaTime);
+	}   
 }
 
 void ACapsulaEnemigaMunicion::NotifyHit(class UPrimitiveComponent*

@@ -40,6 +40,7 @@ protected:
 	float peso;
 	float volumen;
 	bool bMoverse;
+	bool bMovimiento;
 	float Municion;
 
 public:
@@ -58,6 +59,7 @@ public:
 	FORCEINLINE float GetPeso() const { return peso; }
 	FORCEINLINE float GetVolumen() const { return volumen; }
 	FORCEINLINE bool GetMoverse() const { return bMoverse; }
+	FORCEINLINE bool GetMovimiento() const { return bMovimiento; }
 	FORCEINLINE FString GetTipoArma() const { return tipoArma; }
 	FORCEINLINE float GetMunicion() const { return Municion; }
 
@@ -76,6 +78,7 @@ public:
 	FORCEINLINE void SetPeso(float _peso) { peso = _peso; }
 	FORCEINLINE void SetVolumen(float _volumen) { volumen = _volumen; }
 	FORCEINLINE void SetMoverse(bool _bMoverse) { bMoverse = _bMoverse; }
+	FORCEINLINE void SetMovimiento(bool _bMovimiento) { bMovimiento = _bMovimiento; }
 	FORCEINLINE void SetTipoArma(FString _tipoArma) { tipoArma = _tipoArma; }
 	FORCEINLINE void SetMunicion(float _Municion) { Municion = _Municion; }
 

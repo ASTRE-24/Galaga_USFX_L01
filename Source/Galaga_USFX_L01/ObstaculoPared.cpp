@@ -32,6 +32,7 @@ void AObstaculoPared::BeginPlay()
 void AObstaculoPared::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (bMoverse)
 	if (ciclos < 4)
 	{
 

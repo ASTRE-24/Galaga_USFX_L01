@@ -30,16 +30,24 @@ void AEnemigoCapsula::Tick(float DeltaTime)
 
 AActor* AEnemigoCapsula::crearCapsulaArma(FVector posicion)
 {
-	return GetWorld()->SpawnActor<ACapsulaEnemigaArma>(ACapsulaEnemigaArma::StaticClass(), posicion, FRotator (0,0,0));
+	ACapsulaEnemigaArma* CapsulaArma = GetWorld()->SpawnActor<ACapsulaEnemigaArma>
+		(ACapsulaEnemigaArma::StaticClass(), posicion, FRotator(0, 0, 0));
+	CapsulaArma->bMoverse = Move;
+	return CapsulaArma;
 }
 
 AActor* AEnemigoCapsula::crearCapsulaEnergia(FVector posicion)
 {
-	return GetWorld()->SpawnActor<ACapsulaEnemigaEnergia>(ACapsulaEnemigaEnergia::StaticClass(), posicion, FRotator(0, 0, 0));
+	ACapsulaEnemigaEnergia* CapsulaEnergia = GetWorld()->SpawnActor<ACapsulaEnemigaEnergia>
+		(ACapsulaEnemigaEnergia::StaticClass(), posicion, FRotator(0, 0, 0));
+	CapsulaEnergia->bMoverse = Move;
+	return CapsulaEnergia;
 }
 
 AActor* AEnemigoCapsula::crearCapsulaMunicion(FVector posicion)
 {
-	return GetWorld()->SpawnActor<ACapsulaEnemigaMunicion>(ACapsulaEnemigaMunicion::StaticClass(), posicion, FRotator(0, 0, 0));
+	ACapsulaEnemigaMunicion* CapsulaMunicion = GetWorld()->SpawnActor<ACapsulaEnemigaMunicion>(ACapsulaEnemigaMunicion::StaticClass(), posicion, FRotator(0, 0, 0));
+	CapsulaMunicion->bMoverse = Move;
+	return CapsulaMunicion;
 }
 

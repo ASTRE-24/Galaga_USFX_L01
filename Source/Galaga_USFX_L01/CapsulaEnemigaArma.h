@@ -18,6 +18,7 @@ public:
 	ACapsulaEnemigaArma();
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movimiento")
 	UMovimientoVertical* MovementComponent;
+	bool bMoverse = false;
 
 protected:
 	// Called when the game starts or when spawned

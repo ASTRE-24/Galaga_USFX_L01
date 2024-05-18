@@ -19,11 +19,12 @@ class GALAGA_USFX_L01_API AInventoryActor : public AStaticMeshActor
 
 public:
 	AInventoryActor();
-
+	bool bMoverse = true;
 	virtual void PickUp(); //Función para recoger el objeto
 	virtual void PutDown(FTransform TargetLocation); //Función para dejar el objeto
 	virtual void CustomizeAppearance();
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
 protected:
 	// Componente de movimiento vertical

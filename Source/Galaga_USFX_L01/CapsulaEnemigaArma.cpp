@@ -43,7 +43,10 @@ void ACapsulaEnemigaArma::BeginPlay()
 void ACapsulaEnemigaArma::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	if (bMoverse)
+    {
+		MovementComponent->MoveVertical(DeltaTime);
+	}   
 }
 
 void ACapsulaEnemigaArma::NotifyHit(class UPrimitiveComponent*

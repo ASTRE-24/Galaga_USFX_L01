@@ -28,6 +28,12 @@ void UMovimientoVertical::BeginPlay()
 void UMovimientoVertical::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	
+	// ...
+}
+
+void UMovimientoVertical::MoveVertical(float DeltaTime)
+{
 	AActor* Parent = GetOwner();
 	if (Parent)
 	{
@@ -39,6 +45,5 @@ void UMovimientoVertical::TickComponent(float DeltaTime, ELevelTick TickType, FA
 			Parent->SetActorLocation(NewPos);
 		}
 	}
-	// ...
 }
 

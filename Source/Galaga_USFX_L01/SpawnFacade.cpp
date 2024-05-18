@@ -124,15 +124,15 @@ void ASpawnFacade::invocarCapsula()
         int RandomNumber = FMath::FRandRange(0, 3);
         if (RandomNumber == 0)
         {
-            inventarioFactory->crearCapsulaArma(UbicacionInventario[i]);
+            capsulas.Add(inventarioFactory->crearCapsulaArma(UbicacionInventario[i]));
         }
         else if (RandomNumber == 1)
         {
-            inventarioFactory->crearCapsulaEnergia(UbicacionInventario[i]);
+            capsulas.Add(inventarioFactory->crearCapsulaEnergia(UbicacionInventario[i]));
         }
         else if (RandomNumber == 2)
         {
-            inventarioFactory->crearCapsulaMunicion(UbicacionInventario[i]);
+            capsulas.Add(inventarioFactory->crearCapsulaMunicion(UbicacionInventario[i]));
         }
     }
 
@@ -143,23 +143,38 @@ void ASpawnFacade::invocarCapsula()
         FVector PosicionNaveActual = PosicionesNaves[i] + FVector(0.0f, 0.0f, 500.0f);
         if (RandomNumber == 0)
         {
-            inventarioFactory->crearCapsulaArma(PosicionNaveActual);
+            capsulas.Add(inventarioFactory->crearCapsulaArma(PosicionNaveActual));
         }
         else if (RandomNumber == 1)
         {
-            inventarioFactory->crearCapsulaEnergia(PosicionNaveActual);
+            capsulas.Add(inventarioFactory->crearCapsulaEnergia(PosicionNaveActual));
         }
         else if (RandomNumber == 2)
         {
-            inventarioFactory->crearCapsulaMunicion(PosicionNaveActual);
+            capsulas.Add(inventarioFactory->crearCapsulaMunicion(PosicionNaveActual));
         }
 
     }
+    realizaTareas(navesEnemigas, obstaculos, capsulas);
 }
 
-void ASpawnFacade::realizaTareas()
+void ASpawnFacade::realizaTareas(TArray<class ANaveEnemiga*> _NavesEnemigas, 
+    TArray<class AObstaculo*> _Obstaculos, TArray<class AActor*> _Capsulas)
 {
+	for (int i = 0; i < _NavesEnemigas.Num(); i++) 
+    {
+		_NavesEnemigas[i]->SetMovimiento(true);
+	}
 
+	for (int i = 0; i < _Obstaculos.Num(); i++)
+	{
+		_Obstaculos[i]->bMoverse = true;
+	}
+
+	for (int i = 0; i < _Capsulas.Num(); i++)
+	{
+		//_Capsulas[i]->SetActorLocation(_Capsulas[i]->GetActorLocation() + FVector(0.0f, 0.0f, 500.0f));
+	}
 }
 
 void ASpawnFacade::posiciones()
