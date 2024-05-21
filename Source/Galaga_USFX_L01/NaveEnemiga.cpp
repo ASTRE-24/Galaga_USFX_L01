@@ -25,7 +25,7 @@ ANaveEnemiga::ANaveEnemiga()
 	MovementComponent = CreateDefaultSubobject<UMovimentoNavesEnemigas>(TEXT("MovementComponent"));
 	bShoulDispara = false;
 	bMoverse = false;
-	bMovimiento = false;
+	bMovimiento = true;
 	tipoArma = "";
 	
 
@@ -77,6 +77,11 @@ void ANaveEnemiga::Tick(float DeltaTime)
 
 void ANaveEnemiga::DestruirNave() 
 {
+	if (!LluviaDeObstaculos)
+	{
+		
+	    UE_LOG(LogTemp, Error, TEXT("Lluvia de obstaculo no existe")); return;
+	}
 	// Cargar la plantilla del sistema de partículas desde el contenido de tu proyecto
 	//static ConstructorHelpers::FObjectFinder<UParticleSystem> ParticleSystemAsset(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Fire.P_Fire'"));
 	if (DestructionParticle)
@@ -100,7 +105,22 @@ void ANaveEnemiga::DestruirNave()
 
 	// Destruir la nave enemiga
 	Destroy();
+	LluviaDeObstaculos->UnSubscribe(this);
 }
+
+void ANaveEnemiga::Update()
+{
+	bMovimiento = false;
+	bMoverse = true;
+}
+
+void ANaveEnemiga::SetLluviaObstaculo(ALluviaDeObstaculos* MyLluviaObstaculo)
+{
+	LluviaDeObstaculos = MyLluviaObstaculo;
+	LluviaDeObstaculos->Subscribe(this);
+}
+
+
 
 
 

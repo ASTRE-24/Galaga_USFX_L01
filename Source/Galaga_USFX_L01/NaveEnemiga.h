@@ -1,16 +1,16 @@
-
 // Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "ActorComponentDisparo.h"
 #include "MovimentoNavesEnemigas.h"
+#include "LluviaDeObstaculos.h"
+#include "Subscriber.h"
 #include "NaveEnemiga.generated.h"
 
 UCLASS(abstract)
-class GALAGA_USFX_L01_API ANaveEnemiga : public AActor
+class GALAGA_USFX_L01_API ANaveEnemiga : public AActor, public ISubscriber
 {
 	GENERATED_BODY()
 
@@ -85,7 +85,7 @@ public:
 public:
 	// Sets default values for this actor's properties
 	ANaveEnemiga();
-	
+	ALluviaDeObstaculos* LluviaDeObstaculos;
 
 protected:
 	// Called when the game starts or when spawned
@@ -94,11 +94,17 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	void DestruirNave();
+	
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Disparo", meta = (AllowPrivateAccess = "true"))
 	UActorComponentDisparo* DisparoComponent; // Declara el componente DisparoComponent
 	UPROPERTY(VisibleAnywhere)
 	UMovimentoNavesEnemigas* MovementComponent;
+
+	void DestruirNave();
+	void Update() override;
+	void SetLluviaObstaculo(ALluviaDeObstaculos* MyLluviaObstaculo);
+
 
 protected:
 	//virtual void Mover() = 0;

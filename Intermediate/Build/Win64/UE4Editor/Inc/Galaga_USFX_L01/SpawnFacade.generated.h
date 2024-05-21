@@ -13,10 +13,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define GALAGA_USFX_L01_SpawnFacade_generated_h
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_SPARSE_DATA
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_RPC_WRAPPERS
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_RPC_WRAPPERS_NO_PURE_DECLS
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_INCLASS_NO_PURE_DECLS \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_SPARSE_DATA
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_RPC_WRAPPERS
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_RPC_WRAPPERS_NO_PURE_DECLS
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesASpawnFacade(); \
 	friend struct Z_Construct_UClass_ASpawnFacade_Statics; \
@@ -25,7 +25,7 @@ public: \
 	DECLARE_SERIALIZER(ASpawnFacade)
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_INCLASS \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_INCLASS \
 private: \
 	static void StaticRegisterNativesASpawnFacade(); \
 	friend struct Z_Construct_UClass_ASpawnFacade_Statics; \
@@ -34,7 +34,7 @@ public: \
 	DECLARE_SERIALIZER(ASpawnFacade)
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_STANDARD_CONSTRUCTORS \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ASpawnFacade(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ASpawnFacade) \
@@ -47,7 +47,7 @@ private: \
 public:
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_ENHANCED_CONSTRUCTORS \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API ASpawnFacade(ASpawnFacade&&); \
@@ -58,28 +58,28 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ASpawnFacade)
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_PRIVATE_PROPERTY_OFFSET
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_17_PROLOG
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_GENERATED_BODY_LEGACY \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_PRIVATE_PROPERTY_OFFSET
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_18_PROLOG
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_PRIVATE_PROPERTY_OFFSET \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_SPARSE_DATA \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_RPC_WRAPPERS \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_INCLASS \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_STANDARD_CONSTRUCTORS \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_PRIVATE_PROPERTY_OFFSET \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_SPARSE_DATA \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_RPC_WRAPPERS \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_INCLASS \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_GENERATED_BODY \
+#define Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_PRIVATE_PROPERTY_OFFSET \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_SPARSE_DATA \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_INCLASS_NO_PURE_DECLS \
-	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_20_ENHANCED_CONSTRUCTORS \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_PRIVATE_PROPERTY_OFFSET \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_SPARSE_DATA \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_INCLASS_NO_PURE_DECLS \
+	Galaga_USFX_L01_Source_Galaga_USFX_L01_SpawnFacade_h_21_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

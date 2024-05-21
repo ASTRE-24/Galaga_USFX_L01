@@ -51,6 +51,7 @@ public:
 	TArray<FString> NombresNavesInformante; // Aquí se declara el TArray para almacenar los nombres de las naves enemigas de informante
 	TArray<FVector> posicionCapsulasEnemigas; // Aquí se declara el TArray para almacenar las posiciones de las cápsulas enemigas
 	FTimerHandle TimerCapsulas;
+	FTimerHandle LluviaObstaculos;
 
 private:
 	

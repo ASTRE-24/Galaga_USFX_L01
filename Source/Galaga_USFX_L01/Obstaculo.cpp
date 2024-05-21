@@ -14,7 +14,7 @@ AObstaculo::AObstaculo()
     RootComponent = CollisionComponent;
 
     CollisionComponent->SetCollisionProfileName(TEXT("BlockAll"));
-    bMoverse = false;
+    bMoverse = true;
     distanciaObs = 0;
 	velocidad = 500;
 }

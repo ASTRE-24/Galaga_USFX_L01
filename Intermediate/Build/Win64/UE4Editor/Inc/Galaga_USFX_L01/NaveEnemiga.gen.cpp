@@ -21,6 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeNaveEnemiga() {}
 	ENGINE_API UClass* Z_Construct_UClass_UParticleSystem_NoRegister();
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UActorComponentDisparo_NoRegister();
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UMovimentoNavesEnemigas_NoRegister();
+	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_USubscriber_NoRegister();
 // End Cross Module References
 	void ANaveEnemiga::StaticRegisterNativesANaveEnemiga()
 	{
@@ -52,6 +53,7 @@ void EmptyLinkFunctionForGeneratedCodeNaveEnemiga() {}
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_MovementComponent;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+		static const UE4CodeGen_Private::FImplementedInterfaceParams InterfaceParams[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
 	};
@@ -106,6 +108,9 @@ void EmptyLinkFunctionForGeneratedCodeNaveEnemiga() {}
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANaveEnemiga_Statics::NewProp_DisparoComponent,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANaveEnemiga_Statics::NewProp_MovementComponent,
 	};
+		const UE4CodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_ANaveEnemiga_Statics::InterfaceParams[] = {
+			{ Z_Construct_UClass_USubscriber_NoRegister, (int32)VTABLE_OFFSET(ANaveEnemiga, ISubscriber), false },
+		};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ANaveEnemiga_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ANaveEnemiga>::IsAbstract,
 	};
@@ -116,11 +121,11 @@ void EmptyLinkFunctionForGeneratedCodeNaveEnemiga() {}
 		DependentSingletons,
 		nullptr,
 		Z_Construct_UClass_ANaveEnemiga_Statics::PropPointers,
-		nullptr,
+		InterfaceParams,
 		UE_ARRAY_COUNT(DependentSingletons),
 		0,
 		UE_ARRAY_COUNT(Z_Construct_UClass_ANaveEnemiga_Statics::PropPointers),
-		0,
+		UE_ARRAY_COUNT(InterfaceParams),
 		0x009000A5u,
 		METADATA_PARAMS(Z_Construct_UClass_ANaveEnemiga_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_ANaveEnemiga_Statics::Class_MetaDataParams))
 	};
@@ -133,7 +138,7 @@ void EmptyLinkFunctionForGeneratedCodeNaveEnemiga() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ANaveEnemiga, 344707069);
+	IMPLEMENT_CLASS(ANaveEnemiga, 1391549596);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<ANaveEnemiga>()
 	{
 		return ANaveEnemiga::StaticClass();

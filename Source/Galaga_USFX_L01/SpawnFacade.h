@@ -12,6 +12,7 @@
 #include "Obstaculo.h"
 #include "JugadorCapsula.h"
 #include "EnemigoCapsula.h"
+#include "LluviaDeObstaculos.h"
 #include "SpawnFacade.generated.h"
 
 UCLASS()
@@ -33,6 +34,8 @@ public:
 	TArray<AActor*> capsulas;
 	TMap<int, FVector> UbicacionInventario;
 	TArray<FVector> PosicionesNaves;
+	ALluviaDeObstaculos* lluviaObstaculos;
+	FTimerHandle TimerHandle_LluviaObstaculos;
 
 protected:
 	// Called when the game starts or when spawned
@@ -49,4 +52,5 @@ private:
 	void posiciones();
 	void realizaTareas(TArray<class ANaveEnemiga*> _NavesEnemigas, 
 		TArray<class AObstaculo*> _Obstaculos, TArray<class AActor*> _Capsulas);
+	void CrearLluviaObstaculos();
 };

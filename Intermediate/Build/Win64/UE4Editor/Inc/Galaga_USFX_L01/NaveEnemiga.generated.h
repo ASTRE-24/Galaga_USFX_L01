@@ -22,7 +22,8 @@ private: \
 	friend struct Z_Construct_UClass_ANaveEnemiga_Statics; \
 public: \
 	DECLARE_CLASS(ANaveEnemiga, AActor, COMPILED_IN_FLAGS(CLASS_Abstract | CLASS_Config), CASTCLASS_None, TEXT("/Script/Galaga_USFX_L01"), NO_API) \
-	DECLARE_SERIALIZER(ANaveEnemiga)
+	DECLARE_SERIALIZER(ANaveEnemiga) \
+	virtual UObject* _getUObject() const override { return const_cast<ANaveEnemiga*>(this); }
 
 
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_NaveEnemiga_h_15_INCLASS \
@@ -31,7 +32,8 @@ private: \
 	friend struct Z_Construct_UClass_ANaveEnemiga_Statics; \
 public: \
 	DECLARE_CLASS(ANaveEnemiga, AActor, COMPILED_IN_FLAGS(CLASS_Abstract | CLASS_Config), CASTCLASS_None, TEXT("/Script/Galaga_USFX_L01"), NO_API) \
-	DECLARE_SERIALIZER(ANaveEnemiga)
+	DECLARE_SERIALIZER(ANaveEnemiga) \
+	virtual UObject* _getUObject() const override { return const_cast<ANaveEnemiga*>(this); }
 
 
 #define Galaga_USFX_L01_Source_Galaga_USFX_L01_NaveEnemiga_h_15_STANDARD_CONSTRUCTORS \

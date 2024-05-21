@@ -17,6 +17,10 @@ ASpawnFacade::ASpawnFacade()
 void ASpawnFacade::BeginPlay()
 {
 	Super::BeginPlay();
+	lluviaObstaculos = GetWorld()->SpawnActor<ALluviaDeObstaculos>
+        (ALluviaDeObstaculos::StaticClass());
+
+	
 	posiciones();
 }
 
@@ -24,6 +28,7 @@ void ASpawnFacade::BeginPlay()
 void ASpawnFacade::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
 
 }
 
@@ -63,7 +68,8 @@ void ASpawnFacade::invocarNaves()
             {
                 int32 RandomIndex = FMath::RandRange(0, NombresNavesAtaque.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
                 ANaveEnemiga* NaveEnemigaAtaque = navesAtaque->OrdenarNaveEnemiga(NombresNavesAtaque[RandomIndex]);
-				NaveEnemigaAtaque->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0,180,0));
+				NaveEnemigaAtaque->SetLluviaObstaculo(lluviaObstaculos);
+                NaveEnemigaAtaque->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0,180,0));
                 navesEnemigas.Add(NaveEnemigaAtaque);
             }
             else if (random == 1)
@@ -71,7 +77,8 @@ void ASpawnFacade::invocarNaves()
                 int32 RandomIndex = FMath::RandRange(0, NombresNavesApoyo.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
                 // Spawnea la nave aleatoria
                 ANaveEnemiga* NaveEnemigaApoyo = navesApoyo->OrdenarNaveEnemiga(NombresNavesApoyo[RandomIndex]);
-				NaveEnemigaApoyo->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0, 180, 0));
+                NaveEnemigaApoyo->SetLluviaObstaculo(lluviaObstaculos);
+                NaveEnemigaApoyo->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0, 180, 0));
                 navesEnemigas.Add(NaveEnemigaApoyo);
             }
             else
@@ -79,7 +86,8 @@ void ASpawnFacade::invocarNaves()
                 int32 RandomIndex = FMath::RandRange(0, NombresNavesInformante.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
                 // Spawnea la nave aleatoria
                 ANaveEnemiga* NaveEnemigaInformante = navesInformante->OrdenarNaveEnemiga(NombresNavesInformante[RandomIndex]);
-				NaveEnemigaInformante->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0, 180, 0));
+                NaveEnemigaInformante->SetLluviaObstaculo(lluviaObstaculos);
+                NaveEnemigaInformante->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0, 180, 0));
                 navesEnemigas.Add(NaveEnemigaInformante);
             }
         }
@@ -89,28 +97,8 @@ void ASpawnFacade::invocarNaves()
 
 void ASpawnFacade::invocarObstaculos()
 {
-    FVector ubicacionDeObjetosInventario = FVector(-700.0f, -1300.0f, 215.0f);
-	for (int i = 0; i < 12; i++) {
-		UWorld* const World = GetWorld();
-		if (World != nullptr)
-		{
-			//Generar un número aleatorio entre 0 y 2
-			int RandomNumber = FMath::FRandRange(0, 2);
-			if (RandomNumber == 0)
-			{
-				obstaculoMapa = GetWorld()->SpawnActor<AObstaculo>(AObstaculoMeteoro::StaticClass());
-				obstaculoMapa->SetActorLocation(ubicacionDeObjetosInventario);
-				obstaculos.Add(obstaculoMapa);
-			}
-			else if (RandomNumber == 1)
-			{
-				obstaculoMapa = GetWorld()->SpawnActor<AObstaculo>(AObstaculoPared::StaticClass());
-				obstaculoMapa->SetActorLocation(ubicacionDeObjetosInventario);
-				obstaculos.Add(obstaculoMapa);
-			}
-		}
-		ubicacionDeObjetosInventario = ubicacionDeObjetosInventario + FVector(0.0f, 300.0f, 0.0f);
-	}
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_LluviaObstaculos, 
+        this, &ASpawnFacade::CrearLluviaObstaculos, 7.0f, false);
 
 }
 
@@ -161,20 +149,20 @@ void ASpawnFacade::invocarCapsula()
 void ASpawnFacade::realizaTareas(TArray<class ANaveEnemiga*> _NavesEnemigas, 
     TArray<class AObstaculo*> _Obstaculos, TArray<class AActor*> _Capsulas)
 {
-	for (int i = 0; i < _NavesEnemigas.Num(); i++) 
-    {
-		_NavesEnemigas[i]->SetMovimiento(true);
-	}
+	//for (int i = 0; i < _NavesEnemigas.Num(); i++) 
+ //   {
+	//	_NavesEnemigas[i]->SetMovimiento(true);
+	//}
 
-	for (int i = 0; i < _Obstaculos.Num(); i++)
-	{
-		_Obstaculos[i]->bMoverse = true;
-	}
+	//for (int i = 0; i < _Obstaculos.Num(); i++)
+	//{
+	//	_Obstaculos[i]->bMoverse = true;
+	//}
 
-	for (int i = 0; i < _Capsulas.Num(); i++)
-	{
-		//_Capsulas[i]->SetActorLocation(_Capsulas[i]->GetActorLocation() + FVector(0.0f, 0.0f, 500.0f));
-	}
+	//for (int i = 0; i < _Capsulas.Num(); i++)
+	//{
+	//	//_Capsulas[i]->SetActorLocation(_Capsulas[i]->GetActorLocation() + FVector(0.0f, 0.0f, 500.0f));
+	//}
 }
 
 void ASpawnFacade::posiciones()
@@ -228,5 +216,32 @@ void ASpawnFacade::posiciones()
                     PosicionesNaves.Add(PosicionNaveActualY);
             }
         };return;
+    }
+}
+
+void ASpawnFacade::CrearLluviaObstaculos()
+{
+	lluviaObstaculos->SetTimeObstaculo(5.0f);   
+    FVector ubicacionDeObjetosInventario = FVector(-700.0f, -1300.0f, 215.0f);
+    for (int i = 0; i < 12; i++) {
+        UWorld* const World = GetWorld();
+        if (World != nullptr)
+        {
+            //Generar un número aleatorio entre 0 y 2
+            int RandomNumber = FMath::FRandRange(0, 2);
+            if (RandomNumber == 0)
+            {
+                obstaculoMapa = GetWorld()->SpawnActor<AObstaculo>(AObstaculoMeteoro::StaticClass());
+                obstaculoMapa->SetActorLocation(ubicacionDeObjetosInventario);
+                obstaculos.Add(obstaculoMapa);
+            }
+            else if (RandomNumber == 1)
+            {
+                obstaculoMapa = GetWorld()->SpawnActor<AObstaculo>(AObstaculoPared::StaticClass());
+                obstaculoMapa->SetActorLocation(ubicacionDeObjetosInventario);
+                obstaculos.Add(obstaculoMapa);
+            }
+        }
+        ubicacionDeObjetosInventario = ubicacionDeObjetosInventario + FVector(0.0f, 300.0f, 0.0f);
     }
 }
