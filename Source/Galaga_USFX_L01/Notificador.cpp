@@ -3,6 +3,7 @@
 
 #include "Notificador.h"
 #include "Subscriber.h"
+#include "NaveEnemiga.h"
 
 // Sets default values
 ANotificador::ANotificador()
@@ -23,9 +24,9 @@ void ANotificador::BeginPlay()
 void ANotificador::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	int32 ArraySize = Objetivos.Num();
+	/*int32 ArraySize = Objetivos.Num();
 	FString Mensaje = FString::Printf(TEXT("Size %d"), ArraySize);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, Mensaje);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, Mensaje);*/
 }
 
 void ANotificador::Subscribe(AActor* Subscriber)
@@ -45,6 +46,11 @@ void ANotificador::NotifySubscribers()
 		ISubscriber* Suscriptor = Cast<ISubscriber>(Objetivo);
 		if (Suscriptor)
 		{
+			ANaveEnemiga* Nave = Cast<ANaveEnemiga>(Objetivo);
+			if (Nave)
+			{
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("ObjetoNave"));
+			}
 			Suscriptor->Update();
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Notificando"));
 		}

@@ -36,6 +36,7 @@ public:
 	TArray<FVector> PosicionesNaves;
 	ALluviaDeObstaculos* lluviaObstaculos;
 	FTimerHandle TimerHandle_LluviaObstaculos;
+	FTimerHandle TimerHandle_RetornarPosicion;
 
 protected:
 	// Called when the game starts or when spawned
@@ -53,4 +54,5 @@ private:
 	void realizaTareas(TArray<class ANaveEnemiga*> _NavesEnemigas, 
 		TArray<class AObstaculo*> _Obstaculos, TArray<class AActor*> _Capsulas);
 	void CrearLluviaObstaculos();
+	void RetornarPosicion();
 };

@@ -112,6 +112,28 @@ void ANaveEnemiga::Update()
 {
 	bMovimiento = false;
 	bMoverse = true;
+	bShoulDispara = true;
+	int32 random = FMath::RandRange(0, 4);
+	if (random == 0)
+	{
+		tipoArma = "Normal";
+	}
+	else if (random == 1)
+	{
+		tipoArma = "Doble";
+	}
+	else if (random == 2)
+	{
+		tipoArma = "Triple";
+	}
+	else if (random == 3)
+	{
+		tipoArma = "TripleAbanico";
+	}
+	else
+	{
+		tipoArma = "Normal";
+	}
 }
 
 void ANaveEnemiga::SetLluviaObstaculo(ALluviaDeObstaculos* MyLluviaObstaculo)

@@ -243,5 +243,19 @@ void ASpawnFacade::CrearLluviaObstaculos()
             }
         }
         ubicacionDeObjetosInventario = ubicacionDeObjetosInventario + FVector(0.0f, 300.0f, 0.0f);
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle_RetornarPosicion, this, &ASpawnFacade::RetornarPosicion, 3.0f, false);
     }
+}
+
+void ASpawnFacade::RetornarPosicion()
+{
+	for (int i = 0; i < navesEnemigas.Num(); i++)
+	{
+		if (navesEnemigas[i] != nullptr)
+        {
+            navesEnemigas[i]->SetActorLocation(PosicionesNaves[i]);
+			navesEnemigas[i]->SetMoverse(false);
+			navesEnemigas[i]->SetMovimiento(true);
+        }
+	}
 }
