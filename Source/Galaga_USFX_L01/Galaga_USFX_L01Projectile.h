@@ -41,8 +41,8 @@ public:
 	
 	AActor* OriginActor;
 	
-	void SetOriginActor(AActor* _OriginActor) { OriginActor = _OriginActor; }
-	AActor* GetOriginActor() { return OriginActor; }
+	FORCEINLINE void SetOriginActor(AActor* _OriginActor) { OriginActor = _OriginActor; }
+	FORCEINLINE AActor* GetOriginActor() { return OriginActor; }
 	/** Returns ProjectileMesh subobject **/
 	FORCEINLINE UStaticMeshComponent* GetProjectileMesh() const { return ProjectileMesh; }
 	/** Returns ProjectileMovement subobject **/

@@ -20,8 +20,6 @@
 			"Escudo.cpp.obj",
 			"Galaga_USFX_L01.cpp.obj",
 			"Galaga_USFX_L01GameMode.cpp.obj",
-			"Galaga_USFX_L01Pawn.cpp.obj",
-			"Galaga_USFX_L01Projectile.cpp.obj",
 			"GameControlAdapter.cpp.obj",
 			"InterfaceBuilderNaveNodriza.cpp.obj",
 			"InterfaceCapsulaEnemiga.cpp.obj",
@@ -35,7 +33,6 @@
 			"InventoryActorMunicion.cpp.obj",
 			"InventoryComponent.cpp.obj",
 			"JugadorCapsula.cpp.obj",
-			"LluviaDeObstaculos.cpp.obj",
 			"LogisticaJuego.cpp.obj",
 			"MovimentoNavesEnemigas.cpp.obj",
 			"MovimientoVertical.cpp.obj",
@@ -65,6 +62,9 @@
 			"SolicitudDeNavesInformante.cpp.obj",
 			"SpaunFacade.cpp.obj",
 			"Subscriber.cpp.obj",
+			"Galaga_USFX_L01Pawn.cpp.obj",
+			"Galaga_USFX_L01Projectile.cpp.obj",
+			"LluviaDeObstaculos.cpp.obj",
 			"NaveEnemiga.cpp.obj",
 			"Notificador.cpp.obj",
 			"SpawnFacade.cpp.obj"
@@ -86,7 +86,6 @@
 			"DirectorPortaNave.gen.cpp.obj",
 			"EnemigoCapsula.gen.cpp.obj",
 			"Escudo.gen.cpp.obj",
-			"Galaga_USFX_L01.init.gen.cpp.obj",
 			"Galaga_USFX_L01GameMode.gen.cpp.obj",
 			"Galaga_USFX_L01Pawn.gen.cpp.obj",
 			"Galaga_USFX_L01Projectile.gen.cpp.obj",
@@ -132,8 +131,9 @@
 			"SolicitudDeNavesAtaque.gen.cpp.obj",
 			"SolicitudDeNavesInformante.gen.cpp.obj",
 			"SpaunFacade.gen.cpp.obj",
-			"SpawnFacade.gen.cpp.obj",
-			"Subscriber.gen.cpp.obj"
+			"Subscriber.gen.cpp.obj",
+			"Galaga_USFX_L01.init.gen.cpp.obj",
+			"SpawnFacade.gen.cpp.obj"
 		]
 	}
 }

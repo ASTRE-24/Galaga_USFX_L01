@@ -4,6 +4,7 @@
 #include "SpawnFacade.h"
 #include "ObstaculoMeteoro.h"
 #include "ObstaculoPared.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ASpawnFacade::ASpawnFacade()
@@ -19,8 +20,7 @@ void ASpawnFacade::BeginPlay()
 	Super::BeginPlay();
 	lluviaObstaculos = GetWorld()->SpawnActor<ALluviaDeObstaculos>
         (ALluviaDeObstaculos::StaticClass());
-
-	
+    lluviaObstaculos->Subscribe(this);
 	posiciones();
 }
 
@@ -28,7 +28,27 @@ void ASpawnFacade::BeginPlay()
 void ASpawnFacade::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
+    // Verifica y elimina naves inválidas
+    TArray<AActor*> FoundActors;
+    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ANaveEnemiga::StaticClass(), FoundActors);
+
+    bool bAnyNavesEnemigasExist = FoundActors.Num() > 0;
+
+    if (!bAnyNavesEnemigasExist)
+    {
+		navesEnemigas.Empty();
+		obstaculos.Empty();
+		capsulas.Empty();
+		PosicionesNaves.Empty();
+		lluviaObstaculos->flags = 0;
+        posiciones();
+        invocarNaves();
+        invocarCapsula();
+    }
+
+    // Mostrar mensaje en pantalla
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Numero de naves enemigas: %d"), FoundActors.Num()));
+
 
 }
 
@@ -53,7 +73,7 @@ void ASpawnFacade::invocarNaves()
     NombresNavesApoyo.Add("NaveEnemigaReabastecimiento");
     NombresNavesApoyo.Add("NaveReabastecimientoEnergia");
     NombresNavesApoyo.Add("NaveReabastecimientoMunicion");
-
+    lluviaObstaculos->contadorNavesEnemigas = 0;
 
     UWorld* const World = GetWorld();
     if (World != nullptr)
@@ -97,9 +117,31 @@ void ASpawnFacade::invocarNaves()
 
 void ASpawnFacade::invocarObstaculos()
 {
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle_LluviaObstaculos, 
-        this, &ASpawnFacade::CrearLluviaObstaculos, 7.0f, false);
-
+	//GetWorld()->GetTimerManager().SetTimer(TimerHandle_LluviaObstaculos, 
+        //this, &ASpawnFacade::CrearLluviaObstaculos, 7.0f, false);
+    
+    FVector ubicacionDeObjetosInventario = FVector(-700.0f, -1300.0f, 215.0f);
+    for (int i = 0; i < 12; i++) {
+        UWorld* const World = GetWorld();
+        if (World != nullptr)
+        {
+            //Generar un número aleatorio entre 0 y 2
+            int RandomNumber = FMath::FRandRange(0, 2);
+            if (RandomNumber == 0)
+            {
+                obstaculoMapa = GetWorld()->SpawnActor<AObstaculo>(AObstaculoMeteoro::StaticClass());
+                obstaculoMapa->SetActorLocation(ubicacionDeObjetosInventario);
+                obstaculos.Add(obstaculoMapa);
+            }
+            else if (RandomNumber == 1)
+            {
+                obstaculoMapa = GetWorld()->SpawnActor<AObstaculo>(AObstaculoPared::StaticClass());
+                obstaculoMapa->SetActorLocation(ubicacionDeObjetosInventario);
+                obstaculos.Add(obstaculoMapa);
+            }
+        }
+        ubicacionDeObjetosInventario = ubicacionDeObjetosInventario + FVector(0.0f, 300.0f, 0.0f);
+    }
 }
 
 void ASpawnFacade::invocarCapsula()
@@ -221,7 +263,7 @@ void ASpawnFacade::posiciones()
 
 void ASpawnFacade::CrearLluviaObstaculos()
 {
-	lluviaObstaculos->SetTimeObstaculo(5.0f);   
+    //lluviaObstaculos->IniciarLluvia();
     FVector ubicacionDeObjetosInventario = FVector(-700.0f, -1300.0f, 215.0f);
     for (int i = 0; i < 12; i++) {
         UWorld* const World = GetWorld();
@@ -243,7 +285,7 @@ void ASpawnFacade::CrearLluviaObstaculos()
             }
         }
         ubicacionDeObjetosInventario = ubicacionDeObjetosInventario + FVector(0.0f, 300.0f, 0.0f);
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle_RetornarPosicion, this, &ASpawnFacade::RetornarPosicion, 3.0f, false);
+		
     }
 }
 
@@ -251,7 +293,7 @@ void ASpawnFacade::RetornarPosicion()
 {
 	for (int i = 0; i < navesEnemigas.Num(); i++)
 	{
-		if (navesEnemigas[i] != nullptr)
+		if (navesEnemigas[i])
         {
             navesEnemigas[i]->SetActorLocation(PosicionesNaves[i]);
 			navesEnemigas[i]->SetMoverse(false);
@@ -259,3 +301,9 @@ void ASpawnFacade::RetornarPosicion()
         }
 	}
 }
+
+void ASpawnFacade::Update()
+{
+    invocarObstaculos();
+    //GetWorld()->GetTimerManager().SetTimer(TimerHandle_RetornarPosicion, this, &ASpawnFacade::RetornarPosicion, 5.0f, false);
+}   

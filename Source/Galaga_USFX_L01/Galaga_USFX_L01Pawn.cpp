@@ -375,7 +375,7 @@ void AGalaga_USFX_L01Pawn::NotifyHit(class UPrimitiveComponent*
 	AObstaculo* Obstaculo = Cast<AObstaculo>(Other);
 	if (Obstaculo)
 	{
-		Health -= Obstaculo->danioObstaculo();
+		/*Health -= Obstaculo->danioObstaculo();
 		if (Health <= 0)
 		{
 			GameControlAdapter->LoseLife();
@@ -386,7 +386,7 @@ void AGalaga_USFX_L01Pawn::NotifyHit(class UPrimitiveComponent*
 		}
 		GameControlAdapter->SetHealth(Health);
 		Health = GameControlAdapter->GetHealth();
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, TEXT("Salud: " + FString::SanitizeFloat(Health)));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, TEXT("Salud: " + FString::SanitizeFloat(Health)));*/
 		Obstaculo->Destroy();
 	}
 	//if (Obstaculo != nullptr)

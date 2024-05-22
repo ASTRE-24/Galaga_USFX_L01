@@ -10,7 +10,7 @@ ANotificador::ANotificador()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	contadorNavesEnemigas = 0;
 }
 
 // Called when the game starts or when spawned
@@ -32,6 +32,12 @@ void ANotificador::Tick(float DeltaTime)
 void ANotificador::Subscribe(AActor* Subscriber)
 {
 	Objetivos.Add(Subscriber);
+	ANaveEnemiga* Nave = Cast<ANaveEnemiga>(Subscriber);
+	if (Nave)
+	{
+		contadorNavesEnemigas++;
+		
+	}
 }
 
 void ANotificador::UnSubscribe(AActor* SuscriberToRemove)

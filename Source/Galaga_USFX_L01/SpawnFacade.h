@@ -13,10 +13,11 @@
 #include "JugadorCapsula.h"
 #include "EnemigoCapsula.h"
 #include "LluviaDeObstaculos.h"
+#include "Subscriber.h"
 #include "SpawnFacade.generated.h"
 
 UCLASS()
-class GALAGA_USFX_L01_API ASpawnFacade : public AActor
+class GALAGA_USFX_L01_API ASpawnFacade : public AActor, public ISubscriber
 {
 	GENERATED_BODY()
 	
@@ -55,4 +56,5 @@ private:
 		TArray<class AObstaculo*> _Obstaculos, TArray<class AActor*> _Capsulas);
 	void CrearLluviaObstaculos();
 	void RetornarPosicion();
+	void Update() override;
 };

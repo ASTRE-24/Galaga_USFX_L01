@@ -15,7 +15,6 @@
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/DirectorPortaNave.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/EnemigoCapsula.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Escudo.gen.cpp"
-#include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Galaga_USFX_L01.init.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Galaga_USFX_L01GameMode.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Galaga_USFX_L01Pawn.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Galaga_USFX_L01Projectile.gen.cpp"
@@ -61,5 +60,4 @@
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/SolicitudDeNavesAtaque.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/SolicitudDeNavesInformante.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/SpaunFacade.gen.cpp"
-#include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/SpawnFacade.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Subscriber.gen.cpp"

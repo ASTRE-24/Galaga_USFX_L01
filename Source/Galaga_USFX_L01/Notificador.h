@@ -14,8 +14,10 @@ class GALAGA_USFX_L01_API ANotificador : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ANotificador();
-
+	float contadorNavesEnemigas;
+	FORCEINLINE void SetContadorNavesEnemigas(float NewContadorNavesEnemigas);
 protected:
+	
 	TArray<AActor*> Objetivos = TArray<AActor*>();
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

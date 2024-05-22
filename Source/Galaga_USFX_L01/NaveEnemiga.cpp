@@ -26,6 +26,7 @@ ANaveEnemiga::ANaveEnemiga()
 	bShoulDispara = false;
 	bMoverse = false;
 	bMovimiento = true;
+	energia = 100.0f;
 	tipoArma = "";
 	
 
