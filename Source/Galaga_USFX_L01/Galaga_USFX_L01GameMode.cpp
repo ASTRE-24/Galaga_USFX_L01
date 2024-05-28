@@ -35,6 +35,7 @@
 #include "BuilderNaveNodrizaFase3.h"
 #include "TimerManager.h"
 #include "SpawnFacade.h"
+#include "Vehiculo.h"
 
 AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 {
@@ -44,6 +45,8 @@ AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 
 	//NaveEnemiga01 = nullptr;
 }
+
+
 
 void AGalaga_USFX_L01GameMode::BeginPlay()
 {
@@ -55,7 +58,24 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
     FRotator rotacionNave = FRotator(0.0f, 180.0f, 0.0f);
     FRotator rotacionNave90 = FRotator(0.0f, 90.0f, 0.0f);
 
-	SpawnFacade = GetWorld()->SpawnActor<ASpawnFacade>(ASpawnFacade::StaticClass());
+	AVehiculo* vehiculo = GetWorld()->SpawnActor<AVehiculo>(AVehiculo::StaticClass());
+	vehiculo->SetActorLocation(FVector(0.0f, 0.0f, 215.0f));
+    
+    //Manejando en modo terrestre
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, TEXT("" + vehiculo->GetNombreEstado()));
+	vehiculo->Manejar();
+
+	//Cambiando a modo aereo
+	vehiculo->Volar();
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, TEXT("" + vehiculo->GetNombreEstado()));
+    vehiculo->Volar();
+
+	//Cambiando a modo espacial
+	vehiculo->Navegar();
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, TEXT("" + vehiculo->GetNombreEstado()));
+	vehiculo->Navegar();
+
+    SpawnFacade = GetWorld()->SpawnActor<ASpawnFacade>(ASpawnFacade::StaticClass());
     SpawnFacade->invocarNaves();
 	SpawnFacade->invocarObstaculos();
 	SpawnFacade->invocarCapsula();
@@ -240,6 +260,8 @@ void AGalaga_USFX_L01GameMode::SapwnCapsulasEnemigas()
         }
 	}
 }
+
+
 
 
 

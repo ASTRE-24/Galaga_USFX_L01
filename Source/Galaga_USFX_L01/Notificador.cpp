@@ -52,11 +52,7 @@ void ANotificador::NotifySubscribers()
 		ISubscriber* Suscriptor = Cast<ISubscriber>(Objetivo);
 		if (Suscriptor)
 		{
-			ANaveEnemiga* Nave = Cast<ANaveEnemiga>(Objetivo);
-			if (Nave)
-			{
-				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("ObjetoNave"));
-			}
+			
 			Suscriptor->Update();
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Notificando"));
 		}

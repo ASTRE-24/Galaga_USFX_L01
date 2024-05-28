@@ -47,7 +47,7 @@ void ASpawnFacade::Tick(float DeltaTime)
     }
 
     // Mostrar mensaje en pantalla
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Numero de naves enemigas: %d"), FoundActors.Num()));
+    //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Numero de naves enemigas: %d"), FoundActors.Num()));
 
 
 }
@@ -306,4 +306,15 @@ void ASpawnFacade::Update()
 {
     invocarObstaculos();
     //GetWorld()->GetTimerManager().SetTimer(TimerHandle_RetornarPosicion, this, &ASpawnFacade::RetornarPosicion, 5.0f, false);
-}   
+}
+
+void ASpawnFacade::Destroyed()
+{
+    Super::Destroyed();
+    if (!lluviaObstaculos)
+    {
+
+        UE_LOG(LogTemp, Error, TEXT("Lluvia de obstaculo no existe")); return;
+    }
+    lluviaObstaculos->UnSubscribe(this);
+}

@@ -57,4 +57,5 @@ private:
 	void CrearLluviaObstaculos();
 	void RetornarPosicion();
 	void Update() override;
+	virtual void Destroyed() override;
 };

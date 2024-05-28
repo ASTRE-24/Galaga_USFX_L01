@@ -18,6 +18,7 @@ class AGalaga_USFX_L01GameMode : public AGameModeBase
 
 public:
 	AGalaga_USFX_L01GameMode();
+	
 	class ABuilderConcretoPNReparar* ReparacionPorta;
 	class ADirectorPortaNave* IngenieroPortaNave;
 	class IInventarioAFactory* InventarioAB;
@@ -42,6 +43,7 @@ protected:
 public:
 	//Definicion de las naves enemigas en un array
 	//TArray<ANaveEnemiga*> TANavesEnemigas;
+	
 	TArray<ANaveEnemigaCaza*> TANavesEnemigasCaza;
 	TArray<ANaveEnemigaTransporte*> TANavesEnemigasTransporte;
 	TArray<ANaveEnemiga*> NavesEnemigas; // Aquí se declara el TMap para almacenar las naves enemigas

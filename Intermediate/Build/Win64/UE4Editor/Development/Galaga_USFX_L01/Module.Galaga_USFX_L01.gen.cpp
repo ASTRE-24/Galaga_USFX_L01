@@ -60,4 +60,5 @@
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/SolicitudDeNavesAtaque.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/SolicitudDeNavesInformante.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/SpaunFacade.gen.cpp"
+#include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/SpawnFacade.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/Subscriber.gen.cpp"
