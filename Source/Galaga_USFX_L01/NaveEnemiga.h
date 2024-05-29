@@ -7,10 +7,13 @@
 #include "MovimentoNavesEnemigas.h"
 #include "LluviaDeObstaculos.h"
 #include "Subscriber.h"
+#include "SuscriberEstrategia.h"
+#include "ReduccionVida.h"
+#include "BatallaEstrategy.h"
 #include "NaveEnemiga.generated.h"
 
 UCLASS(abstract)
-class GALAGA_USFX_L01_API ANaveEnemiga : public AActor, public ISubscriber
+class GALAGA_USFX_L01_API ANaveEnemiga : public AActor, public ISubscriber, public ISuscriberEstrategia
 {
 	GENERATED_BODY()
 
@@ -21,6 +24,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Effects")
 	UParticleSystem* DestructionParticle;
     bool bShoulDispara;
+	IBatallaEstrategy* Estrategia;
+	void CambiarEstrategia(AActor* myEstrategia);
+	void EjecutarEstrategia();
 
 protected:
 
@@ -42,6 +48,7 @@ protected:
 	bool bMoverse;
 	bool bMovimiento;
 	float Municion;
+	FString TipoMovimiento;
 
 public:
 	FORCEINLINE float GetVelocidad() const { return velocidad; }
@@ -62,6 +69,7 @@ public:
 	FORCEINLINE bool GetMovimiento() const { return bMovimiento; }
 	FORCEINLINE FString GetTipoArma() const { return tipoArma; }
 	FORCEINLINE float GetMunicion() const { return Municion; }
+	FORCEINLINE FString GetTipoMovimiento() const { return TipoMovimiento; }
 
 	FORCEINLINE void SetVelocidad(float _velocidad) { velocidad = _velocidad; }
 	FORCEINLINE void SetResistencia(float _resistencia) { resistencia = _resistencia; }
@@ -81,11 +89,13 @@ public:
 	FORCEINLINE void SetMovimiento(bool _bMovimiento) { bMovimiento = _bMovimiento; }
 	FORCEINLINE void SetTipoArma(FString _tipoArma) { tipoArma = _tipoArma; }
 	FORCEINLINE void SetMunicion(float _Municion) { Municion = _Municion; }
+	FORCEINLINE void SetTipoMovimiento(FString _TipoMovimiento) { TipoMovimiento = _TipoMovimiento; }
 
 public:
 	// Sets default values for this actor's properties
 	ANaveEnemiga();
 	ALluviaDeObstaculos* LluviaDeObstaculos;
+	AReduccionVida* ReduccionVida;
 
 protected:
 	// Called when the game starts or when spawned
@@ -103,7 +113,9 @@ public:
 
 	void DestruirNave();
 	void Update() override;
+	void ActualizarEstrategia() override;
 	void SetLluviaObstaculo(ALluviaDeObstaculos* MyLluviaObstaculo);
+	void SetReduccionVida(AReduccionVida* MyReduccionVida);
 
 
 protected:

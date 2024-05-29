@@ -19,7 +19,7 @@ void ANaveEnemigaEspiaTactica::Mover(float DeltaTime)
     FVector PosicionActual = GetActorLocation();
     float NewY; //Declara la nueva posición en Y
     float PendienteActual; //Declara la pendiente actual
-    float Velocidad = 300.0f; //Declara la velocidad de la nave 
+    float Velocidad = 200.0f + GetVelocidad(); //Declara la velocidad de la nave 
 
     // Si han pasado más de 5 segundos, cambia la pendiente
     if (Timer <= 1.0f && Timer >= 0)

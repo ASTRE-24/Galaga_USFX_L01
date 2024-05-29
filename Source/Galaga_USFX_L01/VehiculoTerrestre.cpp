@@ -66,19 +66,23 @@ void AVehiculoTerrestre::Manejar(AVehiculo* myVehiculo)
 		}
 	}
 	myVehiculo->SetActorRotation(DireccionMovimiento.Rotation());
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo terrestre manejando"));
+	if (myVehiculo->TiempoTranscurrido >= 10.0f)
+	{
+		myVehiculo->SetEstado(myVehiculo->GetEstadoVehiculoAereo());
+		myVehiculo->TiempoTranscurrido = 0.0f;
+	}
 }
 
 void AVehiculoTerrestre::Volar(AVehiculo* myVehiculo)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo terrestre no puede volar"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo terrestre no puede volar"));
 	//myVehiculo->SetEstado(myVehiculo->GetEstadoVehiculoAereo());
 }
 
 void AVehiculoTerrestre::Navegar(AVehiculo* myVehiculo)
 {
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo terrestre no puede navegar"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo terrestre no puede navegar"));
 }
 
 FString AVehiculoTerrestre::NombreEstado()
@@ -93,5 +97,5 @@ void AVehiculoTerrestre::Disparar(AVehiculo* myVehiculo)
 
 void AVehiculoTerrestre::SuministrarCapsulas(AVehiculo* myVehiculo)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("No es posible suministrar capsulas"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("No es posible suministrar capsulas"));
 }

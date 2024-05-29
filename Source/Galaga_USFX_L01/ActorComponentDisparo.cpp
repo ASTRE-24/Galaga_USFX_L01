@@ -217,6 +217,47 @@ void UActorComponentDisparo::ArmaDisparoTripleAbanico()
 	}
 }
 
+void UActorComponentDisparo::ArmaDisparoRafaga()
+{
+	// Si es posible disparar
+	if (bCanFire)
+	{
+		// Obtiene la rotación y la ubicación del propietario del componente
+		FRotator FireRotation = GetOwner()->GetActorRotation() + FRotator(0.0f, 0.0f, 0.0f);
+		FVector SpawnLocation = GetOwner()->GetActorLocation() + FireRotation.RotateVector(GunOffset);
+
+		UWorld* const World = GetWorld();
+		if (World)
+		{
+			for (int i = 0; i < 5; ++i)
+			{
+				// Modify rotation for each projectile
+				FRotator ModifiedRotation = FireRotation;
+				ModifiedRotation.Yaw += (i - 2) * 10.0f; // Offset rotation by 10 degrees
+
+				const FVector ModifiedLocation = GetOwner()->GetActorLocation() + ModifiedRotation.RotateVector(GunOffset);
+
+				// Spawn the projectile
+				AGalaga_USFX_L01Projectile* Proyectil = World->SpawnActor<AGalaga_USFX_L01Projectile>(ModifiedLocation, ModifiedRotation);
+				if (Proyectil)
+				{
+					Proyectil->SetOriginActor(GetOwner());
+				}
+			}
+			bCanFire = false;
+			if (GetOwner()->IsA(AGalaga_USFX_L01Pawn::StaticClass()))
+				FireRate = 0.2;
+			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &UActorComponentDisparo::ShotTimerExpired, FireRate);
+
+			// Reproducir el sonido de disparo
+			if (FireSound)
+			{
+				UGameplayStatics::PlaySoundAtLocation(GetWorld(), FireSound, GetOwner()->GetActorLocation());
+			}
+		}
+	}
+}
+
 // Función para el temporizador de disparo expirado
 void UActorComponentDisparo::ShotTimerExpired()
 {

@@ -24,10 +24,15 @@ protected:
 	virtual void BeginPlay() override;
 	FVector InitialPosition;
 	float TimeElapsed;
+	float ArcFrequency;
+	float ArcAmplitude;
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void movimientoZigzag(float DeltaTime);
+	void movimientoLineal(float DeltaTime);
+	//void movimientoCircular(float DeltaTime);
+
 		
 };

@@ -13,6 +13,8 @@ UMovimentoNavesEnemigas::UMovimentoNavesEnemigas()
 	MovementRange = 2.0f;
 	ZigZagFrequency = 1.0f;
 	TimeElapsed = 0.0f;
+	ArcFrequency = 2.0f; // Ajusta según sea necesario
+	ArcAmplitude = 3.0f; // Ajusta según sea necesario
 	// ...
 }
 
@@ -33,21 +35,8 @@ void UMovimentoNavesEnemigas::BeginPlay()
 void UMovimentoNavesEnemigas::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	// Inicializar la posición inicial
 	
-	/*float NewX = InitialPosition.X - MovementSpeed * DeltaTime;
-	GetOwner()->SetActorLocation(FVector(NewX, InitialPosition.Y, InitialPosition.Z+216));*/
-	// Increment the time elapsed
-	//TimeElapsed += DeltaTime;
-
-	//// Calculate the new position
-	//float MovementDelta = MovementSpeed * DeltaTime;
-	//FVector NewPosition = InitialPosition + FVector(0,0,215);
-
-	//NewPosition.Y += FMath::Sin(TimeElapsed * ZigZagFrequency) * MovementRange;
-	//NewPosition.X += MovementDelta;
-
-	//// Set the new position of the actor
-	//GetOwner()->SetActorLocation(NewPosition);
 }
 
 void UMovimentoNavesEnemigas::movimientoZigzag(float DeltaTime)
@@ -66,5 +55,31 @@ void UMovimentoNavesEnemigas::movimientoZigzag(float DeltaTime)
 
 	// Set the new position of the actor
 	GetOwner()->SetActorLocation(NewPosition);
+}
+
+void UMovimentoNavesEnemigas::movimientoLineal(float DeltaTime)
+{
+	// Obtener la posición inicial del actor
+	InitialPosition = GetOwner()->GetActorLocation();
+
+	// Incrementar el tiempo transcurrido
+	TimeElapsed += DeltaTime;
+
+	// Calcular el nuevo desplazamiento basado en la velocidad de movimiento
+	float MovementDelta = MovementSpeed * DeltaTime;
+
+	// Crear un nuevo vector de posición basado en la posición inicial
+	FVector NewPosition = InitialPosition;
+
+	// Ajustar la posición X para moverse de ida y vuelta
+	NewPosition.X -= 5*FMath::Cos(TimeElapsed * ArcFrequency) * MovementDelta;
+
+	// Ajustar la posición Y para moverse en arco
+	NewPosition.Y += FMath::Sin(TimeElapsed * ArcFrequency) * ArcAmplitude;
+
+	// Establecer la nueva posición del actor
+	GetOwner()->SetActorLocation(NewPosition);
+	// Incrementar el tiempo transcurrido
+	
 }
 

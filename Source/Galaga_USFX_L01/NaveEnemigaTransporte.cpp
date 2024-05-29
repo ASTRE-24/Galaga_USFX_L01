@@ -25,7 +25,7 @@ void ANaveEnemigaTransporte::Mover(float DeltaTime)
 	
 
 	Timer += DeltaTime; //Aumenta el timer con el tiempo transcurrido
-	float Velocidad = 5.0f;
+	float Velocidad = 4.0f + GetVelocidad()/100;
 	//Movimiento sinusoidal
 	/*float Amplitud = 10.0f;
 	float Frecuencia = 4.0f;*/

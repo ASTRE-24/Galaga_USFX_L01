@@ -19,7 +19,7 @@ void ANaveEnemigaTransporteLogistico::Mover(float DeltaTime) {
 
     float NewY; //Declara la nueva posición en Y
 
-    float Velocidad = 200.0f; //Declara la velocidad de la nave 
+    float Velocidad = 100.0f + GetVelocidad(); //Declara la velocidad de la nave 
     float NewX; //Declara la nueva posición en X  
 
 

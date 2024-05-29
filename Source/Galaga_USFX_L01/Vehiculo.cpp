@@ -13,7 +13,7 @@ AVehiculo::AVehiculo()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	// Carga el StaticMesh
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Torus.Shape_Torus'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("StaticMesh'/Game/StarterContent/Mehes/Vehiculo/TankAbrams_Free.TankAbrams_Free'"));
 
 	// Crea el componente de malla estática
 	MallaVehiculo = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MallaVehiculo"));
@@ -77,17 +77,17 @@ void AVehiculo::SetEstado(IEstado* NuevoEstado)
 	Estado = NuevoEstado;
 	if (Estado == EstadoVehiculoTerrestre)
 	{
-		UStaticMesh* NewMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Torus.Shape_Torus'"));
+		UStaticMesh* NewMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/StarterContent/Mehes/Vehiculo/TankAbrams_Free.TankAbrams_Free'"));
 		MallaVehiculo->SetStaticMesh(NewMesh);
 	}
 	else if (Estado == EstadoVehiculoAereo)
 	{
-		UStaticMesh* NewMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_QuadPyramid.Shape_QuadPyramid'"));
+		UStaticMesh* NewMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/StarterContent/Mehes/Vehiculo/ju-87_body_ju_87.ju-87_body_ju_87'"));
 		MallaVehiculo->SetStaticMesh(NewMesh);
 	}
 	else if (Estado == EstadoVehiculoEspacial)
 	{
-		UStaticMesh* NewMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_WideCapsule.Shape_WideCapsule'"));
+		UStaticMesh* NewMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/StarterContent/Mehes/Vehiculo/Sample_Ship.Sample_Ship'"));
 		MallaVehiculo->SetStaticMesh(NewMesh);
 	}
 }

@@ -14,6 +14,12 @@ D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\LluviaDeObstaculos.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\Subscriber.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Subscriber.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\SuscriberEstrategia.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\SuscriberEstrategia.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\ReduccionVida.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ReduccionVida.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\BatallaEstrategy.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\BatallaEstrategy.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemiga.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaTransporte.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\NaveEnemigaTransporteLogistico.generated.h

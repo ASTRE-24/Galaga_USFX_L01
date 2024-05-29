@@ -26,7 +26,7 @@ void ANaveEnemigaCazaSigilosa::Mover(float DeltaTime) {
     FVector PosicionActual = GetActorLocation();
     float NewY; //Declara la nueva posición en Y
     float PendienteActual = -100; //Declara la pendiente actual
-    float Velocidad = 100.0f; //Declara la velocidad de la nave 
+    float Velocidad = GetVelocidad(); //Declara la velocidad de la nave 
     float NewX; //Declara la nueva posición en X  
     float Amplitud = 5.0f;
     float Frecuencia = 4.0f;

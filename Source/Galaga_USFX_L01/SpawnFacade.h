@@ -13,6 +13,7 @@
 #include "JugadorCapsula.h"
 #include "EnemigoCapsula.h"
 #include "LluviaDeObstaculos.h"
+#include "ReduccionVida.h"
 #include "Subscriber.h"
 #include "Vehiculo.h"
 #include "SpawnFacade.generated.h"
@@ -38,6 +39,7 @@ public:
 	TMap<int, FVector> UbicacionInventario;
 	TArray<FVector> PosicionesNaves;
 	ALluviaDeObstaculos* lluviaObstaculos;
+	AReduccionVida* reduccionVida;
 	FTimerHandle TimerHandle_LluviaObstaculos;
 	FTimerHandle TimerHandle_RetornarPosicion;
 	float TiempoTranscurrido;

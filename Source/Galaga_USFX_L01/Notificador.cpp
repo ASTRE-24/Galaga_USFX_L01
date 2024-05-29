@@ -57,9 +57,29 @@ void ANotificador::NotifySubscribers()
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Notificando"));
 		}
 	}
+
+	
 }
 
 void ANotificador::actualizarSubscribers()
 {
 	NotifySubscribers();
+}
+
+void ANotificador::NotificarCambioEstrategia()
+{
+	for (AActor* Objetivo : Objetivos)
+	{
+		ISuscriberEstrategia* Suscriptor = Cast<ISuscriberEstrategia>(Objetivo);
+		if (Suscriptor)
+		{
+			ANaveEnemiga* Nave = Cast<ANaveEnemiga>(Objetivo);
+			if (Nave)
+			{
+				Suscriptor->ActualizarEstrategia();
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Cambio de estrategia"));
+			}
+
+		}
+	}
 }

@@ -22,7 +22,7 @@ void AVehiculoEspacial::BeginPlay()
 	Radio = 1000.0f; // Radio del círculo
 	Angulo = 0.0f;
 	VelocidadAngular = FMath::DegreesToRadians(30.0f); // Velocidad angular en radianes por segundo (ejemplo: 30 grados por segundo)
-	Centro = FVector(0.0f, 0.0f, 301.0f); // Centro del círculo
+	Centro = FVector(0.0f, 0.0f, 350.0f); // Centro del círculo
 }
 
 // Called every frame
@@ -35,12 +35,12 @@ void AVehiculoEspacial::Tick(float DeltaTime)
 void AVehiculoEspacial::Manejar(AVehiculo* myVehiculo)
 {
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo espacial no se puede conducir en tierra"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo espacial no se puede conducir en tierra"));
 }
 
 void AVehiculoEspacial::Volar(AVehiculo* myVehiculo)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo espacial no puede volar en el espacio"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo espacial no puede volar en el espacio"));
 }
 
 void AVehiculoEspacial::Navegar(AVehiculo* myVehiculo)
@@ -68,7 +68,11 @@ void AVehiculoEspacial::Navegar(AVehiculo* myVehiculo)
 	// Calcula la dirección del movimiento tangencial
 	FVector Tangente = FVector(-FMath::Sin(Angulo), FMath::Cos(Angulo), 0.0f).GetSafeNormal();
 	myVehiculo->SetActorRotation(Tangente.Rotation());
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo espacial navegando"));
+	if (myVehiculo->TiempoTranscurrido >= 10.0f)
+	{
+		myVehiculo->SetEstado(myVehiculo->GetEstadoVehiculoTerrestre());
+		myVehiculo->TiempoTranscurrido = 0.0f;
+	}
 }
 
 void AVehiculoEspacial::Disparar(AVehiculo* myVehiculo)
@@ -81,17 +85,16 @@ void AVehiculoEspacial::SuministrarCapsulas(AVehiculo* myVehiculo)
 	int RandomNumber = FMath::FRandRange(0, 3);
 	if (RandomNumber == 0)
 	{
-		inventarioFactory->crearCapsulaArma(myVehiculo->GetActorLocation());
+		inventarioFactory->crearCapsulaArma(myVehiculo->GetActorLocation()-FVector(0,0,120));
 	}
 	else if (RandomNumber == 1)
 	{
-		inventarioFactory->crearCapsulaEnergia(myVehiculo->GetActorLocation());
+		inventarioFactory->crearCapsulaEnergia(myVehiculo->GetActorLocation() - FVector(0, 0, 120));
 	}
 	else if (RandomNumber == 2)
 	{
-		inventarioFactory->crearCapsulaMunicion(myVehiculo->GetActorLocation());
+		inventarioFactory->crearCapsulaMunicion(myVehiculo->GetActorLocation() - FVector(0, 0, 120));
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, TEXT("ENEMIGOS PERRO"));
 }
 
 FString AVehiculoEspacial::NombreEstado()

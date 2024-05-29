@@ -19,7 +19,7 @@ private:
 	IEstado* EstadoVehiculoEspacial;
 
 	UStaticMeshComponent* MallaVehiculo;
-	float TiempoTranscurrido;
+	
 	
 public:	
 	// Sets default values for this actor's properties
@@ -35,6 +35,7 @@ public:
 	void Navegar();
 	void SuministrarCapsulas();
 	void Disparar();
+	float TiempoTranscurrido;
 
 protected:
 	// Called when the game starts or when spawned

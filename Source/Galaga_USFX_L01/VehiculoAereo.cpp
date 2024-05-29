@@ -38,7 +38,7 @@ void AVehiculoAereo::Tick(float DeltaTime)
 void AVehiculoAereo::Manejar(AVehiculo* myVehiculo)
 {
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo aereo no se puede conducir en tierra"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo aereo no se puede conducir en tierra"));
 }
 
 void AVehiculoAereo::Volar(AVehiculo* myVehiculo)
@@ -61,12 +61,16 @@ void AVehiculoAereo::Volar(AVehiculo* myVehiculo)
 		DireccionMovimiento = (VerticesTriangulo[(VerticeActual + 1) % 3] - VerticesTriangulo[VerticeActual]).GetSafeNormal();
 	}
 	myVehiculo->SetActorRotation(DireccionMovimiento.Rotation());
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo aereo volando"));
+	if (myVehiculo->TiempoTranscurrido >= 10.0f)
+	{
+		myVehiculo->SetEstado(myVehiculo->GetEstadoVehiculoEspacial());
+		myVehiculo->TiempoTranscurrido = 0.0f;
+	}
 }
 
 void AVehiculoAereo::Navegar(AVehiculo* myVehiculo)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo arereo no se puede navegar por espacio"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo arereo no se puede navegar por espacio"));
 	//myVehiculo->SetEstado(myVehiculo->GetEstadoVehiculoEspacial());
 }
 

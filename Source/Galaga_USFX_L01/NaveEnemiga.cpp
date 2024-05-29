@@ -8,6 +8,8 @@
 #include "Galaga_USFX_L01Projectile.h"
 #include "ActorComponentDisparo.h"
 #include "TimerManager.h"
+#include "BatallaEstrategy.h"
+
 
 // Sets default values
 ANaveEnemiga::ANaveEnemiga()
@@ -23,7 +25,8 @@ ANaveEnemiga::ANaveEnemiga()
 	RootComponent = mallaNaveEnemiga;
 	DisparoComponent = CreateDefaultSubobject<UActorComponentDisparo>(TEXT("DisparoComponent"));
 	MovementComponent = CreateDefaultSubobject<UMovimentoNavesEnemigas>(TEXT("MovementComponent"));
-	bShoulDispara = false;
+	bShoulDispara = true;
+	velocidad = 100;
 	bMoverse = false;
 	bMovimiento = true;
 	energia = 100.0f;
@@ -39,13 +42,34 @@ ANaveEnemiga::ANaveEnemiga()
 	}
 }
 
+void ANaveEnemiga::CambiarEstrategia(AActor* myEstrategia)
+{
+	Estrategia = Cast<IBatallaEstrategy>(myEstrategia);
+	//Log Error if the cast failed
+	if (!Estrategia)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Green,
+			TEXT("No se pudo hacer el Cast"));
+		
+	}
+}
 
+void ANaveEnemiga::EjecutarEstrategia()
+{
+	if (!Estrategia)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red,
+			TEXT("Error al caragar la estrategia"));return;
+		//Execute the current Strategy Maneuver
+	}
+	Estrategia->MoverseYDisparar(this);
+}
 
 // Called when the game starts or when spawned
 void ANaveEnemiga::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	TipoMovimiento = "";
 
 }
 
@@ -54,7 +78,13 @@ void ANaveEnemiga::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	if (bMovimiento)
-	MovementComponent->movimientoZigzag(DeltaTime);
+	{
+		if (TipoMovimiento == "ZigZag")
+		    MovementComponent->movimientoZigzag(DeltaTime);
+		else if (TipoMovimiento == "Arco")
+			MovementComponent->movimientoLineal(DeltaTime);
+		
+	}
 	if (bShoulDispara)
 	{
 		if (tipoArma == "Normal")
@@ -73,6 +103,11 @@ void ANaveEnemiga::Tick(float DeltaTime)
 		{
 			DisparoComponent->ArmaDisparoTripleAbanico();
 		}
+		else if (tipoArma == "Rafaga")
+		{
+			DisparoComponent->ArmaDisparoRafaga();
+		}
+		
 	}
 }
 
@@ -107,11 +142,13 @@ void ANaveEnemiga::DestruirNave()
 	// Destruir la nave enemiga
 	Destroy();
 	LluviaDeObstaculos->UnSubscribe(this);
+	ReduccionVida->UnSubscribe(this);
 }
 
 void ANaveEnemiga::Update()
 {
-	bMovimiento = false;
+	
+	/*bMovimiento = false;
 	bMoverse = true;
 	bShoulDispara = true;
 	int32 random = FMath::RandRange(0, 4);
@@ -134,13 +171,24 @@ void ANaveEnemiga::Update()
 	else
 	{
 		tipoArma = "Normal";
-	}
+	}*/
 }
 
 void ANaveEnemiga::SetLluviaObstaculo(ALluviaDeObstaculos* MyLluviaObstaculo)
 {
 	LluviaDeObstaculos = MyLluviaObstaculo;
 	LluviaDeObstaculos->Subscribe(this);
+}
+
+void ANaveEnemiga::ActualizarEstrategia()
+{
+	EjecutarEstrategia();
+}
+
+void ANaveEnemiga::SetReduccionVida(AReduccionVida* MyReduccionVida)
+{
+	ReduccionVida = MyReduccionVida;
+	ReduccionVida->Subscribe(this);
 }
 
 

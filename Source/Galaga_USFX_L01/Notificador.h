@@ -28,5 +28,6 @@ public:
 	virtual void Subscribe(AActor* Subscriber);
 	virtual void UnSubscribe(AActor* SubscriberToRemove);
 	virtual void NotifySubscribers();
+	virtual void NotificarCambioEstrategia();
 	virtual void actualizarSubscribers();
 };

@@ -22,6 +22,7 @@ void EmptyLinkFunctionForGeneratedCodeNaveEnemiga() {}
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UActorComponentDisparo_NoRegister();
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UMovimentoNavesEnemigas_NoRegister();
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_USubscriber_NoRegister();
+	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_USuscriberEstrategia_NoRegister();
 // End Cross Module References
 	void ANaveEnemiga::StaticRegisterNativesANaveEnemiga()
 	{
@@ -110,6 +111,7 @@ void EmptyLinkFunctionForGeneratedCodeNaveEnemiga() {}
 	};
 		const UE4CodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_ANaveEnemiga_Statics::InterfaceParams[] = {
 			{ Z_Construct_UClass_USubscriber_NoRegister, (int32)VTABLE_OFFSET(ANaveEnemiga, ISubscriber), false },
+			{ Z_Construct_UClass_USuscriberEstrategia_NoRegister, (int32)VTABLE_OFFSET(ANaveEnemiga, ISuscriberEstrategia), false },
 		};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ANaveEnemiga_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ANaveEnemiga>::IsAbstract,
@@ -138,7 +140,7 @@ void EmptyLinkFunctionForGeneratedCodeNaveEnemiga() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ANaveEnemiga, 1391549596);
+	IMPLEMENT_CLASS(ANaveEnemiga, 1260381873);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<ANaveEnemiga>()
 	{
 		return ANaveEnemiga::StaticClass();

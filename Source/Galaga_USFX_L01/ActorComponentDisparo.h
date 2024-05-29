@@ -21,6 +21,7 @@ public:
     void ArmaDisparoDoble();
     void ArmaDisparoTriple();
     void ArmaDisparoTripleAbanico();
+	void ArmaDisparoRafaga();
     void StartFireTimer();
 
 protected:

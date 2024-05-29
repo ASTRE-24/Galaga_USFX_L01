@@ -20,6 +20,8 @@ void ASpawnFacade::BeginPlay()
 	Super::BeginPlay();
 	lluviaObstaculos = GetWorld()->SpawnActor<ALluviaDeObstaculos>
         (ALluviaDeObstaculos::StaticClass());
+	reduccionVida = GetWorld()->SpawnActor<AReduccionVida>
+		(AReduccionVida::StaticClass());
     lluviaObstaculos->Subscribe(this);
     TiempoTranscurrido = 0;
     TiempoCapsulas = 0;
@@ -49,6 +51,7 @@ void ASpawnFacade::Tick(float DeltaTime)
     }
     TiempoTranscurrido += DeltaTime;
     TiempoCapsulas += DeltaTime;
+
     VehiculoNeutral->Manejar();
     VehiculoNeutral->Volar();
     VehiculoNeutral->Navegar();
@@ -57,31 +60,7 @@ void ASpawnFacade::Tick(float DeltaTime)
         VehiculoNeutral->SuministrarCapsulas();
         TiempoCapsulas = 0.0f;
     }
-    VehiculoNeutral->Disparar();
-    if (TiempoTranscurrido >= 10.0f)
-    {
-        if (VehiculoNeutral->GetEstado() == VehiculoNeutral->GetEstadoVehiculoTerrestre())
-        {
-            VehiculoNeutral->SetEstado(VehiculoNeutral->GetEstadoVehiculoAereo());
-
-        }
-        else if (VehiculoNeutral->GetEstado() == VehiculoNeutral->GetEstadoVehiculoAereo())
-        {
-            VehiculoNeutral->SetEstado(VehiculoNeutral->GetEstadoVehiculoEspacial());
-
-        }
-        else if (VehiculoNeutral->GetEstado() == VehiculoNeutral->GetEstadoVehiculoEspacial())
-        {
-            VehiculoNeutral->SetEstado(VehiculoNeutral->GetEstadoVehiculoTerrestre());
-
-        }
-        TiempoTranscurrido = 0.0f;
-    }
-
-    // Mostrar mensaje en pantalla
-    //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Numero de naves enemigas: %d"), FoundActors.Num()));
-
-
+    VehiculoNeutral->Disparar();  
 }
 
 void ASpawnFacade::IniciarJuego()
@@ -129,7 +108,9 @@ void ASpawnFacade::invocarNaves()
                 int32 RandomIndex = FMath::RandRange(0, NombresNavesAtaque.Num() - 1);//Genera un numero aleatorio entre 0 y el tamaño del TArray - 1
                 ANaveEnemiga* NaveEnemigaAtaque = navesAtaque->OrdenarNaveEnemiga(NombresNavesAtaque[RandomIndex]);
 				NaveEnemigaAtaque->SetLluviaObstaculo(lluviaObstaculos);
+				NaveEnemigaAtaque->SetReduccionVida(reduccionVida);
                 NaveEnemigaAtaque->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0,180,0));
+                
                 navesEnemigas.Add(NaveEnemigaAtaque);
             }
             else if (random == 1)
@@ -138,6 +119,7 @@ void ASpawnFacade::invocarNaves()
                 // Spawnea la nave aleatoria
                 ANaveEnemiga* NaveEnemigaApoyo = navesApoyo->OrdenarNaveEnemiga(NombresNavesApoyo[RandomIndex]);
                 NaveEnemigaApoyo->SetLluviaObstaculo(lluviaObstaculos);
+                NaveEnemigaApoyo->SetReduccionVida(reduccionVida);
                 NaveEnemigaApoyo->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0, 180, 0));
                 navesEnemigas.Add(NaveEnemigaApoyo);
             }
@@ -147,6 +129,7 @@ void ASpawnFacade::invocarNaves()
                 // Spawnea la nave aleatoria
                 ANaveEnemiga* NaveEnemigaInformante = navesInformante->OrdenarNaveEnemiga(NombresNavesInformante[RandomIndex]);
                 NaveEnemigaInformante->SetLluviaObstaculo(lluviaObstaculos);
+                NaveEnemigaInformante->SetReduccionVida(reduccionVida);
                 NaveEnemigaInformante->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0, 180, 0));
                 navesEnemigas.Add(NaveEnemigaInformante);
             }
@@ -206,7 +189,7 @@ void ASpawnFacade::invocarCapsula()
         }
     }
 
-    inventarioFactory = GetWorld()->SpawnActor<IInventarioAFactory>(AEnemigoCapsula::StaticClass());
+   /* inventarioFactory = GetWorld()->SpawnActor<IInventarioAFactory>(AEnemigoCapsula::StaticClass());
     for (int i = 0; i < navesEnemigas.Num(); i++) {
 
         int RandomNumber = FMath::FRandRange(0, 3);
@@ -225,7 +208,7 @@ void ASpawnFacade::invocarCapsula()
         }
 
     }
-    realizaTareas(navesEnemigas, obstaculos, capsulas);
+    realizaTareas(navesEnemigas, obstaculos, capsulas);*/
 }
 
 void ASpawnFacade::CrearVehiculoNeutral()
@@ -350,7 +333,7 @@ void ASpawnFacade::RetornarPosicion()
 
 void ASpawnFacade::Update()
 {
-    invocarObstaculos();
+    //invocarObstaculos();
     //GetWorld()->GetTimerManager().SetTimer(TimerHandle_RetornarPosicion, this, &ASpawnFacade::RetornarPosicion, 5.0f, false);
 }
 
