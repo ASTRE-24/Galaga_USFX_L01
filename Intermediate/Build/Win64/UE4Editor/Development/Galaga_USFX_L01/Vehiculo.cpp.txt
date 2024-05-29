@@ -2,10 +2,14 @@ D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Development\Galaga_
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\Vehiculo.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\Estado.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Estado.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\ActorComponentDisparo.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ActorComponentDisparo.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Vehiculo.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\VehiculoTerrestre.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\VehiculoTerrestre.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\VehiculoAereo.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\InventarioAFactory.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\InventarioAFactory.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\VehiculoAereo.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\VehiculoEspacial.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\VehiculoEspacial.generated.h

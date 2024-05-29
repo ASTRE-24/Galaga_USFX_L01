@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Estado.h"
+#include "InventarioAFactory.h"
 #include "VehiculoEspacial.generated.h"
 
 UCLASS()
@@ -19,6 +20,12 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+private:
+	float Radio;
+	float Angulo;
+	float VelocidadAngular; // En radianes por segundo
+	FVector Centro;
+	IInventarioAFactory* inventarioFactory;
 
 public:	
 	// Called every frame
@@ -27,5 +34,7 @@ public:
 	virtual void Manejar(AVehiculo* myVehiculo) override;
 	virtual void Volar(AVehiculo* myVehiculo) override;
 	virtual void Navegar(AVehiculo* myVehiculo) override;
+	virtual void Disparar(AVehiculo* myVehiculo) override;
+	virtual void SuministrarCapsulas(AVehiculo* myVehiculo) override;
 	virtual FString NombreEstado() override;
 };

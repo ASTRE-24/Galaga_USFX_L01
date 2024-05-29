@@ -30,6 +30,10 @@ D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\EnemigoCapsula.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\InterfaceCapsulaEnemiga.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\InterfaceCapsulaEnemiga.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\EnemigoCapsula.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\Vehiculo.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\Estado.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Estado.generated.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Vehiculo.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\SpawnFacade.generated.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\ObstaculoMeteoro.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\ObstaculoMeteoro.generated.h

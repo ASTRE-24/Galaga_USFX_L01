@@ -26,5 +26,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void MoveVertical(float DeltaTime);
+	void MovimientoHorizontalArriba(float DeltaTime);
+	void MovimientoHorizontalAbajo(float DeltaTime);
 		
 };

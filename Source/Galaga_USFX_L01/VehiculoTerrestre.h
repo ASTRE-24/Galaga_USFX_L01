@@ -16,6 +16,12 @@ public:
 	// Sets default values for this actor's properties
 	AVehiculoTerrestre();
 
+private:
+	FVector DireccionMovimiento;
+	float DistanciaRecorrida;
+	float LongitudLadoCuadrado;
+	float VelocidadMovimiento;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -27,5 +33,7 @@ public:
 	virtual void Manejar(class AVehiculo* myVehiculo) override;
 	virtual void Volar(class AVehiculo* myVehiculo) override;
 	virtual void Navegar(class AVehiculo* myVehiculo) override;
+	virtual void Disparar(class AVehiculo* myVehiculo) override;
+	virtual void SuministrarCapsulas(class AVehiculo* myVehiculo) override;
 	virtual FString NombreEstado() override;
 };

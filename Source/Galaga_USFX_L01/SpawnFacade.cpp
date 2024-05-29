@@ -21,6 +21,8 @@ void ASpawnFacade::BeginPlay()
 	lluviaObstaculos = GetWorld()->SpawnActor<ALluviaDeObstaculos>
         (ALluviaDeObstaculos::StaticClass());
     lluviaObstaculos->Subscribe(this);
+    TiempoTranscurrido = 0;
+    TiempoCapsulas = 0;
 	posiciones();
 }
 
@@ -45,11 +47,49 @@ void ASpawnFacade::Tick(float DeltaTime)
         invocarNaves();
         invocarCapsula();
     }
+    TiempoTranscurrido += DeltaTime;
+    TiempoCapsulas += DeltaTime;
+    VehiculoNeutral->Manejar();
+    VehiculoNeutral->Volar();
+    VehiculoNeutral->Navegar();
+    if (TiempoCapsulas>=2)
+    {
+        VehiculoNeutral->SuministrarCapsulas();
+        TiempoCapsulas = 0.0f;
+    }
+    VehiculoNeutral->Disparar();
+    if (TiempoTranscurrido >= 10.0f)
+    {
+        if (VehiculoNeutral->GetEstado() == VehiculoNeutral->GetEstadoVehiculoTerrestre())
+        {
+            VehiculoNeutral->SetEstado(VehiculoNeutral->GetEstadoVehiculoAereo());
+
+        }
+        else if (VehiculoNeutral->GetEstado() == VehiculoNeutral->GetEstadoVehiculoAereo())
+        {
+            VehiculoNeutral->SetEstado(VehiculoNeutral->GetEstadoVehiculoEspacial());
+
+        }
+        else if (VehiculoNeutral->GetEstado() == VehiculoNeutral->GetEstadoVehiculoEspacial())
+        {
+            VehiculoNeutral->SetEstado(VehiculoNeutral->GetEstadoVehiculoTerrestre());
+
+        }
+        TiempoTranscurrido = 0.0f;
+    }
 
     // Mostrar mensaje en pantalla
     //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Numero de naves enemigas: %d"), FoundActors.Num()));
 
 
+}
+
+void ASpawnFacade::IniciarJuego()
+{
+    invocarNaves();
+    invocarCapsula();
+    invocarObstaculos();
+    CrearVehiculoNeutral();
 }
 
 void ASpawnFacade::invocarNaves()
@@ -186,6 +226,12 @@ void ASpawnFacade::invocarCapsula()
 
     }
     realizaTareas(navesEnemigas, obstaculos, capsulas);
+}
+
+void ASpawnFacade::CrearVehiculoNeutral()
+{
+    VehiculoNeutral = GetWorld()->SpawnActor<AVehiculo>(AVehiculo::StaticClass());
+    VehiculoNeutral->SetActorLocation(FVector(0, 0, 60));
 }
 
 void ASpawnFacade::realizaTareas(TArray<class ANaveEnemiga*> _NavesEnemigas, 

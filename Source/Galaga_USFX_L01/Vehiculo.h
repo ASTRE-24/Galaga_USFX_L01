@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Estado.h"
+#include "ActorComponentDisparo.h"
 #include "Vehiculo.generated.h"
 
 UCLASS()
@@ -18,6 +19,7 @@ private:
 	IEstado* EstadoVehiculoEspacial;
 
 	UStaticMeshComponent* MallaVehiculo;
+	float TiempoTranscurrido;
 	
 public:	
 	// Sets default values for this actor's properties
@@ -31,13 +33,20 @@ public:
 	void Manejar();
 	void Volar();
 	void Navegar();
+	void SuministrarCapsulas();
+	void Disparar();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Disparo", meta = (AllowPrivateAccess = "true"))
+	UActorComponentDisparo* DisparoComponent; // Declara el componente DisparoComponent
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+    FString TipoDisparo;
+	void ControlarEstado();
 
 };

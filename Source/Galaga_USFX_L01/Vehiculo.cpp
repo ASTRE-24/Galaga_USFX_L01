@@ -5,6 +5,7 @@
 #include "VehiculoTerrestre.h"
 #include "VehiculoAereo.h"
 #include "VehiculoEspacial.h"
+#include "ActorComponentDisparo.h"
 
 // Sets default values
 AVehiculo::AVehiculo()
@@ -17,6 +18,10 @@ AVehiculo::AVehiculo()
 	// Crea el componente de malla estática
 	MallaVehiculo = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MallaVehiculo"));
 	RootComponent = MallaVehiculo;
+	//MallaVehiculo->SetWorldScale3D(FVector(0.8f, 0.8f, 0.8)); // Escala del vehículo
+	
+	DisparoComponent = CreateDefaultSubobject<UActorComponentDisparo>(TEXT("DisparoComponent"));
+	TipoDisparo = "";
 
 	// Verifica si se encontró el StaticMesh
 	if (ShipMesh.Succeeded())
@@ -28,7 +33,7 @@ AVehiculo::AVehiculo()
 		MallaVehiculo->SetWorldScale3D(FVector(1.0f, 1.0f, 1.0f)); // Aquí se ajusta la escala
 	}
 	
-
+	TiempoTranscurrido = 0.0f;
 }
 
 // Called when the game starts or when spawned
@@ -46,7 +51,25 @@ void AVehiculo::BeginPlay()
 void AVehiculo::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	TiempoTranscurrido += DeltaTime;
+	ControlarEstado();
+	if (TipoDisparo == "Disparo Doble")
+	{
+		DisparoComponent->ArmaDisparoDoble();
+	}
+	else if (TipoDisparo == "Disparo Triple")
+	{
+		DisparoComponent->ArmaDisparoTriple();
+	}
+	else if (TipoDisparo == "Disparo Triple Abanico")
+	{
+		DisparoComponent->ArmaDisparoTripleAbanico();
+	}
+}
 
+void AVehiculo::ControlarEstado()
+{
+	
 }
 
 void AVehiculo::SetEstado(IEstado* NuevoEstado)
@@ -82,6 +105,16 @@ void AVehiculo::Volar()
 void AVehiculo::Navegar()
 {
 	Estado->Navegar(this);
+}
+
+void AVehiculo::SuministrarCapsulas()
+{
+	Estado->SuministrarCapsulas(this);
+}
+
+void AVehiculo::Disparar()
+{
+	Estado->Disparar(this);
 }
 
 IEstado* AVehiculo::GetEstado()

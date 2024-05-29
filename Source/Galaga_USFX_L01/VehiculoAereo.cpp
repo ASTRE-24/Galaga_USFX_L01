@@ -3,6 +3,7 @@
 
 #include "VehiculoAereo.h"
 #include "Vehiculo.h"
+#include "JugadorCapsula.h"
 
 // Sets default values
 AVehiculoAereo::AVehiculoAereo()
@@ -16,7 +17,15 @@ AVehiculoAereo::AVehiculoAereo()
 void AVehiculoAereo::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	// Inicializa variables para el movimiento en forma triangular
+	VerticesTriangulo.Add(FVector(0.0f, 0.0f, 0.0f)); // Vértice 1
+	VerticesTriangulo.Add(FVector(1000.0f, 0.0f, 0.0f)); // Vértice 2
+	VerticesTriangulo.Add(FVector(500.0f, 866.0f, 0.0f)); // Vértice 3 (aproximadamente altura de un triángulo equilátero)
+	inventarioFactory = GetWorld()->SpawnActor<IInventarioAFactory>(AJugadorCapsula::StaticClass());
+	VerticeActual = 0;
+	DireccionMovimiento = (VerticesTriangulo[1] - VerticesTriangulo[0]).GetSafeNormal();
+	DistanciaRecorrida = 0.0f;
+	VelocidadMovimiento = 200.0f; // Velocidad del movimiento del vehículo
 }
 
 // Called every frame
@@ -28,18 +37,60 @@ void AVehiculoAereo::Tick(float DeltaTime)
 
 void AVehiculoAereo::Manejar(AVehiculo* myVehiculo)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo aereo manejando"));
+	
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo aereo no se puede conducir en tierra"));
 }
 
 void AVehiculoAereo::Volar(AVehiculo* myVehiculo)
 {
+	if (myVehiculo->GetActorLocation().Z <= 215.0f)
+	{
+		myVehiculo->SetActorLocation(FVector(myVehiculo->GetActorLocation().X, myVehiculo->GetActorLocation().Y, myVehiculo->GetActorLocation().Z+1));
+		return;
+	}
+	FVector NuevaPosicion = myVehiculo->GetActorLocation() + (DireccionMovimiento * VelocidadMovimiento * GetWorld()->GetDeltaSeconds());
+	myVehiculo->SetActorLocation(NuevaPosicion);
+
+	DistanciaRecorrida += (DireccionMovimiento * VelocidadMovimiento * GetWorld()->GetDeltaSeconds()).Size();
+
+	// Cambia de dirección cuando se alcanza la distancia al siguiente vértice
+	if (DistanciaRecorrida >= (VerticesTriangulo[(VerticeActual + 1) % 3] - VerticesTriangulo[VerticeActual]).Size())
+	{
+		DistanciaRecorrida = 0.0f;
+		VerticeActual = (VerticeActual + 1) % 3;
+		DireccionMovimiento = (VerticesTriangulo[(VerticeActual + 1) % 3] - VerticesTriangulo[VerticeActual]).GetSafeNormal();
+	}
+	myVehiculo->SetActorRotation(DireccionMovimiento.Rotation());
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo aereo volando"));
 }
 
 void AVehiculoAereo::Navegar(AVehiculo* myVehiculo)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Cambiando el vehiculo a modo espacial"));
-	myVehiculo->SetEstado(myVehiculo->GetEstadoVehiculoEspacial());
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vehiculo arereo no se puede navegar por espacio"));
+	//myVehiculo->SetEstado(myVehiculo->GetEstadoVehiculoEspacial());
+}
+
+void AVehiculoAereo::Disparar(AVehiculo* myVehiculo)
+{
+	myVehiculo->TipoDisparo = "Disparo Triple";
+}
+
+void AVehiculoAereo::SuministrarCapsulas(AVehiculo* myVehiculo)
+{
+	
+		int RandomNumber = FMath::FRandRange(0, 3);
+		if (RandomNumber == 0)
+		{
+			inventarioFactory->crearCapsulaArma(myVehiculo->GetActorLocation());
+		}
+		else if (RandomNumber == 1)
+		{
+			inventarioFactory->crearCapsulaEnergia(myVehiculo->GetActorLocation());
+		}
+		else if (RandomNumber == 2)
+		{
+			inventarioFactory->crearCapsulaMunicion(myVehiculo->GetActorLocation());
+		}
 }
 
 FString AVehiculoAereo::NombreEstado()

@@ -47,3 +47,32 @@ void UMovimientoVertical::MoveVertical(float DeltaTime)
 	}
 }
 
+void UMovimientoVertical::MovimientoHorizontalArriba(float DeltaTime)
+{
+	AActor* Parent = GetOwner();
+	if (Parent)
+	{
+		if (Parent->GetActorLocation().X <= 1800.f)
+		{
+
+			// Find a new position for the object to go to
+			auto NewPos = Parent->GetActorLocation() + FVector(1, 0, 0);
+			Parent->SetActorLocation(NewPos);
+		}
+	}
+}
+
+void UMovimientoVertical::MovimientoHorizontalAbajo(float DeltaTime)
+{
+	AActor* Parent = GetOwner();
+	if (Parent)
+	{
+		if (Parent->GetActorLocation().X >= -1800.f)
+		{
+
+			// Find a new position for the object to go to
+			auto NewPos = Parent->GetActorLocation() + FVector(-1, 0, 0);
+			Parent->SetActorLocation(NewPos);
+		}
+	}
+}

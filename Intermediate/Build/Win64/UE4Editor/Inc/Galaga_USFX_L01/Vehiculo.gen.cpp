@@ -17,6 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeVehiculo() {}
 	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_AVehiculo();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	UPackage* Z_Construct_UPackage__Script_Galaga_USFX_L01();
+	GALAGA_USFX_L01_API UClass* Z_Construct_UClass_UActorComponentDisparo_NoRegister();
 // End Cross Module References
 	void AVehiculo::StaticRegisterNativesAVehiculo()
 	{
@@ -31,6 +32,11 @@ void EmptyLinkFunctionForGeneratedCodeVehiculo() {}
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_DisparoComponent_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_DisparoComponent;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
 	};
@@ -44,6 +50,18 @@ void EmptyLinkFunctionForGeneratedCodeVehiculo() {}
 		{ "ModuleRelativePath", "Vehiculo.h" },
 	};
 #endif
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AVehiculo_Statics::NewProp_DisparoComponent_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Disparo" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Vehiculo.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AVehiculo_Statics::NewProp_DisparoComponent = { "DisparoComponent", nullptr, (EPropertyFlags)0x00200800000a001d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AVehiculo, DisparoComponent), Z_Construct_UClass_UActorComponentDisparo_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AVehiculo_Statics::NewProp_DisparoComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AVehiculo_Statics::NewProp_DisparoComponent_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AVehiculo_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AVehiculo_Statics::NewProp_DisparoComponent,
+	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AVehiculo_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AVehiculo>::IsAbstract,
 	};
@@ -53,11 +71,11 @@ void EmptyLinkFunctionForGeneratedCodeVehiculo() {}
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		nullptr,
-		nullptr,
+		Z_Construct_UClass_AVehiculo_Statics::PropPointers,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
 		0,
-		0,
+		UE_ARRAY_COUNT(Z_Construct_UClass_AVehiculo_Statics::PropPointers),
 		0,
 		0x009000A4u,
 		METADATA_PARAMS(Z_Construct_UClass_AVehiculo_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_AVehiculo_Statics::Class_MetaDataParams))
@@ -71,7 +89,7 @@ void EmptyLinkFunctionForGeneratedCodeVehiculo() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AVehiculo, 24843151);
+	IMPLEMENT_CLASS(AVehiculo, 1006688143);
 	template<> GALAGA_USFX_L01_API UClass* StaticClass<AVehiculo>()
 	{
 		return AVehiculo::StaticClass();

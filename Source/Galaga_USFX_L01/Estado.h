@@ -26,5 +26,7 @@ public:
 	virtual void Manejar(class AVehiculo* vehiculo) = 0;
 	virtual void Volar(class AVehiculo* vehiculo) = 0;
 	virtual void Navegar(class AVehiculo* vehiculo) = 0;
+	virtual void Disparar(class AVehiculo* vehiculo) = 0;
+	virtual void SuministrarCapsulas(class AVehiculo* vehiculo) = 0;
 	virtual FString NombreEstado() = 0;
 };

@@ -45,6 +45,7 @@ void ACapsulaEnemigaMunicion::Tick(float DeltaTime)
 	if (bMoverse)
     {
 		MovementComponent->MoveVertical(DeltaTime);
+		MovementComponent->MovimientoHorizontalArriba(DeltaTime);
 	}   
 }
 

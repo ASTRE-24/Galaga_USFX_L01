@@ -56,5 +56,6 @@ void AInventoryActor::Tick(float DeltaTime)
 	if (bMoverse)
 	{
 		MovementComponent->MoveVertical(DeltaTime);
+		MovementComponent->MovimientoHorizontalAbajo(DeltaTime);
 	}
 }

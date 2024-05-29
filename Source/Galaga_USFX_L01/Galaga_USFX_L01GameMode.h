@@ -18,7 +18,7 @@ class AGalaga_USFX_L01GameMode : public AGameModeBase
 
 public:
 	AGalaga_USFX_L01GameMode();
-	
+	class AVehiculo* Vehiculo01;
 	class ABuilderConcretoPNReparar* ReparacionPorta;
 	class ADirectorPortaNave* IngenieroPortaNave;
 	class IInventarioAFactory* InventarioAB;

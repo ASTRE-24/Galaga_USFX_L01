@@ -14,6 +14,7 @@
 #include "EnemigoCapsula.h"
 #include "LluviaDeObstaculos.h"
 #include "Subscriber.h"
+#include "Vehiculo.h"
 #include "SpawnFacade.generated.h"
 
 UCLASS()
@@ -29,6 +30,7 @@ public:
 	ASolicitudDeNavesInformante* navesInformante;
 	AObstaculo* obstaculoMapa;
 	IInventarioAFactory* inventarioFactory;
+	AVehiculo* VehiculoNeutral;
 
 	TArray<ANaveEnemiga*> navesEnemigas;
 	TArray<AObstaculo*> obstaculos;
@@ -38,6 +40,8 @@ public:
 	ALluviaDeObstaculos* lluviaObstaculos;
 	FTimerHandle TimerHandle_LluviaObstaculos;
 	FTimerHandle TimerHandle_RetornarPosicion;
+	float TiempoTranscurrido;
+	float TiempoCapsulas;
 
 protected:
 	// Called when the game starts or when spawned
@@ -46,11 +50,13 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	void IniciarJuego();
+
+private:
 	void invocarNaves();
 	void invocarObstaculos();
 	void invocarCapsula();
-
-private:
+	void CrearVehiculoNeutral();
 	void posiciones();
 	void realizaTareas(TArray<class ANaveEnemiga*> _NavesEnemigas, 
 		TArray<class AObstaculo*> _Obstaculos, TArray<class AActor*> _Capsulas);
