@@ -9,6 +9,7 @@
 #include "NaveEnemiga.h"
 #include "Galaga_USFX_L01Pawn.h"
 #include "vehiculo.h"
+#include "SpawnFacade.h"
 
 // Sets default values
 AControladorEventos::AControladorEventos()
@@ -35,53 +36,78 @@ void AControladorEventos::Tick(float DeltaTime)
 
 }
 
-void AControladorEventos::InicializarComponente(AActor* Componente)
+
+void AControladorEventos::SetSpawnFacade(ASpawnFacade* SpawnFacade)
 {
-	vehiculo = Cast<AVehiculo>(Componente);
-	jugador = Cast<AGalaga_USFX_L01Pawn>(Componente);
-	naveEnemiga = Cast<ANaveEnemiga>(Componente);
+	Facade = SpawnFacade;
+}
+
+void AControladorEventos::SetNaveEnemiga(ANaveEnemiga* nave)
+{
+	naveEnemiga = nave;
+}
+
+void AControladorEventos::SetVehiculo(AVehiculo* vehiculoNeutral)
+{
+	vehiculo = vehiculoNeutral;
+}
+
+void AControladorEventos::SetJugador(AGalaga_USFX_L01Pawn* myjugador)
+{
+	jugador = myjugador;
 }
 
 void AControladorEventos::Notificar(AActor* Emisor, const FString& evento)
 {
-	if (evento == "Inicial")
+	if (evento == "RecargaJugador")
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Evento Inicial"));
 		vehiculo->ControlarEstado("Aereo");
+		jugador->ReturnToInitialPosition();
 	}
 	else if (evento == "RecargaEnemigo")
 	{
-
+		vehiculo->ControlarEstado("Espacial");
+		Facade -> invocarCapsula();
+		jugador->SetMaxProyectilesDisparados(jugador->GetMaxProyectilesDisparados() + 20);
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, TEXT("Bonus Disparo Rafaga +20 Municion"));
+		jugador->SetTipoArma("Rafaga");
 	}
-	else if (evento == "RecargaJugador")
+	else if (evento == "LluviaObstaculos")
 	{
-
-	}
-	else if (evento == "Lluvia de Obstaculos")
-	{
-
+		vehiculo->ControlarEstado("Terrestre");
+		Facade->invocarObstaculos();
 	}
 	else if (evento == "Cambio de Estrategia")
 	{
 		naveEnemiga = Cast<ANaveEnemiga>(Emisor);
-		if (naveEnemiga->GetEnergia() >= 100) {
+		if (naveEnemiga->GetEnergia() >= 100) 
+		{
 			naveEnemiga->CambiarEstrategia(EstrategiaPasiva);
 			naveEnemiga->EjecutarEstrategia();
+			if(jugador)
+			jugador->FireRate = 0.2f;
 		}
 		else if (naveEnemiga->GetEnergia() <= 75 && naveEnemiga->GetEnergia()>50 )
 		{
 			naveEnemiga->CambiarEstrategia(EstrategiaAgresiva);
 			naveEnemiga->EjecutarEstrategia();
+			if (jugador)
+			jugador->FireRate = 0.15f;
 		}
 		else if (naveEnemiga->GetEnergia() <= 50 && naveEnemiga->GetEnergia() > 25)
 		{
 			naveEnemiga->CambiarEstrategia(EstrategiaViolenta);
 			naveEnemiga->EjecutarEstrategia();
+			if (jugador)
+			jugador->FireRate = 0.1f;
 		}
 		else if (naveEnemiga->GetEnergia() <= 25)
 		{
 			naveEnemiga->CambiarEstrategia(EstrategiaMuyPeligroso);
 			naveEnemiga->EjecutarEstrategia();
+			if (jugador)
+			jugador->FireRate = 0.05f;
 		}
 	}
 }

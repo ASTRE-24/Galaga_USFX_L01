@@ -58,7 +58,7 @@ public:
 	void ReloadAmmo();
 
 	void ReturnToInitialPosition();
-
+	void RetornarPosicion();	
 	void Saltar();
 	void FinSaltar();
 	//Movimiento en diagonal
@@ -191,6 +191,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UActorSpawnerComponent* ActorSpawnerComponent;
-
+	void SetTipoArma(FString _tipoArma);
+	void SetMaxProyectilesDisparados(int32 _maxProyectilesDisparados) { MaxProyectilesDisparados = _maxProyectilesDisparados; }
+	int32 GetMaxProyectilesDisparados() { return MaxProyectilesDisparados; }
 };
 

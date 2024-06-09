@@ -14,7 +14,7 @@ ASpawnFacade::ASpawnFacade()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	flag = 0;
 }
 
 // Called when the game starts or when spawned
@@ -28,11 +28,14 @@ void ASpawnFacade::BeginPlay()
     lluviaObstaculos->Subscribe(this);
 	ControladorEventos = GetWorld()->SpawnActor<AControladorEventos>
 		(AControladorEventos::StaticClass());
+	ControladorEventos->SetSpawnFacade(this);
+
     TArray<AActor*> FoundActors;
     UGameplayStatics::GetAllActorsOfClass(GetWorld(), AGalaga_USFX_L01Pawn::StaticClass(), FoundActors);
 	if (FoundActors.Num() > 0)
 	{
 		AGalaga_USFX_L01Pawn* Jugador = Cast<AGalaga_USFX_L01Pawn>(FoundActors[0]);
+		ControladorEventos->SetJugador(Jugador);
 		Jugador->EstablecerControlador(ControladorEventos);
 	}
     TiempoTranscurrido = 0;
@@ -49,7 +52,18 @@ void ASpawnFacade::Tick(float DeltaTime)
     UGameplayStatics::GetAllActorsOfClass(GetWorld(), ANaveEnemiga::StaticClass(), FoundActors);
 
     bool bAnyNavesEnemigasExist = FoundActors.Num() > 0;
-
+    float promedio = 0;
+    for (AActor* Naves : FoundActors)
+    {
+		ANaveEnemiga* nave = Cast<ANaveEnemiga>(Naves);
+        promedio+=nave->GetEnergia();
+    }
+	if (promedio / navesEnemigas.Num() < 80.0f && flag == 0)
+    {
+		ControladorEventos->Notificar(this, "RecargaEnemigo");
+		flag = 1;
+	}
+    
     if (!bAnyNavesEnemigasExist)
     {
 		navesEnemigas.Empty();
@@ -59,7 +73,9 @@ void ASpawnFacade::Tick(float DeltaTime)
 		lluviaObstaculos->flags = 0;
         posiciones();
         invocarNaves();
-        invocarCapsula();
+		ControladorEventos->Notificar(this, "LluviaObstaculos");
+        invocarObstaculos();
+        //invocarCapsula();
     }
     if(VehiculoNeutral)
     {
@@ -125,6 +141,7 @@ void ASpawnFacade::invocarNaves()
 				NaveEnemigaAtaque->SetLluviaObstaculo(lluviaObstaculos);
 				NaveEnemigaAtaque->SetReduccionVida(reduccionVida);
                 NaveEnemigaAtaque->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0,180,0));
+				ControladorEventos->SetNaveEnemiga(NaveEnemigaAtaque);
 				NaveEnemigaAtaque->EstablecerControlador(ControladorEventos);
                 navesEnemigas.Add(NaveEnemigaAtaque);
             }
@@ -136,6 +153,7 @@ void ASpawnFacade::invocarNaves()
                 NaveEnemigaApoyo->SetLluviaObstaculo(lluviaObstaculos);
                 NaveEnemigaApoyo->SetReduccionVida(reduccionVida);
                 NaveEnemigaApoyo->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0, 180, 0));
+				ControladorEventos->SetNaveEnemiga(NaveEnemigaApoyo);
 				NaveEnemigaApoyo->EstablecerControlador(ControladorEventos);
                 navesEnemigas.Add(NaveEnemigaApoyo);
             }
@@ -147,6 +165,7 @@ void ASpawnFacade::invocarNaves()
                 NaveEnemigaInformante->SetLluviaObstaculo(lluviaObstaculos);
                 NaveEnemigaInformante->SetReduccionVida(reduccionVida);
                 NaveEnemigaInformante->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0, 180, 0));
+				ControladorEventos->SetNaveEnemiga(NaveEnemigaInformante);
 				NaveEnemigaInformante->EstablecerControlador(ControladorEventos);
                 navesEnemigas.Add(NaveEnemigaInformante);
             }
@@ -159,9 +178,10 @@ void ASpawnFacade::invocarObstaculos()
 {
 	//GetWorld()->GetTimerManager().SetTimer(TimerHandle_LluviaObstaculos, 
         //this, &ASpawnFacade::CrearLluviaObstaculos, 7.0f, false);
-    
+   
     FVector ubicacionDeObjetosInventario = FVector(-700.0f, -1300.0f, 215.0f);
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 12; i++) 
+    {
         UWorld* const World = GetWorld();
         if (World != nullptr)
         {
@@ -171,13 +191,13 @@ void ASpawnFacade::invocarObstaculos()
             {
                 obstaculoMapa = GetWorld()->SpawnActor<AObstaculo>(AObstaculoMeteoro::StaticClass());
                 obstaculoMapa->SetActorLocation(ubicacionDeObjetosInventario);
-                obstaculos.Add(obstaculoMapa);
+                //obstaculos.Add(obstaculoMapa);
             }
             else if (RandomNumber == 1)
             {
                 obstaculoMapa = GetWorld()->SpawnActor<AObstaculo>(AObstaculoPared::StaticClass());
                 obstaculoMapa->SetActorLocation(ubicacionDeObjetosInventario);
-                obstaculos.Add(obstaculoMapa);
+                //.Add(obstaculoMapa);
             }
         }
         ubicacionDeObjetosInventario = ubicacionDeObjetosInventario + FVector(0.0f, 300.0f, 0.0f);
@@ -187,26 +207,26 @@ void ASpawnFacade::invocarObstaculos()
 void ASpawnFacade::invocarCapsula()
 {
     FVector ubicacionDeObjetosInventario = FVector(-700.0f, 300.0f, 700.0f);
-    inventarioFactory = GetWorld()->SpawnActor<IInventarioAFactory>(AJugadorCapsula::StaticClass());
-    for (int i = 0; i < 7; i++) {
-        UbicacionInventario.Add(i, FVector(ubicacionDeObjetosInventario.X, ubicacionDeObjetosInventario.Y + i * 140.0f, ubicacionDeObjetosInventario.Z));
-        //Generar un número aleatorio entre 0 y 1
-        int RandomNumber = FMath::FRandRange(0, 3);
-        if (RandomNumber == 0)
-        {
-            capsulas.Add(inventarioFactory->crearCapsulaArma(UbicacionInventario[i]));
-        }
-        else if (RandomNumber == 1)
-        {
-            capsulas.Add(inventarioFactory->crearCapsulaEnergia(UbicacionInventario[i]));
-        }
-        else if (RandomNumber == 2)
-        {
-            capsulas.Add(inventarioFactory->crearCapsulaMunicion(UbicacionInventario[i]));
-        }
-    }
+    //inventarioFactory = GetWorld()->SpawnActor<IInventarioAFactory>(AJugadorCapsula::StaticClass());
+    //for (int i = 0; i < 7; i++) {
+    //    UbicacionInventario.Add(i, FVector(ubicacionDeObjetosInventario.X, ubicacionDeObjetosInventario.Y + i * 140.0f, ubicacionDeObjetosInventario.Z));
+    //    //Generar un número aleatorio entre 0 y 1
+    //    int RandomNumber = FMath::FRandRange(0, 3);
+    //    if (RandomNumber == 0)
+    //    {
+    //        capsulas.Add(inventarioFactory->crearCapsulaArma(UbicacionInventario[i]));
+    //    }
+    //    else if (RandomNumber == 1)
+    //    {
+    //        capsulas.Add(inventarioFactory->crearCapsulaEnergia(UbicacionInventario[i]));
+    //    }
+    //    else if (RandomNumber == 2)
+    //    {
+    //        capsulas.Add(inventarioFactory->crearCapsulaMunicion(UbicacionInventario[i]));
+    //    }
+    //}
 
-   /* inventarioFactory = GetWorld()->SpawnActor<IInventarioAFactory>(AEnemigoCapsula::StaticClass());
+    inventarioFactory = GetWorld()->SpawnActor<IInventarioAFactory>(AEnemigoCapsula::StaticClass());
     for (int i = 0; i < navesEnemigas.Num(); i++) {
 
         int RandomNumber = FMath::FRandRange(0, 3);
@@ -225,7 +245,7 @@ void ASpawnFacade::invocarCapsula()
         }
 
     }
-    realizaTareas(navesEnemigas, obstaculos, capsulas);*/
+    realizaTareas(navesEnemigas, obstaculos, capsulas);
 }
 
 void ASpawnFacade::CrearVehiculoNeutral()
@@ -233,7 +253,7 @@ void ASpawnFacade::CrearVehiculoNeutral()
     VehiculoNeutral = GetWorld()->SpawnActor<AVehiculo>(AVehiculo::StaticClass());
     VehiculoNeutral->SetActorLocation(FVector(0, 0, 60));
 	VehiculoNeutral->EstablecerControlador(ControladorEventos);
-    ControladorEventos->InicializarComponente(VehiculoNeutral);
+	ControladorEventos->SetVehiculo(VehiculoNeutral);
 }
 
 void ASpawnFacade::realizaTareas(TArray<class ANaveEnemiga*> _NavesEnemigas, 
@@ -353,3 +373,5 @@ void ASpawnFacade::Destroyed()
     }
     lluviaObstaculos->UnSubscribe(this);
 }
+
+

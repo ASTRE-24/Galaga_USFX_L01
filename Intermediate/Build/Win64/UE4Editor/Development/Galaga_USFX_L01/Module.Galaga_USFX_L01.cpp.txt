@@ -116,9 +116,6 @@ D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\CapsulaEnemigaArma.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\InterfaceCapsulaEnemiga.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\InterfaceCapsulaEnemiga.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\CapsulaEnemigaArma.generated.h
-D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/CapsulaEnemigaEnergia.cpp
-D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\CapsulaEnemigaEnergia.h
-D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\CapsulaEnemigaEnergia.generated.h
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/CapsulaEnemigaMunicion.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\CapsulaEnemigaMunicion.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\CapsulaEnemigaMunicion.generated.h
@@ -137,6 +134,8 @@ D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\EnemigoCapsula.h
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\InventarioAFactory.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\InventarioAFactory.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\EnemigoCapsula.generated.h
+D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\CapsulaEnemigaEnergia.h
+D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\CapsulaEnemigaEnergia.generated.h
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Escudo.cpp
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Estado.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\Estado.h
@@ -198,6 +197,11 @@ D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\Vehiculo.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\Vehiculo.generated.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\SpawnFacade.generated.h
+D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Galaga_USFX_L01Projectile.cpp
+D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/ProjectileMovementComponent.h
+D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/MovementComponent.h
+D:\game\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MovementComponent.generated.h
+D:\game\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ProjectileMovementComponent.generated.h
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/GameControlAdapter.cpp
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/InterfaceBuilderNaveNodriza.cpp
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/InterfaceCapsulaEnemiga.cpp
@@ -223,6 +227,7 @@ D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/MovimientoVertical.cpp
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/MyInterface.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\MyInterface.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\MyInterface.generated.h
+D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemiga.cpp
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/NaveEnemigaCaza.cpp
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\Components/BoxComponent.h
 D:\game\UE_4.27\Engine\Source\Runtime\Engine\Classes\Components/ShapeComponent.h

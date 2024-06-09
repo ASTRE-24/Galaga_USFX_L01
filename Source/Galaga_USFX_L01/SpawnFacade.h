@@ -44,6 +44,7 @@ public:
 	FTimerHandle TimerHandle_RetornarPosicion;
 	float TiempoTranscurrido;
 	float TiempoCapsulas;
+	int flag;
 
 protected:
 	// Called when the game starts or when spawned
@@ -53,11 +54,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	void IniciarJuego();
+    void invocarObstaculos();
+    void invocarCapsula();
 
 private:
 	void invocarNaves();
-	void invocarObstaculos();
-	void invocarCapsula();
+	
+	
 	void CrearVehiculoNeutral();
 	void posiciones();
 	void realizaTareas(TArray<class ANaveEnemiga*> _NavesEnemigas, 
@@ -66,4 +69,5 @@ private:
 	void RetornarPosicion();
 	void Update() override;
 	virtual void Destroyed() override;
+	
 };

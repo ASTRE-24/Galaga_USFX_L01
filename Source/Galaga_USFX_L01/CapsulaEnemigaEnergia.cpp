@@ -75,24 +75,24 @@ void ACapsulaEnemigaEnergia::usarCapsulaEnemiga(ANaveEnemiga* naveEnemiga)
     int32 random = FMath::RandRange(0, 3);
     if (random == 0)
     {
-        naveEnemiga->SetEnergia(100);
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Energia Nave Enemiga +100"));
+        naveEnemiga->SetEnergia(naveEnemiga->GetEnergia() + 5);
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Energia Nave Enemiga +5"));
     }
         
     else if (random == 1)
     {
-        naveEnemiga->SetEnergia(120);
-        GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Energia Nave Enemiga +120"));
+        naveEnemiga->SetEnergia(naveEnemiga->GetEnergia() + 10);
+        GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Energia Nave Enemiga +10"));
     }
     else if (random == 2)
     {
-        naveEnemiga->SetEnergia(150);
-        GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Energia Nave Enemiga +150"));
+        naveEnemiga->SetEnergia(naveEnemiga->GetEnergia() + 15);
+        GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Energia Nave Enemiga +15"));
     }
     else if (random == 3)
     {
-        naveEnemiga->SetEnergia(200);
-        GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Energia Nave Enemiga +200"));
+        naveEnemiga->SetEnergia(naveEnemiga->GetEnergia() + 20);
+        GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Energia Nave Enemiga +20"));
     }
 }
 

@@ -12,7 +12,6 @@
 #include "Engine/CollisionProfile.h"
 #include "Engine/StaticMesh.h"
 #include "Escudo.h"
-
 #include "Galaga_USFX_L01Projectile.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -98,7 +97,7 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	MyInventory =
 		CreateDefaultSubobject<UInventoryComponent>("MyInventory");
 	//NumItems = 0;
-	InicialPosicion = FVector(-790.0f,10.0f, 215.0f);
+	InicialPosicion = FVector(-1600.0f,10.0f, 215.0f);
 	lastInput = FVector2D::ZeroVector;
 	AlturaSalto = 215 + 300.0f;
 	//Entrada para movimiento diagonal
@@ -130,7 +129,7 @@ void AGalaga_USFX_L01Pawn::SolicitarArmaEnergiaMunicion()
 {
 	if (Controlador)
 	{
-		Controlador->Notificar(this, "Inicial");
+		Controlador->Notificar(this, "RecargaJugador");
 	}
 }
 
@@ -282,6 +281,11 @@ void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
 			{
 				DisparoComponent->ArmaDisparoTripleAbanico();
 			}
+			else if (tipoArma == "Rafaga")
+			{
+				DisparoComponent->ArmaDisparoRafaga();
+				
+			}
 			// Restablece el contador cuando se alcance el límite máximo
 			if (NumProyectilesDisparados >= MaxProyectilesDisparados)
 			{
@@ -313,6 +317,7 @@ void AGalaga_USFX_L01Pawn::ShotTimerExpired()
 		//NumProyectilesDisparados = 0;
 		if (GEngine)
 		{
+			tipoArma = "Normal";
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "No tienes municiones");
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Presiona O para recargar");
 			
@@ -630,6 +635,11 @@ void AGalaga_USFX_L01Pawn::ReturnToInitialPosition()
 	}
 }
 
+void AGalaga_USFX_L01Pawn::RetornarPosicion()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Retornar a la posicin inicial"));
+}
+
 void AGalaga_USFX_L01Pawn::Saltar()
 {
 	 //AlturaSalto = GetActorLocation().Z+300.0f; // Ajusta la altura del salto según sea necesario	
@@ -856,4 +866,8 @@ void AGalaga_USFX_L01Pawn::ChocarYAtravesar()
 	}
 }
 
+void AGalaga_USFX_L01Pawn::SetTipoArma(FString Arma)
+{
+	tipoArma = Arma;
+}
 

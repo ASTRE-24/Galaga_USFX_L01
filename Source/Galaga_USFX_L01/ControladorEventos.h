@@ -18,6 +18,7 @@ public:
 	class ANaveEnemiga* naveEnemiga;
 	class AVehiculo* vehiculo;
 	class AGalaga_USFX_L01Pawn* jugador;
+	class ASpawnFacade* Facade;
 
 
 protected:
@@ -32,5 +33,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void Notificar(AActor* Emisor, const FString& evento) override;
-	void InicializarComponente(AActor* Componente);
+	void SetNaveEnemiga(ANaveEnemiga* nave);
+	void SetVehiculo(AVehiculo* vehiculo);
+	void SetJugador(AGalaga_USFX_L01Pawn* jugador);
+	void SetSpawnFacade(ASpawnFacade* Facade);
 };
