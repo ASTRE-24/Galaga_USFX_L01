@@ -87,24 +87,25 @@ void AGalaga_USFX_L01Projectile::NotifyHit(class UPrimitiveComponent*
 	AGalaga_USFX_L01Pawn* NaveJugador = Cast<AGalaga_USFX_L01Pawn>(Other);
 	if (NaveJugador)
 	{
-		//if (this->GetOriginActor()->IsA(ANaveEnemiga::StaticClass()))
-		//{
-		//	//AGalaga_USFX_L01Pawn* GalagaPawn = Cast<AGalaga_USFX_L01Pawn>(this->GetOriginActor());
-		//	NaveJugador->Health -= 10;
-		//	if (NaveJugador->Health <= 0)
-		//	{
-		//		NaveJugador->GameControlAdapter->LoseLife();
-		//		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vidas: " + FString::FromInt(NaveJugador->GameControlAdapter->GetLives())));
-		//		NaveJugador->Health = 100;
-		//		NaveJugador->GameControlAdapter->SetHealth(NaveJugador->Health);
-		//		NaveJugador->ReturnToInitialPosition();
-		//	}
-		//	NaveJugador->GameControlAdapter->SetHealth(NaveJugador->Health);
-		//	if (NaveJugador->GameControlAdapter)
-		//	NaveJugador->Health = NaveJugador->GameControlAdapter->GetHealth();
-		//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, TEXT("Salud: " + FString::SanitizeFloat(NaveJugador->Health)));
-		//	
-		//}
+		if (this->GetOriginActor()->IsA(ANaveEnemiga::StaticClass()))
+		{
+			/*AGalaga_USFX_L01Pawn* GalagaPawn = Cast<AGalaga_USFX_L01Pawn>(this->GetOriginActor());
+			NaveJugador->Health -= 10;
+			if (NaveJugador->Health <= 0)
+			{
+				NaveJugador->GameControlAdapter->LoseLife();
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Vidas: " + FString::FromInt(NaveJugador->GameControlAdapter->GetLives())));
+				NaveJugador->Health = 100;
+				NaveJugador->GameControlAdapter->SetHealth(NaveJugador->Health);
+				NaveJugador->ReturnToInitialPosition();
+			}
+			NaveJugador->GameControlAdapter->SetHealth(NaveJugador->Health);
+			if (NaveJugador->GameControlAdapter)
+			NaveJugador->Health = NaveJugador->GameControlAdapter->GetHealth();
+			*/
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, TEXT("Salud: " + FString::SanitizeFloat(NaveJugador->Health)));
+			
+		}
 		return;
 
 	}

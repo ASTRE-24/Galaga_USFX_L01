@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\Galaga_USFX_L01.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{EBDCC4B1-4B21-4B07-A10B-88F8DF638310}</UniqueIdentifier>
+      <UniqueIdentifier>{C84BCBB3-EA24-4966-BF4D-3B25BFE62BF7}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\Galaga_USFX_L01.Target.cs">
       <Filter>Source</Filter>
@@ -14,7 +14,7 @@
     <None Include="..\..\.gitattributes" />
     <None Include="..\..\.gitignore" />
     <Filter Include="Config">
-      <UniqueIdentifier>{F2C58F00-A2C3-4633-8DC4-C3BCF0CC4AAD}</UniqueIdentifier>
+      <UniqueIdentifier>{F1E2BE12-122F-467A-8DAE-C95267B57DB8}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -32,7 +32,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\Galaga_USFX_L01">
-      <UniqueIdentifier>{5A9F53E2-E137-4589-8E28-7F9F1E10CCCE}</UniqueIdentifier>
+      <UniqueIdentifier>{D1B5C43E-84E5-4FEE-ACBC-E34587973B01}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\ActorComponentDisparo.cpp">
       <Filter>Source\Galaga_USFX_L01</Filter>
@@ -106,6 +106,18 @@
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\CapsulaEnemigaMunicion.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\Controlador.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\Controlador.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\ControladorEventos.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\ControladorEventos.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\ControlLogisticaJuego.cpp">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClCompile>
@@ -175,6 +187,9 @@
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\Galaga_USFX_L01.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
+    <None Include="..\..\Source\Galaga_USFX_L01\Galaga_USFX_L01.rar">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </None>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\Galaga_USFX_L01GameMode.cpp">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClCompile>

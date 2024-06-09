@@ -117,6 +117,12 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 
 }
 
+void AGalaga_USFX_L01Pawn::EstablecerControlador(IControlador* myControlador)
+{
+	Controlador = myControlador;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Controlador Establecido"));
+}
+
 void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	//Super::SetupPlayerInputComponent(PlayerInputComponent);

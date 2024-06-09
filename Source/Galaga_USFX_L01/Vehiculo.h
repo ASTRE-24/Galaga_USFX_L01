@@ -19,7 +19,7 @@ private:
 	IEstado* EstadoVehiculoEspacial;
 
 	UStaticMeshComponent* MallaVehiculo;
-	
+	class IControlador* Controlador;
 	
 public:	
 	// Sets default values for this actor's properties
@@ -49,5 +49,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
     FString TipoDisparo;
 	void ControlarEstado();
+	void EstablecerControlador(IControlador* myControlador);
 
 };

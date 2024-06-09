@@ -32,7 +32,7 @@ public:
 	AObstaculo* obstaculoMapa;
 	IInventarioAFactory* inventarioFactory;
 	AVehiculo* VehiculoNeutral;
-
+	class AControladorEventos* ControladorEventos;
 	TArray<ANaveEnemiga*> navesEnemigas;
 	TArray<AObstaculo*> obstaculos;
 	TArray<AActor*> capsulas;

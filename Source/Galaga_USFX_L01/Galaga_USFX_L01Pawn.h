@@ -168,7 +168,7 @@ private:
 	FString tipoArma;
 	UPROPERTY(VisibleAnywhere)
 	class USphereComponent* CollisionComponent;
-	
+	class IControlador* Controlador;
 
 public:
 	/** Returns ShipMeshComponent subobject **/
@@ -177,6 +177,7 @@ public:
 	FORCEINLINE class UCameraComponent* GetCameraComponent() const { return CameraComponent; }
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+	void EstablecerControlador(IControlador* myControlador);
 
 protected:
 	

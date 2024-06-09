@@ -4,7 +4,10 @@
 #include "SpawnFacade.h"
 #include "ObstaculoMeteoro.h"
 #include "ObstaculoPared.h"
+#include "ControladorEventos.h"
 #include "Kismet/GameplayStatics.h"
+#include "Galaga_USFX_L01Pawn.h"
+
 
 // Sets default values
 ASpawnFacade::ASpawnFacade()
@@ -23,6 +26,15 @@ void ASpawnFacade::BeginPlay()
 	reduccionVida = GetWorld()->SpawnActor<AReduccionVida>
 		(AReduccionVida::StaticClass());
     lluviaObstaculos->Subscribe(this);
+	ControladorEventos = GetWorld()->SpawnActor<AControladorEventos>
+		(AControladorEventos::StaticClass());
+    TArray<AActor*> FoundActors;
+    UGameplayStatics::GetAllActorsOfClass(GetWorld(), AGalaga_USFX_L01Pawn::StaticClass(), FoundActors);
+	if (FoundActors.Num() > 0)
+	{
+		AGalaga_USFX_L01Pawn* Jugador = Cast<AGalaga_USFX_L01Pawn>(FoundActors[0]);
+		Jugador->EstablecerControlador(ControladorEventos);
+	}
     TiempoTranscurrido = 0;
     TiempoCapsulas = 0;
 	posiciones();
@@ -49,18 +61,21 @@ void ASpawnFacade::Tick(float DeltaTime)
         invocarNaves();
         invocarCapsula();
     }
-    TiempoTranscurrido += DeltaTime;
-    TiempoCapsulas += DeltaTime;
-
-    VehiculoNeutral->Manejar();
-    VehiculoNeutral->Volar();
-    VehiculoNeutral->Navegar();
-    if (TiempoCapsulas>=2)
+    if(VehiculoNeutral)
     {
-        VehiculoNeutral->SuministrarCapsulas();
-        TiempoCapsulas = 0.0f;
+        TiempoTranscurrido += DeltaTime;
+        TiempoCapsulas += DeltaTime;
+
+        VehiculoNeutral->Manejar();
+        VehiculoNeutral->Volar();
+        VehiculoNeutral->Navegar();
+        if (TiempoCapsulas >= 2)
+        {
+            VehiculoNeutral->SuministrarCapsulas();
+            TiempoCapsulas = 0.0f;
+        }
+        VehiculoNeutral->Disparar();
     }
-    VehiculoNeutral->Disparar();  
 }
 
 void ASpawnFacade::IniciarJuego()
@@ -110,7 +125,7 @@ void ASpawnFacade::invocarNaves()
 				NaveEnemigaAtaque->SetLluviaObstaculo(lluviaObstaculos);
 				NaveEnemigaAtaque->SetReduccionVida(reduccionVida);
                 NaveEnemigaAtaque->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0,180,0));
-                
+				NaveEnemigaAtaque->EstablecerControlador(ControladorEventos);
                 navesEnemigas.Add(NaveEnemigaAtaque);
             }
             else if (random == 1)
@@ -121,6 +136,7 @@ void ASpawnFacade::invocarNaves()
                 NaveEnemigaApoyo->SetLluviaObstaculo(lluviaObstaculos);
                 NaveEnemigaApoyo->SetReduccionVida(reduccionVida);
                 NaveEnemigaApoyo->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0, 180, 0));
+				NaveEnemigaApoyo->EstablecerControlador(ControladorEventos);
                 navesEnemigas.Add(NaveEnemigaApoyo);
             }
             else
@@ -131,6 +147,7 @@ void ASpawnFacade::invocarNaves()
                 NaveEnemigaInformante->SetLluviaObstaculo(lluviaObstaculos);
                 NaveEnemigaInformante->SetReduccionVida(reduccionVida);
                 NaveEnemigaInformante->SetActorLocationAndRotation(PosicionesNaves[i], FRotator(0, 180, 0));
+				NaveEnemigaInformante->EstablecerControlador(ControladorEventos);
                 navesEnemigas.Add(NaveEnemigaInformante);
             }
         }
@@ -215,25 +232,13 @@ void ASpawnFacade::CrearVehiculoNeutral()
 {
     VehiculoNeutral = GetWorld()->SpawnActor<AVehiculo>(AVehiculo::StaticClass());
     VehiculoNeutral->SetActorLocation(FVector(0, 0, 60));
+	VehiculoNeutral->EstablecerControlador(ControladorEventos);
 }
 
 void ASpawnFacade::realizaTareas(TArray<class ANaveEnemiga*> _NavesEnemigas, 
     TArray<class AObstaculo*> _Obstaculos, TArray<class AActor*> _Capsulas)
 {
-	//for (int i = 0; i < _NavesEnemigas.Num(); i++) 
- //   {
-	//	_NavesEnemigas[i]->SetMovimiento(true);
-	//}
-
-	//for (int i = 0; i < _Obstaculos.Num(); i++)
-	//{
-	//	_Obstaculos[i]->bMoverse = true;
-	//}
-
-	//for (int i = 0; i < _Capsulas.Num(); i++)
-	//{
-	//	//_Capsulas[i]->SetActorLocation(_Capsulas[i]->GetActorLocation() + FVector(0.0f, 0.0f, 500.0f));
-	//}
+	
 }
 
 void ASpawnFacade::posiciones()

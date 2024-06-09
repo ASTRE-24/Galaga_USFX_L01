@@ -9,6 +9,7 @@
 #include "ActorComponentDisparo.h"
 #include "TimerManager.h"
 #include "BatallaEstrategy.h"
+#include "Controlador.h"
 
 
 // Sets default values
@@ -42,6 +43,11 @@ ANaveEnemiga::ANaveEnemiga()
 	}
 }
 
+void ANaveEnemiga::EstablecerControlador(IControlador* myControlador)
+{
+	Controlador = myControlador;
+}
+
 void ANaveEnemiga::CambiarEstrategia(AActor* myEstrategia)
 {
 	Estrategia = Cast<IBatallaEstrategy>(myEstrategia);
@@ -58,8 +64,8 @@ void ANaveEnemiga::EjecutarEstrategia()
 {
 	if (!Estrategia)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red,
-			TEXT("Error al caragar la estrategia"));return;
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red,
+			TEXT("Error al cargar la estrategia"));return;
 		//Execute the current Strategy Maneuver
 	}
 	Estrategia->MoverseYDisparar(this);
@@ -73,10 +79,21 @@ void ANaveEnemiga::BeginPlay()
 
 }
 
+void ANaveEnemiga::EnergiaBaja()
+{
+	
+	if (energia <= 80)
+	{
+		Controlador->Notificar(this, "Energia 80%");
+		energia = 100;
+	}
+}
+
 // Called every frame
 void ANaveEnemiga::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	EnergiaBaja();
 	if (bMovimiento)
 	{
 		if (TipoMovimiento == "ZigZag")
@@ -182,7 +199,7 @@ void ANaveEnemiga::SetLluviaObstaculo(ALluviaDeObstaculos* MyLluviaObstaculo)
 
 void ANaveEnemiga::ActualizarEstrategia()
 {
-	EjecutarEstrategia();
+	//EjecutarEstrategia();
 }
 
 void ANaveEnemiga::SetReduccionVida(AReduccionVida* MyReduccionVida)

@@ -50,6 +50,8 @@ protected:
 	float Municion;
 	FString TipoMovimiento;
 
+	class IControlador* Controlador;
+
 public:
 	FORCEINLINE float GetVelocidad() const { return velocidad; }
 	FORCEINLINE float GetResistencia() const { return resistencia; }
@@ -104,7 +106,9 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
+
+	void EstablecerControlador(IControlador* _controlador);
+	void EnergiaBaja();
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Disparo", meta = (AllowPrivateAccess = "true"))
 	UActorComponentDisparo* DisparoComponent; // Declara el componente DisparoComponent

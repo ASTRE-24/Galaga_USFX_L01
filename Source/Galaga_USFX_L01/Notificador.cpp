@@ -77,7 +77,7 @@ void ANotificador::NotificarCambioEstrategia()
 			if (Nave)
 			{
 				Suscriptor->ActualizarEstrategia();
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Cambio de estrategia"));
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Cambio de estrategia"));
 			}
 
 		}

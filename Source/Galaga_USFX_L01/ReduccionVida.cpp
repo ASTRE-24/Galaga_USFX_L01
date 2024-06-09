@@ -42,7 +42,7 @@ void AReduccionVida::Tick(float DeltaTime)
 					{
 						Nave->CambiarEstrategia(EstrategiaPasiva);
 						CambioDeEstrategia();
-						GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Cambio de estrategia"));
+						//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Cambio de estrategia"));
 					}
 
 				}
@@ -65,7 +65,7 @@ void AReduccionVida::Tick(float DeltaTime)
 					{
 						Nave->CambiarEstrategia(EstrategiaAgresiva);
 						CambioDeEstrategia();
-						GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, TEXT("Cambio de estrategia"));
+						//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, TEXT("Cambio de estrategia"));
 					}
 
 				}

@@ -141,3 +141,8 @@ FString AVehiculo::GetNombreEstado()
 {
 	return "Estoy en un  " + Estado->NombreEstado();	
 }
+
+void AVehiculo::EstablecerControlador(IControlador* myControlador)
+{
+	Controlador = myControlador;
+}
