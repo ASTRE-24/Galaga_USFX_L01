@@ -1,31 +1,33 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Galaga_USFX_L01Pawn.h"
-#include "Galaga_USFX_L01Projectile.h"
-#include "TimerManager.h"
-#include "UObject/ConstructorHelpers.h"
+#include "ActorSpawnerComponent.h"
 #include "Camera/CameraComponent.h"
-#include "Components/StaticMeshComponent.h"
+#include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
-#include "GameFramework/SpringArmComponent.h"
+#include "Components/SphereComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Containers/Queue.h"
+#include "Controlador.h"
 #include "Engine/CollisionProfile.h"
 #include "Engine/StaticMesh.h"
-#include "InventoryComponent.h"
-#include "InventoryActor.h"
-#include "InventoryActorMunicion.h"
-#include "InventoryActorEnergia.h"
 #include "Escudo.h"
-#include "ActorSpawnerComponent.h"
+
+#include "Galaga_USFX_L01Projectile.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "InventoryActor.h"
+#include "InventoryActorArma.h"
+#include "InventoryActorEnergia.h"
+#include "InventoryActorMunicion.h"
+#include "InventoryComponent.h"
+#include "Kismet/GameplayStatics.h" // Necesario para usar usar la musica de fondo
 #include "Obstaculo.h"
 #include "ObstaculoMeteoro.h"
 #include "ObstaculoPared.h"
-#include "InventoryActorArma.h"
-#include "Containers/Queue.h"
 #include "Sound/SoundBase.h"
-#include "Kismet/GameplayStatics.h" // Necesario para usar usar la musica de fondo
-#include "GameFramework/SpringArmComponent.h"
-#include "Camera/CameraComponent.h"
-#include "Components/SphereComponent.h"
+#include "TimerManager.h"
+#include "UObject/ConstructorHelpers.h"
 
 const FName AGalaga_USFX_L01Pawn::MoveForwardBinding("MoveForward");
 const FName AGalaga_USFX_L01Pawn::MoveRightBinding("MoveRight");
@@ -114,6 +116,7 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	ChocaControla = FInputActionKeyMapping("ChocaYControla", EKeys::B, 0, 0, 0, 0);
 	ChocaMeDestruyo = FInputActionKeyMapping("ChocaYMeDestruyo", EKeys::N, 0, 0, 0, 0);
 	ChocarAtravesar = FInputActionKeyMapping("ChocarYAtravesar", EKeys::M, 0, 0, 0, 0);
+	SolicitarRecarga = FInputActionKeyMapping("SolicitarArmaEnergiaMunicion", EKeys::L, 0, 0, 0, 0);
 
 }
 
@@ -121,6 +124,14 @@ void AGalaga_USFX_L01Pawn::EstablecerControlador(IControlador* myControlador)
 {
 	Controlador = myControlador;
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Controlador Establecido"));
+}
+
+void AGalaga_USFX_L01Pawn::SolicitarArmaEnergiaMunicion()
+{
+	if (Controlador)
+	{
+		Controlador->Notificar(this, "Inicial");
+	}
 }
 
 void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -143,6 +154,7 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 	UPlayerInput::AddEngineDefinedActionMapping(ChocaDestruye);
 	UPlayerInput::AddEngineDefinedActionMapping(ChocaMeDestruyo);
 	UPlayerInput::AddEngineDefinedActionMapping(ChocarAtravesar);
+	UPlayerInput::AddEngineDefinedActionMapping(SolicitarRecarga);
 
 	// set up gameplay key bindings
 	PlayerInputComponent->BindAxis(MoveForwardBinding);
@@ -168,6 +180,7 @@ void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* Play
 	PlayerInputComponent->BindAction("ChocaYControla", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ChocaYControla);
 	PlayerInputComponent->BindAction("ChocaYMeDestruyo", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ChocaYMeDestruyo);
 	PlayerInputComponent->BindAction("ChocarYAtravesar", IE_Pressed, this, &AGalaga_USFX_L01Pawn::ChocarYAtravesar);
+	PlayerInputComponent->BindAction("SolicitarArmaEnergiaMunicion", IE_Pressed, this, &AGalaga_USFX_L01Pawn::SolicitarArmaEnergiaMunicion);
 
 
 }

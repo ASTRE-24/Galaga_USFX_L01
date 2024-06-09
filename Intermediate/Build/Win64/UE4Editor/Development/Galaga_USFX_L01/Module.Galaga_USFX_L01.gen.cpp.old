@@ -11,7 +11,6 @@
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/CapsulaEnemigaArma.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/CapsulaEnemigaEnergia.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/CapsulaEnemigaMunicion.gen.cpp"
-#include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/ControladorEventos.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/ControlLogisticaJuego.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/DirectorNaveNodriza.gen.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Intermediate/Build/Win64/UE4Editor/Inc/Galaga_USFX_L01/DirectorPortaNave.gen.cpp"

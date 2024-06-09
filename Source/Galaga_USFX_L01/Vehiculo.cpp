@@ -51,8 +51,8 @@ void AVehiculo::BeginPlay()
 void AVehiculo::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	TiempoTranscurrido += DeltaTime;
-	ControlarEstado();
+	//TiempoTranscurrido += DeltaTime;
+	//ControlarEstado();
 	if (TipoDisparo == "Disparo Doble")
 	{
 		DisparoComponent->ArmaDisparoDoble();
@@ -67,9 +67,20 @@ void AVehiculo::Tick(float DeltaTime)
 	}
 }
 
-void AVehiculo::ControlarEstado()
+void AVehiculo::ControlarEstado(FString State)
 {
-	
+	if (State == "Terrestre")
+	{
+		SetEstado(EstadoVehiculoTerrestre);
+	}
+	else if (State == "Aereo")
+	{
+		SetEstado(EstadoVehiculoAereo);
+	}
+	else if (State == "Espacial")
+	{
+		SetEstado(EstadoVehiculoEspacial);
+	}
 }
 
 void AVehiculo::SetEstado(IEstado* NuevoEstado)

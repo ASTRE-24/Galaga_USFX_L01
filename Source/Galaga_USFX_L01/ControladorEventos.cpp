@@ -35,11 +35,19 @@ void AControladorEventos::Tick(float DeltaTime)
 
 }
 
+void AControladorEventos::InicializarComponente(AActor* Componente)
+{
+	vehiculo = Cast<AVehiculo>(Componente);
+	jugador = Cast<AGalaga_USFX_L01Pawn>(Componente);
+	naveEnemiga = Cast<ANaveEnemiga>(Componente);
+}
+
 void AControladorEventos::Notificar(AActor* Emisor, const FString& evento)
 {
 	if (evento == "Inicial")
 	{
-
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Evento Inicial"));
+		vehiculo->ControlarEstado("Aereo");
 	}
 	else if (evento == "RecargaEnemigo")
 	{
@@ -52,6 +60,29 @@ void AControladorEventos::Notificar(AActor* Emisor, const FString& evento)
 	else if (evento == "Lluvia de Obstaculos")
 	{
 
+	}
+	else if (evento == "Cambio de Estrategia")
+	{
+		naveEnemiga = Cast<ANaveEnemiga>(Emisor);
+		if (naveEnemiga->GetEnergia() >= 100) {
+			naveEnemiga->CambiarEstrategia(EstrategiaPasiva);
+			naveEnemiga->EjecutarEstrategia();
+		}
+		else if (naveEnemiga->GetEnergia() <= 75 && naveEnemiga->GetEnergia()>50 )
+		{
+			naveEnemiga->CambiarEstrategia(EstrategiaAgresiva);
+			naveEnemiga->EjecutarEstrategia();
+		}
+		else if (naveEnemiga->GetEnergia() <= 50 && naveEnemiga->GetEnergia() > 25)
+		{
+			naveEnemiga->CambiarEstrategia(EstrategiaViolenta);
+			naveEnemiga->EjecutarEstrategia();
+		}
+		else if (naveEnemiga->GetEnergia() <= 25)
+		{
+			naveEnemiga->CambiarEstrategia(EstrategiaMuyPeligroso);
+			naveEnemiga->EjecutarEstrategia();
+		}
 	}
 }
 

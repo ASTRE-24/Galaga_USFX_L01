@@ -233,6 +233,7 @@ void ASpawnFacade::CrearVehiculoNeutral()
     VehiculoNeutral = GetWorld()->SpawnActor<AVehiculo>(AVehiculo::StaticClass());
     VehiculoNeutral->SetActorLocation(FVector(0, 0, 60));
 	VehiculoNeutral->EstablecerControlador(ControladorEventos);
+    ControladorEventos->InicializarComponente(VehiculoNeutral);
 }
 
 void ASpawnFacade::realizaTareas(TArray<class ANaveEnemiga*> _NavesEnemigas, 

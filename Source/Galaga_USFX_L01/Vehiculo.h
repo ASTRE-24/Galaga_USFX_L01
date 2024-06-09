@@ -48,7 +48,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
     FString TipoDisparo;
-	void ControlarEstado();
+	void ControlarEstado(FString State);
 	void EstablecerControlador(IControlador* myControlador);
 
 };

@@ -14,6 +14,7 @@
 			"CapsulaEnemigaArma.cpp.obj",
 			"CapsulaEnemigaEnergia.cpp.obj",
 			"CapsulaEnemigaMunicion.cpp.obj",
+			"Controlador.cpp.obj",
 			"ControlLogisticaJuego.cpp.obj",
 			"DirectorNaveNodriza.cpp.obj",
 			"DirectorPortaNave.cpp.obj",
@@ -60,10 +61,12 @@
 			"NaveEnemigaTransporteLogistico.cpp.obj",
 			"NaveReabastecimientoEnergia.cpp.obj",
 			"NaveReabastecimientoMunicion.cpp.obj",
+			"Notificador.cpp.obj",
 			"Obstaculo.cpp.obj",
 			"ObstaculoMeteoro.cpp.obj",
 			"ObstaculoPared.cpp.obj",
 			"PortaNave.cpp.obj",
+			"ReduccionVida.cpp.obj",
 			"SolicitudDeNaves.cpp.obj",
 			"SolicitudDeNavesApoyo.cpp.obj",
 			"SolicitudDeNavesAtaque.cpp.obj",
@@ -74,13 +77,10 @@
 			"VehiculoAereo.cpp.obj",
 			"VehiculoEspacial.cpp.obj",
 			"VehiculoTerrestre.cpp.obj",
-			"Controlador.cpp.obj",
 			"ControladorEventos.cpp.obj",
 			"Galaga_USFX_L01Pawn.cpp.obj",
 			"Galaga_USFX_L01Projectile.cpp.obj",
 			"NaveEnemiga.cpp.obj",
-			"Notificador.cpp.obj",
-			"ReduccionVida.cpp.obj",
 			"SpawnFacade.cpp.obj",
 			"Vehiculo.cpp.obj"
 		],
@@ -97,6 +97,8 @@
 			"CapsulaEnemigaArma.gen.cpp.obj",
 			"CapsulaEnemigaEnergia.gen.cpp.obj",
 			"CapsulaEnemigaMunicion.gen.cpp.obj",
+			"Controlador.gen.cpp.obj",
+			"ControladorEventos.gen.cpp.obj",
 			"ControlLogisticaJuego.gen.cpp.obj",
 			"DirectorNaveNodriza.gen.cpp.obj",
 			"DirectorPortaNave.gen.cpp.obj",
@@ -107,6 +109,7 @@
 			"EstrategiaEnemigoMuyPeligroso.gen.cpp.obj",
 			"EstrategiaEnemigoPasivo.gen.cpp.obj",
 			"EstrategiaEnemigoViolento.gen.cpp.obj",
+			"Galaga_USFX_L01.init.gen.cpp.obj",
 			"Galaga_USFX_L01GameMode.gen.cpp.obj",
 			"Galaga_USFX_L01Pawn.gen.cpp.obj",
 			"Galaga_USFX_L01Projectile.gen.cpp.obj",
@@ -160,10 +163,7 @@
 			"Vehiculo.gen.cpp.obj",
 			"VehiculoAereo.gen.cpp.obj",
 			"VehiculoEspacial.gen.cpp.obj",
-			"VehiculoTerrestre.gen.cpp.obj",
-			"Controlador.gen.cpp.obj",
-			"ControladorEventos.gen.cpp.obj",
-			"Galaga_USFX_L01.init.gen.cpp.obj"
+			"VehiculoTerrestre.gen.cpp.obj"
 		]
 	}
 }

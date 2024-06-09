@@ -16,7 +16,7 @@ public:
 	// Sets default values for this actor's properties
 	AControladorEventos();
 	class ANaveEnemiga* naveEnemiga;
-	class Avehiculo* vehiculo;
+	class AVehiculo* vehiculo;
 	class AGalaga_USFX_L01Pawn* jugador;
 
 
@@ -32,4 +32,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void Notificar(AActor* Emisor, const FString& evento) override;
+	void InicializarComponente(AActor* Componente);
 };

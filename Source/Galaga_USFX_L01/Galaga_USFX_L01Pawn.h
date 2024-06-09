@@ -73,7 +73,7 @@ public:
 	//Funciones para los botones
 	FInputActionKeyMapping  Retornar;
 	FInputActionKeyMapping  Jump;
-	//FInputActionKeyMapping  Saltar;
+	FInputActionKeyMapping  SolicitarRecarga;
 	FInputActionKeyMapping  ChocaDestruye;
 	FInputActionKeyMapping  ChocaControla;
 	FInputActionKeyMapping  ChocaMeDestruyo;
@@ -127,6 +127,7 @@ public:
 	void ChocaYControla();
 	void ChocaYMeDestruyo();
 	void ChocarYAtravesar();
+	void SolicitarArmaEnergiaMunicion();
 	
 
 	// Static names for axis bindings

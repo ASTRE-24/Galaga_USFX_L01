@@ -32,7 +32,7 @@ ANaveEnemiga::ANaveEnemiga()
 	bMovimiento = true;
 	energia = 100.0f;
 	tipoArma = "";
-	
+	contador = 0;
 
 	// Configurar la plantilla de partículas (reemplaza "Path/To/Your/ParticleSystem" con la ruta correcta)
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> ParticleSystemAsset(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Fire.P_Fire'"));
@@ -82,11 +82,27 @@ void ANaveEnemiga::BeginPlay()
 void ANaveEnemiga::EnergiaBaja()
 {
 	
-	if (energia <= 80)
+	if (energia >= 100 && contador == 0)
 	{
-		Controlador->Notificar(this, "Energia 80%");
-		energia = 100;
+		Controlador->Notificar(this, "Cambio de Estrategia");
+		contador++;
 	}
+	else if (energia <= 75 && contador == 1)
+	{
+		Controlador->Notificar(this, "Cambio de Estrategia");
+		contador++;
+	}
+	else if (energia <= 50 && contador == 2)
+	{
+		Controlador->Notificar(this, "Cambio de Estrategia");
+		contador++;
+	}
+	else if (energia <= 25 && contador == 3)
+	{
+		Controlador->Notificar(this, "Cambio de Estrategia");
+		contador++;
+	}
+	
 }
 
 // Called every frame

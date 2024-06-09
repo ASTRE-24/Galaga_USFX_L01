@@ -49,7 +49,7 @@ protected:
 	bool bMovimiento;
 	float Municion;
 	FString TipoMovimiento;
-
+	int contador;
 	class IControlador* Controlador;
 
 public:

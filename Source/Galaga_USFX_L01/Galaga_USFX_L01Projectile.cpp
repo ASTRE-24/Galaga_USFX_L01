@@ -117,7 +117,7 @@ void AGalaga_USFX_L01Projectile::NotifyHit(class UPrimitiveComponent*
 			GalagaPawn->GameControlAdapter->RecordScore(10);
 			GalagaPawn->Score = GalagaPawn->GameControlAdapter->GetScore();
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Score: " + FString::FromInt(GalagaPawn->Score)));*/
-			NaveEnemiga->SetEnergia(NaveEnemiga->GetEnergia() - 30);
+			NaveEnemiga->SetEnergia(NaveEnemiga->GetEnergia() - 10);
 			if (NaveEnemiga->GetEnergia() <= 0)
 			{
 				NaveEnemiga->DestruirNave();
