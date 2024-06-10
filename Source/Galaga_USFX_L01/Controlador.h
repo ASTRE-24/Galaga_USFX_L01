@@ -22,5 +22,5 @@ class GALAGA_USFX_L01_API IControlador
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	virtual void Notificar(AActor* _ActorQueNotifica, const FString& _Evento) = 0;
+	virtual void Notificar(AActor* _Emisor, const FString& _Evento) = 0;
 };
