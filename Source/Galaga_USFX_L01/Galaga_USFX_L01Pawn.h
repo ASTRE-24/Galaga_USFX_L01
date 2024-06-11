@@ -126,8 +126,7 @@ public:
 	void ChocaYDestruye();
 	void ChocaYControla();
 	void ChocaYMeDestruyo();
-	void ChocarYAtravesar();
-	void SolicitarArmaEnergiaMunicion();
+	void ChocarYAtravesar();	
 	
 
 	// Static names for axis bindings
@@ -169,6 +168,7 @@ private:
 	FString tipoArma;
 	UPROPERTY(VisibleAnywhere)
 	class USphereComponent* CollisionComponent;
+	//Referencia al controlador
 	class IControlador* Controlador;
 
 public:
@@ -178,7 +178,9 @@ public:
 	FORCEINLINE class UCameraComponent* GetCameraComponent() const { return CameraComponent; }
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+	//Establecer el controlador
 	void EstablecerControlador(IControlador* myControlador);
+	void SolicitarArmaEnergiaMunicion();
 
 protected:
 	

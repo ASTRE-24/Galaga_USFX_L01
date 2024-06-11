@@ -28,6 +28,7 @@ void ASpawnFacade::BeginPlay()
     lluviaObstaculos->Subscribe(this);
 	ControladorEventos = GetWorld()->SpawnActor<AControladorEventos>
 		(AControladorEventos::StaticClass());
+    
 	ControladorEventos->SetSpawnFacade(this);
 
     TArray<AActor*> FoundActors;

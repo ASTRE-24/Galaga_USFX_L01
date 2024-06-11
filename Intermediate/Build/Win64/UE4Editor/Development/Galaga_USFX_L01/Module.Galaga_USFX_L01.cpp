@@ -73,7 +73,6 @@
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/SolicitudDeNavesAtaque.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/SolicitudDeNavesInformante.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/SpaunFacade.cpp"
-#include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/SpawnFacade.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Subscriber.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/SuscriberEstrategia.cpp"
 #include "D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Vehiculo.cpp"

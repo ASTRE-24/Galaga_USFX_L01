@@ -275,7 +275,6 @@ D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/SolicitudDeNavesInformante.cpp
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/SpaunFacade.cpp
 D:\sis457\Galaga_USFX_L01\Source\Galaga_USFX_L01\SpaunFacade.h
 D:\sis457\Galaga_USFX_L01\Intermediate\Build\Win64\UE4Editor\Inc\Galaga_USFX_L01\SpaunFacade.generated.h
-D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/SpawnFacade.cpp
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Subscriber.cpp
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/SuscriberEstrategia.cpp
 D:/sis457/Galaga_USFX_L01/Source/Galaga_USFX_L01/Vehiculo.cpp

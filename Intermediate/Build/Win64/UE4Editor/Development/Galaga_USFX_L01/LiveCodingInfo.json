@@ -76,13 +76,13 @@
 			"SolicitudDeNavesAtaque.cpp.obj",
 			"SolicitudDeNavesInformante.cpp.obj",
 			"SpaunFacade.cpp.obj",
-			"SpawnFacade.cpp.obj",
 			"Subscriber.cpp.obj",
 			"SuscriberEstrategia.cpp.obj",
 			"Vehiculo.cpp.obj",
 			"VehiculoAereo.cpp.obj",
 			"VehiculoEspacial.cpp.obj",
-			"VehiculoTerrestre.cpp.obj"
+			"VehiculoTerrestre.cpp.obj",
+			"SpawnFacade.cpp.obj"
 		],
 		"Module.Galaga_USFX_L01.gen.cpp.obj": [
 			"ActorComponentDisparo.gen.cpp.obj",

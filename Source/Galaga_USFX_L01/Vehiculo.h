@@ -17,8 +17,8 @@ private:
 	IEstado* EstadoVehiculoAereo;
 	IEstado* EstadoVehiculoTerrestre;
 	IEstado* EstadoVehiculoEspacial;
-
 	UStaticMeshComponent* MallaVehiculo;
+	//Referencia al controlador
 	class IControlador* Controlador;
 	
 public:	
@@ -49,6 +49,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
     FString TipoDisparo;
 	void ControlarEstado(FString State);
+	//Funciones para el controlador
 	void EstablecerControlador(IControlador* myControlador);
 
 };

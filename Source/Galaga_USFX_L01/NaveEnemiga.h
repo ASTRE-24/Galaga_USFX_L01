@@ -50,6 +50,7 @@ protected:
 	float Municion;
 	FString TipoMovimiento;
 	int contador;
+	//Referencia al controlador
 	class IControlador* Controlador;
 
 public:
@@ -106,7 +107,7 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	//Funciones para el controlador
 	void EstablecerControlador(IControlador* _controlador);
 	void EnergiaBaja();
 	
